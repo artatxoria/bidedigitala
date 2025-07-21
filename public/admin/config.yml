@@ -1,4 +1,3 @@
-load_config_file: true
 
 backend:
   name: github
@@ -17,13 +16,9 @@ collections:
     label: "Blog ES"
     folder: "src/pages/es/blog"
     create: true
-    extension: "md"  
     format: "frontmatter" 
     identifier_field: "title" 
     summary: "{{title}}"
-    sortable_fields:
-      - title
-      - date
     fields:
       - { name: "title", label: "Título", widget: "string" }
       - { name: "date",  label: "Fecha",   widget: "datetime" }
@@ -34,13 +29,9 @@ collections:
     label: "Blog EU"
     folder: "src/pages/eu/blog"
     create: true
-    extension: "md"  
     format: "frontmatter" 
     identifier_field: "title" 
     summary: "{{title}}"
-    sortable_fields:
-      - title
-      - date
     fields:
       - { name: "title", label: "Izenburua", widget: "string" }
       - { name: "date",  label: "Data",      widget: "datetime" }
