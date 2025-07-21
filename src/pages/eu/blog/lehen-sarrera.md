@@ -1,4 +1,3 @@
-
 ---
 title: "Lehen sarrera"
 date: "2025-07-21"

@@ -1,4 +1,3 @@
-
 ---
 title: "Primer artículo"
 date: "2025-07-21"
