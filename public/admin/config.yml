@@ -17,7 +17,8 @@ collections:
     label: "Blog ES"
     folder: "src/pages/es/blog"
     create: true
-    format: "markdown"      # ← Cambiado de md a markdown
+    extension: "md"  
+    format: "yaml-frontmatter"      
     fields:
       - { name: "title", label: "Título", widget: "string" }
       - { name: "date",  label: "Fecha",   widget: "datetime" }
@@ -27,7 +28,8 @@ collections:
     label: "Blog EU"
     folder: "src/pages/eu/blog"
     create: true
-    format: "markdown"      # ← Cambiado de md a markdown
+    extension: "md"  
+    format: "yaml-frontmatter"      # ← Cambiado de md a markdown
     fields:
       - { name: "title", label: "Izenburua", widget: "string" }
       - { name: "date",  label: "Data",      widget: "datetime" }
