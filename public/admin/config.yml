@@ -21,6 +21,9 @@ collections:
     format: "frontmatter" 
     identifier_field: "title" 
     summary: "{{title}}"
+    sortable_fields:
+      - title
+      - date
     fields:
       - { name: "title", label: "Título", widget: "string" }
       - { name: "date",  label: "Fecha",   widget: "datetime" }
@@ -35,6 +38,9 @@ collections:
     format: "frontmatter" 
     identifier_field: "title" 
     summary: "{{title}}"
+    sortable_fields:
+      - title
+      - date
     fields:
       - { name: "title", label: "Izenburua", widget: "string" }
       - { name: "date",  label: "Data",      widget: "datetime" }
