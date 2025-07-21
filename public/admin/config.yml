@@ -17,7 +17,7 @@ collections:
     folder: "src/pages/es/blog"
     create: true
     #format: "yaml-frontmatter" 
-    identifier_field: "title" 
+    #identifier_field: "title" 
     summary: "{{title}}"
     fields:
       - { name: "title", label: "Título", widget: "string" }
@@ -30,7 +30,7 @@ collections:
     folder: "src/pages/eu/blog"
     create: true
     #format: "yaml-frontmatter" 
-    identifier_field: "title" 
+    #identifier_field: "title" 
     summary: "{{title}}"
     fields:
       - { name: "title", label: "Izenburua", widget: "string" }
