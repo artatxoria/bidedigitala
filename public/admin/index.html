@@ -4,76 +4,22 @@
     <meta charset="utf-8" />
     <title>Admin Bidedigitala</title>
 
-    <!-- 1) Estilos de Decap CMS -->
+    <!-- 1) Estilos de Netlify CMS v2 -->
     <link
       rel="stylesheet"
-      href="https://unpkg.com/decap-cms@3.8.0/dist/cms.css"
+      href="https://unpkg.com/netlify-cms@^2.0.0/dist/cms.css"
     />
 
-    <!-- 2) Indicamos inicialización manual -->
-    <script>window.CMS_MANUAL_INIT = true;</script>
-
-    <!-- 3) Carga el bundle que define `initCMS` y `CMS` -->
-    <script src="https://unpkg.com/decap-cms-app@3.8.0/dist/decap-cms-app.js"></script>
+    <!-- 2) Dónde está tu configuración YAML -->
+    <link
+      rel="cms-config-url"
+      href="/admin/config.yml"
+      type="text/yaml"
+    />
   </head>
 
   <body>
-    <!-- 4) Definimos nuestra configuración en JS (y queda en window.CMS_CONFIG) -->
-    <script>
-      window.CMS_CONFIG = {
-        load_config_file: false,    // NO lee config.yml, usamos JS puro
-        backend: {
-          name: "github",
-          repo: "artatxoria/bidedigitala",
-          branch: "main",
-          api_root: "https://api.github.com",
-          open_authoring: false,
-          auth_scope: "repo",
-          client_id: "Ov23liIDXJl2davy6Rn0"
-        },
-        media_folder: "public/assets",
-        public_folder: "/assets",
-        collections: [
-          {
-            name: "blog_es",
-            label: "Blog ES",
-            folder: "src/pages/es/blog",
-            create: true,
-            extension: "md",
-            format: "yaml-frontmatter",
-            summary: "{{title}}",
-            identifier_field: "title",
-            fields: [
-              { name: "title", label: "Título", widget: "string" },
-              { name: "date",  label: "Fecha",  widget: "datetime" },
-              { name: "body",  label: "Contenido", widget: "markdown" }
-            ]
-          },
-          {
-            name: "blog_eu",
-            label: "Blog EU",
-            folder: "src/pages/eu/blog",
-            create: true,
-            extension: "md",
-            format: "yaml-frontmatter",
-            summary: "{{title}}",
-            identifier_field: "title",
-            fields: [
-              { name: "title", label: "Izenburua", widget: "string" },
-              { name: "date",  label: "Data",       widget: "datetime" },
-              { name: "body",  label: "Eduki",      widget: "markdown" }
-            ]
-          }
-        ]
-      };
-      // Para depurar, comprueba que ahora sí está definido:
-      console.log("CMS_CONFIG:", window.CMS_CONFIG);
-    </script>
-
-    <!-- 5) Finalmente inicializamos el CMS con la configuración de arriba -->
-    <script>
-      const { initCMS } = window;
-      initCMS({ config: window.CMS_CONFIG });
-    </script>
+    <!-- 3) Bundle JS clásico de Netlify CMS v2 -->
+    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/cms.js"></script>
   </body>
 </html>

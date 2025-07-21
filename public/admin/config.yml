@@ -18,12 +18,9 @@ collections:
     folder: "src/pages/es/blog"
     create: true
     extension: "md"  
-    format: "yaml-frontmatter" 
+    format: "frontmatter" 
     identifier_field: "title" 
-    summary: "{{fields.title}}"
-    sortable_fields:
-      - title
-      - date 
+    summary: "{{title}}"
     fields:
       - { name: "title", label: "Título", widget: "string" }
       - { name: "date",  label: "Fecha",   widget: "datetime" }
@@ -35,12 +32,9 @@ collections:
     folder: "src/pages/eu/blog"
     create: true
     extension: "md"  
-    format: "yaml-frontmatter" 
+    format: "frontmatter" 
     identifier_field: "title" 
-    summary: "{{fields.title}}"
-    sortable_fields:
-      - title
-      - date       
+    summary: "{{title}}"
     fields:
       - { name: "title", label: "Izenburua", widget: "string" }
       - { name: "date",  label: "Data",      widget: "datetime" }
