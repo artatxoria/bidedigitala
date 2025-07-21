@@ -1,0 +1,73 @@
+<!-- public/admin/index.html -->
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Admin Bidedigitala</title>
+
+    <!-- 1) Carga de estilos -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/decap-cms@^3.7.2/dist/cms.css"
+    /> <!-- :contentReference[oaicite:0]{index=0} -->
+
+    <!-- 2) Indicamos inicialización manual -->
+    <script>
+      window.CMS_MANUAL_INIT = true;
+    </script>
+  </head>
+
+  <body>
+    <!-- 3) Carga del bundle principal que define `window.CMS` -->
+    <script src="https://unpkg.com/decap-cms@^3.7.2/dist/cms.js"></script> <!-- :contentReference[oaicite:1]{index=1} -->
+
+    <!-- 4) Configuración inline ANTES de llamar a init -->
+    <script>
+      window.CMS_CONFIG = {
+        load_config_file: false,
+        backend: {
+          name: "github",
+          repo: "artatxoria/bidedigitala",
+          branch: "main",
+          api_root: "https://api.github.com",
+          open_authoring: false,
+          auth_scope: "repo",
+          client_id: "Ov23liIDXJl2davy6Rn0"
+        },
+        media_folder: "public/assets",
+        public_folder: "/assets",
+        collections: [
+          {
+            name: "blog_es",
+            label: "Blog ES",
+            folder: "src/pages/es/blog",
+            create: true,
+            format: "md",
+            fields: [
+              { name: "title", label: "Título", widget: "string" },
+              { name: "date",  label: "Fecha",   widget: "datetime" },
+              { name: "body",  label: "Contenido", widget: "markdown" }
+            ]
+          },
+          {
+            name: "blog_eu",
+            label: "Blog EU",
+            folder: "src/pages/eu/blog",
+            create: true,
+            format: "md",
+            fields: [
+              { name: "title", label: "Izenburua", widget: "string" },
+              { name: "date",  label: "Data",      widget: "datetime" },
+              { name: "body",  label: "Eduki",     widget: "markdown" }
+            ]
+          }
+        ]
+      };
+    </script>
+
+    <!-- 5) Inicialización manual -->
+    <script>
+      CMS.init({ config: window.CMS_CONFIG });
+    </script>
+  </body>
+</html>

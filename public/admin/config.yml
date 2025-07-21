@@ -1,0 +1,34 @@
+load_config_file: true
+
+backend:
+  name: github
+  repo: artatxoria/bidedigitala
+  branch: main
+  api_root: https://api.github.com
+  open_authoring: false
+  auth_scope: repo
+  client_id: Ov23liIDXJl2davy6Rn0
+
+media_folder: "public/assets"
+public_folder: "/assets"
+
+collections:
+  - name: "blog_es"
+    label: "Blog ES"
+    folder: "src/pages/es/blog"
+    create: true
+    format: "markdown"      # ← Cambiado de md a markdown
+    fields:
+      - { name: "title", label: "Título", widget: "string" }
+      - { name: "date",  label: "Fecha",   widget: "datetime" }
+      - { name: "body",  label: "Contenido", widget: "markdown" }
+
+  - name: "blog_eu"
+    label: "Blog EU"
+    folder: "src/pages/eu/blog"
+    create: true
+    format: "markdown"      # ← Cambiado de md a markdown
+    fields:
+      - { name: "title", label: "Izenburua", widget: "string" }
+      - { name: "date",  label: "Data",      widget: "datetime" }
+      - { name: "body",  label: "Eduki",     widget: "markdown" }
