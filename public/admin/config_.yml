@@ -18,10 +18,16 @@ collections:
     folder: "src/pages/es/blog"
     create: true
     extension: "md"  
-    format: "yaml-frontmatter"      
+    format: "yaml-frontmatter" 
+    identifier_field: "title" 
+    summary: "{{fields.title}}"
+    sortable_fields:
+      - title
+      - date 
     fields:
       - { name: "title", label: "Título", widget: "string" }
       - { name: "date",  label: "Fecha",   widget: "datetime" }
+      - { name: "slug",  label: "Slug",   widget: "string", required: false }
       - { name: "body",  label: "Contenido", widget: "markdown" }
 
   - name: "blog_eu"
@@ -29,8 +35,14 @@ collections:
     folder: "src/pages/eu/blog"
     create: true
     extension: "md"  
-    format: "yaml-frontmatter"      # ← Cambiado de md a markdown
+    format: "yaml-frontmatter" 
+    identifier_field: "title" 
+    summary: "{{fields.title}}"
+    sortable_fields:
+      - title
+      - date       
     fields:
       - { name: "title", label: "Izenburua", widget: "string" }
       - { name: "date",  label: "Data",      widget: "datetime" }
+      - { name: "slug",  label: "Slug",   widget: "string", required: false }
       - { name: "body",  label: "Eduki",     widget: "markdown" }
