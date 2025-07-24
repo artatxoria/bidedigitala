@@ -1,0 +1,34 @@
+{
+  "site": {
+    "title": "BideDigitala"
+  },
+  "nav": {
+    "home": "Hasiera",
+    "problemas": "Arazoak",
+    "valor": "Balioa",
+    "servicios": "Zerbitzuak",
+    "contacto": "Harremana"
+  },
+  "hero": {
+    "title": "Zure etorkizun digitala bultzatuko dugu",
+    "subtitle": "Soluzio pertsonalizatuak zure negoziorako",
+    "description": "Produkturik eraginkorrenak eta eskalagarriak sortzen ditugu.",
+    "ctaPrimary": "Jarri harremanetan",
+    "ctaSecondary": "Gure zerbitzuak"
+  },
+  "footer": {
+    "tagline": "Ideiak esperientzia digitalen bihurtzen",
+    "services": "Zerbitzuak",
+    "service1": "Web Garapena",
+    "service2": "UX/UI Diseinua",
+    "service3": "Estrategia Digitala",
+    "company": "Enpresa",
+    "valueProposal": "Balio Proposamena",
+    "process": "Prozesua",
+    "contact": "Harremana",
+    "rights": "Eskubide guztiak erreserbatuta."
+  },
+  "home": {
+    "title": "Hasiera – BideDigitala"
+  }
+}

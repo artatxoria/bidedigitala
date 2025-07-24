@@ -1,0 +1,15 @@
+---
+import i18next, { t } from 'i18next';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+i18next.changeLanguage('eu');
+
+const lang = 'eu';
+const title = t('home.title');
+---
+<BaseLayout lang={lang} title={title}>
+  <!-- Mismo contenido, pero textos en euskera -->
+  <section id="hasiera" class="hero">
+    <h1>Página principal en euskera</h1>
+  </section>
+</BaseLayout>

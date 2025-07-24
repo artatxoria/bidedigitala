@@ -1,8 +1,24 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"],
+  "include": [
+    ".astro/types.d.ts",
+    "src",           // Aseguramos que TS rasque todo tu código fuente
+    "src/types"
+  ],
+  "exclude": ["dist", "node_modules"],
   "compilerOptions": {
-    "strictNullChecks": true
+    "module": "node16",
+    // 1) ESM moderno para resolver 'astro/config' sin errores
+    "moduleResolution": "node16",
+    // 2) Mantén las comprobaciones estrictas, pero ignora libs externas
+    "skipLibCheck": true,
+    // 3) Permite importar JSON (tus .json de locales)
+    "resolveJsonModule": true,
+    // 4) Configura JSX para Astro
+    "jsx": "preserve",
+    "jsxImportSource": "astro",
+    // 5) Añade los tipos que Astro provee para el cliente
+    "types": ["astro/client"]
   }
 }
+

@@ -1,0 +1,67 @@
+{
+  "site": {
+    "title": "BideDigitala"
+  },
+  "nav": {
+    "home": "Inicio",
+    "problemas": "Problemas",
+    "valor": "Valor",
+    "servicios": "Servicios",
+    "contacto": "Contacto"
+  },
+  "hero": {
+    "title": "La Formación Bonificada que tu PYME",
+    "title_": "Entenderá y Amará",
+    "badge" : "Tecnología de vanguardia",
+    "badge_" : "Gestión Automatizada",
+    "badge__" : "Talento que crece",
+    "subtitle": "Soluciones a medida para tu negocio",
+    "description": "Creamos productos digitales eficientes y escalables.",
+    "ctaPrimary": "Contáctanos",
+    "ctaSecondary": "Nuestros servicios",
+    "contacto" : "Solicita tu Asesoría Gratuita",
+    "diferencia" : "Descubre cómo"
+  },
+  "problema": {
+    "libera": "Libera el Potencial de tu Equipo. Sin Burocracia. Sin Complicaciones.",
+    "problema" : "El Problema que Conoces",
+    "sabemos" : "Sabemos que para muchas PYMES, la formación bonificada es un laberinto de papeleo, plazos y dudas. Quieres invertir en tu equipo para mejorar su productividad, adaptarte a la transformación digital y retener el talento. Pero, ¿cómo hacerlo sin que la gestión administrativa consuma tu tiempo y recursos?",
+    "nosotros" : "Nuestra Solución",
+    "solución" : "En BideDigitala, hemos redefinido la formación para empresas. Hemos fusionado la Inteligencia Artificial con la excelencia pedagógica humana para eliminar la fricción, simplificar el proceso y ofrecerte resultados tangibles. Porque creemos que formar a tu equipo debería ser una inversión estratégica, no un quebradero de cabeza."
+  },
+  "diferencia" : {
+    "tu solución" : "Tu Solución en Formación: Agilidad, Especialización y Cercanía",
+    "qué" : "¿Qué nos hace realmente diferentes? No solo impartimos formación. Automatizamos la experiencia completa para ti y tus empleados, desde la inscripción hasta la bonificación final.",
+    "hiper" : "Hiper-Automatización Inteligente",
+    "nuestro" : "Nuestro 'core' de negocio late con IA. Gestionamos inscripciones, bonificaciones FUNDAE, notificaciones y certificados de forma automática y transparente. ¡Despídete del papeleo! Tu empresa solo se preocupa de elegir la formación y tus empleados, del aprendizaje.",
+    "eficiencia" : "Esta eficiencia radical es nuestra ventaja competitiva, difícil de imitar por academias tradicionales.",
+    "especialización" : "Especialización Tecnológica de Vanguardia",
+    "foco" : "Nos enfocamos en las habilidades más demandadas y con mayor brecha de talento en el mercado actual. Desde Ciberseguridad y Análisis de Datos (Excel, Power BI), hasta Inteligencia Artificial Generativa Aplicada y Automatización de Procesos (con n8n), pasando por Programación (PHP, C++).",
+    "contenido" : "Contenidos prácticos y de aplicación inmediata, impartidos por expertos humanos.",
+    "bi" : "Bilingüismo Integral y Compromiso Local",
+    "euskadi" : "En Euskadi, el idioma importa. Toda nuestra oferta formativa, materiales, tutorías y plataforma son íntegramente bilingües (Euskera y Castellano). No es un añadido, es un pilar fundamental que nos posiciona favorablemente y demuestra nuestro respeto por la cultura local."
+  },
+  
+  "servicios" : {
+
+  },
+  
+  
+  
+  
+  "footer": {
+    "tagline": "Transformando ideas en experiencias digitales",
+    "services": "Servicios",
+    "service1": "Desarrollo Web",
+    "service2": "UX/UI Design",
+    "service3": "Estrategia Digital",
+    "company": "Empresa",
+    "valueProposal": "Propuesta de valor",
+    "process": "Proceso",
+    "contact": "Contacto",
+    "rights": "Todos los derechos reservados."
+  },
+  "home": {
+    "title": "Inicio – BideDigitala"
+  }
+}
