@@ -1,0 +1,205 @@
+---
+// src/components/Servicios.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  clave: { title: string; 
+          subtitle: string; 
+          titulo_1: string; 
+          contenido_1: string;
+          item_1_1: string;
+          item_1_2: string;
+          item_1_3: string;
+          item_1_4: string;
+          titulo_2: string;
+          contenido_2: string;
+          item_2_1: string;
+          item_2_2: string;
+          item_2_3: string;
+          titulo_3: string;
+          contenido_3: string;
+          item_3_1: string;
+          item_3_2: string;
+          item_3_3: string;
+          item_3_4: string;
+          titulo_4: string;
+          contenido_4: string
+        }
+}> = {
+  es: {
+    clave: {
+      title: 'Nuestros Servicios: Adaptados a tus necesidades',
+      subtitle: 'Nuestra cartera de servicios ha sido diseñada para responder directamente a la brecha de competencias digitales detectadas en el mercado actual.',
+      titulo_1: 'Formación Bonificada para Empresas (FUNDAE)',
+      contenido_1: "Formación a medida en tus instalaciones (presencial) o en nuestro aula virtual síncrona (online). Toda la gestión a nuestro alcance",
+      item_1_1: "Inteligencia Artificial Generativa",
+      item_1_2: "Análisis de Datos (Excel, Power BI)",
+      item_1_3: "Ciberseguridad",
+      item_1_4: "Automatización",
+      titulo_2: "Formación Subvencionada para Trabajadores y Desempleados",
+      contenido_2: "Formación exclusivamente online a través del aula virtual síncrona (con herramientas como Jitsi o BigBlueButton) para fomentar la interacción.",
+      item_2_1: "Capacidades de alta demanda del mercado laboral",
+      item_2_2: "Mejorar la empleabilidad",
+      item_2_3: "Participamos en licitaciones públicas",
+      titulo_3: "Formación Privada y Específica",
+      contenido_3: "Cursos especializados de catálogo propio que se venden directamente a particulares y empresas.",
+      item_3_1: "Ciberseguridad",
+      item_3_2: "Inteligencia Artificial",
+      item_3_3: "Gestión de Datos",
+      item_3_4: "Últimas tendencias",
+      titulo_4: "",
+      contenido_4: ""
+    }
+  },
+  eu: {
+    clave: {
+      title: 'Gure Zerbitzuak: Zure beharretara egokituta',
+      subtitle: 'Gure zerbitzuen zorroa egungo merkatuan hautemandako gaitasun digitalen arrakalari zuzenean erantzuteko diseinatu da.',
+      titulo_1: 'Enpresentzako Formazio Bonifikatua (FUNDAE)',
+      contenido_1: "Neurrirako prestakuntza, zure instalazioetan (presenciala) edo gure ikasgela birtual sinkronoan (online). Kudeaketa osoa gure esku",
+      item_1_1: "Adimen Artifizial sortzailea",
+      item_1_2: "Datuen Analisia (Excel, Power BI)",
+      item_1_3: "Zibersegurtasuna",
+      item_1_4: "Automatizazioa",
+      titulo_2: "Langile eta Langabezian daudenentzako Formazio Dirulagundua",
+      contenido_2: "Formazio esklusiboki online, ikasgela birtual sinkronoaren bidez (Jitsi edo BigBlueButton bezalako tresnekin), interakzioa sustatzeko.",
+      item_2_1: "Lan-merkatuaren eskari handiko gaitasunak",
+      item_2_2: "Enplegagarritasuna hobetzeko",
+      item_2_3: "Lizitazio publikoetan parte hartzen dugu",
+      titulo_3: "Formazio Pribatua eta Berariazkoa",
+      contenido_3: "Katalogo propioko ikastaro espezializatuak, zuzenean saltzen direnak norbanako zein enpresei.",
+      item_3_1: "Zibersegurtasuna",
+      item_3_2: "Adimen Artifiziala",
+      item_3_3: "Datuen Kudeaketa",
+      item_3_4: "Azken joerak",
+      titulo_4: "",
+      contenido_4: ""
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+/* Services Section */
+.services {
+    padding: var(--section-padding);
+    background: var(--bg-light);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    background: var(--bg-white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--secondary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.service-icon i {
+    font-size: 1.8rem;
+    color: var(--text-white);
+}
+
+.service-card h3 {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.service-card ul {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.service-card li {
+    padding: 0.5rem 0;
+    color: var(--text-light);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.service-card li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+</style>
+    <!-- Servicios Section -->
+    <section id="zerbitzuak" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">{dict.clave.title}</h2>
+                <p class="section-subtitle">{dict.clave.subtitle}</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>{dict.clave.titulo_1}</h3>
+                    <p>{dict.clave.contenido_1}</p>
+                    <ul>
+                        <li>{dict.clave.item_1_1}</li>
+                        <li>{dict.clave.item_1_2}</li>
+                        <li>{dict.clave.item_1_3}</li>
+                        <li>{dict.clave.item_1_4}</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>{dict.clave.titulo_2}</h3>
+                    <p>{dict.clave.contenido_2}</p>
+                    <ul>
+                        <li>{dict.clave.item_2_1}</li>
+                        <li>{dict.clave.item_2_2}</li>
+                        <li>{dict.clave.item_2_3}</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>{dict.clave.titulo_3}</h3>
+                    <p>{dict.clave.contenido_3}</p>
+                    <ul>
+                        <li>{dict.clave.item_3_1}</li>
+                        <li>{dict.clave.item_3_2}</li>
+                        <li>{dict.clave.item_3_3}</li>
+                        <li>{dict.clave.item_3_4}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+ 

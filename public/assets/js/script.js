@@ -74,17 +74,96 @@ function initTooltips() {
   });
 }
 
+
+// Typing Animation
+function initTypingAnimation() {
+    const typingElement = document.querySelector('.typing-text');
+    if (!typingElement) return;
+
+    const text = typingElement.textContent;
+    typingElement.textContent = '';
+    
+    let index = 0;
+    const speed = 50; // milliseconds per character
+
+    function typeWriter() {
+        if (index < text.length) {
+            typingElement.textContent += text.charAt(index);
+            index++;
+            setTimeout(typeWriter, speed);
+        } else {
+            // Add blinking cursor effect
+            typingElement.style.borderRight = '3px solid #1e3a8a';
+            typingElement.style.animation = 'blink 1s infinite';
+        }
+    }
+
+    // Start typing animation after a short delay
+    setTimeout(typeWriter, 1000);
+}
+
+
+// Mobile Navigation
+function initMobileNavigation() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 // — Único listener de DOMContentLoaded —  
 document.addEventListener('DOMContentLoaded', () => {
+
+      // Mobile Navigation
+    initMobileNavigation();
+  
+  // Typing Animation
+    initTypingAnimation();
+
+
   // 1) Toggle menú móvil
-  const toggle = document.querySelector('.nav-toggle');
+  /* const toggle = document.querySelector('.nav-toggle');
   const menu   = document.getElementById('primary-navigation');
   if (toggle && menu) {
     toggle.addEventListener('click', () => {
       const isOpen = menu.classList.toggle('open');
       toggle.setAttribute('aria-expanded', isOpen);
     });
-  }
+  } */
 
   // 2) Navegación suave
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {

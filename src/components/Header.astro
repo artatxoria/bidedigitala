@@ -25,7 +25,7 @@ const { lang } = Astro.props;
       <Navegacion lang={lang} />
 
       <!-- Nav toggle como <button> con aria-controls="primary-navigation" -->
-    <button 
+    <!-- <button 
       class="nav-toggle" 
       aria-label="Abrir menú" 
       aria-expanded="false"
@@ -34,7 +34,12 @@ const { lang } = Astro.props;
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
-    </button>
+    </button> -->
+    <div class="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
     </div>
   </nav>
 </header>

@@ -8,7 +8,8 @@
     "valor": "Valor",
     "resultados" : "Resultados",
     "servicios": "Servicios",
-    "contacto": "Contacto"
+    "contacto": "Contacto",
+    "diagnostico" : "Diagnóstico Gratuito"
   },
   "hero": {
     "title": "La Formación Bonificada que tu PYME",
@@ -44,7 +45,7 @@
   },
   
   "servicios" : {
-    "nuestros" : "Nuestros Servicios: Formación a tu Medida, Donde y Cuando la Necesites",
+    "nuestros" : "Formación a tu Medida, Donde y Cuando la Necesites",
     "servicios" : "En BideDigitala, nos adaptamos a la realidad de tu empresa y a las necesidades de los trabajadores, sean ocupados o en búsqueda de empleo:",
     "empresas" : "Para Empresas",
     "bonificada" : "Formación Bonificada FUNDAE",
@@ -74,11 +75,10 @@
   },
 
   "cta" : {
-    "preparado" : "¿Preparado para Transformar la Formación en tu Empresa?",
-    "miles" : "Miles de PYMES ya están liberando el potencial de sus equipos. Da el primer paso hacia una formación inteligente, eficiente y de calidad superior.",
+    "preparado" : "¡Contactanos!",
+    "miles" : "Si quieres impulsar el futuro de tu empresa a través de la Inteligencia Artificial y las competencias digitales, ponte en contacto con nosotros. Solicita un diagnóstico gratuito y te explicamos cómo aprovechar tu crédito formativo sin ningún tipo de burocracia.",
     "solicita" : "Solicita tu Asesoría Gratuita y Calcula tu Crédito FUNDAE",
     "nombre" : "Nombre completo",
-    "email" : "Email empresarial",
     "teléfono" : "Teléfono",
     "empresa" : "Empresa",
     "numero" : "Número de empleados",
@@ -90,7 +90,8 @@
     "solicitar" : "Solicitar Asesoría Gratuita", 
     "propuesta" : "¿Necesitas una propuesta personalizada?", 
     "dudas" : "¿Tienes dudas sobre la bonificación? Contacta con nuestros expertos:", 
-    "email" : "Email"
+    "email" : "Email",
+    "localidad" : "Localidad"
   },
   
  

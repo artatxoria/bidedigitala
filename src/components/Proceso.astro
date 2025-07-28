@@ -1,0 +1,199 @@
+---
+// src/components/Proceso.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  clave: { title: string; 
+          subtitle: string; 
+          titulo_1: string; 
+          contenido_1: string;
+          item_1_1: string;
+          item_1_2: string;
+          item_1_3: string;
+          item_1_4: string;
+          titulo_2: string;
+          contenido_2: string;
+          item_2_1: string;
+          item_2_2: string;
+          item_2_3: string;
+          titulo_3: string;
+          contenido_3: string;
+          item_3_1: string;
+          item_3_2: string;
+          item_3_3: string;
+          item_3_4: string;
+          titulo_4: string;
+          contenido_4: string;
+          titulo_5: string;
+          contenido_5: string;
+          titulo_6: string;
+          contenido_6: string;
+          titulo_7: string;
+          contenido_7: string;
+        }
+}> = {
+  es: {
+    clave: {
+      title: '¿Cómo trabajamos? Método llave en mano',
+      subtitle: 'Nuestro proceso es sencillo, transparente y eficaz, de principio a fin contigo:',
+      titulo_1: 'Diagnóstico de Necesidades',
+      contenido_1: "En primer lugar, analizamos las necesidades formativas y los objetivos estratégicos de su empresa.",
+      item_1_1: "",
+      item_1_2: "",
+      item_1_3: "",
+      item_1_4: "",
+      titulo_2: "Propuesta Personalizada",
+      contenido_2: "Preparamos una oferta de cursos adaptada a tus objetivos y presupuesto, de forma casi inmediata.",
+      item_2_1: "",
+      item_2_2: "",
+      item_2_3: "",
+      titulo_3: "Gestión Integral",
+      contenido_3: "Gestionamos todos los trámites administrativos relacionados con entidades como FUNDAE y Lanbide. Tú no tienes que hacer nada.",
+      item_3_1: "",
+      item_3_2: "",
+      item_3_3: "",
+      item_3_4: "",
+      titulo_4: "Formación de Calidad",
+      contenido_4: "Nuestros expertos tutores, en nuestra propia plataforma tecnológica, imparte formación de alto nivel con metodologías activas y eficaces.",
+      titulo_5: "Seguimiento e Informes",
+      contenido_5: "Ofrecemos informes detallados sobre el impacto de la formación y un seguimiento proactivo para que veas tu ROI de forma clara.",
+      titulo_6: "",
+      contenido_6: "",
+      titulo_7: "",
+      contenido_7:""
+    }
+  },
+  eu: {
+    clave: {
+      title: 'Nola lan egiten dugu? Giltza eskura metodoa',
+      subtitle: 'Gure prozesua erraza, garden eta eraginkorra da, hasieratik amaierara arte zurekin batera:',
+      titulo_1: 'Beharren Diagnostikoa',
+      contenido_1: "Lehenengo, zure enpresaren formakuntza-beharrak eta helburu estrategikoak aztertzen ditugu.",
+      item_1_1: "",
+      item_1_2: "",
+      item_1_3: "",
+      item_1_4: "",
+      titulo_2: "Proposamen Pertsonalizatua",
+      contenido_2: "Zure helburuetara eta aurrekontura egokitutako ikastaro-eskaintza bat prestatzen dugu, ia berehala.",
+      item_2_1: "",
+      item_2_2: "",
+      item_2_3: "",
+      titulo_3: "Kudeaketa Integrala",
+      contenido_3: "FUNDAE eta Lanbide bezalako erakundeekin lotutako izapide administratibo guztiak kudeatzen ditugu. Zuk ez duzu ezer egin behar.",
+      item_3_1: "",
+      item_3_2: "",
+      item_3_3: "",
+      item_3_4: "",
+      titulo_4: "Kalitatezko Formazioa",
+      contenido_4: "Gure tutore adituek, gure plataforma teknologiko propioan, goi-mailako prestakuntza inpartitzen dute, metodologia aktibo eta eraginkorrekin.",
+      titulo_5: "Jarraipena eta Txostenak",
+      contenido_5: "Formazioaren eraginari buruzko txosten zehatzak eta jarraipen proaktiboa eskaintzen ditugu, zure ROI-a modu argian ikus dezazun.",
+      titulo_6: "",
+      contenido_6: "",
+      titulo_7: "",
+      contenido_7:""
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+/* Process Section */
+.process {
+    padding: var(--section-padding);
+    background: var(--bg-light);
+}
+
+.process-steps {
+    display: grid;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.process-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color);
+    color: var(--text-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.step-content h3 {
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+</style>
+
+<!-- Proceso Section -->
+    <section id="prozesua" class="process">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">{dict.clave.title}</h2>
+                <p class="section-subtitle">{dict.clave.subtitle}</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>{dict.clave.titulo_1}</h3>
+                        <p>{dict.clave.contenido_1}</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>{dict.clave.titulo_2}</h3>
+                        <p>{dict.clave.contenido_2}</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>{dict.clave.titulo_3}</h3>
+                        <p>{dict.clave.contenido_3}</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>{dict.clave.titulo_4}</h3>
+                        <p>{dict.clave.contenido_4}</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>{dict.clave.titulo_5}</h3>
+                        <p>{dict.clave.contenido_5}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+

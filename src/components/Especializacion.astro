@@ -1,0 +1,154 @@
+---
+// src/components/Especializacion.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  clave: { title: string; 
+          subtitle: string; 
+          titulo_1: string; 
+          contenido_1: string;
+          item_1_1: string;
+          item_1_2: string;
+          item_1_3: string;
+          item_1_4: string;
+          titulo_2: string;
+          contenido_2: string;
+          item_2_1: string;
+          item_2_2: string;
+          item_2_3: string;
+          titulo_3: string;
+          contenido_3: string;
+          item_3_1: string;
+          item_3_2: string;
+          item_3_3: string;
+          item_3_4: string;
+          titulo_4: string;
+          contenido_4: string;
+          titulo_5: string;
+          contenido_5: string;
+          titulo_6: string;
+          contenido_6: string;
+          titulo_7: string;
+          contenido_7: string;
+        }
+}> = {
+  es: {
+    clave: {
+      title: '¿En qué estamos especializados? Tu Empresa Ideal',
+      subtitle: '',
+      titulo_1: '',
+      contenido_1: "Nuestro perfil ideal de cliente son las medianas empresas vascas (aproximadamente entre 50 y 250 empleados) del sector manufacturero industrial o de servicios avanzados (TIC, consultoría, logística, finanzas/seguros).",
+      item_1_1: "",
+      item_1_2: "",
+      item_1_3: "",
+      item_1_4: "",
+      titulo_2: "",
+      contenido_2: "Son empresas inmersas en la transformación digital y que buscan mejorar sus competencias en tecnologías como la IA, el análisis de datos, la ciberseguridad y la automatización para sus empleados.",
+      item_2_1: "",
+      item_2_2: "",
+      item_2_3: "",
+      titulo_3: "",
+      contenido_3: "",
+      item_3_1: "",
+      item_3_2: "",
+      item_3_3: "",
+      item_3_4: "",
+      titulo_4: "",
+      contenido_4: "",
+      titulo_5: "",
+      contenido_5: "",
+      titulo_6: "",
+      contenido_6: "",
+      titulo_7: "",
+      contenido_7:""
+    }
+  },
+  eu: {
+    clave: {
+      title: 'Zertan espezializatuta gaude? Zure Enpresa Ideala',
+      subtitle: '',
+      titulo_1: '',
+      contenido_1: "Gure bezero-profil ideala Euskadiko enpresa ertainak dira (gutxi gorabehera 50 eta 250 langile bitartekoak), industria manufakturako edo zerbitzu aurreratuetako sektorekoak (IKT, aholkularitza, logistika, finantza/aseguruak).",
+      item_1_1: "",
+      item_1_2: "",
+      item_1_3: "",
+      item_1_4: "",
+      titulo_2: "",
+      contenido_2: "Eraldaketa digitalean murgilduta dauden eta beren langileentzako IA, datuen analisia, zibersegurtasuna eta automatizazioa bezalako teknologietan gaitasunak hobetu nahi dituzten enpresak dira.",
+      item_2_1: "",
+      item_2_2: "",
+      item_2_3: "",
+      titulo_3: "",
+      contenido_3: "",
+      item_3_1: "",
+      item_3_2: "",
+      item_3_3: "",
+      item_3_4: "",
+      titulo_4: "",
+      contenido_4: "",
+      titulo_5: "",
+      contenido_5: "",
+      titulo_6: "",
+      contenido_6: "",
+      titulo_7: "",
+      contenido_7:""
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+/* Specialization Section */
+.specialization {
+    padding: var(--section-padding);
+}
+
+.specialization-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.specialization-text p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.specialization-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+}
+
+
+</style>
+
+    <!-- Especialización Section -->
+    <section id="espezializazioa" class="specialization">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">{dict.clave.title}</h2>
+            </div>
+            <div class="specialization-content">
+                <div class="specialization-text">
+                    <p>{dict.clave.contenido_1}</p>
+                    <p>{dict.clave.contenido_2}</p>
+                </div>
+                <div class="specialization-image">
+                    <img src="/images/business_training.jpg" alt="Enpresa Prestakuntza">
+                </div>
+            </div>
+        </div>
+    </section>
+

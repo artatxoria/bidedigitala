@@ -1,0 +1,131 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          subtitle: string; 
+          burocracia: string; 
+          formazio: string;
+          gaitasun: string;
+          taldeak: string;
+          inbertsioa: string;
+          kuantifikatu: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Los problemas de tu empresa los resolvemos nosotros',
+      subtitle: 'Para ser competitivo en el mercado laboral actual, la formación continua es imprescindible. Pero también sabemos que tiene retos:',
+      burocracia: '¿Una burocracia asfixiante?',
+      formazio: "¿Cree que la gestión de la formación bonificada es compleja? ¿Teme la burocracia y el riesgo de perder las bonificaciones? ¿El trabajo administrativo de su empresa le consume tiempo y recursos?",
+      gaitasun: "¿Deficiencias en las competencias digitales?",
+      taldeak: "¿Siente que su equipo necesita formación especializada en las últimas tecnologías (Inteligencia Artificial, análisis de datos, ciberseguridad...) pero no dispone de recursos internos para gestionarlo?",
+      inbertsioa: "¿Dificultades para medir el retorno de la inversión?",
+      kuantifikatu: "¿No sabes cómo cuantificar el impacto real de la inversión en formación y el ROI en tu negocio?"
+    }
+  },
+  eu: {
+    hero: {
+      title: 'Zure enpresak dituen arazoak, guk konpontzen ditugu',
+      subtitle: 'Egungo lan-merkatuan lehiakorra izateko, etengabeko prestakuntza ezinbestekoa da. Baina badakigu erronkak ere badituela:',
+      burocracia: 'Burokrazia itogarria?',
+      formazio: "Formazio bonifikatuaren kudeaketa konplexua dela uste al duzu? Burokraziaren beldur zara eta bonifikazioak galtzeko arriskua? Zure enpresako administrazio-lanak denbora eta baliabideak jaten al dizkizu?",
+      gaitasun: "Gaitasun digitaletan hutsuneak?",
+      taldeak: "Zure taldeak azken teknologietan prestakuntza espezializatua behar duela sentitzen al duzu (Adimen Artifizialean, datuen analisian, zibersegurtasunean…), baina ez duzu barne-baliabiderik hori kudeatzeko?",
+      inbertsioa: "Inbertsioaren itzulera neurtzeko zailtasunak?",
+      kuantifikatu: "Ez al dakizu nola kuantifikatu formakuntzan egindako inbertsioaren benetako eragina eta ROI-a zure negozioan?"
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.problems {
+    padding: var(--section-padding);
+    background: #f7fbfd;
+}
+
+.problems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.problem-card {
+    background: var(--bg-white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.problem-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.problem-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.problem-icon i {
+    font-size: 2rem;
+    color: var(--text-white);
+}
+
+.problem-card h3 {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+</style>
+<!-- Problemas Section -->
+    <section id="arazoak" class="problems">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">{dict.hero.title}</h2>
+                <p class="section-subtitle">{dict.hero.subtitle}</p>
+            </div>
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>{dict.hero.burocracia}</h3>
+                    <p>{dict.hero.formazio}</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>{dict.hero.gaitasun}</h3>
+                    <p>{dict.hero.taldeak}</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>{dict.hero.inbertsioa}</h3>
+                    <p>{dict.hero.kuantifikatu}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+ 

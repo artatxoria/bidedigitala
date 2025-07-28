@@ -8,7 +8,8 @@
     "valor": "Baioa",
     "resultados" : "Emaitzak",
     "servicios": "Zerbitzuak",
-    "contacto": "Kontaktua"
+    "contacto": "Kontaktua",
+    "diagnostico" : "Diagnostiko Doakoa"
   },
   "hero": {
     "title": "Zure ETEak ulertuko eta maitatuko duen",
@@ -44,7 +45,7 @@
   },
   
   "servicios" : {
-    "nuestros" : "Gure zerbitzuak: zure neurrira egindako prestakuntza, non eta noiz behar duzun",
+    "nuestros" : "Zure neurrira egindako prestakuntza, non eta noiz behar duzun",
     "servicios" : "BideDigitalan, zure enpresaren errealitatera eta langileen beharretara egokitzen gara, okupatuak izan edo lana bilatzen ari direnak izan:",
     "empresas" : "Enpresentzat",
     "bonificada" : "Prestakuntza hobariduna FUNDAE",
@@ -74,8 +75,8 @@
   },
 
   "cta" : {
-    "preparado" : "Prestakuntza zure enpresan eraldatzeko prest?",
-    "miles" : "Milaka ETE beren ekipoen potentziala askatzen ari dira. Prestakuntza adimenduna, eraginkorra eta kalitate handiagokoa lortzeko lehen urratsa ematen du.",
+    "preparado" : "Jarri Harremanetan!",
+    "miles" : "Zure enpresaren etorkizuna Adimen Artifizialaren eta gaitasun digitalen bidez bultzatu nahi baduzu, jarri gurekin harremanetan. Eskatu doako diagnostikoa eta azalduko dizugu nola aprobetxatu zure formakuntza-kreditua, inolako burokraziarik gabe.",
     "solicita" : "Eskatu zure doako aholkularitza eta kalkulatu zure kreditua FUNDAE",
     "nombre" : "Izen osoa",
     "teléfono" : "Telefonoa",
@@ -89,7 +90,8 @@
     "solicitar" : "Doako aholkularitza eskatu", 
     "propuesta" : "Proposamen pertsonalizatua behar duzu?", 
     "dudas" : "Zalantzak dituzu hobariari buruz? Jarri harremanetan gure adituekin:", 
-    "email" : "Emaila"
+    "email" : "Emaila",
+    "localidad" : "Kokapena"
   },
   
   

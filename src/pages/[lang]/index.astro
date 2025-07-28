@@ -1,6 +1,16 @@
 ---
 // src/pages/[lang]/index.astro
 
+//Importaciones
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t, tPath } from '../../lib/translations';
+import Problemas from '../../components/Problemas.astro';
+import Valores from '../../components/Valores.astro';
+import Servicios from '../../components/Servicios.astro';
+import Onurak from '../../components/Onurak.astro';
+import Proceso from '../../components/Proceso.astro';
+import Especializacion from '../../components/Especializacion.astro';
+
 // Para rutas dinámicas, exportamos getStaticPaths
 export async function getStaticPaths() {
   return [
@@ -12,16 +22,19 @@ export async function getStaticPaths() {
 // Generación estática
 export const prerender = true;
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { t, tPath } from '../../lib/translations';
+// Extraemos el parámetro (puede ser string|undefined)
+const langParam = Astro.params.lang;
 
-const { lang } = Astro.params;
+// Definimos la lista de idiomas admitidos
+const supported = ['es', 'eu'] as const;
 
 // Validamos el parámetro
-const supported = ['es', 'eu'];
-if (!supported.includes(lang)) {
+
+if (!langParam || !supported.includes(langParam as any)) {
   throw Astro.redirect(`/es/`);
 }
+
+const lang = langParam as typeof supported[number];
 
 const title = t(lang, 'home.title');
 ---
@@ -50,7 +63,7 @@ const title = t(lang, 'home.title');
           </p>
 
           <div class="hero-cta">
-            <a href=#contacto" class="btn btn-primary">
+            <a href="#contacto" class="btn btn-primary">
               <i class="fas fa-rocket"></i>
               {t(lang, 'hero.contacto')}
             </a>
@@ -63,66 +76,18 @@ const title = t(lang, 'home.title');
       </div>
     </section> 
   
-    <!-- Problem/Solution Section -->
-  <section class="problem-solution" id="arazoak">
-    <div class="container">
-        <div class="section-header">
-            <h2>🚀 {t(lang, 'problema.libera')}</h2>
-        </div>
-        <div class="content-grid">
-            <div class="problem-content">
-                <h3>{t(lang, 'problema.problema')}</h3>
-                <p>{t(lang, 'problema.sabemos')}</p>
-            </div>
-            <div class="solution-content">
-                <h3>{t(lang, 'problema.nosotros')}</h3>
-                <p>{t(lang, 'problema.solución')}</p>
-            </div>
-        </div>
-    </div>
-  </section>
+  <Problemas lang={lang} />
 
+  <Valores lang={lang} />
   
-  <!-- Differentiators Section -->
-  <section id="diferenciadores" class="differentiators">
-      <div class="container">
-          <div class="section-header">
-              <h2>🌟 {t(lang, 'diferencia.tu solución')}</h2>
-              <p>{t(lang, 'diferencia.qué')}</p>
-          </div>
-          <div class="differentiators-grid">
-              <div class="differentiator-card">
-                  <div class="card-icon">
-                      <i class="fas fa-robot"></i>
-                  </div>
-                  <h3>{t(lang, 'diferencia.hiper')}</h3>
-                  <p>{t(lang, 'diferencia.nuestro')}</p>
-                  <div class="card-highlight">{t(lang, 'diferencia.eficiencia')}</div>
-              </div>
-              <div class="differentiator-card">
-                  <div class="card-icon">
-                      <i class="fas fa-code"></i>
-                  </div>
-                  <h3>{t(lang, 'diferencia.especialización')}</h3>
-                  <p>{t(lang, 'diferencia.foco')}</p>
-                  <div class="card-highlight">{t(lang, 'diferencia.contenido')}</div>
-              </div>
-              <div class="differentiator-card">
-                  <div class="card-icon">
-                      <i class="fas fa-language"></i>
-                  </div>
-                  <h3>{t(lang, 'diferencia.bi')}</h3>
-                  <p>{t(lang, 'diferencia.euskadi')}</p>
-              </div>
-          </div>
-      </div>
-  </section>
+  <Servicios lang={lang} />
+  
 
   <!-- Services Section -->
   <section id="servicios" class="services">
     <div class="container">
       <div class="section-header">
-        <h2>🎓 {t(lang, 'servicios.nuestros')}</h2>
+        <h2>{t(lang, 'servicios.nuestros')}</h2>
         <p>{t(lang, 'servicios.servicios')}</p>
       </div>
       <div class="services-grid">
@@ -160,55 +125,22 @@ const title = t(lang, 'home.title');
                   </div>
               </div>
           </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Results Section -->
-  <section id="resultados" class="results">
-    <div class="container">
-      <div class="section-header">
-          <h2>📈 {t(lang, 'resultados.medir')}</h2>
-          <p>{t(lang, 'resultados.bidedigitala')}</p>
-      </div>
-      <div class="results-grid">
-          <div class="result-card">
-              <div class="result-icon">
-                  <i class="fas fa-chart-line"></i>
-              </div>
-              <h3>{t(lang, 'resultados.productividad')}</h3>
-              <p>{t(lang, 'resultados.empleados')}</p>
-          </div>
-          <div class="result-card">
-              <div class="result-icon">
-                  <i class="fas fa-heart"></i>
-              </div>
-              <h3>{t(lang, 'resultados.retención')}</h3>
-              <p>{t(lang, 'resultados.desarrollo')}</p>
-          </div>
-          <div class="result-card">
-              <div class="result-icon">
-                  <i class="fas fa-digital-tachograph"></i>
-              </div>
-              <h3>{t(lang, 'resultados.adaptación')}</h3>
-              <p>{t(lang, 'resultados.empresa')}</p>
-          </div>
-          <div class="result-card">
-              <div class="result-icon">
-                  <i class="fas fa-eye"></i>
-              </div>
-              <h3>{t(lang, 'resultados.transparencia')}</h3>
-              <p>{t(lang, 'resultados.paneles')}</p>
-          </div>
-      </div>
-    </div>
-  </section>
+  <Onurak lang={lang} />
+
+  <Proceso lang={lang} />
+
+  <Especializacion lang={lang} />
 
     <!-- CTA Section -->
     <section id="contacto" class="cta-section">
       <div class="container">
         <div class="cta-content">
-          <h2>💡 {t(lang, 'cta.preparado')}</h2>
+          <h2>{t(lang, 'cta.preparado')}</h2>
           <p>{t(lang, 'cta.miles')}</p>
           
           <div class="contact-grid">
@@ -263,6 +195,13 @@ const title = t(lang, 'home.title');
                         <div>
                             <strong>{t(lang, 'cta.teléfono')}</strong>
                             <p>+34 685 756 143</p>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="contact-details">
+                            <strong>{t(lang, 'cta.localidad')}</strong>
+                            <p>Aulesti, Bizkaia</p>
                         </div>
                     </div>
                     <div class="contact-method">

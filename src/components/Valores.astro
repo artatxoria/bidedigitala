@@ -1,0 +1,164 @@
+---
+// src/components/Valores.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  clave: { title: string; 
+          subtitle: string; 
+          automatizazioa: string; 
+          burokrazia: string;
+          muina: string;
+          espezializazioa: string;
+          etorkizuna: string;
+          eskaintza: string;
+          elebitasun: string;
+          bereizgarria: string;
+          gure: string
+        }
+}> = {
+  es: {
+    clave: {
+      title: 'Nuestra Propuesta de Valor: ¿Por qué somos diferentes?',
+      subtitle: 'BideDigitala, S.L. no es una agencia de formación al uso. Nuestra ventaja competitiva reside en nuestro funcionamiento, basado en la innovación de procesos, difícil de imitar para las academias tradicionales.',
+      automatizazioa: 'Hiper-Automatización',
+      burokrazia: "Pura burocracia automatizada al 95%.",
+      muina: "El núcleo de nuestro negocio se basa en la hiperautomatización (con herramientas como la N8N) para que la carga administrativa relacionada con FUNDAE y Lanbide sea ágil, escalable y sin fallos.",
+      espezializazioa: "Alta Especialización Tecnológica",
+      etorkizuna: "Capacidades futuras de la mano de expertos punteros.",
+      eskaintza: "Nuestra oferta formativa está centrada en ámbitos de alta demanda: Inteligencia Artificial Creativa (utilizando herramientas como ChatGPT y Gemini), Análisis de Datos (Excel, Power BI), Ciberseguridad, y automatización de procesos (a través de n8n).",
+      elebitasun: "Bilingüismo Integral y Compromiso Local",
+      bereizgarria: "Nuestro distintivo en Euskadi.",
+      gure: "Toda nuestra oferta formativa, incluidos materiales, tutorías y la propia plataforma, es íntegramente bilingüe (euskera y castellano). Esta apuesta responde a la demanda existente en el mercado de Euskadi, donde se valora mucho el uso del euskera."
+    }
+  },
+  eu: {
+    clave: {
+      title: 'Gure Balio Proposamena: Zergatik gara desberdinak?',
+      subtitle: 'BideDigitala, S.L. ez da ohiko prestakuntza-agentzia bat. Gure abantaila lehiakorra gure funtzionamenduan datza, prozesuen berrikuntzan oinarrituta, akademia tradizionalentzat imitatzeko zaila dena.',
+      automatizazioa: 'Hiper-Automatizazioa',
+      burokrazia: "Burokrazia hutsa, %95ean automatizatua.",
+      muina: "Gure negozioaren muina hiper-automatizazioan oinarritzen da (n8n bezalako tresnekin), FUNDAErekin eta Lanbiderekin lotutako karga administratiboa arina, eskalagarria eta akatsik gabekoa izan dadin.",
+      espezializazioa: "Espezializazio Teknologiko Handia",
+      etorkizuna: "Etorkizuneko gaitasunak, punta-puntako adituen eskutik.",
+      eskaintza: "Gure eskaintza formatiboa eskari handiko esparruetan zentratuta dago: Adimen Artifizial sortzailea (ChatGPT eta Gemini bezalako tresnak erabiliz), Datuen Analisia (Excel, Power BI), Zibersegurtasuna, eta prozesuen automatizazioa (n8n bidez).",
+      elebitasun: "Elebitasun Integrala eta Tokiko Konpromisoa",
+      bereizgarria: "Gure bereizgarria Euskadin.",
+      gure: "Gure eskaintza formatibo osoa, materialak, tutoretzak eta plataforma bera barne, osorik elebiduna da (euskara eta gaztelania). Apustu honek Euskadiko merkatuan dagoen eskaerari erantzuten dio, non euskararen erabilera asko baloratzen den."
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+/* Value Proposition Section */
+.value-proposition {
+    padding: var(--section-padding);
+}
+
+.value-grid {
+    display: grid;
+    gap: 3rem;
+}
+
+.value-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    background: var(--bg-white);
+}
+
+.value-card:nth-child(even) {
+    direction: rtl;
+}
+
+.value-card:nth-child(even) .value-content {
+    direction: ltr;
+}
+
+.value-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+.value-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.value-icon i {
+    font-size: 1.5rem;
+    color: var(--text-white);
+}
+
+</style>
+<!-- Propuesta de Valor Section -->
+    <section id="balio-proposamena" class="value-proposition">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">{dict.clave.title}</h2>
+                <p class="section-subtitle">{dict.clave.subtitle}</p>
+            </div>
+            <div class="value-grid">
+                <div class="value-card">
+                    <div class="value-image">
+                        <img src="/images/automation_tech.jpg" alt="Hiper-Automatizazioa">
+                    </div>
+                    <div class="value-content">
+                        <div class="value-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>{dict.clave.automatizazioa}</h3>
+                        <p><strong>{dict.clave.burokrazia}</strong></p>
+                        <p>{dict.clave.muina}</p>
+                    </div>
+                </div>
+                <div class="value-card">
+                    <div class="value-image">
+                        <img src="/images/training_education.jpg" alt="Espezializazio Teknologikoa">
+                    </div>
+                    <div class="value-content">
+                        <div class="value-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>{dict.clave.espezializazioa}</h3>
+                        <p><strong>{dict.clave.etorkizuna}</strong></p>
+                        <p>{dict.clave.eskaintza}</p>
+                    </div>
+                </div>
+                <div class="value-card">
+                    <div class="value-image">
+                        <img src="/images/euskadi_landscape.jpg" alt="Elebitasun Integrala">
+                    </div>
+                    <div class="value-content">
+                        <div class="value-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3>{dict.clave.elebitasun}</h3>
+                        <p><strong>{dict.clave.bereizgarria}</strong></p>
+                        <p>{dict.clave.gure}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 

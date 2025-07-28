@@ -4,10 +4,7 @@ import { tPath, t } from '../lib/translations';
 const { lang } = Astro.props;
 ---
 <ul id="primary-navigation" class="nav-menu">
-  <li class="nav-item">
-    <a href={tPath('/', lang)} class="nav-link">{t(lang, 'nav.home')}</a>
-  </li>
-  <li class="nav-item">
+   <li class="nav-item">
     <a href={tPath('#inicio', lang)} class="nav-link">{t(lang, 'nav.home')}</a>
   </li>
   <li class="nav-item">
@@ -23,6 +20,9 @@ const { lang } = Astro.props;
     <a href={tPath('#resultados', lang)} class="nav-link">{t(lang, 'nav.resultados')}</a>
   </li>
   <li class="nav-item">
-    <a href={tPath('#contacto', lang)} class="nav-link">{t(lang, 'nav.contacto')}</a>
+    <div class="nav-cta">
+    <a href="#contacto" class="btn btn-primary">{t(lang, 'nav.diagnostico')}</a>
+</div>
   </li>
 </ul>
+ 

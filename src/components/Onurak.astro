@@ -1,0 +1,210 @@
+---
+// src/components/Servicios.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  clave: { title: string; 
+          subtitle: string; 
+          titulo_1: string; 
+          contenido_1: string;
+          item_1_1: string;
+          item_1_2: string;
+          item_1_3: string;
+          item_1_4: string;
+          titulo_2: string;
+          contenido_2: string;
+          item_2_1: string;
+          item_2_2: string;
+          item_2_3: string;
+          titulo_3: string;
+          contenido_3: string;
+          item_3_1: string;
+          item_3_2: string;
+          item_3_3: string;
+          item_3_4: string;
+          titulo_4: string;
+          contenido_4: string;
+          titulo_5: string;
+          contenido_5: string;
+          titulo_6: string;
+          contenido_6: string;
+          titulo_7: string;
+          contenido_7: string;
+        }
+}> = {
+  es: {
+    clave: {
+      title: 'Tus Beneficios Trabajando con Nosotros',
+      subtitle: 'Nuestro objetivo es claro: convertir tu inversión más en una inversión estratégica que en un coste, con resultados medibles.',
+      titulo_1: 'Coste Bajo o Nulo',
+      contenido_1: "Su empresa puede aprovechar el crédito formativo al 100% a través de FUNDAE, aplicando descuentos en las cotizaciones a su Seguridad Social.",
+      item_1_1: "",
+      item_1_2: "",
+      item_1_3: "",
+      item_1_4: "",
+      titulo_2: "Aumentar la Productividad y la Competitividad",
+      contenido_2: "Fortalece las capacidades de tu equipo e impulsa la transformación digital de la empresa, preparada para afrontar los retos del futuro.",
+      item_2_1: "",
+      item_2_2: "",
+      item_2_3: "",
+      titulo_3: "Atraer y Retener Talento",
+      contenido_3: "Ofrecer oportunidades de desarrollo profesional aumenta la satisfacción de los trabajadores y se convierte en una ventaja para atraer y fidelizar talento.",
+      item_3_1: "",
+      item_3_2: "",
+      item_3_3: "",
+      item_3_4: "",
+      titulo_4: "Gestión Simplificada",
+      contenido_4: "Como tenemos todos nuestros procesos automatizados (plataformas LMS, integraciones CRM y N8), te quitamos la carga administrativa liberando tiempo y recursos.",
+      titulo_5: "Adaptación a la Realidad Local",
+      contenido_5: "Conocer a fondo el mercado y el idioma de Euskadi nos permite dar respuestas concretas a tus necesidades locales, demostrando un compromiso real.",
+      titulo_6: "Adaptación Digital Garantizada",
+      contenido_6: "Tu empresa siempre al día con las tendencias, desarrollando las competencias digitales críticas para el futuro.",
+      titulo_7: "Transparencia Total",
+      contenido_7:"Paneles de seguimiento y reportes automatizados para que visualices el progreso de tu equipo y el impacto de la formación."
+    }
+  },
+  eu: {
+    clave: {
+      title: 'Zure Onurak Gurekin Lan Eginez',
+      subtitle: 'Gure helburua argia da: zure inbertsioa kostu batean baino inbertsio estrategiko batean bihurtzea, emaitza neurgarriekin.',
+      titulo_1: 'Kostu Txikia edo Nulua',
+      contenido_1: "Zure enpresak prestakuntza-kreditua %100ean aprobetxatu dezake FUNDAE bidez, zure Segurantza Sozialeko kotizazioetan deskontuak aplikatuz.",
+      item_1_1: "",
+      item_1_2: "",
+      item_1_3: "",
+      item_1_4: "",
+      titulo_2: "Produktibitatea eta Lehiakortasuna Handitu",
+      contenido_2: "Zure taldearen gaitasunak indartu eta enpresaren eraldaketa digitala bultzatu, etorkizuneko erronkei aurre egiteko prest.",
+      item_2_1: "",
+      item_2_2: "",
+      item_2_3: "",
+      titulo_3: "Talentua Erakarri eta Atxiki",
+      contenido_3: "Garapen profesionaleko aukerak eskaintzeak langileen gogobetetasuna areagotzen du, eta talentua erakarri eta fidelizatzeko abantaila bihurtzen da.",
+      item_3_1: "",
+      item_3_2: "",
+      item_3_3: "",
+      item_3_4: "",
+      titulo_4: "Kudeaketa Sinplifikatua",
+      contenido_4: "Gure prozesu guztiak automatizatuta ditugunez (LMS plataformak, CRM eta n8n integrazioak), administrazio-karga kentzen dizugu, denbora eta baliabideak askatuz.",
+      titulo_5: "Tokiko Errealitatera Egokituta",
+      contenido_5: "Euskadiko merkatua eta hizkuntza sakonki ezagutzeak zure tokiko beharretara erantzun zehatzak emateko aukera ematen digu, benetako konpromisoa erakutsiz.",
+      titulo_6: "Egokitzapen digital bermatua",
+      contenido_6: "Zure enpresa egunero joerekin, etorkizunerako kritikoak diren gaitasun digitalak garatuz.",
+      titulo_7: "Gardentasuna guztira",
+      contenido_7:"Jarraipen-panelak eta txosten automatizatuak, zure taldearen aurrerapena eta prestakuntzaren eragina ikus dezazun."
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+/* Benefits Section */
+.benefits {
+    padding: var(--section-padding);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.benefit-item {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.benefit-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.benefit-icon i {
+    font-size: 1.8rem;
+    color: var(--text-white);
+}
+
+.benefit-item h3 {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+</style>
+    <!-- Beneficios Section -->
+    <section id="onurak" class="benefits">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">{dict.clave.title}</h2>
+                <p class="section-subtitle">{dict.clave.subtitle}</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-euro-sign"></i>
+                    </div>
+                    <h3>{dict.clave.titulo_1}</h3>
+                    <p>{dict.clave.contenido_1}</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>{dict.clave.titulo_2}</h3>
+                    <p>{dict.clave.contenido_2}</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>{dict.clave.titulo_3}</h3>
+                    <p>{dict.clave.contenido_3}</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3>{dict.clave.titulo_4}</h3>
+                    <p>{dict.clave.contenido_4}</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>{dict.clave.titulo_5}</h3>
+                    <p>{dict.clave.contenido_5}</p>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-digital-tachograph"></i>
+                    </div>
+                    <h3>{dict.clave.titulo_6}</h3>
+                    <p>{dict.clave.contenido_6}</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>{dict.clave.titulo_7}</h3>
+                    <p>{dict.clave.contenido_7}</p>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+ 
