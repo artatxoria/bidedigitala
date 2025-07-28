@@ -1,32 +1,109 @@
 {
   "site": {
-    "title": "BideDigitala"
+    "title": "BideDigitala S.L."
   },
   "nav": {
     "home": "Hasiera",
     "problemas": "Arazoak",
-    "valor": "Balioa",
+    "valor": "Baioa",
+    "resultados" : "Emaitzak",
     "servicios": "Zerbitzuak",
-    "contacto": "Harremana"
+    "contacto": "Kontaktua"
   },
   "hero": {
-    "title": "Zure etorkizun digitala bultzatuko dugu",
-    "subtitle": "Soluzio pertsonalizatuak zure negoziorako",
-    "description": "Produkturik eraginkorrenak eta eskalagarriak sortzen ditugu.",
-    "ctaPrimary": "Jarri harremanetan",
-    "ctaSecondary": "Gure zerbitzuak"
+    "title": "Zure ETEak ulertuko eta maitatuko duen",
+    "title_": "Prestakuntza Hobariduna",
+    "badge" : "Abangoardiako teknologia",
+    "badge_" : "Kudeaketa automatizatua",
+    "badge__" : "Hazten ari den talentua",
+    "subtitle": "Soluciones a medida para tu negocio",
+    "description": "Creamos productos digitales eficientes y escalables.",
+    "ctaPrimary": "Contáctanos",
+    "ctaSecondary": "Nuestros servicios",
+    "contacto" : "Eskatu zure doako aholkularitza",
+    "diferencia" : "Ezagutu nola"
   },
+  "problema": {
+    "libera": "Askatu zure taldearen potentziala. Burokraziarik gabe. Konplikaziorik gabe.",
+    "problema" : "Ezagutzen duzun arazoa",
+    "sabemos" : "Badakigu ETE askorentzat prestakuntza hobariduna paperen, epeen eta zalantzen labirintoa dela. Zure taldean inbertitu nahi duzu produktibitatea hobetzeko, eraldaketa digitalera egokitzeko eta talentuari eusteko. Baina, nola egin administrazio-kudeaketak zure denbora eta baliabideak kontsumitu gabe?",
+    "nosotros" : "Gure Konponbidea",
+    "solución" : "BideDigitalan, enpresentzako prestakuntza birdefinitu dugu. Adimen Artifiziala eta giza bikaintasun pedagogikoa uztartu ditugu tirabira ezabatzeko, prozesua sinplifikatzeko eta emaitza ukigarriak eskaintzeko. Zure taldea prestatzea inbertsio estrategikoa izan beharko litzatekeela uste dugulako, ez buruhaustea."
+  },
+  "diferencia" : {
+    "tu solución" : "Zure Irtenbidea Prestakuntzan: Bizkortasuna, Espezializazioa eta Hurbiltasuna",
+    "qué" : "Zerk egiten gaitu benetan desberdin? Ez dugu prestakuntza bakarrik ematen. Esperientzia osoa automatizatzen dugu zuretzat eta zure langileentzat, izen-ematetik azken hobarira arte.",
+    "hiper" : "Hiperautomatizazio adimenduna",
+    "nuestro" : "Gure negozio 'koreak' IArekin egiten du talka. Inskripzioak, FUNDAE hobariak, jakinarazpenak eta ziurtagiriak kudeatzen ditugu automatikoki eta gardentasunez. Esan agur paperei! Zure enpresa prestakuntza aukeratzeaz bakarrik arduratzen da, eta zure langileak ikaskuntzaz.",
+    "eficiencia" : "Esta eficiencia radical es nuestra ventaja competitiva, difícil de imitar por academias tradicionales.",
+    "especialización" : "Abangoardiako espezializazio teknologikoa",
+    "foco" : "Egungo merkatuan gehien eskatzen diren eta talentu-arrakala handiena duten trebetasunetan jartzen dugu arreta. Zibersegurtasuna eta Datuen Analisia (Excel, Power BI), Adimen Artifizial Sortzaile Aplikatua eta Prozesuen Automatizazioa (n8n), Programazioa (PHP, C++).",
+    "contenido" : "Eduki praktikoak eta berehala aplikatzekoak, adituek emanak.",
+    "bi" : "Elebitasun integrala eta tokiko konpromisoa",
+    "euskadi" : "Euskadin, hizkuntzak axola du. Gure prestakuntza-eskaintza, materialak, tutoretzak eta plataforma osoa elebidunak dira (euskara eta gaztelania). Ez da gehigarri bat, funtsezko zutabea da, aldeko jarrera ematen digu eta tokiko kulturarekiko dugun errespetua erakusten du."
+  },
+  
+  "servicios" : {
+    "nuestros" : "Gure zerbitzuak: zure neurrira egindako prestakuntza, non eta noiz behar duzun",
+    "servicios" : "BideDigitalan, zure enpresaren errealitatera eta langileen beharretara egokitzen gara, okupatuak izan edo lana bilatzen ari direnak izan:",
+    "empresas" : "Enpresentzat",
+    "bonificada" : "Prestakuntza hobariduna FUNDAE",
+    "medida" : "Neurrira",
+    "diseño" : "Zure taldearentzako ikastaro espezifikoak diseinatzen ditugu, zure instalazioetan aurrez aurre edo gure ikasgela birtualaren bidez zuzenean emanda.",
+    "gestión" : "'Giltza eskuan' kudeaketa",
+    "burocracia" : "FUNDAErekin egin beharreko izapide guztiez arduratzen gara, zure prestakuntza-kreditua % 100ean aprobetxa dezazun, ahalegin burokratikorik egin gabe.",
+    "trabajadores" : "Para Trabajadores y Desempleados",
+    "online" : "Langile eta langabeentzat",
+    "síncrona" : "Modalitate sinkronoa",
+    "clases" : "Eskolak denbora errealean giza tutorearekin, gure gela birtualaren bidez, elkarrekintza eta ikaskuntza aktiboa sustatuz.",
+    "programas" : "Diruz lagundutako programak",
+    "itinerario" : "Lanbidek edo SEPEk finantzatutako enplegagarritasun handiko prestakuntza-ibilbideetara sar daiteke."
+  },
+  
+  "resultados": {
+    "medir" : "Neurtu ditzakezun emaitzak. Senti dezakezun balioa.",
+    "bidedigitala" : "Burokrazia kentzeaz gain, zure inbertsioaren benetako itzulera ikusten lagunduko dizugu. BideDigitalarekin, prestakuntza hazkunde-motor bihurtzen da zure negozioarentzat:",
+    "productividad" : "Produktibitate hobetua",
+    "empleados" : "Enplegatu eraginkorragoak eta azken teknologietara egokituak.",
+    "retención" : "Talentua atxikitzea",
+    "desarrollo": "Garapen profesionala eskaintzeak gogobetetzea areagotzen du eta txandakatzea murrizten.",
+    "adaptación": "Egokitzapen digital bermatua",
+    "empresa": "Zure enpresa egunero joerekin, etorkizunerako kritikoak diren gaitasun digitalak garatuz.",
+    "transparencia": "Gardentasuna guztira",
+    "paneles": "Jarraipen-panelak eta txosten automatizatuak, zure taldearen aurrerapena eta prestakuntzaren eragina ikus dezazun."
+  },
+
+  "cta" : {
+    "preparado" : "Prestakuntza zure enpresan eraldatzeko prest?",
+    "miles" : "Milaka ETE beren ekipoen potentziala askatzen ari dira. Prestakuntza adimenduna, eraginkorra eta kalitate handiagokoa lortzeko lehen urratsa ematen du.",
+    "solicita" : "Eskatu zure doako aholkularitza eta kalkulatu zure kreditua FUNDAE",
+    "nombre" : "Izen osoa",
+    "teléfono" : "Telefonoa",
+    "empresa" : "Enpresa",
+    "numero" : "Langile kopurua",
+    "1" : "1-10 langile",
+    "11" : "11-50 langile", 
+    "51" : "51-100 langile", 
+    "mas" : "100 baino langile gehiago", 
+    "tareas" : "Zein arlotan behar duzu prestakuntza?", 
+    "solicitar" : "Doako aholkularitza eskatu", 
+    "propuesta" : "Proposamen pertsonalizatua behar duzu?", 
+    "dudas" : "Zalantzak dituzu hobariari buruz? Jarri harremanetan gure adituekin:", 
+    "email" : "Emaila"
+  },
+  
+  
   "footer": {
-    "tagline": "Ideiak esperientzia digitalen bihurtzen",
+    "tagline": "Formazio adimenduna Euskadiko enpresentzat",
     "services": "Zerbitzuak",
-    "service1": "Web Garapena",
-    "service2": "UX/UI Diseinua",
-    "service3": "Estrategia Digitala",
+    "service1": "Formazio Bonifikatua",
+    "service2": "Formazio Dirulagundua",
+    "service3": "Formazio Pribatua",
     "company": "Enpresa",
-    "valueProposal": "Balio Proposamena",
-    "process": "Prozesua",
-    "contact": "Harremana",
-    "rights": "Eskubide guztiak erreserbatuta."
+    "valueProposal": "Gure balio proposamena",
+    "process": "Nola lan egituen dugu",
+    "contact": "Harremanetan jarri",
+    "rights": "2025 BideDigitala, S.L. Eskubide guztiak gordeta."
   },
   "home": {
     "title": "Hasiera – BideDigitala"

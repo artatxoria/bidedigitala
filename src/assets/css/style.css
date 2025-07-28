@@ -14,7 +14,7 @@
     --text-dark: #1f2937;
     --text-light: #6b7280;
     --text-white: #ffffff;
-    --bg-light: #f9fafb;
+    --bg-light: #f8fafc;
     --bg-white: #ffffff;
     --border-light: #e5e7eb;
     
@@ -173,12 +173,6 @@ p {
     color: var(--primary-color);
 }
 
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-}
-
 .bar {
     width: 25px;
     height: 3px;
@@ -281,12 +275,9 @@ p {
 }
 
 .hero-subtitle {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    font-size: 1.5rem;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 3rem;
-    flex-wrap: wrap;
     animation: fadeInUp 1s ease 0.2s both;
 }
 
@@ -306,6 +297,7 @@ p {
     justify-content: center;
     flex-wrap: wrap;
     animation: fadeInUp 1s ease 0.6s both;
+    margin-bottom: 1.5rem;
 }
 
 .hero-bg-image {
@@ -511,20 +503,68 @@ section {
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
+    gap: 3rem;
 }
 
 .service-card {
-    background: var(--bg-white);
+    background: white;
     padding: 2rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-md);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
 .service-card:hover {
     transform: translateY(-5px);
 }
+
+.service-header {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+}
+
+.service-header i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.service-header h3 {
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.service-tag {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color:white
+}
+
+.service-content {
+    padding: 2rem;
+}
+
+.service-item {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.service-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.service-item h4 {
+    color: #1e3a8a;
+    margin-bottom: 0.5rem;
+}
+
 
 .service-icon {
     width: 70px;
@@ -566,6 +606,236 @@ section {
     color: var(--secondary-color);
     font-weight: bold;
 }
+
+/* Results Section */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.result-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+}
+
+.result-card:hover {
+    transform: translateY(-5px);
+    border-color: #1e3a8a;
+}
+
+.result-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: white;
+}
+
+.result-card h3 {
+    color: #1e3a8a;
+    margin-bottom: 1rem;
+}
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(135deg, #111827 0%, #374151 100%);
+    color: white;
+}
+
+.cta-section .section-header h2,
+.cta-section .section-header p {
+    color: white;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+}
+
+.contact-form {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2.5rem;
+}
+
+.contact-form h3 {
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.);
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.contact-info {
+    padding: 2rem 0;
+}
+
+.contact-info h3 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.contact-info p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-method {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.contact-method i {
+    font-size: 1.5rem;
+    color: #10b981;
+    width: 30px;
+}
+
+.contact-method strong {
+    color: white;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.contact-method p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+
+/* MENÚ DE NAVEGACIÓN */
+/* ==== Menú en escritorio: siempre visible ==== */
+.nav-menu {
+  display: flex;           /* o block, según tu diseño */
+  gap: 1rem;               /* separación entre ítems */
+  list-style: none;
+}
+
+/* ==== Toggle oculto en escritorio ==== */
+.nav-toggle {
+    display: none;
+    background: none;    /* eliminar fondo */
+    border: none;        /* eliminar borde */
+    padding: 0;          /* ajustar espacio */
+    flex-direction: column;
+    cursor: pointer;
+}
+
+/* ==== En pantallas pequeñas: menú oculto, toggle visible ==== */
+@media (max-width: 768px) {
+  /* Oculta el menú por defecto */
+  .nav-menu {
+    display: none;
+    flex-direction: column;  /* si lo quieres en columna */
+    gap: 0.5rem;
+  }
+
+  /* Muestra el menú cuando tenga .open */
+  .nav-menu.open {
+    display: flex;           /* o block si prefieres */
+  }
+
+  /* Muestra el botón hamburguesa */
+  .nav-toggle {
+    display: block;
+    cursor: pointer;
+  }
+}
+
+/* Las 3 rayas: */
+.nav-toggle .bar {
+  display: block;
+  width: 25px;         /* ancho de cada raya */
+  height: 3px;         /* grosor de cada raya */
+  margin: 5px auto;    /* espacio entre ellas y centrado */
+  background-color: currentColor; /* toman el color del texto */
+  transition: background-color 0.3s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -902,46 +1172,7 @@ section {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 70px;
-        flex-direction: column;
-        background-color: var(--bg-white);
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-        box-shadow: var(--shadow-lg);
-        padding: 2rem 0;
-    }
 
-    .nav-menu.active {
-        left: 0;
-    }
-
-    .nav-menu li {
-        margin: 1rem 0;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .hamburger.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-
-    .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
-
-    .nav-cta {
-        display: none;
-    }
 
     h1 {
         font-size: 2.5rem;

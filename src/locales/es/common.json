@@ -1,11 +1,12 @@
 {
   "site": {
-    "title": "BideDigitala"
+    "title": "BideDigitala S.L."
   },
   "nav": {
     "home": "Inicio",
     "problemas": "Problemas",
     "valor": "Valor",
+    "resultados" : "Resultados",
     "servicios": "Servicios",
     "contacto": "Contacto"
   },
@@ -37,29 +38,73 @@
     "eficiencia" : "Esta eficiencia radical es nuestra ventaja competitiva, difícil de imitar por academias tradicionales.",
     "especialización" : "Especialización Tecnológica de Vanguardia",
     "foco" : "Nos enfocamos en las habilidades más demandadas y con mayor brecha de talento en el mercado actual. Desde Ciberseguridad y Análisis de Datos (Excel, Power BI), hasta Inteligencia Artificial Generativa Aplicada y Automatización de Procesos (con n8n), pasando por Programación (PHP, C++).",
-    "contenido" : "Contenidos prácticos y de aplicación inmediata, impartidos por expertos humanos.",
+    "contenido" : "Contenidos prácticos y de aplicación inmediata, impartidos por formadores expertos.",
     "bi" : "Bilingüismo Integral y Compromiso Local",
     "euskadi" : "En Euskadi, el idioma importa. Toda nuestra oferta formativa, materiales, tutorías y plataforma son íntegramente bilingües (Euskera y Castellano). No es un añadido, es un pilar fundamental que nos posiciona favorablemente y demuestra nuestro respeto por la cultura local."
   },
   
   "servicios" : {
-
+    "nuestros" : "Nuestros Servicios: Formación a tu Medida, Donde y Cuando la Necesites",
+    "servicios" : "En BideDigitala, nos adaptamos a la realidad de tu empresa y a las necesidades de los trabajadores, sean ocupados o en búsqueda de empleo:",
+    "empresas" : "Para Empresas",
+    "bonificada" : "Formación Bonificada FUNDAE",
+    "medida" : "A medida",
+    "diseño" : "Diseñamos cursos específicos para tu equipo, impartidos de forma presencial en tus instalaciones o a través de nuestra aula virtual en directo.",
+    "gestión" : "Gestión 'Llave en Mano'",
+    "burocracia" : "Nos encargamos de todos los trámites con FUNDAE para que aproveches al 100% tu crédito de formación sin esfuerzo burocrático.",
+    "trabajadores" : "Para Trabajadores y Desempleados",
+    "online" : "Exclusivamente Online",
+    "síncrona" : "Modalidad Síncrona",
+    "clases" : "Clases en tiempo real con tutor humano a través de nuestra aula virtual, fomentando la interacción y el aprendizaje activo.",
+    "programas" : "Programas Subvencionados",
+    "itinerario" : "Accede a itinerarios formativos de alta empleabilidad financiados por organismos como Lanbide o el SEPE."
   },
   
+  "resultados": {
+    "medir" : "Resultados que Puedes Medir. Valor que Puedes Sentir.",
+    "bidedigitala" : "No solo te quitamos la burocracia, te ayudamos a ver el retorno real de tu inversión. Con BideDigitala, la formación se convierte en un motor de crecimiento para tu negocio:",
+    "productividad" : "Productividad Mejorada",
+    "empleados" : "Empleados más eficientes y adaptados a las últimas tecnologías.",
+    "retención" : "Retención de Talento",
+    "desarrollo": "Ofrecer desarrollo profesional aumenta la satisfacción y reduce la rotación.",
+    "adaptación": "Adaptación Digital Garantizada",
+    "empresa": "Tu empresa siempre al día con las tendencias, desarrollando las competencias digitales críticas para el futuro.",
+    "transparencia": "Transparencia Total",
+    "paneles": "Paneles de seguimiento y reportes automatizados para que visualices el progreso de tu equipo y el impacto de la formación."
+  },
+
+  "cta" : {
+    "preparado" : "¿Preparado para Transformar la Formación en tu Empresa?",
+    "miles" : "Miles de PYMES ya están liberando el potencial de sus equipos. Da el primer paso hacia una formación inteligente, eficiente y de calidad superior.",
+    "solicita" : "Solicita tu Asesoría Gratuita y Calcula tu Crédito FUNDAE",
+    "nombre" : "Nombre completo",
+    "email" : "Email empresarial",
+    "teléfono" : "Teléfono",
+    "empresa" : "Empresa",
+    "numero" : "Número de empleados",
+    "1" : "1-10 empleados",
+    "11" : "11-50 empleados", 
+    "51" : "51-100 empleados", 
+    "mas" : "Más de 100 empleados", 
+    "tareas" : "¿En qué área necesitas formación?", 
+    "solicitar" : "Solicitar Asesoría Gratuita", 
+    "propuesta" : "¿Necesitas una propuesta personalizada?", 
+    "dudas" : "¿Tienes dudas sobre la bonificación? Contacta con nuestros expertos:", 
+    "email" : "Email"
+  },
   
-  
-  
+ 
   "footer": {
-    "tagline": "Transformando ideas en experiencias digitales",
+    "tagline": "Formación inteligente para empresas vascas",
     "services": "Servicios",
-    "service1": "Desarrollo Web",
-    "service2": "UX/UI Design",
-    "service3": "Estrategia Digital",
+    "service1": "Formación Bonificada",
+    "service2": "Formación Subvencionada",
+    "service3": "Formación Privada",
     "company": "Empresa",
     "valueProposal": "Propuesta de valor",
     "process": "Proceso",
     "contact": "Contacto",
-    "rights": "Todos los derechos reservados."
+    "rights": "2025 BideDigitala, S.L. Todos los derechos reservados."
   },
   "home": {
     "title": "Inicio – BideDigitala"

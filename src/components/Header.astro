@@ -1,33 +1,40 @@
 ---
-// Header.astro
+// src/components/Header.astro
+
 import { tPath, t } from '../lib/translations';
+import Navegacion from './Navegacion.astro';
+
 const { lang } = Astro.props;
 ---
 <header class="header">
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-logo">
-        <h2><img
+        <a href={tPath('/', lang)}>
+          <img
             src="/images/BideDigitala.png"
             alt="BideDigitala Logo"
             class="logo-img"
             width="300"
           />
-        </h2>
+        </a>
       </div>
-      <a href={`/${lang}/`} class="nav-link">{t(lang,'nav.home')}</a>
-      <ul class="nav-menu">
-        <li class="nav-item"><a href={`/${lang}#inicio`} class="nav-link">{t(lang,'nav.inicio')}</a></li>
-        <li class="nav-item"><a href={`/${lang}#arazoak`} class="nav-link">{t(lang,'nav.problemas')}</a></li>
-        <li class="nav-item"><a href={`/${lang}#balio-proposamena`} class="nav-link">{t(lang,'nav.valor')}</a></li>
-        <li class="nav-item"><a href={`/${lang}#zerbitzuak`} class="nav-link">{t(lang,'nav.servicios')}</a></li>
-        <li class="nav-item"><a href={`/${lang}#harremana`} class="nav-link">{t(lang,'nav.contacto')}</a></li>
-      </ul>
-      <div class="nav-toggle">
-        <span class="bar">Item</span>
-        <span class="bar">Item</span>
-        <span class="bar">Item</span>
-      </div>
+      
+      
+     <!-- Menú de navegación extraído a su propio componente -->
+      <Navegacion lang={lang} />
+
+      <!-- Nav toggle como <button> con aria-controls="primary-navigation" -->
+    <button 
+      class="nav-toggle" 
+      aria-label="Abrir menú" 
+      aria-expanded="false"
+      aria-controls="primary-navigation"
+    >
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
     </div>
   </nav>
 </header>

@@ -4,33 +4,33 @@ import { tPath, t } from '../lib/translations';
 const { lang } = Astro.props;
 ---
 <footer class="footer">
-          <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <h3>BideDigitala<span class="logo-accent">.eus</span></h3>
-                    <p>Formazio adimenduna Euskadiko enpresentzat</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-section">
-                        <h4>Zerbitzuak</h4>
-                        <ul>
-                            <li><a href="#zerbitzuak">Formazio Bonifikatua</a></li>
-                            <li><a href="#zerbitzuak">Formazio Dirulagundua</a></li>
-                            <li><a href="#zerbitzuak">Formazio Pribatua</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
-                        <h4>Enpresa</h4>
-                        <ul>
-                            <li><a href="#balio-proposamena">Gure Balio Proposamena</a></li>
-                            <li><a href="#prozesua">Nola Lan Egiten Dugu</a></li>
-                            <li><a href="#harremana">Harremanetan Jarri</a></li>
-                        </ul>
-                    </div>
-                </div>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>BideDigitala<span class="logo-accent">.eus</span></h3>
+                <p>{t(lang, 'footer.tagline')}</p>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 BideDigitala, S.L. Eskubide guztiak gordeta.</p>
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h4>{t(lang, 'footer.services')}</h4>
+                    <ul>
+                        <li><a href="#zerbitzuak">{t(lang, 'footer.service1')}</a></li>
+                        <li><a href="#zerbitzuak">{t(lang, 'footer.service2')}</a></li>
+                        <li><a href="#zerbitzuak">{t(lang, 'footer.service3')}</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>{t(lang, 'footer.company')}</h4>
+                    <ul>
+                        <li><a href="#balio-proposamena">{t(lang, 'footer.valueProposal')}</a></li>
+                        <li><a href="#prozesua">{t(lang, 'footer.process')}</a></li>
+                        <li><a href="#harremana">{t(lang, 'footer.contact')}</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
+    <div class="footer-bottom">
+        <p>&copy; {t(lang, 'footer.rights')}</p>
+    </div>
+</div>
 </footer>
