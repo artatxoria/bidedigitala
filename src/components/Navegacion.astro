@@ -1,10 +1,14 @@
 ---
 // src/components/Navegacion.astro
 import { tPath, t } from '../lib/translations';
+import CambioIdioma from './CambioIdioma.astro';
 const { lang } = Astro.props;
 ---
 <ul id="primary-navigation" class="nav-menu">
-   <li class="nav-item">
+  <li class="nav-item">
+    <CambioIdioma lang={lang} />
+  </li>
+  <li class="nav-item">
     <a href={tPath('#inicio', lang)} class="nav-link">{t(lang, 'nav.home')}</a>
   </li>
   <li class="nav-item">

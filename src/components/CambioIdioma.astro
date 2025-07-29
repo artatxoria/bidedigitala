@@ -1,0 +1,65 @@
+---
+// src/components/LanguageSwitcher.astro
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+
+// Idiomas que manejas
+const supported = ['es', 'eu'] as const;
+
+// Ruta actual (p.ej. "/es/blog/primer-post" → "/blog/primer-post")
+const rawPath = Astro.url.pathname;
+// Eliminamos el `/es` o `/eu` inicial
+const pagePath = rawPath.replace(/^\/(es|eu)/, '') || '/';
+
+---
+<style>
+  .lang-switch {
+    list-style: none;
+    display: inline-flex;
+    padding: 2px;
+    border-radius: 10px;
+    border: 1px solid;
+    background-clip: linear-gradient(to right, blue, green) 1;;
+    margin: 0;
+  }
+  
+  .lang-switch li {
+  list-style: none;
+}
+  
+  .lang-switch a {
+  display: block;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 10px;
+  font-weight: 500;
+  color: var(--text-dark);
+  background: white; /* color de fondo interior */
+  transition: background 0.3s ease, color 0.3s ease;
+}
+  .lang-switch a.active {
+    background: linear-gradient(to right, blue, green);
+    color: white;
+  }
+</style>
+
+<ul class="lang-switch">
+  {supported.map((l) => {
+    // Construimos la URL con el prefijo de idioma
+    const href = `/${l}${pagePath}`;
+    // La etiqueta que verás: ES o EU
+    const label = l.toUpperCase();
+    // ¿Es el idioma activo?
+    const isActive = l === Astro.props.lang;
+
+    return (
+      <li>
+        <a href={href} class={isActive ? 'active' : ''}>
+          {label}
+        </a>
+      </li>
+    );
+  })}
+</ul>
