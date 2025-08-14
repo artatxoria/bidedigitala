@@ -1,0 +1,198 @@
+---
+// src/pages/[lang]/politica-privacidad.astro
+// Página de Política de Privacidad con traducciones embebidas
+
+import { string } from 'astro:schema';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'eu' } }
+  ];
+}
+export const prerender = true;
+
+const supported = ['es', 'eu'] as const;
+type Lang = typeof supported[number];
+
+const langParam = Astro.params.lang;
+
+const lang: Lang = supported.includes(langParam as any)
+  ? (langParam as Lang)
+  : 'es'; // fallback
+
+// Traducciones embebidas directamente en el archivo
+const translations: Record<Lang, {
+  title: string;
+  fecha_act: string;
+  fecha: string;
+  intro: string;
+  responsable: string;
+  identidad: string;
+  direccion: string;
+  email: string;
+  telefono: string;
+  dataUse: string;
+  dataUseText: string;
+  item_1_1: string;
+  item_1_2: string;
+  item_2_1: string;
+  item_2_2: string;
+  dataUseText_2: string;
+  legitimacion:string;
+  legitimacion_text:string;
+  destino: string;
+  destino_text:string;
+  plazo:string;
+  plazo_text:string;
+  derechos:string;
+  derechos_text:string;
+  item_3_1:string;
+  item_3_2:string;
+  item_3_3:string;
+  item_3_4:string;
+  item_3_5:string;
+  item_3_6:string;
+  item_3_7:string;
+  derechos_text_2:string;
+  derechos_text_3:string;
+  medidas: string;
+  medidasText: string;
+}> = {
+  es: {
+    title: 'Política de Privacidad',
+    fecha_act: 'Fecha de última actualización:',
+    fecha: '13 de julio de 2025',
+    intro: 'En BideDigitala (Aulesti, Bizkaia), nos comprometemos con la protección de sus datos personales y la transparencia en su tratamiento. Esta política de privacidad describe cómo recopilamos, utilizamos y protegemos la información que nos proporciona a través de nuestro formulario de contacto.',
+    responsable: '1. Responsable del Tratamiento de sus Datos',
+    identidad: 'Identidad',
+    direccion: 'Dirección',
+    email: 'Correo electrónico',
+    telefono: 'Telefono',
+    dataUse: '2. Finalidad del Tratamiento de sus Datos Personales',
+    dataUseText: 'Los datos personales que nos proporcione a través del formulario de contacto de nuestra página web serán tratados exclusivamente para las siguientes finalidades:',
+    item_1_1: 'Gestionar su solicitud de información:',
+    item_1_2: 'Utilizaremos sus datos para responder a sus consultas, proporcionarle la información solicitada sobre nuestros servicios y resolver cualquier duda que pueda tener.',
+    item_2_1: 'Iniciar una relación comercial:',
+    item_2_2: 'En caso de que su consulta derive en un interés por nuestros servicios, utilizaremos sus datos para gestionar el proceso de inicio de una posible relación comercial, incluyendo el envío de propuestas, presupuestos y comunicaciones relacionadas.',
+    dataUseText_2: 'No utilizaremos sus datos para ninguna otra finalidad sin su consentimiento explícito, ni para el envío de comunicaciones comerciales no solicitadas.',
+    legitimacion:'3. Legitimación para el Tratamiento de sus Datos',
+    legitimacion_text:'La base legal para el tratamiento de sus datos es el consentimiento que usted nos otorga al rellenar y enviar el formulario de contacto. Al marcar la casilla de aceptación de esta política de privacidad, usted consiente expresamente el tratamiento de sus datos para las finalidades descritas.',
+    destino: '4. Destinatarios de sus Datos',
+    destino_text:'Le informamos que sus datos personales <strong>no serán cedidos a terceros</strong> bajo ninguna circunstancia, salvo obligación legal. Los datos que nos proporcione serán tratados de forma confidencial y utilizados exclusivamente por BideDigitala, S.L. para las finalidades mencionadas.',
+    plazo:'5. Plazo de Conservación de sus Datos',
+    plazo_text:'Sus datos personales serán conservados durante el tiempo estrictamente necesario para cumplir con las finalidades para las que fueron recogidos y, en su caso, para la gestión de la relación comercial. Una vez finalizada la finalidad o la relación comercial, sus datos serán bloqueados y conservados durante los plazos legalmente exigidos para atender posibles responsabilidades derivadas del tratamiento, y posteriormente serán eliminados.',
+    derechos:'6. Sus Derechos',
+    derechos_text:'Usted tiene derecho a:',
+    item_3_1:'<strong>Acceder</strong> a sus datos personales.',
+    item_3_2:'Solicitar la <strong>rectificación</strong> de los datos inexactos.',
+    item_3_3:'Solicitar su <strong>supresión</strong> cuando, entre otros motivos, los datos ya no sean necesarios para los fines que fueron recogidos.',
+    item_3_4:'Solicitar la <strong>limitación del tratamiento</strong> de sus datos, en cuyo caso únicamente los conservaremos para el ejercicio o la defensa de reclamaciones.',
+    item_3_5:'<strong>Oponerse</strong> al tratamiento de sus datos, en determinadas circunstancias y por motivos relacionados con su situación particular.',
+    item_3_6:'Solicitar la <strong>portabilidad</strong> de sus datos.',
+    item_3_7:'<strong>Revocar</strong> el consentimiento otorgado en cualquier momento, sin que ello afecte a la licitud del tratamiento basado en el consentimiento previo a su retirada.',
+    derechos_text_2:'Para ejercer cualquiera de estos derechos, puede dirigirse a BideDigitala, S.L. a través de la dirección de correo electrónico info@ostadarra.eus o la dirección postal indicada en el apartado 1, adjuntando copia de su DNI o documento identificativo equivalente.',
+    derechos_text_3:'Asimismo, tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (AEPD) si considera que el tratamiento de sus datos personales no se ajusta a la normativa vigente. Puede encontrar más información en <a href="https://www.aepd.es" target="_blank">www.aepd.es</a>.',
+    medidas: '7. Medidas de Seguridad',
+    medidasText: 'En BideDigitala, S.L. hemos adoptado las medidas técnicas y organizativas necesarias para garantizar la seguridad e integridad de los datos personales que tratamos, evitando su alteración, pérdida, tratamiento o acceso no autorizado, habida cuenta del estado de la tecnología, la naturaleza de los datos almacenados y los riesgos a los que están expuestos, ya provengan de la acción humana o del medio físico o natural.'
+  },
+  eu: {
+    title: 'Pribatutasun Politika',
+    fecha_act: 'Azken eguneratze-data:',
+    fecha: '2025eko uztailaren 13a',
+    intro: 'BideDigitalan (Aulesti, Bizkaia), zure datu pertsonalen babesarekin eta datuen tratamenduaren gardentasunarekin konprometitzen gara. Pribatutasun-politika honek gure kontaktu-formularioaren bidez ematen digun informazioa nola biltzen, erabiltzen eta babesten dugun deskribatzen du.',
+    responsable: '1. Zure datuen tratamenduaren arduraduna',
+    identidad: 'Identitatea',
+    direccion: 'Helbidea',
+    email: 'Posta elektronikoa',
+    telefono: 'Telefonoa',
+    dataUse: '2. Zure datu pertsonalen tratamenduaren helburua',
+    dataUseText: 'Gure web orriko harremanetarako formularioaren bidez ematen dizkigun datu pertsonalak honako helburu hauetarako baino ez dira erabiliko:',
+    item_1_1: 'Informazio-eskaera kudeatzea:',
+    item_1_2: 'Zure datuak erabiliko ditugu zure kontsultei erantzuteko, gure zerbitzuei buruz eskatutako informazioa emateko eta izan dezakezun edozein zalantza argitzeko.',
+    item_2_1: 'Merkataritza-harreman bat hastea:',
+    item_2_2: 'Zure kontsultaren ondorioz gure zerbitzuekiko interesa sortzen bada, zure datuak erabiliko ditugu balizko merkataritza-harreman bat hasteko prozesua kudeatzeko, proposamenak, aurrekontuak eta lotutako komunikazioak bidaltzea barne.',
+    dataUseText_2: 'Ez ditugu zure datuak beste ezertarako erabiliko zure baimen espliziturik gabe, ezta eskatu gabeko komunikazio komertzialak bidaltzeko ere.',
+    legitimacion:'3. Zure datuak tratatzeko legitimazioa',
+    legitimacion_text:'Zure datuak tratatzeko lege-oinarria harremanetarako formularioa bete eta bidaltzean ematen diguzun baimena da. Pribatutasun-politika honen onarpen-laukitxoa markatzean, berariaz onartzen duzu zure datuen tratamendua deskribatutako helburuetarako.',
+    destino: '4. Datuen hartzaileak',
+    destino_text:'Jakinarazten dizugu zure datu pertsonalak <strong>ez zaizkizula inolaz ere hirugarrenei lagako</strong>, legezko betebeharretan izan ezik. Ematen dizkigun datuak modu konfidentzialean tratatuko dira, eta Ostadarra, S.L.k bakarrik erabiliko ditu aipatutako helburuetarako.',
+    plazo:'5. Datuak gordetzeko epea',
+    plazo_text:'Datu pertsonalak bildu ziren helburuak betetzeko eta, hala badagokio, merkataritza-harremanak kudeatzeko behar-beharrezkoa den denboran gordeko dira. Merkataritza-helburua edo -harremana amaitu ondoren, zure datuak blokeatu eta legez eskatutako epeetan gordeko dira, tratamenduaren ondoriozko balizko erantzukizunei erantzuteko, eta, ondoren, ezabatu egingo dira.',
+    derechos:'6. Eskubideak',
+    derechos_text:'Eskubidea duzu:',
+    item_3_1:'Zure datu pertsonaletara <strong>sartzea</strong>.',
+    item_3_2:'Datu okerrak <strong>zuzentzeko</strong> eskatzea.',
+    item_3_3:'Datuak <strong>ezabatzeko</strong> eskatzea, besteak beste, jasotako helburuetarako beharrezkoak ez direnean.',
+    item_3_4:'Zure datuen <strong>tratamendua mugatzeko</strong> eskatzea; kasu horretan, erreklamazioak egiteko edo defendatzeko baino ez ditugu gordeko.',
+    item_3_5:'Bere <strong>datuen tratamenduari aurka egitea</strong>, egoera jakin batzuetan eta bere egoera partikularrarekin zerikusia duten arrazoiengatik.',
+    item_3_6:'Zure datuen <strong>eramangarritasuna</strong> eskatu.',
+    item_3_7:'Emandako baimena edozein unetan <strong>baliogabetzea</strong>, baina horrek ez du eraginik izango kendu aurreko baimenean oinarritutako tratamenduaren zilegitasunean.',
+    derechos_text_2:'Eskubide horietakoren bat baliatzeko, BideDigitala, S.L.ra jo dezakezu info@ostadarra.eus helbide elektronikoaren edo 1. atalean adierazitako posta-helbidearen bidez, NANaren edo identifikazio-agiri baliokidearen kopia erantsita.',
+    derechos_text_3:'Era berean, eskubidea duzu Datuak Babesteko Espainiako Bulegoan (AEPD) erreklamazio bat aurkezteko, zure datu pertsonalen tratamendua indarrean dagoen araudiarekin bat ez datorrela uste baduzu. Informazio gehiago <a href="https://www.aepd.es" target="_blank">www.aepd.es</a> webgunean aurki dezakezu.',
+    medidas: '7. Segurtasun-neurriak',
+    medidasText: 'BideDigitala, S.L.n beharrezko neurri teknikoak eta antolakuntzakoak hartu ditugu tratatzen ditugun datu pertsonalen segurtasuna eta osotasuna bermatzeko, datu horiek aldatzea, galtzea, baimenik gabe tratatzea edo eskuratzea saihestuz, teknologiaren egoera, biltegiratutako datuen izaera eta izan ditzaketen arriskuak kontuan hartuta, giza ekintzatik edo ingurune fisiko edo naturaletik datozenak.'
+  }
+};
+
+// Seleccionamos el diccionario según el idioma (fallback es español)
+const dict = translations[lang] || translations.es;
+
+// Título de la página
+const title = dict.title;
+---
+<BaseLayout lang={lang} title={title}>
+  <section class="container">
+<br><br><br>
+<br><br><br>
+<br><br><br>
+ <main class="privacy-page">
+        <div class="container">
+            <h1 class="section-title">{dict.title}</h1>
+            <p><strong>{dict.fecha_act}</strong> {dict.fecha}</p>
+            <p>{dict.intro}</p>
+
+            <h2 class="section-subtitle">{dict.responsable}</h2>
+            <p><strong>{dict.identidad}:</strong> Ostadarra, S.L.</p>
+            <p><strong>{dict.direccion}:</strong> Aulesti, Bizkaia</p>
+            <p><strong>{dict.email}:</strong> info@ostadarra.eus</p>
+            <p><strong>{dict.telefono}:</strong> +34 685 756 143</p>
+
+            <h2 class="section-subtitle">{dict.dataUse}</h2>
+            <p>{dict.dataUseText}</p>
+            <ul>
+                <li><strong>{dict.item_1_1}</strong> {dict.item_1_2}</li>
+                <li><strong>{dict.item_2_1}</strong> {dict.item_2_2}</li>
+            </ul>
+            <p>{dict.dataUseText_2}/p>
+
+            <h2 class="section-subtitle">{dict.legitimacion}</h2>
+            <p>{dict.legitimacion_text}</p>
+
+            <h2 class="section-subtitle">{dict.destino}</h2>
+            <p>{dict.destino_text}</p>
+
+            <h2 class="section-subtitle">{dict.plazo}</h2>
+            <p>{dict.plazo_text}</p>
+
+            <h2 class="section-subtitle">{dict.derechos}</h2>
+            <p>{dict.derechos_text}</p>
+            <ul>
+                <li>{dict.item_3_1}</li>
+                <li>{dict.item_3_2}</li>
+                <li>{dict.item_3_3}</li>
+                <li>{dict.item_3_4}</li>
+                <li>{dict.item_3_5}</li>
+                <li>{dict.item_3_6}</li>
+                <li>{dict.item_3_7}</li>
+            </ul>
+            <p>{dict.derechos_text_2}</p>
+            <p>{dict.derechos_text_3}</p>
+
+            <h2 class="section-subtitle">{dict.medidas}</h2>
+            <p>{dict.medidasText}</p>
+        </div>
+    </main>
+  </section>
+</BaseLayout>

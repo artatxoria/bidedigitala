@@ -10,6 +10,9 @@ import Servicios from '../../components/Servicios.astro';
 import Onurak from '../../components/Onurak.astro';
 import Proceso from '../../components/Proceso.astro';
 import Especializacion from '../../components/Especializacion.astro';
+import Navegacion from '../../components/Navegacion.astro';
+
+
 
 // Para rutas dinámicas, exportamos getStaticPaths
 export async function getStaticPaths() {
@@ -39,6 +42,11 @@ const lang = langParam as typeof supported[number];
 const title = t(lang, 'home.title');
 ---
 <BaseLayout lang={lang} title={title}>
+
+  <!-- Navegación secundaria -->
+  <Navegacion lang={lang} />
+
+    
   <!-- Hero Section -->
   <section id="inicio" class="hero">
       <div class="hero-background">

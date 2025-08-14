@@ -1,0 +1,36 @@
+---
+import { mainNav } from '../lib/navItems';
+import CambioIdioma from './CambioIdioma.astro';
+import { tPath, t } from '../lib/translations';
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+---
+<style>
+.primary-nav {
+  display: flex;
+  gap: 1rem;
+}
+.primary-nav a {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--text-dark);
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+.primary-nav a:hover {
+  background: var(--bg-light);
+}
+</style>
+
+<nav class="primary-nav" role="navigation" aria-label="Menú principal">
+  <CambioIdioma lang={lang} />
+  {mainNav.map(({ key, path }) => (
+    <a href={tPath(path, lang)}>
+      {t(lang, key)}
+    </a>
+  ))}
+</nav>

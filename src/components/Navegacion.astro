@@ -1,32 +1,51 @@
 ---
 // src/components/Navegacion.astro
 import { tPath, t } from '../lib/translations';
-import CambioIdioma from './CambioIdioma.astro';
+
 const { lang } = Astro.props;
 ---
-<ul id="primary-navigation" class="nav-menu">
-  <li class="nav-item">
-    <CambioIdioma lang={lang} />
-  </li>
-  <li class="nav-item">
-    <a href={tPath('#inicio', lang)} class="nav-link">{t(lang, 'nav.home')}</a>
-  </li>
-  <li class="nav-item">
-    <a href={tPath('#arazoak', lang)} class="nav-link">{t(lang, 'nav.problemas')}</a>
-  </li>
-  <li class="nav-item">
-    <a href={tPath('#diferenciadores', lang)} class="nav-link">{t(lang, 'nav.valor')}</a>
-  </li>
-  <li class="nav-item">
-    <a href={tPath('#servicios', lang)} class="nav-link">{t(lang, 'nav.servicios')}</a>
-  </li>
-  <li class="nav-item">
-    <a href={tPath('#resultados', lang)} class="nav-link">{t(lang, 'nav.resultados')}</a>
-  </li>
-  <li class="nav-item">
-    <div class="nav-cta">
-    <a href="#contacto" class="btn btn-primary">{t(lang, 'nav.diagnostico')}</a>
-</div>
-  </li>
-</ul>
- 
+<style>
+
+.cont-nav {
+    max-width: 100%;
+    margin: 0 auto;
+    padding-top: 180px;
+    padding-bottom: 10px;
+  justify-content:space-between;
+
+    
+    
+}
+
+.cont-nav .nav-menu {
+    list-style: none;
+    justify-content:space-evenly;
+    align-items: center;
+}
+
+</style>
+
+<section class="cont-nav">
+  <ul class="nav-menu">
+    <li class="nav-item">
+      <a href={tPath('#inicio', lang)} class="nav-link">{t(lang, 'nav.home')}</a>
+    </li>
+    <li class="nav-item">
+      <a href={tPath('#arazoak', lang)} class="nav-link">{t(lang, 'nav.problemas')}</a>
+    </li>
+    <li class="nav-item">
+      <a href={tPath('#diferenciadores', lang)} class="nav-link">{t(lang, 'nav.valor')}</a>
+    </li>
+    <li class="nav-item">
+      <a href={tPath('#servicios', lang)} class="nav-link">{t(lang, 'nav.servicios')}</a>
+    </li>
+    <li class="nav-item">
+      <a href={tPath('#resultados', lang)} class="nav-link">{t(lang, 'nav.resultados')}</a>
+    </li>
+    <li class="nav-item">
+      <div class="nav-cta">
+      <a href="#contacto" class="btn btn-primary">{t(lang, 'nav.diagnostico')}</a>
+  </div>
+    </li>
+  </ul>
+</section>

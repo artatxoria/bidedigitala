@@ -2,7 +2,8 @@
 // src/components/Header.astro
 
 import { tPath, t } from '../lib/translations';
-import Navegacion from './Navegacion.astro';
+import NavegacionPrincipal from './NavegacionPrincipal.astro';
+
 
 const { lang } = Astro.props;
 ---
@@ -22,7 +23,7 @@ const { lang } = Astro.props;
       
       
      <!-- Menú de navegación extraído a su propio componente -->
-      <Navegacion lang={lang} />
+      <NavegacionPrincipal lang={lang} />
 
 
     <div class="nav-toggle">

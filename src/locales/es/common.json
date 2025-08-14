@@ -4,6 +4,8 @@
   },
   "nav": {
     "home": "Inicio",
+    "blog": "Blog",
+    "privacy": "Privacidad",
     "problemas": "Problemas",
     "valor": "Valor",
     "resultados" : "Resultados",
