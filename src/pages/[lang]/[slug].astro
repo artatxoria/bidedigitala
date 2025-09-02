@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const { lang, slug } = Astro.params;
+
+const allPosts = await getCollection('blog');
+
+const post = allPosts.find(
+  (entry) => entry.data.lang === lang && entry.slug.split('/').pop() === slug
+);
+
+if (!post) {
+  throw new Error(`Post no encontrado: ${lang}/${slug}`);
+}
+
+const { Content } = await post.render();
+const { title, pubDate, summary } = post.data;
+
+export async function getStaticPaths() {
+  const all = await getCollection('blog');
+  return all.map((entry) => ({
+    params: {
+      lang: entry.data.lang,
+      slug: entry.slug.split('/').pop(), // <-- basename para la URL
+    },
+  }));
+}
+---
+
+<BaseLayout lang={lang} title={title}>
+  <div class="post-layout container">
+    <aside id="toc" class="toc"></aside>
+      <article class="container blog-post">
+        <header>
+          <h1>{title}</h1>
+          <time datetime={pubDate.toISOString()}>
+            {new Date(pubDate).toLocaleDateString(lang === 'es' ? 'es-ES' : 'eu-ES')}
+          </time>
+          <p class="summary">{summary}</p>
+        </header>
+        
+        <Content />
+        
+        <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        const article = document.querySelector('.blog-post');
+        if (!article) return;
+
+        // evita duplicar si HMR en dev
+        if (article.dataset.enhanced === '1') return;
+        article.dataset.enhanced = '1';
+
+        const heads = article.querySelectorAll('h2, h3, h4');
+        heads.forEach(h => {
+          if (!h.id) {
+            h.id = h.textContent.toLowerCase()
+              .replace(/[^\w\s-]/g, '')
+              .trim()
+              .replace(/\s+/g, '-');
+          }
+          const a = document.createElement('a');
+          a.href = `#${h.id}`;
+          a.className = 'anchor';
+          a.textContent = '#';
+          h.appendChild(a);
+        });
+
+        const toc = document.getElementById('toc');
+        if (toc) {
+          toc.innerHTML = '<h4>Contenido</h4>';
+          heads.forEach(h => {
+            const link = document.createElement('a');
+            link.href = `#${h.id}`;
+            link.textContent = h.textContent.replace('#','').trim();
+            link.style.marginLeft =
+              h.tagName === 'H3' ? '0.5rem' : h.tagName === 'H4' ? '1rem' : '0';
+            toc.appendChild(link);
+          });
+        }
+      });
+    </script>
+  </div>  
+  </article>
+</BaseLayout>
+

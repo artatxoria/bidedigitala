@@ -50,6 +50,7 @@ html {
     max-width: 1200px;
     margin: 0 auto;
     padding: var(--container-padding);
+    padding-top: 120px;
 }
 
 /* Tipografía */
@@ -132,6 +133,7 @@ p {
 .header {
     position: fixed;
     top: 0;
+    height: 80px;
     left: 0;
     width: 100%;
     background: rgba(255, 255, 255, 0.95);
@@ -139,6 +141,7 @@ p {
     z-index: 1000;
     box-shadow: var(--shadow-sm);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
 }
 
 .navbar {
@@ -878,6 +881,394 @@ section {
     text-align: center;
 }
 
+
+
+/* ==================Blog========= */
+
+.blog-index {
+  padding-top: 200px;
+  padding-bottom: 2.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  min-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.section-header {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.section-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+.section-header p {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 800px;
+  display: grid;
+   gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .post-list {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+.post-card {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.post-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.post-card h3 {
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem;
+  color: #222;
+}
+
+.post-summary {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.post-date {
+  font-size: 0.875rem;
+  color: #888;
+}
+
+/* ===== Blog Post (lectura) ===== */
+.blog-post {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 200px;
+}
+
+/* Cabecera del post */
+.blog-post h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.25rem;
+  color: var(--text-dark);
+}
+
+.blog-post .summary {
+  font-size: 1.125rem;
+  color: var(--text-light);
+  margin-bottom: 1.25rem;
+}
+
+.blog-post time {
+  display: inline-block;
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+/* Ritmo vertical y legibilidad */
+.blog-post p,
+.blog-post ul,
+.blog-post ol,
+.blog-post blockquote,
+.blog-post pre,
+.blog-post table,
+.blog-post figure {
+  margin: 1rem 0 1.25rem;
+}
+
+.blog-post p {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: #1f2937; /* un poco más oscuro que --text-light */
+}
+
+/* Encabezados dentro del post */
+.blog-post h2 {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.blog-post h3 {
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  color: #0f172a;
+}
+
+.blog-post h4 {
+  font-size: 1.125rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #111827;
+}
+
+/* Listas */
+.blog-post ul,
+.blog-post ol {
+  padding-left: 1.25rem;
+}
+
+.blog-post li {
+  margin: 0.4rem 0;
+}
+
+.blog-post li::marker {
+  color: var(--secondary-color);
+}
+
+/* Citas */
+.blog-post blockquote {
+  border-left: 4px solid var(--primary-color);
+  background: #f8fafc;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  color: #334155;
+}
+
+/* Imágenes y figuras */
+.blog-post img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1rem auto;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.blog-post figure {
+  text-align: center;
+}
+
+.blog-post figcaption {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+}
+
+/* Código */
+.blog-post code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.95em;
+  background: #f3f4f6;
+  padding: 0.15rem 0.35rem;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+}
+
+.blog-post pre {
+  background: #0b1020;            /* tema oscuro para bloques */
+  color: #e5e7eb;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  overflow-x: auto;
+  border: 1px solid #111827;
+  box-shadow: var(--shadow-sm);
+}
+
+.blog-post pre code {
+  background: transparent;
+  padding: 0;
+  border: 0;
+  color: inherit;
+}
+
+/* Tablas */
+.blog-post table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.blog-post th,
+.blog-post td {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.blog-post thead th {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+/* Separadores y enlaces */
+.blog-post hr {
+  border: 0;
+  border-top: 1px solid var(--border-light);
+  margin: 2rem 0;
+}
+
+.blog-post a {
+  color: var(--primary-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.blog-post a:hover {
+  color: var(--primary-color);
+}
+
+/* Navegación entre posts (si la añades) */
+.post-nav {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 640px) {
+  .post-nav {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.post-nav a {
+  display: block;
+  padding: 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+
+.post-nav a:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Toc (si lo generas por JS) */
+.toc {
+  position: sticky;
+  top: 100px;
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.toc h4 {
+  margin: 0 0 .5rem;
+}
+
+.toc a {
+  display: block;
+  font-size: 0.95rem;
+  color: #374151;
+  text-decoration: none;
+  padding: 0.25rem 0;
+}
+
+.toc a:hover { color: var(--primary-dark); }
+
+.blog-post .anchor {
+  visibility: hidden;
+  margin-left: 0.25rem;
+  font-size: 0.9rem;
+  color: var(--primary-dark);
+}
+
+.blog-post h2:hover .anchor,
+.blog-post h3:hover .anchor,
+.blog-post h4:hover .anchor {
+  visibility: visible;
+}
+
+/* Layout de detalle de post + TOC lateral */
+.post-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+/* TOC lateral */
+.toc {
+  position: sticky;
+  top: 200px; /* deja hueco para tu header fijo */
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+  max-height: calc(100vh - 120px);
+  overflow: auto;
+  z-index: 1; /* por debajo del contenido si se solapan */
+}
+
+.toc h4 {
+  margin: 0 0 .5rem;
+}
+
+.toc a {
+  display: block;
+  font-size: 0.95rem;
+  color: #374151;
+  text-decoration: none;
+  padding: 0.25rem 0;
+}
+.toc a:hover { color: var(--primary-dark); }
+
+/* Evita que el TOC tape el contenido en pantallas pequeñas */
+@media (max-width: 1024px) {
+  .post-layout {
+    display: block;
+  }
+  .toc {
+    position: static;
+    max-height: none;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Que los encabezados anclados no queden ocultos bajo el header fijo */
+.blog-post :is(h2, h3, h4) {
+  scroll-margin-top: 110px; /* ajusta a la altura de tu header */
+}
+
+
+
+
+
+
 /* Animaciones */
 @keyframes fadeInUp {
     from {
@@ -893,7 +1284,6 @@ section {
 .fade-in-up {
     animation: fadeInUp 0.6s ease-out;
 }
-
 
 
 /* Responsive Design */

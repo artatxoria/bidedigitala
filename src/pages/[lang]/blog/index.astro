@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  return [{ params: { lang: 'es' } }, { params: { lang: 'eu' } }];
+}
+
+export const prerender = true;
+
+const supported = ['es', 'eu'] as const;
+type Lang = typeof supported[number];
+
+const langParam = Astro.params.lang;
+const lang: Lang = supported.includes(langParam as Lang) ? (langParam as Lang) : 'es';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts.filter(p => p.data.lang === lang);
+---
+
+<BaseLayout lang={lang} title={lang === 'es' ? 'Blog' : 'Bloga'}>
+  <section class="blog-index container">  
+<!--     <ul class="post-list">
+      {posts.map(post => (
+        <li class="post-card">
+          <a href={`/${lang}/blog/${post.slug}`}>
+            <h3>{post.data.title}</h3>
+            <p class="post-summary">{post.data.summary}</p>
+            <time class="post-date">
+              {new Date(post.data.pubDate).toLocaleDateString(lang === 'es' ? 'es-ES' : 'eu-ES')}
+            </time>
+          </a>
+        </li>
+      ))}
+    </ul>
+   -->
+<ul class="post-list">
+  {posts.map(post => {
+    const slugPart = post.slug.split('/').pop(); // <-- solo el basename
+    return (
+      <li class="post-card">
+        <a href={`/${lang}/${slugPart}`}>
+          <h3>{post.data.title}</h3>
+          <p class="post-summary">{post.data.summary}</p>
+          <time class="post-date">
+            {new Date(post.data.pubDate).toLocaleDateString(lang === 'es' ? 'es-ES' : 'eu-ES')}
+          </time>
+        </a>
+      </li>
+    );
+  })}
+</ul>
+</section>
+
+
+</BaseLayout>
+
+
+
