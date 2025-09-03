@@ -15,9 +15,9 @@ const {
   SMTP_PASS,
   SMTP_FROM,
   SMTP_TO,
-  DATA_DIR,   // opcional: ruta del directorio para leads (p.ej. "./data")
-  LEADS_FILE, // opcional: nombre de archivo (p.ej. "leads.jsonl")
-} = import.meta.env as Record<string, string | undefined>;
+  DATA_DIR,
+  LEADS_FILE,
+} = process.env as Record<string, string | undefined>;
 
 const LEADS_DIR = DATA_DIR || "./data";
 const LEADS_PATH = path.join(LEADS_DIR, LEADS_FILE || "leads.jsonl");
