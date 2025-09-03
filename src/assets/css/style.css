@@ -747,8 +747,30 @@ section {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-    color: rgba(255, 255, 255, 0.);
+    color: #6b7280;   /* gris medio legible */
+    opacity: 1;
 }
+
+/* Placeholder en el formulario de la sección CTA (fondo oscuro) */
+.cta-section .contact-form input::placeholder,
+.cta-section .contact-form textarea::placeholder,
+.cta-section .contact-form select::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+  opacity: 1;
+}
+
+/* Asegura color de texto real en inputs del formulario oscuro */
+.cta-section .contact-form .form-group input,
+.cta-section .contact-form .form-group textarea,
+.cta-section .contact-form .form-group select {
+  color: #fff;
+}
+
+
+
+
+
+
 
 .form-group textarea {
     min-height: 100px;
