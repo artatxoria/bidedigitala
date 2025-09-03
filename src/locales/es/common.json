@@ -79,7 +79,7 @@
   "cta" : {
     "preparado" : "¡Contactanos!",
     "miles" : "Si quieres impulsar el futuro de tu empresa a través de la Inteligencia Artificial y las competencias digitales, ponte en contacto con nosotros. Solicita un diagnóstico gratuito y te explicamos cómo aprovechar tu crédito formativo sin ningún tipo de burocracia.",
-    "solicita" : "Solicita tu Asesoría Gratuita y Calcula tu Crédito FUNDAE",
+    "solicita" : "Solicita tu Asesoría Gratuita de formación",
     "nombre" : "Nombre completo",
     "teléfono" : "Teléfono",
     "empresa" : "Empresa",
@@ -93,7 +93,8 @@
     "propuesta" : "¿Necesitas una propuesta personalizada?", 
     "dudas" : "¿Tienes dudas sobre la bonificación? Contacta con nuestros expertos:", 
     "email" : "Email",
-    "localidad" : "Localidad"
+    "localidad" : "Localidad",
+    "consent": "He leído y acepto la Política de Privacidad."
   },
   
  

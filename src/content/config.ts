@@ -13,7 +13,7 @@ const blog = defineCollection({
     summary: z.string(),
     author: z.string(),
     tags: z.array(z.string()).optional(),
-    // tkey: z.string().optional(), // opcional, para emparejar traducciones
+    tkey: z.string().optional(), // clave de emparejado ES/EU
   }),
 });
 

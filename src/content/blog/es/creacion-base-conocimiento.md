@@ -11,6 +11,7 @@ tags:
   - Automatización
   - IA
   - formación
+tkey: "creacion-base-conocimiento"   # <- misma tkey en ES y EU
 ---
 
 ## Base de conocimiento personal

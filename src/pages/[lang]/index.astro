@@ -154,36 +154,94 @@ const title = t(lang, 'home.title');
           <div class="contact-grid">
             <div class="contact-form">
                 <h3>👉 {t(lang, 'cta.solicita')}</h3>
-                <form class="form formulario-contacto" id="formulario-contacto">
-                    <div class="form-group">
-                        <input type="text" placeholder={t(lang, 'cta.nombre')} required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" placeholder={t(lang, 'cta.email')} required>
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" placeholder={t(lang, 'cta.teléfono')} required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" placeholder={t(lang, 'cta.empresa')} required>
-                    </div>
-                    <div class="form-group">
-                        <select required>
-                            <option value="">{t(lang, 'cta.numero')}</option>
-                            <option value="1-10">{t(lang, 'cta.1')}</option>
-                            <option value="11-50">{t(lang, 'cta.11')}</option>
-                            <option value="51-100">{t(lang, 'cta.51')}</option>
-                            <option value="100+">{t(lang, 'cta.mas')}</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <textarea placeholder={t(lang, 'cta.tareas')}></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-full">
-                        <i class="fas fa-paper-plane"></i>
-                        {t(lang, 'cta.solicitar')}
-                    </button>
-                </form>
+<form
+  class="form formulario-contacto"
+  id="formulario-contacto"
+  action="/api/contact"
+  method="POST"
+  novalidate
+>
+  <!-- Necesario para tracking y i18n del lado servidor -->
+  <input type="hidden" name="lang" value={lang} />
+  <input type="hidden" name="source" value={Astro.url.pathname} />
+
+  <!-- Honeypot anti-spam (oculto para humanos) -->
+  <p style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
+    <label>Website: <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+  </p>
+
+  <div class="form-group">
+    <input id="f-nombre" name="nombre" type="text" placeholder={t(lang, 'cta.nombre')} required autocomplete="name" />
+  </div>
+
+  <div class="form-group">
+    <input id="f-email" name="email" type="email" placeholder={t(lang, 'cta.email')} required autocomplete="email" />
+  </div>
+
+  <div class="form-group">
+    <input id="f-telefono" name="telefono" type="tel" placeholder={t(lang, 'cta.teléfono')} required autocomplete="tel" />
+  </div>
+
+  <div class="form-group">
+    <input id="f-empresa" name="empresa" type="text" placeholder={t(lang, 'cta.empresa')} required />
+  </div>
+
+  <div class="form-group">
+    <select id="f-tamano" name="tamano" required>
+      <option value="">{t(lang, 'cta.numero')}</option>
+      <option value="1-10">{t(lang, 'cta.1')}</option>
+      <option value="11-50">{t(lang, 'cta.11')}</option>
+      <option value="51-100">{t(lang, 'cta.51')}</option>
+      <option value="100+">{t(lang, 'cta.mas')}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <textarea id="f-mensaje" name="mensaje" placeholder={t(lang, 'cta.tareas')}></textarea>
+  </div>
+
+  <!-- Consentimiento RGPD -->
+<label for="f-consent" style="display:flex;gap:.5rem;align-items:center;margin:.5rem 0 1rem">
+  <input id="f-consent" name="consent" type="checkbox" required />
+  <small>
+    {lang === 'es' ? (
+      <>
+        He leído y acepto la{' '}
+        <a href={tPath('/privacidad', lang)} target="_blank" rel="noopener noreferrer">
+          Política de Privacidad
+        </a>.
+      </>
+    ) : (
+      <>
+        Pribatutasun{' '}
+        <a href={tPath('/privacidad', lang)} target="_blank" rel="noopener noreferrer">
+          Politika
+        </a>{' '}
+        irakurri eta onartzen dut.
+      </>
+    )}
+  </small>
+</label>
+
+<!-- Consentimiento de marketing (opcional) -->
+<label for="f-marketing" style="display:flex;gap:.5rem;align-items:center;margin:.25rem 0 1rem">
+  <input id="f-marketing" name="marketing" type="checkbox" value="yes" />
+  <small>
+    {lang === 'es'
+      ? 'Deseo recibir comunicaciones sobre servicios y novedades (opcional).'
+      : 'Zerbitzu eta berriei buruzko komunikazioak jaso nahi ditut (aukerakoa).'
+    }
+  </small>
+</label>
+
+  <!-- Mensajes dinámicos (lo usaremos en el Paso 3) -->
+  <p class="form-msg" aria-live="polite" hidden></p>
+
+  <button type="submit" class="btn btn-primary btn-full">
+    <i class="fas fa-paper-plane"></i>
+    {t(lang, 'cta.solicitar')}
+  </button>
+</form>
               </div>
               
               <div class="contact-info">
@@ -195,7 +253,7 @@ const title = t(lang, 'home.title');
                         <i class="fas fa-envelope"></i>
                         <div>
                             <strong>{t(lang, 'cta.email')}</strong>
-                            <p>ostadarra@ostadarra.eus</p>
+                            <p>info@bidedigitala.eus</p>
                         </div>
                     </div>
                     <div class="contact-method">
@@ -241,9 +299,5 @@ const title = t(lang, 'home.title');
             </div>
         </div>
     </section> -->
-
-
-
-
 
 </BaseLayout>

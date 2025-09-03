@@ -153,3 +153,8 @@ hr {
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
 }
+
+
+/* errores en línea del formulario */
+.field-error { outline: 2px solid #ef4444; outline-offset: 2px; }
+.field-error-msg { margin-top: .35rem; color: #b91c1c; font-size: .9rem; }

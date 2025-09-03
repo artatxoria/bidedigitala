@@ -79,7 +79,7 @@
   "cta" : {
     "preparado" : "Jarri Harremanetan!",
     "miles" : "Zure enpresaren etorkizuna Adimen Artifizialaren eta gaitasun digitalen bidez bultzatu nahi baduzu, jarri gurekin harremanetan. Eskatu doako diagnostikoa eta azalduko dizugu nola aprobetxatu zure formakuntza-kreditua, inolako burokraziarik gabe.",
-    "solicita" : "Eskatu zure doako aholkularitza eta kalkulatu zure kreditua FUNDAE",
+    "solicita" : "Eskatu zure doako formakuntzako aholkularitza",
     "nombre" : "Izen osoa",
     "teléfono" : "Telefonoa",
     "empresa" : "Enpresa",
@@ -93,7 +93,8 @@
     "propuesta" : "Proposamen pertsonalizatua behar duzu?", 
     "dudas" : "Zalantzak dituzu hobariari buruz? Jarri harremanetan gure adituekin:", 
     "email" : "Emaila",
-    "localidad" : "Kokapena"
+    "localidad" : "Kokapena",
+    "consent": "Pribatutasun Politika irakurri eta onartzen dut."
   },
   
   

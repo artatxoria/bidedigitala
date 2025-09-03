@@ -5,8 +5,9 @@ import { tPath, t } from '../lib/translations';
 
 export interface Props {
   lang: 'es' | 'eu';
+  altLinks?: Record<'es' | 'eu', string>; // <- NUEVO
 }
-const { lang } = Astro.props;
+const { lang, altLinks } = Astro.props;
 ---
 <style>
 .primary-nav {
@@ -27,7 +28,7 @@ const { lang } = Astro.props;
 </style>
 
 <nav class="primary-nav" role="navigation" aria-label="Menú principal">
-  <CambioIdioma lang={lang} />
+  <CambioIdioma lang={lang} links={altLinks} />
   {mainNav.map(({ key, path }) => (
     <a href={tPath(path, lang)}>
       {t(lang, key)}
