@@ -1,5 +1,7 @@
 // public/assets/js/script.js
 
+console.log('[script.js] v2025-09-03-1');
+
 // — Funciones auxiliares —
 // Estas pueden quedar fuera del DOMContentLoaded
 function isValidEmail(email) {
