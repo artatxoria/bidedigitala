@@ -6,7 +6,7 @@ export async function getStaticPaths() {
   return [{ params: { lang: 'es' } }, { params: { lang: 'eu' } }];
 }
 
-export const prerender = true;
+export const prerender = false;
 
 const supported = ['es', 'eu'] as const;
 type Lang = typeof supported[number];
