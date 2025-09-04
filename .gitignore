@@ -25,3 +25,32 @@ pnpm-debug.log*
 
 #datos
 data/
+dist/
+node_modules/
+.env
+.env.*
+data/
+certs/
+webroot/
+n8n_data/
+*.log
+*.bak
+*.bak.*
+# Build/dep
+dist/
+node_modules/
+
+# Entorno/secretos
+.env
+.env.*
+
+# Datos locales
+data/
+certs/
+webroot/
+n8n_data/
+
+# Logs y backups
+*.log
+*.bak
+*.bak.*
