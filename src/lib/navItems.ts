@@ -11,11 +11,12 @@ export const mainNav: NavItem[] = [
   { key: 'nav.blog',      path: '/blog' },
   { key: 'nav.privacy',   path: '/privacidad' },
   {
-    key: 'nav.catalogo',
+    key: 'nav.catalogo',  
     children: [
-      { key: 'nav.categoria1', path: '/catalogo/categoria1' },
-      { key: 'nav.categoria2', path: '/catalogo/categoria2' },
-      { key: 'nav.categoria3', path: '/catalogo/categoria3' },
+      { key: 'nav.categoria1', path: '/catalogo#analisis-datos' },
+      { key: 'nav.categoria2', path: '/catalogo#inteligencia-artificial' },
+      { key: 'nav.categoria3', path: '/catalogo#automatizacion' },
+      { key: 'nav.categoria4', path: '/catalogo#programacion' },
     ]
   },
   // añade aquí nuevas páginas: p.ej. { key: 'nav.contact', path: '/contacto' }

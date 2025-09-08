@@ -12,7 +12,11 @@
     "servicios": "Zerbitzuak",
     "contacto": "Kontaktua",
     "diagnostico" : "Diagnostiko Doakoa",
-    "catalogo" : "Formakuntza"
+    "catalogo" : "Formakuntza",
+    "categoria1": "Datuen analizia",
+    "categoria2": "Adimen Artifiziala",
+    "categoria3": "Automatizazioa",
+    "categoria4": "Programazioa"
   },
   "hero": {
     "title": "Zure ETEak ulertuko eta maitatuko duen",

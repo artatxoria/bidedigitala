@@ -12,7 +12,11 @@
     "servicios": "Servicios",
     "contacto": "Contacto",
     "diagnostico" : "Diagnóstico Gratuito",
-    "catalogo" : "Formación"
+    "catalogo" : "Formación",
+    "categoria1": "Análisis de datos",
+    "categoria2": "Inteligencia Artificial",
+    "categoria3": "Automatización",
+    "categoria4": "Programación"
   },
   "hero": {
     "title": "La Formación Bonificada que tu PYME",
