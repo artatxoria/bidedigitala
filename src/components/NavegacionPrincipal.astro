@@ -13,25 +13,75 @@ const { lang, altLinks } = Astro.props;
 .primary-nav {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
-.primary-nav a {
+
+.primary-nav a,
+.dropdown-btn {
   text-decoration: none;
   font-weight: 500;
   color: var(--text-dark);
   padding: 0.5rem;
   border-radius: 4px;
-  transition: background 0.2s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
-.primary-nav a:hover {
+
+.primary-nav a:hover,
+.dropdown-btn:hover {
   background: var(--bg-light);
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 200px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-radius: 0.5rem;
+  z-index: 1000;
+  padding: 0.5rem 0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--text-dark);
+}
+
+.dropdown-content a:hover {
+  background-color: var(--bg-light);
 }
 </style>
 
 <nav class="primary-nav" role="navigation" aria-label="Menú principal">
   <CambioIdioma lang={lang} links={altLinks} />
-  {mainNav.map(({ key, path }) => (
-    <a href={tPath(path, lang)}>
-      {t(lang, key)}
-    </a>
+
+  {mainNav.map(item => (
+    item.children ? (
+      <div class="dropdown">
+        <button class="dropdown-btn">
+          {t(lang, item.key)} <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-content">
+          {item.children.map(sub => (
+            <a href={tPath(sub.path, lang)}>{t(lang, sub.key)}</a>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <a href={tPath(item.path!, lang)}>{t(lang, item.key)}</a>
+    )
   ))}
 </nav>
