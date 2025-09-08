@@ -1,0 +1,138 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          li_5: string;
+          li_6: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Programación con Python (Nivel Inicial)',
+      duracion: '40 horas',
+      descripcion: 'Python se ha convertido en el lenguaje de programación más versátil y demandado a nivel global, siendo la puerta de entrada a campos tan relevantes como la Inteligencia Artificial, el Análisis de Datos y la Automatización de Procesos. Este curso proporciona una introducción sólida a Python, permitiendo a sus equipos adquirir habilidades prácticas para la manipulación de datos, la automatización de tareas repetitivas y la base para explorar aplicaciones de IA. Es una inversión estratégica para cualquier empresa que busque modernizar sus operaciones y aprovechar el potencial de las nuevas tecnologías.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Comprender los fundamentos de la programación con Python.",
+      li_2: "Dominar la sintaxis básica, variables y estructuras de datos (listas, diccionarios, tuplas).",
+      li_3: "Implementar estructuras de control de flujo y funciones.",
+      li_4: "Realizar operaciones con archivos y gestionar errores.",
+      li_5: 'Utilizar librerías básicas para la manipulación de datos (ej. Pandas para introducción).',
+      li_6: 'Escribir scripts sencillos para automatizar tareas rutinarias.',
+      publico_obj: "Público Objetivo",
+      publico: 'Profesionales sin experiencia previa en programación, equipos que buscan una base sólida para proyectos de ciencia de datos o IA, personal administrativo interesado en automatizar tareas mediante scripts, o cualquier empleado que necesite adquirir una competencia digital transversal de alto valor.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'Python bidezko programazioa (hasierako maila)',
+      duracion: '40 ordu',
+      descripcion: 'Python programazio-lengoaia moldakorrena eta eskatuena bihurtu da maila globalean, eta Adimen Artifiziala, Datuen Analisia eta Prozesuen Automatizazioa bezalako eremu garrantzitsuetara sartzeko atea da. Ikastaro honek sarrera sendoa ematen dio Python-i, eta bere ekipoei aukera ematen die trebetasun praktikoak eskuratzeko datuak manipulatzeko, zeregin errepikakorrak automatizatzeko eta IAren aplikazioak esploratzeko. Inbertsio estrategikoa da eragiketak modernizatu eta teknologia berrien potentziala aprobetxatu nahi duen edozein enpresarentzat.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "Python programazioaren oinarriak ulertzea.",
+      li_2: "Oinarrizko sintaxia, aldagaiak eta datu-egiturak (zerrendak, hiztegiak, tuploak) menderatzea.",
+      li_3: "Fluxua eta funtzioak kontrolatzeko egiturak inplementatzea.",
+      li_4: "Artxiboekin eragiketak egitea eta erroreak kudeatzea.",
+      li_5: 'Datuak manipulatzeko oinarrizko liburutegiak erabiltzea (adibidez, sartzeko pandak).',
+      li_6: 'Script errazak idaztea, ohiko zereginak automatizatzeko.',
+      publico_obj: "Xede Publikoa",
+      publico: 'Profesionales sin experiencia previa en programación, equipos que buscan una base sólida para proyectos de ciencia de datos o IA, personal administrativo interesado en automatizar tareas mediante scripts, o cualquier empleado que necesite adquirir una competencia digital transversal de alto valor.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+            <li>{dict.hero.li_5}</li>
+            <li>{dict.hero.li_6}</li>
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>

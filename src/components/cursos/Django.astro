@@ -1,0 +1,137 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          //li_5: string;
+          //li_6: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Desarrollo Web con Django (Python) y Bases de Datos',
+      duracion: '50 horas',
+      descripcion: 'Un curso completo para aprender a construir potentes aplicaciones web con Django, el framework de Python que fomenta un desarrollo rápido y limpio. Ideal para proyectos basados en datos y con necesidad de escalabilidad.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: 'Entender la filosofía "batteries-included" de Django y su arquitectura.',
+      li_2: "Diseñar modelos de datos y gestionar bases de datos con el ORM de Django.",
+      li_3: "Crear vistas, URLs y plantillas para construir interfaces de usuario dinámicas.",
+      li_4: "Implementar autenticación, formularios y pruebas para un desarrollo robusto.",
+      //li_5: 'Utilizar librerías básicas para la manipulación de datos (ej. Pandas para introducción).',
+      //li_6: 'Escribir scripts sencillos para automatizar tareas rutinarias.',
+      publico_obj: "Público Objetivo",
+      publico: "Programadores Python, científicos de datos que desean extenderse al desarrollo web, equipos de stPython programatzaileak, web-garapenera hedatu nahi duten datu-zientzialariak, startup-taldeak eta web-soluzioak behar dituzten datuak edo IA aztertzeko ikuspegia duten enpresak. 'artup y empresas con enfoque en análisis de datos o IA que necesitan soluciones web.",
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'Web garapena Django (Python) eta datu-baseekin',
+      duracion: '50 ordu',
+      descripcion: 'Djangorekin web aplikazio indartsuak eraikitzen ikasteko ikastaro oso bat, garapen azkarra eta garbia sustatzen duen Python framework-a. Ezin hobea datuetan oinarritutako eta eskalagarritasun-beharra duten proiektuetarako..',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: 'Djangoren "batteries-included" filosofia eta arkitektura ulertzea.',
+      li_2: "Datu-ereduak diseinatzea eta datu-baseak kudeatzea Djangoko ORMarekin.",
+      li_3: "Bistak, URLak eta txantiloiak sortzea erabiltzaile-interfaze dinamikoak eraikitzeko.",
+      li_4: "Garapen sendorako autentifikazioa, formularioak eta probak inplementatzea.",
+      //li_5: 'Datuak manipulatzeko oinarrizko liburutegiak erabiltzea (adibidez, sartzeko pandak).',
+      //li_6: 'Script errazak idaztea, ohiko zereginak automatizatzeko.',
+      publico_obj: "Xede Publikoa",
+      publico: 'Programadores Python, científicos de datos que desean extenderse al desarrollo web, equipos de startup y empresas con enfoque en análisis de datos o IA que necesitan soluciones web.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>

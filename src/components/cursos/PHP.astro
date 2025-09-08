@@ -1,0 +1,138 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          li_5: string;
+          li_6: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Programación Web con PHP (Nivel Inicial)',
+      duracion: '40 horas',
+      descripcion: 'En el corazón de millones de sitios web dinámicos, PHP sigue siendo un lenguaje robusto y fundamental para el desarrollo backend. Este curso está diseñado para sentar las bases en PHP, permitiendo a sus equipos comprender cómo funcionan las aplicaciones web y cómo construir una lógica de servidor eficiente. Es el punto de partida ideal para aquellos profesionales que necesitan interactuar con sistemas existentes basados en PHP o embarcarse en nuevos proyectos web, mejorando la capacidad interna de su empresa para mantener y desarrollar su presencia digital.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Comprender la sintaxis básica y la estructura de PHP.",
+      li_2: "Declarar y manipular variables y tipos de datos.",
+      li_3: "Dominar las estructuras de control (condicionales, bucles) para la lógica de programación.",
+      li_4: "Utilizar funciones predefinidas y crear funciones personalizadas.",
+      li_5: 'Gestionar formularios HTML y procesar datos enviados por el usuario.',
+      li_6: 'Configurar un entorno de desarrollo PHP local (XAMPP/LAMP/Docker).',
+      publico_obj: "Público Objetivo",
+      publico: 'Personal técnico sin experiencia previa en PHP, desarrolladores de frontend que deseen incursionar en el backend, administradores de sistemas que necesiten entender aplicaciones web basadas en PHP.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'Web programazioa PHPrekin (hasierako maila)',
+      duracion: '40 ordu',
+      descripcion: 'Milioika webgune dinamikoen bihotzean, PHP hizkuntza sendoa eta funtsezkoa da backend garapenerako. Ikastaro hau PHPn oinarriak ezartzeko diseinatuta dago, eta bere ekipoei web aplikazioek nola funtzionatzen duten eta zerbitzari-logika eraginkorra nola eraiki ulertzeko aukera ematen die. Abiapuntu ezin hobea da PHPn oinarritutako sistemekin elkarreragin behar duten edo web-proiektu berrietan murgildu behar duten profesionalentzat, haien presentzia digitala mantentzeko eta garatzeko enpresaren barne-gaitasuna hobetuz.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "PHPren oinarrizko sintaxia eta egitura ulertzeko.",
+      li_2: "Aldagaiak eta datu motak adieraztea eta manipulatzea.",
+      li_3: "Programazio-logikarako kontrol-egiturak (baldintzazkoak, begiztak) menderatzea.",
+      li_4: "Aurrez definitutako funtzioak erabiltzea eta funtzio pertsonalizatuak sortzea.",
+      li_5: 'HTML inprimakiak kudeatzea eta erabiltzaileak bidalitako datuak prozesatzea.',
+      li_6: 'Tokiko PHP garapen-ingurune bat konfiguratzea (XAMPP/LAMP/Docker).',
+      publico_obj: "Xede Publikoa",
+      publico: 'PHPn aldez aurretik esperientziarik ez duten teknikariak, backendan sartu nahi duten frontend garatzaileak, PHPn oinarritutako web aplikazioak ulertu behar dituzten sistemen administratzaileak.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+            <li>{dict.hero.li_5}</li>
+            <li>{dict.hero.li_6}</li>
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>

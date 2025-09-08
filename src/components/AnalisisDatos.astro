@@ -1,0 +1,82 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+import { INVALID } from 'astro:schema';
+import Excel_I from './cursos/Excel_I.astro'
+import Excel_II from './cursos/Excel_II.astro'
+import Excel_III from './cursos/Excel_III.astro'
+import Excel_IV from './cursos/Excel_IV.astro'
+import Excel_V from './cursos/Excel_V.astro'
+import Excel_VI from './cursos/Excel_VI.astro'
+import PowerBI from './cursos/PowerBI.astro'
+
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          subtitle: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Análisis de Datos y Ofimática Avanzada',
+      subtitle: 'En un entorno empresarial cada vez más impulsado por los datos, dominar herramientas como Excel y Power BI es fundamental para la toma de decisiones informadas y la optimización de procesos. Nuestros cursos están diseñados para transformar a los usuarios en analistas de datos competentes, capaces de extraer información valiosa para su negocio.',
+    }
+  },
+  eu: {
+    hero: {
+      title: 'Datuen Analisia eta Ofimática Aurreratua',
+      subtitle: 'Enpresa ingurunean datuek gidatutako erabakiak hartzeko eta prozesuak optimizatzeko, Excel eta Power BI bezalako tresnak menperatzea funtsezkoa da. Gure ikastaroak erabiltzaileak datu-analizatzaile gaituen bihurtzeko diseinatuta daude.',
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.section {
+    padding: var(--section-padding);
+    background: #f7fbfd;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, auto);
+    gap: 2rem;
+}
+
+</style>
+<!-- Problemas Section -->
+    <section id="analisis-datos" class="section">
+        <div class="container">
+            <div class="section-header">
+                <img src="/public/images/data_analysis.jpg" alt="Análisis de Datos" class="section-image">
+                <div class="section-info">
+                    <h2 class="section-title">{dict.hero.title}</h2>
+                    <p class="section-description">{dict.hero.subtitle}</p>
+                </div>
+            </div>
+            <div class="grid">
+                
+            <Excel_I lang={lang} /> 
+            <Excel_II lang={lang} />    
+            <Excel_III lang={lang} />  
+            <Excel_IV lang={lang} />  
+            <Excel_V lang={lang} />  
+            <Excel_VI lang={lang} />
+            <PowerBI lang={lang} />
+    </section>
+
+
+
+
+
+
+   
+ 

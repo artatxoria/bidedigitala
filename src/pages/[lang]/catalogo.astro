@@ -1,0 +1,77 @@
+---
+import { string } from 'astro:schema';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NavegacionCursos from '../../components/NavegacionCursos.astro';
+import AnalisisDatos from '../../components/AnalisisDatos.astro';
+import InteligenciaArtificial from '../../components/InteligenciaArtificial.astro';
+import Automatizacion from '../../components/Automatizacion.astro';
+import Programacion from '../../components/Programacion.astro';
+
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'eu' } }
+  ];
+}
+export const prerender = true;
+
+const supported = ['es', 'eu'] as const;
+type Lang = typeof supported[number];
+
+const langParam = Astro.params.lang;
+
+const lang: Lang = supported.includes(langParam as any)
+  ? (langParam as Lang)
+  : 'es'; // fallback
+
+// Traducciones embebidas directamente en el archivo
+const translations: Record<Lang, {
+  title: string;
+  subtitulo: string;
+  intro: string;
+  }> = {
+  es: {
+    title: 'Catálogo de formación',
+    subtitulo: 'Oferta completa de formación de BideDigitala, S.L.',
+    intro: 'Nuestros cursos están diseñados para acompañar a las empresas en su transformación digital, desde el análisis de datos hasta la inteligencia artificial, de la ciberseguridad a la automatización.',
+},
+  eu: {
+    title: 'Formazio Katalogoa',
+    subtitulo: 'BideDigitala, S.L.ren prestakuntza eskaintza osoa',
+    intro: 'Gure ikastaroak enpresaren eraldaketa digitalean laguntzeko diseinatuta daude, datuen analisitik adimen artifizialera, zibersegurtasunetik automatizaziora.',
+  }
+};
+
+// Seleccionamos el diccionario según el idioma (fallback es español)
+const dict = translations[lang] || translations.es;
+
+// Título de la página
+const title = dict.title;
+---
+<BaseLayout lang={lang} title={title}>
+
+  <!-- Navegación cursos -->
+  <NavegacionCursos lang={lang} />
+
+    
+  <!-- Hero Section -->
+  <section class="courses-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">{dict.title}</h1>
+                <p class="hero-subtitle">{dict.subtitulo}</p>
+                <p class="hero-description">{dict.intro}</p>
+            </div>
+        </div>
+    </section>
+  <!-- Análisis de datos -->
+    <AnalisisDatos lang={lang} />
+    <InteligenciaArtificial lang={lang} />
+    <Automatizacion lang={lang} />
+    <Programacion lang={lang} />
+
+
+
+  
+
+</BaseLayout>

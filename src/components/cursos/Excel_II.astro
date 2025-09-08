@@ -1,0 +1,134 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          li_5: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Excel para la Productividad Empresarial (Nivel Medio)',
+      duracion: '20 horas',
+      descripcion: 'Este programa está meticulosamente diseñado para profesionales que ya poseen un manejo fundamental de Excel y aspiran a optimizar sus flujos de trabajo. Nos enfocamos en habilidades que permiten manejar conjuntos de datos más complejos, construir informes dinámicos y automatizar tareas sencillas.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Dominar el uso de funciones lógicas (SI, Y, O), de búsqueda (BUSCARV, BUSCARX) y de texto",
+      li_2: "Aplicar técnicas avanzadas de formato condicional y validación de datos",
+      li_3: "Crear y gestionar escenarios y tablas de datos para análisis 'qué pasaría si'",
+      li_4: "Introducir la elaboración de gráficos avanzados y sparklines",
+      li_5: 'Optimizar la preparación de informes y cuadros de mando interactivos',
+      publico_obj: "Público Objetivo",
+      publico: 'Personal administrativo, nuevos empleados, cualquier profesional que requiera dominar las funcionalidades básicas de Excel para su trabajo diario.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'Excel Enpresaren Produktibitatea (Erdiko Maila)',
+      duracion: '20 ordu',
+      descripcion: 'Programa hau Excel-en oinarrizko kudeaketa duten profesionalentzat diseinatuta dago eta beren lan-fluxuak optimizatu nahi dituztenei zuzenduta. Datu-multzo konplexuagoak kudeatzeko, txosten dinamikoak eraikitzeko eta ataza sinpleak automatizatzeko gaitasunak lantzen ditugu.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "Funtzio logikoak (SI, Y, O), bilaketa (BUSCARV, BUSCARX) eta testukoak menperatzea",
+      li_2: "Formato baldintzatua eta datuen balidazioa aplikatzea",
+      li_3: "Eszenarioak eta datu-taulak sortu eta kudeatzea",
+      li_4: "Grafiko aurreratuak eta sparkline-ak elaboratzea",
+      li_5: "Txosten eta aginte-koadro interaktiboak prestatzea",
+      publico_obj: "Xede Publikoa",
+      publico: 'Excel-en oinarrizko esperientzia duen administrazio langilea, tarteko agintariak, finantza, salmenta, logistika eta Giza Baliabideetako sailetako profesionalak.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+            <li>{dict.hero.li_5}</li>
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico_obj}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>

@@ -1,0 +1,138 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          li_5: string;
+          li_6: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Programación PHP Orientada a Objetos (POO) y Frameworks',
+      duracion: '50 horas',
+      descripcion: 'Para construir aplicaciones PHP escalables, mantenibles y eficientes, la programación orientada a objetos (POO) es el paradigma fundamental. Este curso no solo domina los principios de la POO en PHP, sino que también introduce a los participantes en el uso de frameworks modernos y potentes como Laravel o Symfony, que potencian la productividad y seguridad. Su equipo aprenderá a diseñar arquitecturas de software robustas, aplicar patrones de diseño y trabajar con herramientas de desarrollo que son estándar en la industria, posicionando a su empresa a la vanguardia del desarrollo web.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Aplicar los principios de la Programación Orientada a Objetos (clases, objetos, herencia, polimorfismo) en PHP.",
+      li_2: "Diseñar arquitecturas de aplicaciones web siguiendo patrones de diseño (MVC).",
+      li_3: "Utilizar un framework PHP moderno (ej. Laravel) para acelerar el desarrollo.",
+      li_4: "Gestionar dependencias y paquetes con Composer.",
+      li_5: 'Implementar pruebas unitarias y de integración para garantizar la calidad del código.',
+      li_6: 'Trabajar con sistemas de control de versiones (Git) en un entorno de equipo.',
+      publico_obj: "Público Objetivo",
+      publico: 'Desarrolladores PHP con experiencia, equipos de desarrollo que deseen adoptar metodologías modernas y frameworks, profesionales que buscan construir aplicaciones a gran escala o mejorar la mantenibilidad de sus proyectos.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'PHP Objektuetara Bideratutako Programazioa (POO) eta Frameworks',
+      duracion: '50 ordu',
+      descripcion: 'PHP aplikazio eskalagarri, iraunkor eta eraginkorrak eraikitzeko, objektuetara bideratutako programazioa (POO) da funtsezko paradigma. Ikastaro honek, PHPn POOren printzipioak menderatzeaz gain, frameworks moderno eta indartsuen erabileran ere sartzen ditu parte-hartzaileak, hala nola Laravel edo Symfony, produktibitatea eta segurtasuna sustatzen dutenak. Bere taldeak software-arkitektura sendoak diseinatzen, diseinu-patroiak aplikatzen eta industrian estandarrak diren garapen-tresnekin lan egiten ikasiko du, bere enpresa web-garapenaren abangoardian jarriz.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "Objektuetara (klaseak, objektuak, herentzia, polimorfismoa) bideratutako programazioaren printzipioak aplikatzea PHPn.",
+      li_2: "Web aplikazioen arkitekturak diseinu-patroiei (MVC) jarraituz diseinatzea.",
+      li_3: "PHP framework moderno bat erabiltzea (adibidez, Laravel) garapena bizkortzeko.",
+      li_4: "Konposer bidezko mendekotasunak eta paketeak kudeatzea.",
+      li_5: 'Proba unitarioak eta integraziokoak inplementatzea, kodearen kalitatea bermatzeko.',
+      li_6: 'Bertsioak kontrolatzeko sistemekin (Git) lan egitea talde-ingurune batean.',
+      publico_obj: "Xede Publikoa",
+      publico: 'Esperientzia duten PHP garatzaileak, metodologia modernoak eta framework-ak hartu nahi dituzten garapen-taldeak, eskala handiko aplikazioak eraiki nahi dituzten profesionalak edo beren proiektuen iraunkortasuna hobetu nahi dutenak.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+            <li>{dict.hero.li_5}</li>
+            <li>{dict.hero.li_6}</li>
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>

@@ -1,0 +1,134 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          li_5: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Automatización de Tareas en Excel con Macros (VBA)',
+      duracion: '20 horas',
+      descripcion: '¡Elimina la burocracia y las tareas repetitivas en Excel de una vez por todas! Este curso capacitará a su equipo para automatizar informes, consolidar datos, formatear hojas de cálculo y ejecutar cualquier secuencia de acciones con un solo clic, utilizando la potencia de las Macros y VBA (Visual Basic for Applications).',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Grabar y ejecutar macros para automatizar secuencias de acciones repetitivas",
+      li_2: "Comprender el entorno de desarrollo de VBA y editar código de macros",
+      li_3: "Programar funciones y procedimientos básicos en VBA",
+      li_4: "Crear formularios de usuario sencillos para interactuar con las macros",
+      li_5: 'Desarrollar soluciones personalizadas que mejoren significativamente la eficiencia',
+      publico_obj: "Público Objetivo",
+      publico: 'Usuarios avanzados de Excel, personal administrativo que maneja grandes volúmenes de datos, analistas que buscan optimizar sus procesos de generación de informes.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'Excel-eko Atazen Automatizazioa Makroekin (VBA)',
+      duracion: '20 ordu',
+      descripcion: 'Ezabatu burokrazia eta Excel-eko ataza errepikakorrak behin betiko! Ikastaro honek zure taldea txostenak automatizatzeko, datuak kontsoldatzeko, kalkulu-orriak formateatzeko eta edozein ekintza-sekuentzia klik batekin exekutatzeko prestatuko du, Makroen eta VBA-ren (Visual Basic for Applications) potentzia erabiliz.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "Makroak grabatu eta exekutatzea Excel-eko ekintza errepikakorrak automatizatzeko",
+      li_2: "VBA garapen-ingurunea ulertu eta makroen kodea editatzea",
+      li_3: "VBA-n funtzio eta prozedura oinarrizkoak programatzea",
+      li_4: "Erabiltzaile-formulario sinpleak sortzea makroekin elkarreragiteko",
+      li_5: 'Eguneroko datuen kudeaketan eraginkortasuna eta zehaztasuna nabarmen hobetzen duten soluzio pertsonalizatuak garatzea',
+      publico_obj: "Xede Publikoa",
+      publico: 'Excel-eko erabiltzaile aurreratuak, datu-bolumen handiak kudeatzen dituen administrazio langilea, txosten-sorkuntza prozesuak optimizatu nahi dituzten analizatzaileak.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+            <li>{dict.hero.li_5}</li>
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico_obj}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>

@@ -1,0 +1,81 @@
+---
+// src/components/Servicios.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  clave: { inicio: string; 
+          analisis: string; 
+          inteligencia: string,
+          ciber: string;
+          auto: string;
+        }
+}> = {
+  es: {
+    clave: {
+      inicio: 'Inicio',
+      analisis: 'Análisis de datos',
+      inteligencia: 'Inteligencia Artificial',
+      ciber: 'Ciberseguridad',
+      auto:"Automatización"
+    }
+  },
+  eu: {
+    clave: {
+      inicio: 'Hasiera',
+      analisis: 'Datuen Analisia',
+      inteligencia: 'Adimen Artifiziala',
+      ciber: 'Zibersegurtasuna',
+      auto:'Automatizazioa'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+
+.cont-nav {
+    max-width: 100%;
+    margin: 0 auto;
+    padding-top: 180px;
+    padding-bottom: 10px;
+  justify-content:space-between;
+
+    
+    
+}
+
+.cont-nav .nav-menu {
+    list-style: none;
+    justify-content:space-evenly;
+    align-items: center;
+}
+
+</style>
+
+<section class="cont-nav">
+  <ul class="nav-menu">
+    <li class="nav-item">
+        <a href="index.html#inicio" class="nav-link">{dict.clave.inicio}</a>
+    </li>
+    <li class="nav-item">
+        <a href="#analisis-datos" class="nav-link"><i class="fas fa-chart-bar"></i><span> {dict.clave.analisis}</span></a>
+    </li>
+    <li class="nav-item">
+        <a href="#inteligencia-artificial" class="nav-link"><i class="fas fa-brain"></i><span>{dict.clave.inteligencia}</span></a>
+    </li>
+    <li class="nav-item">
+        <a href="#ciberseguridad" class="nav-link"><i class="fas fa-shield-alt"></i><span>{dict.clave.ciber}</span></a>
+    </li>
+    <li class="nav-item">
+        <a href="#automatizacion" class="nav-link"><i class="fas fa-cogs"></i><span>{dict.clave.auto}</span></a>
+    </li>
+  </ul>
+</section>

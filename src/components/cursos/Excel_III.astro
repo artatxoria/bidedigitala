@@ -1,0 +1,130 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Excel Avanzado: Automatización y Análisis de Datos',
+      duracion: '25 horas',
+      descripcion: 'Este curso va más allá de lo básico, capacitando a los participantes en el uso de funciones avanzadas, tablas dinámicas y macros para automatizar tareas repetitivas y realizar análisis complejos, liberando tiempo y reduciendo errores manuales.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Dominar funciones avanzadas (BUSCARV, SI, SUMAR.SI.CONJUNTO) para análisis de datos",
+      li_2: "Crear y gestionar Tablas Dinámicas para reportes ejecutivos ágiles",
+      li_3: "Automatizar tareas repetitivas mediante la grabación y edición de Macros",
+      li_4: "Aplicar técnicas de validación de datos y protección de hojas para la integridad de la información",
+      publico_obj: "Público Objetivo",
+      publico: 'Analistas de negocio, personal financiero, equipos de marketing y ventas, mandos intermedios y cualquier profesional que busque optimizar sus informes y flujos de trabajo en Excel.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'Excel Aurreratua: Automatizazioa eta Datuen Analisia',
+      duracion: '25 ordu',
+      descripcion: 'Ikastaro honek oinarrizkoa gainditzen du, parte-hartzaileak funtzio aurreratuak, taula dinamikoak eta makroak erabiltzeko prestatuz, ataza errepikakorrak automatizatzeko eta analisi konplexuak egiteko.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "Funtzio aurreratuak (BUSCARV, SI, SUMAR.SI.CONJUNTO) menperatzea",
+      li_2: "Taula Dinamikoak sortu eta kudeatzea txosten exekutibo azkarretarako",
+      li_3: "Ataza errepikakorrak automatizatzea Makroen bidez",
+      li_4: "Datuen balidazio eta orrien babes teknikak aplikatzea",
+      publico_obj: "Xede Publikoa",
+      publico: 'Negozio analizatzaileak, finantza langilea, marketing eta salmenta taldeak, tarteko agintariak eta Excel-en txostenak eta lan-fluxuak optimizatu nahi dituen edozein profesional.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico_obj}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>

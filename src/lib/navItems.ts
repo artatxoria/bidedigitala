@@ -9,5 +9,6 @@ export const mainNav: NavItem[] = [
   { key: 'nav.home',      path: '/' },
   { key: 'nav.blog',      path: '/blog' },
   { key: 'nav.privacy',   path: '/privacidad' },
+  { key: 'nav.catalogo',   path: '/catalogo' },
   // añade aquí nuevas páginas: p.ej. { key: 'nav.contact', path: '/contacto' }
 ];

@@ -11,7 +11,8 @@
     "resultados" : "Emaitzak",
     "servicios": "Zerbitzuak",
     "contacto": "Kontaktua",
-    "diagnostico" : "Diagnostiko Doakoa"
+    "diagnostico" : "Diagnostiko Doakoa",
+    "catalogo" : "Formakuntza"
   },
   "hero": {
     "title": "Zure ETEak ulertuko eta maitatuko duen",

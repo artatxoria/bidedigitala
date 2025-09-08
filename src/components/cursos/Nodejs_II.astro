@@ -1,0 +1,137 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          li_5: string;
+          //li_6: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Desarrollo Web Full-Stack con JavaScript: Node.js, Express y Sequelize para Aplicaciones Modernas',
+      duracion: '120 horas',
+      descripcion: 'El ecosistema JavaScript es el motor de la web moderna, impulsando tanto la experiencia de usuario (frontend) como la lógica de negocio (backend). Este itinerario Full-Stack capacitará a sus profesionales para dominar el desarrollo completo de aplicaciones web, desde la interfaz hasta la base de datos. Se sumergirán en Node.js, el entorno de ejecución que permite a JavaScript operar en el servidor, junto con Express.js, el framework estándar para construir APIs robustas. Además, aprenderán a interactuar con bases de datos relacionales de forma eficiente y segura a través de Sequelize ORM. Nuestros cursos están diseñados con un enfoque práctico y de aplicación inmediata, garantizando que sus equipos adquieran las habilidades más demandadas para construir las soluciones digitales que su empresa necesita hoy y mañana. Nos diferenciamos por ofrecer una gestión integral de la formación, incluyendo la automatización de trámites con FUNDAE, lo que asegura una experiencia fluida y sin complicaciones burocráticas.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Desarrollar aplicaciones backend utilizando Node.js y el framework Express.js.",
+      li_2: "Implementar una capa de abstracción de base de datos (ORM) con Sequelize para interactuar con bases de datos relacionales (MySQL, PostgreSQL).",
+      li_3: "Diseñar y construir APIs RESTful para la comunicación eficiente entre el frontend y el backend.",
+      li_4: "Aplicar conceptos de autenticación, autorización y seguridad en aplicaciones web.",
+      li_5: 'Integrar componentes frontend (utilizando frameworks como React, Angular o Vue.js, que se pueden ver en otros módulos complementarios) con el backend desarrollado, para construir aplicaciones Full-Stack completas.',
+      //li_6: 'Integrar JavaScript con HTML5 y CSS3.',
+      publico_obj: "Público Objetivo",
+      publico: 'Programadores que buscan convertirse en desarrolladores Full-Stack, equipos de desarrollo de software en empresas que necesitan expandir sus capacidades en JavaScript backend, y profesionales interesados en una de las habilidades más versátiles y de alta empleabilidad en el mercado tecnológico. Ideal para impulsar la innovación y la digitalización interna en sectores como servicios avanzados, tecnología e industria.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'Full-Stack web-garapena JavaScript-ekin: Node.js, Express eta Sequelize aplikazio modernoetarako',
+      duracion: '120 ordu',
+      descripcion: 'JavaScript ekosistema webgune modernoaren motorra da, erabiltzailearen esperientzia (frontend) eta negozio-logika (backend) bultzatuz. Full-Stack ibilbide horrek gaitasuna emango die profesionalei web-aplikazioen garapen osoa menderatzeko, interfazetik datu-baseraino. Node.js-en murgilduko dira, JavaScript-i API sendoak eraikitzeko framework estandarra zerbitzarian, Express.jsekin batera, jarduteko aukera ematen dion exekuzio-ingurunean. Gainera, datu-base erlazionalekin modu eraginkorrean eta seguruan elkarreragiten ikasiko dute Sequelize ORMren bidez. Gure ikastaroak ikuspegi praktiko eta berehalako aplikazioko batekin diseinatuta daude, beren taldeek gaur eta bihar zure enpresak behar dituen soluzio digitalak eraikitzeko gehien eskatzen diren trebetasunak eskuratuko dituztela bermatuz. Prestakuntzaren kudeaketa integrala eskaintzeagatik bereizten gara, FUNDAErekiko izapideen automatizazioa barne; horrek esperientzia arina eta arazo burokratikorik gabea ziurtatzen du.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "Backend aplikazioak garatzea Node.js eta framework Express.js. erabiliz.",
+      li_2: "Datu-baseen abstrakzio-geruza bat (ORM) inplementatzea Sequelize-rekin, datu-base erlazionalekin elkarreragiteko (MySQL, PostgreSQL).",
+      li_3: "Frontend eta backend-aren arteko komunikazio eraginkorrerako RESTful APIak diseinatu eta eraikitzea.",
+      li_4: "Web aplikazioetan autentifikazio, baimen eta segurtasun kontzeptuak aplikatzea.",
+      li_5: 'Frontend osagaiak (frameworkak erabiliz, hala nola React, Angular edo Vue.js, beste modulu osagarri batzuetan ikus daitezkeenak) garatutako backendarekin integratzea, Full-Stack aplikazio osoak eraikitzeko.',
+      //li_6: 'JavaScript HTML5 eta CSS3rekin integratzea.',
+      publico_obj: "Xede Publikoa",
+      publico: 'Programadores que buscan convertirse en desarrolladores Full-Stack, equipos de desarrollo de software en empresas que necesitan expandir sus capacidades en JavaScript backend, y profesionales interesados en una de las habilidades más versátiles y de alta empleabilidad en el mercado tecnológico. Ideal para impulsar la innovación y la digitalización interna en sectores como servicios avanzados, tecnología e industria.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+            <li>{dict.hero.li_5}</li>
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>

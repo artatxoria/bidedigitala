@@ -1,0 +1,137 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          li_5: string;
+          //li_6: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Programación PHP Profesional con Laravel: Desarrollo Backend de Alto Rendimiento',
+      duracion: '150 horas',
+      descripcion: 'En un entorno donde la agilidad y la robustez del backend son críticas, este programa sumerge a sus equipos en PHP, un lenguaje que sigue siendo el pilar de millones de aplicaciones web, y en Laravel, el framework que ha redefinido la productividad y la seguridad en el desarrollo web. Nuestros expertos, con profunda experiencia en el desarrollo de soluciones para la administración pública y en entornos empresariales, le guiarán para construir aplicaciones backend sólidas, escalables y eficientes, capaces de gestionar grandes volúmenes de datos y automatizar procesos clave. En nuestro emprendimiento, aplicamos la misma filosofía de optimización y automatización interna que enseñamos, asegurando que cada hora de formación se traduzca en valor tangible para su organización. Además, nuestra gestión automatizada de las bonificaciones FUNDAE le garantiza cero complicaciones administrativas, permitiéndole centrarse en la capacitación de su talento.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Dominar la sintaxis y las características avanzadas de PHP para el desarrollo de aplicaciones web complejas.",
+      li_2: "Construir aplicaciones backend robustas y seguras, gestionando la lógica de negocio y las interacciones con bases de datos utilizando el framework Laravel.",
+      li_3: "Implementar y optimizar la gestión de bases de datos relacionales (MySQL y PostgreSQL) dentro de proyectos Laravel, asegurando la integridad y eficiencia de los datos.",
+      li_4: "Desarrollar APIs RESTful para facilitar la comunicación e integración con sistemas frontend y aplicaciones externas.",
+      li_5: 'Aplicar patrones de diseño, principios de arquitectura limpia y buenas prácticas de desarrollo para construir código mantenible y escalable.',
+      //li_6: 'Trabajar con sistemas de control de versiones (Git) en un entorno de equipo.',
+      publico_obj: "Público Objetivo",
+      publico: 'Desarrolladores junior que buscan especializarse en backend, programadores con experiencia en otros lenguajes que desean migrar a PHP/Laravel, y equipos de IT o departamentos de ingeniería de PYMES y grandes empresas que necesiten desarrollar o mantener soluciones web internas, optimizar procesos con tecnología propia, o aquellos que aspiren a modernizar sus sistemas legacy. Ideal para empresas en plena transformación digital que valoran la eficiencia y la independencia tecnológica.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'PHP profesionalaren programazioa Laravelekin: errendimendu handiko backend garapena',
+      duracion: '150 ordu',
+      descripcion: 'Backendaren arintasuna eta sendotasuna kritikoak diren ingurune batean, programa honek PHPn murgiltzen ditu bere ekipoak, milioika web-aplikazioren zutabe izaten jarraitzen duen lengoaian, eta Laravelen, web garapenaren produktibitatea eta segurtasuna birdefinitu dituen frameworkean. Gure adituek esperientzia handia dute administrazio publikorako eta enpresa-inguruneetarako konponbideak garatzen, eta backend aplikazio sendoak, eskalagarriak eta eraginkorrak eraikitzen lagunduko diote, datu-bolumen handiak kudeatzeko eta funtsezko prozesuak automatizatzeko gai direnak. Gure ekintzailetzan, irakasten dugun optimizazio- eta automatizazio-filosofia bera aplikatzen dugu, prestakuntza-ordu bakoitza antolaketarako balio ukigarri bihurtzen dela ziurtatuz. Gainera, FUNDAEren hobarien gure kudeaketa automatizatuak arazo administratiborik ez duela bermatzen dio, eta bere talentuaren trebakuntzan zentratzeko aukera ematen dio.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "Web-aplikazio konplexuak garatzeko PHPren sintaxia eta ezaugarri aurreratuak menderatzea.",
+      li_2: "Backend aplikazio sendoak eta seguruak eraikitzea, negozio-logika eta datu-baseekiko interakzioak kudeatuz, Laravel framework-a erabiliz.",
+      li_3: "Datu-base erlazionalen (MySQL eta PostgreSQL) kudeaketa inplementatzea eta optimizatzea Laravel proiektuen barruan, datuen osotasuna eta eraginkortasuna ziurtatuz.",
+      li_4: "RESTful APIak garatzea, frontend sistemekin eta kanpoko aplikazioekin komunikazioa eta integrazioa errazteko.",
+      li_5: 'Diseinu-patroiak, arkitektura garbiaren printzipioak eta garapen-jardunbide egokiak aplikatzea, kode iraunkorra eta eskalagarria eraikitzeko.',
+      //li_6: 'Bertsioak kontrolatzeko sistemekin (Git) lan egitea talde-ingurune batean.',
+      publico_obj: "Xede Publikoa",
+      publico: 'PHP programatzaileak, softwarea garatzeko ekipoak, Laravel beren barne-sistemetan edo produktuetan erabiltzeko asmoa duten enpresak.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+            <li>{dict.hero.li_5}</li>
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>

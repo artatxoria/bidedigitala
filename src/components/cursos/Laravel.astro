@@ -1,0 +1,137 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          //li_5: string;
+          //li_6: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Desarrollo Web con Laravel (PHP) para Aplicaciones Empresariales',
+      duracion: '50 horas',
+      descripcion: 'Dirigido a quienes buscan construir aplicaciones web empresariales de forma rápida y segura. Este curso enseña el uso del framework Laravel (PHP), conocido por su elegancia y robustez, para el desarrollo de sistemas complejos y escalables.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Dominar la arquitectura MVC (Modelo-Vista-Controlador) de Laravel.",
+      li_2: "Construir bases de datos y ORM con Eloquent.",
+      li_3: "Implementar autenticación, autorización y seguridad en aplicaciones web.",
+      li_4: "Desarrollar y desplegar aplicaciones web empresariales con Laravel.",
+      //li_5: 'Implementar pruebas unitarias y de integración para garantizar la calidad del código.',
+      //li_6: 'Trabajar con sistemas de control de versiones (Git) en un entorno de equipo.',
+      publico_obj: "Público Objetivo",
+      publico: 'Programadores PHP, equipos de desarrollo de software, empresas que utilizan o planean utilizar Laravel para sus sistemas internos o productos.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'Web Garapena Laravelekin (PHP) Enpresa Aplikazioetarako',
+      duracion: '50 ordu',
+      descripcion: 'Enpresen web aplikazioak azkar eta modu seguruan eraiki nahi dituztenei zuzendua. Ikastaro honek Laravel frameworkaren (PHP) erabilera irakasten du, bere dotorezia eta sendotasunagatik ezaguna, sistema konplexu eta eskalagarrien garapenerako.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "Laravelen MVC arkitektura (modelo-bista-kontrolatzailea) menderatzea.",
+      li_2: "Datu-baseak eta ORM eraikitzea Eloquent-ekin.",
+      li_3: "Web-aplikazioetan autentifikazioa, baimena eta segurtasuna inplementatzea.",
+      li_4: "Enpresen web-aplikazioak garatzea eta hedatzea Laravelekin.",
+      //li_5: 'Proba unitarioak eta integraziokoak inplementatzea, kodearen kalitatea bermatzeko.',
+      //li_6: 'Bertsioak kontrolatzeko sistemekin (Git) lan egitea talde-ingurune batean.',
+      publico_obj: "Xede Publikoa",
+      publico: 'PHP programatzaileak, softwarea garatzeko ekipoak, Laravel beren barne-sistemetan edo produktuetan erabiltzeko asmoa duten enpresak.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+            <!-- <li>{dict.hero.li_5}</li> -->
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>

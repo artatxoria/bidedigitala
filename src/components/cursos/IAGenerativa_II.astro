@@ -1,0 +1,134 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          //li_5: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'IA Generativa: Nivel Medio y Creación de Asistentes Conversacionales',
+      duracion: '30 horas',
+      descripcion: 'Profundiza en las capacidades de la IA Generativa, enseñando a personalizar modelos y a construir asistentes conversacionales sencillos para automatizar respuestas a preguntas frecuentes, mejorar el servicio al cliente o el soporte interno.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Ajustar modelos de IA Generativa para tareas específicas de negocio.",
+      li_2: "Diseñar y entrenar chatbots básicos para FAQs y atención al cliente.",
+      li_3: "Integrar asistentes de IA en entornos de trabajo existentes (ej. web interna).",
+      li_4: "Evaluar la calidad de las respuestas generadas por IA y optimizar su rendimiento.",
+      //li_5: 'Interpretar visualizaciones para la toma de decisiones estratégicas',
+      publico_obj: "Público Objetivo",
+      publico: 'Responsables de atención al cliente, personal de soporte técnico, equipos de desarrollo de negocio, y cualquier profesional con interés en implementar soluciones de IA práctica.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'IA Sortzailea: Maila Ertaina eta Elkarrizketa Laguntzaileen Sorrera',
+      duracion: '30 ordu',
+      descripcion: 'IA Generatiboaren gaitasunetan sakontzen du, ereduak pertsonalizatzen eta elkarrizketa-laguntzaile errazak eraikitzen irakatsiz, ohiko galderen erantzunak automatizatzeko, bezeroarentzako zerbitzua hobetzeko edo barne-euskarria hobetzeko.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "Negozio-zeregin espezifikoetarako IA sortzailearen ereduak doitzea.",
+      li_2: "FAQetarako eta bezeroarentzako arretarako oinarrizko chatbotak diseinatzea eta entrenatzea.",
+      li_3: "IAko laguntzaileak lehendik dauden lan-inguruneetan integratzea (adib. barne-webgunea).",
+      li_4: "Evaluar la calidad de las respuestas generadas por IA y optimizar su rendimiento.",
+      //li_5: 'Bisualizazioak interpretatzea erabaki estrategikoetarako',
+      publico_obj: "Xede Publikoa",
+      publico: 'Bezeroari arreta emateko arduradunak, euskarri teknikoko langileak, negozioa garatzeko taldeak eta IA praktikoko konponbideak inplementatzeko interesa duen edozein profesional.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+            <!-- <li>{dict.hero.li_5}</li> -->
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico_obj}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>

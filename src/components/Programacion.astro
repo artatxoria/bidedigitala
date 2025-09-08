@@ -1,0 +1,89 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+import { INVALID } from 'astro:schema';
+import JavaScript from './cursos/JavaScript.astro'
+import Nodejs from './cursos/Nodejs.astro'
+import Nodejs_II from './cursos/Nodejs_II.astro'
+import PHP from './cursos/PHP.astro'
+import PHP_II from './cursos/PHP_II.astro'
+import PHP_III from './cursos/PHP_III.astro'
+import Laravel from './cursos/Laravel.astro'
+import Laravel_II from './cursos/Laravel_II.astro'
+import Python from './cursos/Python.astro'
+import Django from './cursos/Django.astro'
+import Django_II from './cursos/Django_II.astro'
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          subtitle: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Programación y Desarrollo de Software',
+      subtitle: 'El desarrollo de software es una habilidad fundamental en la era digital. Nuestros itinerarios están diseñados para proporcionar rutas de aprendizaje claras y completas, convirtiendo a los estudiantes en desarrolladores competentes en tecnologías específicas de alta demanda, como Node.js, Express, Laravel y Django.',
+    }
+  },
+  eu: {
+    hero: {
+      title: 'Softwarearen programazioa eta garapena',
+      subtitle: 'Software garapena aro digitalean oinarrizko trebetasuna da. Gure ibilbideak ikaskuntza-ibilbide argiak eta osoak eskaintzeko diseinatuta daude, ikasleak eskari handiko teknologia espezifikoetan (Node.js, Express, Laravel eta Django) trebe bihurtuz.',
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.section {
+    padding: var(--section-padding);
+    background: #f7fbfd;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, auto);
+    gap: 2rem;
+}
+
+</style>
+<!-- Problemas Section -->
+    <section id="analisis-datos" class="section">
+        <div class="container">
+            <div class="section-header">
+                <img src="/public/images/programacion.jpeg" alt="Adimen Artifiziala" class="section-image">
+                <div class="section-info">
+                    <h2 class="section-title">{dict.hero.title}</h2>
+                    <p class="section-description">{dict.hero.subtitle}</p>
+                </div>
+            </div>
+            <div class="grid">
+                
+            <JavaScript lang={lang} />
+            <Nodejs lang={lang} />
+            <Nodejs_II lang={lang} />
+            <PHP lang={lang} />
+            <PHP_II lang={lang} />
+            <PHP_III lang={lang} />
+            <Laravel lang={lang} />
+            <Laravel_II lang={lang} />
+            <Python lang={lang} />
+            <Django lang={lang} />
+            <Django_II lang={lang} />
+    </section>
+
+
+
+
+
+
+   
+ 

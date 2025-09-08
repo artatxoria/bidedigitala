@@ -1,0 +1,134 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          li_5: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Power BI para la Inteligencia de Negocio',
+      duracion: '30 horas',
+      descripcion: 'Capacita a los profesionales para transformar datos brutos en insights de negocio accionables, creando cuadros de mando interactivos que facilitan la comprensión del rendimiento empresarial y la identificación de oportunidades.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Conectar y transformar datos de múltiples fuentes (Excel, bases de datos, web)",
+      li_2: "Modelar datos para crear relaciones coherentes y optimizadas",
+      li_3: "Diseñar y publicar cuadros de mando interactivos (dashboards) en Power BI Desktop y Service",
+      li_4: "Aplicar el lenguaje DAX para crear medidas y columnas calculadas complejas",
+      li_5: 'Interpretar visualizaciones para la toma de decisiones estratégicas',
+      publico_obj: "Público Objetivo",
+      publico: 'Directivos, gerentes de departamento (finanzas, marketing, operaciones), analistas de datos, personal de RRHH, y profesionales que necesiten visualizar y analizar grandes volúmenes de información.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'Negozio Adimenaren Power BI',
+      duracion: '30 ordu',
+      descripcion: 'Profesionalak datu gordinak negozio-ikuspegi ekintzagarrietan eraldatzeko gaitasuna ematen die, enpresaren errendimenduaren ulermena eta aukeren identifikazioa errazten duten aginte-koadro interaktiboak sortuz.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "Iturri anitzak konektatu eta eraldatzea (Excel, datu-baseak, web)",
+      li_2: "Datuak modelatzea harreman koherenteak eta optimizatuak sortzeko",
+      li_3: "Aginte-koadro interaktiboak (dashboards) diseinatu eta argitaratzea Power BI Desktop eta Service-n",
+      li_4: "DAX lengoaia aplikatzea neurri eta zutabe kalkulatu konplexuak sortzeko",
+      li_5: 'Bisualizazioak interpretatzea erabaki estrategikoetarako',
+      publico_obj: "Xede Publikoa",
+      publico: 'Zuzendariak, sailburuak (finantza, marketing, eragiketak), datu analizatzaileak, GGBB langilea, eta informazio-bolumen handiak bistaratu eta aztertu behar dituzten profesionalak.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+            <li>{dict.hero.li_5}</li>
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico_obj}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>

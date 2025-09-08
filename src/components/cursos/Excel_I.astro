@@ -1,0 +1,130 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Excel para la Productividad Empresarial (Nivel Inicial)',
+      duracion: '20 horas',
+      descripcion: 'Curso esencial para sentar las bases en el manejo de Excel, la herramienta más universal para la gestión de datos. Ayuda a los equipos a organizar información eficientemente y a realizar cálculos básicos con solidez, eliminando errores comunes en el día a día administrativo.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Utilizar las funciones y fórmulas básicas para la manipulación de datos",
+      li_2: "Formatear hojas de cálculo para una presentación clara y profesional",
+      li_3: "Crear gráficos sencillos para visualizar tendencias y resultados",
+      li_4: "Organizar y filtrar datos para una consulta rápida y eficiente",
+      publico_obj: "Público Objetivo",
+      publico: 'Personal administrativo, nuevos empleados, cualquier profesional que requiera dominar las funcionalidades básicas de Excel para su trabajo diario.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'Excel Enpresaren Produktibitatea (Oinarrizko Maila)',
+      duracion: '20 ordu',
+      descripcion: 'Excel kudeatzeko oinarriak ezartzeko ikastaro ezinbestekoa, datuen kudeaketarako tresna unibertsalena. Taldeak informazioa modu eraginkorrean antolatzeko eta oinarrizko kalkuluak sendotasunez egiteko laguntzen du.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "Datuen manipulaziorako funtzio eta formula oinarrizkoak erabiltzea",
+      li_2: "Kalkulu-orriak aurkezpen argi eta profesionalerako formateatzea",
+      li_3: "Joera eta emaitzak bistaratzeko grafiko sinpleak sortzea",
+      li_4: "Datuak antolatu eta iragaztea kontsulta azkar eta eraginkorra egiteko",
+      publico_obj: "Xede Publikoa",
+      publico: 'Administrazioko langileak, langile berriak, eguneroko lanerako Excelen oinarrizko funtzionaltasunak menderatu behar dituen edozein profesional.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico_obj}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>

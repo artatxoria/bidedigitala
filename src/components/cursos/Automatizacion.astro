@@ -1,0 +1,134 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          //li_5: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Automatización de Procesos con n8n (No-Code/Low-Code)',
+      duracion: '25 horas',
+      descripcion: 'Este servicio, un elemento diferenciador clave de nuestra oferta, capacita a profesionales y empresas para diseñar y desplegar sus propias automatizaciones. Se enseña a integrar aplicaciones (CRM, email, hojas de cálculo, etc.), crear flujos de trabajo automatizados y optimizar tareas repetitivas, sin necesidad de programación compleja.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Diseñar flujos de trabajo automatizados para tareas administrativas y operativas.",
+      li_2: "Integrar aplicaciones de uso común (ej. Google Sheets, Gmail, Slack) sin código.",
+      li_3: "Optimizar la gestión de datos y la comunicación interna mediante automatización.",
+      li_4: "Identificar procesos empresariales susceptibles de ser automatizados para maximizar la eficiencia.",
+      //li_5: 'Interpretar visualizaciones para la toma de decisiones estratégicas',
+      publico_obj: "Público Objetivo",
+      publico: 'Personal de administración, gerentes de operaciones, equipos de RRHH, emprendedores y pymes que buscan reducir su carga burocrática y mejorar la agilidad.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'Prozesuen automatizazioa n8n bidez (No-Code/Low-Code)',
+      duracion: '25 ordu',
+      descripcion: 'Zerbitzu hori gure eskaintzaren funtsezko elementu bereizlea da, eta profesionalak eta enpresak gaitzen ditu beren automatizazioak diseinatzeko eta hedatzeko. Aplikazioak integratzen (CRM, email, kalkulu-orriak, etab.), lan-fluxu automatizatuak sortzen eta zeregin errepikakorrak optimizatzen irakasten da, programazio konplexuaren beharrik gabe.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "Zeregin administratibo eta operatiboetarako lan-fluxu automatizatuak diseinatzea.",
+      li_2: "Koderik gabeko erabilera komuneko aplikazioak integratzea (adibidez, Google Sheets, Gmail, Slack).",
+      li_3: "Automatizazio bidez datuen kudeaketa eta barne-komunikazioa optimizatzea.",
+      li_4: "Automatizatu daitezkeen enpresa-prozesuak identifikatzea, eraginkortasuna maximizatzeko.",
+      //li_5: 'Bisualizazioak interpretatzea erabaki estrategikoetarako',
+      publico_obj: "Xede Publikoa",
+      publico: 'Administrazioko langileak, operazio-kudeatzaileak, giza baliabideetako ekipoak, ekintzaileak eta ETEak, karga burokratikoa murriztu eta arintasuna hobetu nahi dutenak..',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+            <!-- <li>{dict.hero.li_5}</li> -->
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>

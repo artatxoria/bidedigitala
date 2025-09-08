@@ -1,0 +1,134 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          //li_5: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'IA Generativa: Impulsa tu Productividad Personal y Empresarial (Iniciación)',
+      duracion: '20 horas',
+      descripcion: 'Un curso introductorio que permite a los participantes entender y aplicar herramientas de IA Generativa como ChatGPT en sus tareas diarias, optimizando la redacción, el análisis y la ideación, sin necesidad de conocimientos técnicos previos.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Comprender los fundamentos de la IA Generativa y sus aplicaciones prácticas",
+      li_2: "Utilizar herramientas como ChatGPT para la creación de textos, resúmenes e ideas",
+      li_3: "Aplicar prompts efectivos para obtener resultados de IA de alta calidad",
+      li_4: "Identificar oportunidades para integrar la IA en sus flujos de trabajo cotidianos",
+      //li_5: 'Interpretar visualizaciones para la toma de decisiones estratégicas',
+      publico_obj: "Público Objetivo",
+      publico: 'Toda la plantilla (especialmente personal de administración, marketing, comunicación, RRHH), directivos y mandos intermedios interesados en la innovación y la eficiencia.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'IA Sortzailea: Bultzatu zure Produktibitate Pertsonala eta Enpresariala (Hasiera)',
+      duracion: '20 ordu',
+      descripcion: 'Sarrera ikastaro bat, parte-hartzaileei IA Sortzaileko tresnak ulertu eta aplikatzeko aukera ematen diena, ChatGPT bezalakoak beren eguneroko atazetan, idazketa, analisia eta ideazioa optimizatuz, aurretiko ezagutza teknikorik behar gabe.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "IA Sortzailearen oinarriak eta aplikazio praktikoak ulertzea",
+      li_2: "ChatGPT bezalako tresnak testuen, laburpenen eta ideien sorkuntzarako erabiltzea",
+      li_3: "Kalitate handiko IA emaitzak lortzeko prompt eraginkorrak aplikatzea",
+      li_4: "IA beren eguneroko lan-fluxuetan integratzeko aukerak identifikatzea",
+      //li_5: 'Bisualizazioak interpretatzea erabaki estrategikoetarako',
+      publico_obj: "Xede Publikoa",
+      publico: 'Langile guztiak (bereziki administrazio, marketing, komunikazio, GGBB langilea), zuzendariak eta tarteko agintariak berrikuntzan eta eraginkortasunean interesatuak.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+            <!-- <li>{dict.hero.li_5}</li> -->
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico_obj}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>

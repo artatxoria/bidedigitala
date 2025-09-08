@@ -1,0 +1,134 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          li_5: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Inteligencia de Negocio con Power Query y Power Pivot en Excel',
+      duracion: '20 horas',
+      descripcion: 'Rompe las barreras del Excel tradicional y adéntrate en el mundo de la Inteligencia de Negocio con Power Query y Power Pivot. Este curso te capacitará para conectar y transformar datos de múltiples fuentes heterogéneas con Power Query, y para construir modelos de datos robustos y medidas complejas (DAX) con Power Pivot.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Importar, limpiar y transformar datos de diversas fuentes utilizando Power Query",
+      li_2: "Crear modelos de datos relacionales robustos en Power Pivot",
+      li_3: "Desarrollar medidas y KPIs complejos utilizando el lenguaje DAX",
+      li_4: "Integrar los modelos de datos de Power Pivot con Tablas Dinámicas y gráficos",
+      li_5: 'Preparar y automatizar flujos de datos que reduzcan la intervención manual',
+      publico_obj: "Público Objetivo",
+      publico: 'Analistas de datos, controladores de gestión, profesionales de finanzas, consultores y cualquier experto en Excel.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'Excel-eko Power Query eta Power Pivot-ekin Negozio Adimena',
+      duracion: '20 ordu',
+      descripcion: 'Excel tradizionalaren mugak hautsi eta Negozio Adimenaren munduan sartu Power Query eta Power Pivot-ekin. Ikastaro honek iturri heterogeneo anitzak konektatu eta eraldatzeko gaitasuna emango dizu Power Query-rekin, eta datu-eredu sendoak eta neurri konplexuak (DAX) eraikitzeko Power Pivot-ekin.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "Iturri ezberdinetatik datuak inportatu, garbitu eta eraldatzea Power Query erabiliz",
+      li_2: "Power Pivot-en datu-eredu erlazionalak sortzea",
+      li_3: "DAX (Data Analysis Expressions) lengoaia erabiliz neurri eta KPI konplexuak garatzea",
+      li_4: "Power Pivot-eko datu-ereduak Taula Dinamiko eta grafikoekin integratzea",
+      li_5: 'Datu-fluxuak prestatu eta automatizatzea',
+      publico_obj: "Xede Publikoa",
+      publico: 'Datu analizatzaileak, kudeaketa kontrolatzaileak, finantza profesionalak, aholkulariak eta Excel adituak.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+            <li>{dict.hero.li_5}</li>
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico_obj}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>

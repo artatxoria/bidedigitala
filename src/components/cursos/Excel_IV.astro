@@ -1,0 +1,134 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          li_5: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Análisis de Datos con Tablas Dinámicas en Excel',
+      duracion: '15 horas',
+      descripcion: 'Este curso está diseñado para desatar el verdadero potencial de Excel como herramienta de Business Intelligence. Las Tablas Dinámicas permiten a cualquier profesional, sin necesidad de conocimientos de programación, transformar grandes bases de datos en informes interactivos, resúmenes estratégicos y dashboards visuales con una agilidad sorprendente.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Crear Tablas Dinámicas eficientes a partir de diversas fuentes de datos",
+      li_2: "Personalizar la estructura y el diseño de las Tablas Dinámicas",
+      li_3: "Implementar y gestionar Campos Calculados y Elementos Calculados",
+      li_4: "Utilizar Segmentación de Datos (Slicers) y Líneas de Tiempo",
+      li_5: 'Desarrollar habilidades para el análisis exploratorio de grandes volúmenes de datos',
+      publico_obj: "Público Objetivo",
+      publico: 'Analistas de negocio, gerentes y responsables de área, personal de contabilidad, marketing, logística y Recursos Humanos.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'Excel-eko Taula Dinamikoekin Datuen Analisia',
+      duracion: '15 ordu',
+      descripcion: 'Ikastaro hau Excel-en benetako potentziala Business Intelligence tresna gisa askatzeko diseinatuta dago. Taula Dinamikoek edozein profesionali, programazio ezagutzarik gabe, datu-base handiak txosten interaktiboetan, laburpen estrategikoetan eta dashboard bisualetan eraldatzeko aukera ematen diete.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "Taula Dinamiko eraginkorrak sortzea datu-iturri ezberdinetatik",
+      li_2: "Taula Dinamikoen egitura eta diseinua pertsonalizatzea",
+      li_3: "Eremu Kalkulatuak eta Elementu Kalkulatuak inplementatu eta kudeatzea",
+      li_4: "Datuen Segmentazioa (Slicers) eta Denbora Lerroak erabiltzea",
+      li_5: 'Datu-bolumen handien analisi esploratzailerako gaitasunak garatzea',
+      publico_obj: "Xede Publikoa",
+      publico: 'Negozio analizatzaileak, area arduradunak eta kudeatzaileak, kontabilitate, marketing, logistika eta Giza Baliabideetako langilea.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+            <li>{dict.hero.li_5}</li>
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico_obj}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>
