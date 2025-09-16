@@ -10,9 +10,11 @@ import PHP_II from './cursos/PHP_II.astro'
 import PHP_III from './cursos/PHP_III.astro'
 import Laravel from './cursos/Laravel.astro'
 import Laravel_II from './cursos/Laravel_II.astro'
+import PythonGPT from './cursos/Python_GPT.astro'
 import Python from './cursos/Python.astro'
 import Django from './cursos/Django.astro'
 import Django_II from './cursos/Django_II.astro'
+import Cplusplus from './cursos/Cplusplus.astro'
 
 export interface Props {
   lang: 'es' | 'eu';
@@ -76,8 +78,10 @@ const dict = translations[lang] || translations.es;
             <Laravel lang={lang} />
             <Laravel_II lang={lang} />
             <Python lang={lang} />
+            <PythonGPT lang={lang} />
             <Django lang={lang} />
             <Django_II lang={lang} />
+            <Cplusplus lang={lang} />
     </section>
 
 

@@ -1,0 +1,138 @@
+---
+// src/components/Problemas.astro
+// Componente autocontenido con CSS y traducciones embebidas
+
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+// Traducciones embebidas
+const translations: Record<'es' | 'eu', {
+  hero: { title: string; 
+          duracion: string,
+          descripcion: string; 
+          objetivos: string; 
+          li_1: string;
+          li_2: string;
+          li_3: string;
+          li_4: string;
+          li_5: string;
+          li_6: string;
+          publico_obj: string;
+          publico: string;
+          mod: string;
+          modalidad: string
+        }
+}> = {
+  es: {
+    hero: {
+      title: 'Programación en C++: Fundamentos y Desarrollo de Aplicaciones',
+      duracion: '60 horas',
+      descripcion: 'Este itinerario ofrece a los participantes una formación integral en C++, uno de los lenguajes de programación más potentes, versátiles y utilizados en el sector tecnológico. Se trabajarán desde los fundamentos hasta el desarrollo de aplicaciones prácticas, con un enfoque en la programación estructurada y orientada a objetos. El curso dota a los alumnos de las competencias necesarias para construir soluciones eficientes y de alto rendimiento, aplicables en campos como el desarrollo de software, aplicaciones científicas, sistemas embebidos y videojuegos.',
+      objetivos: 'Objetivos de Aprendizaje',
+      li_1: "Dominar la sintaxis, estructuras de control y tipos de datos de C++.",
+      li_2: "Aplicar conceptos de programación modular y buenas prácticas en el diseño de código.",
+      li_3: "Comprender y aplicar los principios de la Programación Orientada a Objetos (clases, herencia, polimorfismo).",
+      li_4: "Gestionar memoria de forma dinámica y optimizar recursos.",
+      li_5: 'Introducirse en el uso de librerías estándar (STL) y colecciones de datos.',
+      li_6: 'Desarrollar proyectos funcionales que integren los diferentes conceptos aprendidos.',
+      publico_obj: "Público Objetivo",
+      publico: 'Estudiantes y profesionales de TI interesados en ampliar sus competencias en programación, aspirantes a desarrolladores de software que busquen un dominio sólido en lenguajes de alto rendimiento, equipos de desarrollo en sectores industriales, científicos o de videojuegos.',
+      mod: 'Modalidad',
+      modalidad: 'Online Síncrona o Presencial in-company'
+    }
+  },
+  eu: {
+    hero: {
+      title: 'C++ programazioa: Oinarriak eta Aplikazioen Garapena',
+      duracion: '60 ordu',
+      descripcion: 'Ibilbide honek C++ programazio-lengoaia indartsu, moldakor eta teknologia-sektorean erabilienetakoa den C++en prestakuntza integrala eskaintzen die parte-hartzaileei. Oinarrietatik aplikazio praktikoen garapenera arte lan egingo da, programazio egituratua eta objektuetara bideratua kontuan hartuta. Ikastaroak soluzio eraginkorrak eta errendimendu handikoak eraikitzeko beharrezkoak diren gaitasunak ematen dizkie ikasleei. Soluzio horiek softwarearen garapenean, aplikazio zientifikoetan, sistema txertatuetan eta bideojokoetan aplika daitezke.',
+      objetivos: 'Ikaskuntza Helburuak',
+      li_1: "Sintaxia, kontrol-egiturak eta C++ datu-motak menderatzea.",
+      li_2: "Programazio modularreko kontzeptuak eta jardunbide egokiak aplikatzea kodearen diseinuan.",
+      li_3: "Objektuetara bideratutako programazioaren printzipioak ulertzea eta aplikatzea (klaseak, herentzia, polimorfismoa).",
+      li_4: "Memoria dinamikoki kudeatzea eta baliabideak optimizatzea.",
+      li_5: 'Liburutegi estandarren (STL) eta datu-bildumen erabileran sartzea.',
+      li_6: 'Ikasitako kontzeptuak integratuko dituzten proiektu funtzionalak garatzea.',
+      publico_obj: "Xede Publikoa",
+      publico: 'Programazioko gaitasunak zabaltzeko interesa duten ITko ikasleak eta profesionalak, errendimendu handiko lengoaietan nagusitasun sendoa bilatzen duten software-garatzaileak izateko hautagaiak, industria-, zientzia- edo bideojokoen sektoreetako garapen-taldeak.',
+      mod: 'Modalitatea',
+      modalidad: 'Online Sinkronoa edo Enpresako Presentziala'
+    }
+  }
+};
+
+// Seleccionamos el diccionario según el idioma, fallback a español
+const dict = translations[lang] || translations.es;
+---
+<style>
+.card {
+    background: var(--bg-white);
+    background-color: rgb(227, 237, 245);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.card h3 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+}
+
+.card h4 {
+    color: darkslategrey;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.card strong {
+    color: darkslategrey;
+}
+.card .objectives, .card .target, .card .modality {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.card ul{
+    list-style: none;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+</style>
+    
+<div class="card">
+    <div class="cabecera">
+        <h3 class="title">{dict.hero.title}</h3>
+        <span class="duration">{dict.hero.duracion}</span>
+    </div>
+    
+    <p class="description">{dict.hero.descripcion}</p>
+    <div class="objectives">
+        <h4>{dict.hero.objetivos}:</h4>
+        <ul>
+            <li>{dict.hero.li_1}</li>
+            <li>{dict.hero.li_2}</li>
+            <li>{dict.hero.li_3}</li>
+            <li>{dict.hero.li_4}</li>
+            <li>{dict.hero.li_5}</li>
+            <li>{dict.hero.li_6}</li>
+        </ul>
+    </div>
+    <div class="target">
+        <strong>{dict.hero.publico_obj}:</strong> {dict.hero.publico}
+    </div>
+    <div class="modality">
+        <strong>{dict.hero.mod}:</strong> {dict.hero.modalidad}
+    </div>
+</div>
