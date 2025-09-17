@@ -1,5 +1,5 @@
 ---
-title: "Garun Digitala Eraikitzen (5. zatia): Oroimen Bektoriala ChromaDB-rekin"
+title: "Ezagutzaren Orkestratzailea Python bidez (V): ezagutza-base adimendunaren eraikuntza"
 description: "Bosgarren entrega: ChromaDB eta embeddings erabiliz, JSON fitxategiak memoria bektorial bizian bihurtzen ditugu Python bidez."
 pubDate: "2025-09-15"
 lang: "eu"
@@ -13,7 +13,7 @@ tags:
   - ChromaDB
   - Ollama
   - Embeddings
-tkey: "ezagutza-basea-05"
+tkey: "base-conocimiento-05"
 ---
 
 # Garun Digitala Eraikitzen (5. zatia): Oroimen Bektoriala ChromaDB-rekin
