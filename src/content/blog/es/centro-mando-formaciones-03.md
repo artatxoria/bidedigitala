@@ -42,6 +42,7 @@ Vamos con cada paso, uno a uno.
 
 Creamos una carpeta raíz `Planificador/` y dentro organizamos el código en módulos, respetando la **arquitectura modular por capas**:
 
+```bash
 Planificador/
 ├─ planificador/
 │ ├─ init.py
@@ -71,7 +72,7 @@ Planificador/
 └─ tests/
 ├─ init.py
 └─ test_sanity.py
-
+```
 
 Esto nos asegura **modularidad y mantenibilidad** desde el primer día.
 
