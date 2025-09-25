@@ -1,5 +1,5 @@
 ---
-title: "Prestakuntzen kontrol-gunea (III): inplementazioaren hasiera, egitura eta bertsioen kontrola"
+title: "Prestakuntzen kontrol-gunea (IV): Datuen geruzaren inplementazioa: egitura, biltegiak eta probak"
 description: "Laugarren atala: funtsezko atal batera sartzen gara: datuen geruza."
 pubDate: "2025-09-25"
 lang: "eu"
