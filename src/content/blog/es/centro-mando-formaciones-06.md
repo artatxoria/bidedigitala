@@ -1,5 +1,5 @@
 ---
-title: "Servicios de exportación, sincronización y copias de seguridad"
+title: "Centro de mando de formaciones (VI):Servicios de exportación, sincronización y copias de seguridad"
 description: "Sexta entrega del proyecto Planificador: en esta fase desarrollamos los servicios transversales que amplían la funcionalidad del sistema — exportación de datos, sincronización con Google Calendar y sistema de copias de seguridad automáticas."
 pubDate: "2025-10-13"
 lang: "es"

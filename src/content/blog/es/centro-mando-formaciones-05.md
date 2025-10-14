@@ -1,5 +1,5 @@
 ---
-title: "Clases de dominio y trazabilidad con logging"
+title: "Centro de mando de formaciones (V):Clases de dominio y trazabilidad con logging"
 description: "Quinta entrega: dotamos de inteligencia a nuestro planificador. Implementamos las clases de dominio, integramos validaciones y un sistema de logging que registra toda la actividad del proyecto."
 pubDate: "2025-10-11"
 lang: "es"

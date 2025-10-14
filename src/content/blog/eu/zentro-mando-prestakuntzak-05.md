@@ -1,5 +1,5 @@
 ---
-title: "Domeinu-geruza eta jardueren trazabilitatea logging bidez"
+title: "Prestakuntzen kontrol-gunea (V):Domeinu-geruza eta jardueren trazabilitatea logging bidez"
 description: "Bosgarren atala: gure planifikatzaileari adimena ematen diogu. Domeinu-klaseak inplementatzen ditugu, balidazioak txertatzen ditugu eta logging sistema bat gehitzen dugu, proiektuaren jarduera osoa erregistratzeko."
 pubDate: "2025-10-11"
 lang: "eu"

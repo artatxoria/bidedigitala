@@ -1,5 +1,5 @@
 ---
-title: "Esportazio, sinkronizazio eta segurtasun-kopia zerbitzuak"
+title: "Prestakuntzen kontrol-gunea (VI):Esportazio, sinkronizazio eta segurtasun-kopia zerbitzuak"
 description: "Planifikatzaile proiektuaren seigarren entrega: fase honetan sistemaren funtzionaltasuna zabaltzen duten zerbitzuak garatzen ditugu — datuen esportazioa, Google Calendar sinkronizazioa eta segurtasun-kopien kudeaketa automatikoa."
 pubDate: "2025-10-13"
 lang: "eu"

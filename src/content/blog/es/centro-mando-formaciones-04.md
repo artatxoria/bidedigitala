@@ -1,5 +1,5 @@
 ---
-title: "Implementación de la capa de datos: estructura, repositorios y pruebas"
+title: "Centro de mando de formaciones (IV):Implementación de la capa de datos: estructura, repositorios y pruebas"
 description: "Cuarta entrega: entramos en un terreno clave: la capa de datos, es decir, todo lo que tiene que ver con almacenar, consultar y mantener la información de nuestro planificador de formaciones."
 pubDate: "2025-09-25"
 lang: "es"
