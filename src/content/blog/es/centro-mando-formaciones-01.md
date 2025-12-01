@@ -5,6 +5,9 @@ pubDate: "2025-09-10"
 lang: "es"
 summary: "¿Impartes formación en varias empresas y usas mil excels? Esta serie muestra paso a paso cómo construir tu propia agenda visual para organizar sesiones, evitar solapamientos y conectar con Google Calendar."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Gestión de Formaciones
+  - Castellano
 tags:
   - Formación
   - Productividad

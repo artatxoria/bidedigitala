@@ -5,6 +5,9 @@ pubDate: "2025-10-13"
 lang: "es"
 summary: "El proyecto Planificador alcanza un punto de madurez importante con la implementación de servicios que garantizan la interoperabilidad, la seguridad de la información y la trazabilidad. En esta sexta entrega abordamos la exportación, sincronización y los backups automáticos."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Gestión de Formaciones
+  - Castellano
 tags:
   - Formación
   - Productividad

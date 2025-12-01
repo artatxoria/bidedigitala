@@ -5,6 +5,9 @@ pubDate: "2025-10-13"
 lang: "eu"
 summary: "Zazpigarren atalean proiektuaren atal ikusgarrienetako batera iritsi gara: PyQt6-rekin egindako interfazea. Aplikazioak jada atal ezberdinen artean nabigatzea, datuak kontsultatzea eta bezeroak, prestakuntzak eta interakzioak kudeatzea ahalbidetzen du, egitura modular eta profesional baten bidez."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Prestakuntza zentroa
+  - Euskera
 tags:
   - PyQt6
   - Python

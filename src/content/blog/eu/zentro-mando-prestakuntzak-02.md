@@ -5,6 +5,9 @@ pubDate: "2025-09-15"
 lang: "eu"
 summary: "Ideia orokorraren ondoren, urrats garrantzitsuena: agenda bisualaren arkitektura geruzaz antolatzea (datuak, domeinua, zerbitzuak, interfazea) eta datu-eredua zehaztea, oinarrizko prestakuntzak, kontratazioak eta saioak bereiziz."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Prestakuntza zentroa
+  - Euskera
 tags:
   - Prestakuntza
   - Produktibitatea

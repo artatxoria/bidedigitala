@@ -5,6 +5,9 @@ pubDate: "2025-09-08"
 lang: "es"
 summary: "Aprende a crear paso a paso tu propio cerebro digital con Python, RAG, y tecnologías locales como Ollama y ChromaDB. Una solución libre, potente y privada para organizar tu conocimiento."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Base de conocimiento
+  - Castellano
 tags:
   - RAG
   - IA local

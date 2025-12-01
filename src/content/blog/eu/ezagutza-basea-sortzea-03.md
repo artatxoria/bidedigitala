@@ -5,6 +5,9 @@ pubDate: "2025-09-08"
 lang: "eu"
 summary: "Ikasi nola sortu zure burmuin digitala urratsez urrats Python, RAG eta tokiko teknologiak erabiliz (Ollama, ChromaDB...). Soluzio librea, indartsua eta pribatua."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Ezagutzea basea
+  - Euskera
 tags:
   - RAG
   - IA lokala

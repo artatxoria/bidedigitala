@@ -5,6 +5,9 @@ pubDate: "2025-09-12"
 lang: "eu"
 summary: "Orkestratzaile modular bat sortzen dugu: dokumentuak, webguneak eta beste iturriak prozesatzeko plugin-sistema baten antzera diseinatua."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Ezagutzea basea
+  - Euskera
 tags:
   - RAG
   - Ezagutza-basea

@@ -5,6 +5,9 @@ pubDate: "2025-09-25"
 lang: "es"
 summary: "En los posts anteriores definimos los objetivos del proyecto, diseñamos la arquitectura y dimos los primeros pasos de implementación. En este cuarto artículo entramos en un terreno clave: la capa de datos, es decir, todo lo que tiene que ver con almacenar, consultar y mantener la información de nuestro planificador de formaciones."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Gestión de Formaciones
+  - Castellano
 tags:
   - Formación
   - Productividad

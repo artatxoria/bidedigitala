@@ -5,6 +5,9 @@ pubDate: "2025-09-19"
 lang: "es"
 summary: "Implementamos la memoria vectorial del sistema: indexación en ChromaDB, embeddings generados con Ollama y un script sincronizador que convierte texto plano en conocimiento vivo consultable."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Base de conocimiento
+  - Castellano
 tags:
   - RAG
   - Base de conocimiento

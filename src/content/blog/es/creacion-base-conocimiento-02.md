@@ -5,6 +5,9 @@ pubDate: "2025-09-04"
 lang: "es"
 summary: "Dos caminos en local: control total con scripts o orquestación visual con n8n, ambos apoyados en RAG para trabajar con tu propia documentación."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Base de conocimiento
+  - Castellano
 tags:
   - RAG
   - Base de conocimiento

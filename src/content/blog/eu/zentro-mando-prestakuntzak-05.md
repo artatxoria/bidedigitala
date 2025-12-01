@@ -5,6 +5,9 @@ pubDate: "2025-10-11"
 lang: "eu"
 summary: "Bosgarren atal honetan gure prestakuntza-planifikatzailearen garapeneko urrats garrantzitsu bat egiten dugu: domeinu-klaseak sortu, balidazioak gehitu eta logging sistema sendo bat inplementatzen dugu, aplikazioaren ekintza, arrakasta eta errore guztiak zentralizatutako erregistro batean gordetzeko."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Prestakuntza zentroa
+  - Euskera
 tags:
   - Prestakuntza
   - Produktibitatea

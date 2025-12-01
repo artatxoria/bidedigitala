@@ -5,6 +5,9 @@ pubDate: "2025-09-22"
 lang: "es"
 summary: "Tras definir los objetivos y diseñar la arquitectura, llega el momento de ensuciarnos las manos con código. En este artículo iniciamos la implementación del planificador de formaciones: estructura modular, entorno virtual, dependencias, configuración y control de versiones."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Gestión de Formaciones
+  - Castellano
 tags:
   - Formación
   - Productividad

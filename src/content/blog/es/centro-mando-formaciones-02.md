@@ -5,6 +5,9 @@ pubDate: "2025-09-15"
 lang: "es"
 summary: "Tras la idea inicial, llega el paso clave: organizar la arquitectura de la agenda visual por capas (datos, dominio, servicios, interfaz) y definir un modelo de datos flexible con formaciones base, contrataciones y sesiones."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Gestión de Formaciones
+  - Castellano
 tags:
   - Formación
   - Productividad

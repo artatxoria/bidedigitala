@@ -5,6 +5,9 @@ pubDate: "2025-09-12"
 lang: "es"
 summary: "Creamos un Orquestador de Extracción en Python: arquitectura tipo plugin, clase base común, procesadores para archivos locales y scraping web, y un main que los descubre y ejecuta."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Base de conocimiento
+  - Castellano
 tags:
   - RAG
   - Base de conocimiento

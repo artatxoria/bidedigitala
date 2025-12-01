@@ -6,10 +6,17 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://www.bidedigitala.eus',
-  output: 'server',                 // habilita SSR/APIs (necesario por /api/contact)
+  output: 'server', // habilita SSR/APIs (necesario por /api/contact)
   adapter: node({ mode: 'standalone' }), // servidor Node autocontenido en dist/
   integrations: [
     mdx(),
     sitemap(),
   ],
+
+  // --- 👇 Añade esto ---
+  markdown: {
+    remarkRehype: { allowDangerousHtml: true },
+    rehypePlugins: [],
+  },
 });
+

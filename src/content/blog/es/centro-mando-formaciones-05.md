@@ -5,6 +5,9 @@ pubDate: "2025-10-11"
 lang: "es"
 summary: "En esta quinta entrega damos un paso clave en la evolución de nuestro planificador de formaciones: construimos las clases de dominio, incorporamos validaciones y añadimos un sistema de logging robusto que registra cada acción, éxito o error de manera centralizada."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Gestión de Formaciones
+  - Castellano
 tags:
   - Formación
   - Productividad

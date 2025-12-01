@@ -5,6 +5,9 @@ pubDate: "2025-09-01"
 lang: "es"
 summary: "Exploramos tres formas de construir un 'segundo cerebro' para organizar documentación personal y profesional: desde automatizaciones visuales hasta soluciones locales o SaaS especializadas."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Base de conocimiento
+  - Castellano
 tags:
   - RAG
   - Base de conocimiento

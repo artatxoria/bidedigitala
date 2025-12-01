@@ -5,6 +5,9 @@ pubDate: "2025-10-15"
 lang: "es"
 summary: "En esta octava entrega culminamos la integración funcional del planificador de formaciones. Los módulos de recordatorios, interacciones y sesiones ya trabajan de forma automática y sincronizada. Incorporamos además la vista de Recordatorios, con notificaciones y avisos locales."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Gestión de Formaciones
+  - Castellano
 tags:
   - PyQt6
   - Python

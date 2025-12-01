@@ -5,6 +5,9 @@ pubDate: "2025-09-19"
 lang: "eu"
 summary: "Ollama zerbitzaria eta beharrezko LLM modeloak instalatuko ditugu, eta web-txat bat sortuko dugu streamlit bidez."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Ezagutzea basea
+  - Euskera
 tags:
   - RAG
   - Ezagutza-basea

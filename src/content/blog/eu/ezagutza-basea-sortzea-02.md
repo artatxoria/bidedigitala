@@ -5,6 +5,9 @@ pubDate: "2025-09-04"
 lang: "eu"
 summary: "Bi bide lokal: kontrol osoa script-ekin edo orkestrazio bisuala n8n-rekin; bietan RAG, zure dokumentazio propioan oinarrituta."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Ezagutzea basea
+  - Euskera
 tags:
   - RAG
   - Ezagutza-basea

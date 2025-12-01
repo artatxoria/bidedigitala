@@ -5,6 +5,9 @@ pubDate: "2025-09-19"
 lang: "es"
 summary: "Instalamos el servidor Ollama y los modelos LLM necesarios y creamos un chat web con el uso de streamlit"
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Base de conocimiento
+  - Castellano
 tags:
   - RAG
   - Base de conocimiento

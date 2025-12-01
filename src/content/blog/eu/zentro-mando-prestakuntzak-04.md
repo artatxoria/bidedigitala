@@ -5,6 +5,9 @@ pubDate: "2025-09-25"
 lang: "eu"
 summary: "Aurreko artikuluetan proiektuaren helburuak zehaztu genituen, arkitektura diseinatu genuen eta lehen urratsak eman genituen inplementazioan. Laugarren artikulu honetan, funtsezko atal batera sartzen gara: datuen geruza. Hau da, gure formakuntza-planifikatzailearen informazioa gordetzea, kontsultatzea eta kudeatzea ahalbidetuko duen zatia."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Prestakuntza zentroa
+  - Euskera
 tags:
   - Prestakuntza
   - Produktibitatea

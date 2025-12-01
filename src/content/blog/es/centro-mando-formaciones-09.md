@@ -5,6 +5,9 @@ pubDate: "2025-10-19"
 lang: "es"
 summary: "En esta fase ampliamos el modelo de cliente y su relación con las contrataciones y formaciones. Añadimos entidades de cliente final, contactos y participantes, mejoramos el flujo comercial y validamos los servicios de recordatorios y sesiones mediante tests unitarios."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Gestión de Formaciones
+  - Castellano
 tags:
   - Python
   - PyQt6

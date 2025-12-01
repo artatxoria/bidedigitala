@@ -158,3 +158,52 @@ hr {
 /* errores en línea del formulario */
 .field-error { outline: 2px solid #ef4444; outline-offset: 2px; }
 .field-error-msg { margin-top: .35rem; color: #b91c1c; font-size: .9rem; }
+
+
+
+/* === Layout del post con TOC + contenido + aside derecho === */
+
+
+/* === Tipografía específica para artículos del blog === */
+.blog-post h1,
+.blog-post :where(p > h1) {
+  font-size: 2.0rem !important;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 1.5rem 0 1rem;
+  color: rgb(var(--black));
+}
+
+.blog-post h2,
+.blog-post :where(p > h2) {
+  font-size: 1.6em !important;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 1.4rem 0 0.9rem;
+  color: rgb(var(--black));
+}
+
+.blog-post h3,
+.blog-post :where(p > h3) {
+  font-size: 1.4em !important;
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 1.2rem 0 0.8rem;
+  color: rgb(var(--black));
+}
+
+.blog-post h4,
+.blog-post :where(p > h4) {
+  font-size: 1.2em !important;
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 1rem 0 0.6rem;
+  color: rgb(var(--black));
+}
+
+.blog-post p {
+  font-size: 1rem;
+  line-height: 1.65;
+  margin-bottom: 1.2rem;
+  color: rgb(var(--gray-dark));
+}

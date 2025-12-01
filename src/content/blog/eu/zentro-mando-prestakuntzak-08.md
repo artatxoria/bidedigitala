@@ -5,6 +5,9 @@ pubDate: "2025-10-15"
 lang: "eu"
 summary: "Zortzigarren entrega honetan prestakuntzen planifikatzailearen funtzionalitateen integrazioa burutu dugu. Oroigarriak, elkarreraginak eta saioak automatikoki eta sinkronizatuta lan egiten dute jada. Gainera, Oroigarrien ikuspegia gehitu dugu, jakinarazpen eta abisu lokalekin."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Prestakuntza zentroa
+  - Euskera
 tags:
   - PyQt6
   - Python

@@ -5,6 +5,9 @@ pubDate: "2025-10-19"
 lang: "eu"
 summary: "Fase honetan bezeroaren eredua zabaldu dugu, bezero finalak eta parte-hartzaileak gehituz. Harreman komertzialen fluxua hobetu dugu eta oroigarri- eta saio-zerbitzuak probatu ditugu test unitarioekin."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Prestakuntza zentroa
+  - Euskera
 tags:
   - Python
   - PyQt6

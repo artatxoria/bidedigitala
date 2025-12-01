@@ -5,6 +5,9 @@ pubDate: "2025-09-01"
 lang: "eu"
 summary: "Hiru modu aztertzen ditugu 'bigarren garuna' eraikitzeko dokumentazio pertsonala eta profesionala antolatzeko: automatizazio bisualak, tokiko soluzioak edo SaaS espezializatuak erabilita."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Ezagutzea basea
+  - Euskera
 tags: ["RAG", "Ezagutza-basea", "Automatizazioa", "Adimen Artifiziala", "Prestakuntza"]
 tkey: "creacion-base-conocimiento"   # <- misma tkey en ES y EU
 ---

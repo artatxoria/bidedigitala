@@ -5,6 +5,9 @@ pubDate: "2025-09-10"
 lang: "eu"
 summary: "Hilero prestakuntzak ematen badituzu, eta mila Excel darabiltzazu, serie honek pausoz pauso erakutsiko dizu nola eraiki zure agenda bisuala: saioak antolatzeko, gainjartzeak saihesteko eta Google Calendarrarekin sinkronizatzeko."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Prestakuntza zentroa
+  - Euskera
 tags:
   - Prestakuntza
   - Produktibitatea

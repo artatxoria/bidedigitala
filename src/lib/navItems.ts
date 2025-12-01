@@ -1,4 +1,4 @@
-import type { Lang } from './i18n'; 
+import type { Lang } from './i18n';
 
 export interface NavItem {
   key: string; // clave de traducción
@@ -7,11 +7,11 @@ export interface NavItem {
 }
 
 export const mainNav: NavItem[] = [
-  { key: 'nav.home',      path: '/' },
-  { key: 'nav.blog',      path: '/blog' },
-  { key: 'nav.privacy',   path: '/privacidad' },
+  { key: 'nav.home', path: '/' },
+  { key: 'nav.blog', path: '/blog' },
+  { key: 'nav.privacy', path: '/privacidad' },
   {
-    key: 'nav.catalogo',  
+    key: 'nav.catalogo',
     children: [
       { key: 'nav.categoria1', path: '/catalogo#analisis-datos' },
       { key: 'nav.categoria2', path: '/catalogo#inteligencia-artificial' },
@@ -19,5 +19,6 @@ export const mainNav: NavItem[] = [
       { key: 'nav.categoria4', path: '/catalogo#programacion' },
     ]
   },
+  { key: 'nav.designService', path: '/diseinu-zerbitzua' },
   // añade aquí nuevas páginas: p.ej. { key: 'nav.contact', path: '/contacto' }
 ];

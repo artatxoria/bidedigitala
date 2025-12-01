@@ -5,6 +5,9 @@ pubDate: "2025-09-22"
 lang: "eu"
 summary: "Helburuak eta arkitektura definitu ondoren, kodearekin zikintzeko garaia iritsi da. Artikulu honetan prestakuntzen planifikatzailearen lehen inplementazioa hasten dugu: egitura modularra, ingurune birtuala, mendekotasunak, konfigurazioa eta bertsioen kontrola."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Prestakuntza zentroa
+  - Euskera
 tags:
   - Prestakuntza
   - Produktibitatea

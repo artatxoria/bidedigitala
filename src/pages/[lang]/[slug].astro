@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
 const { lang, slug } = Astro.params;
 
+// --- Cargar todos los posts ---
 const allPosts = await getCollection('blog');
 
+// --- Buscar el post actual ---
 const post = allPosts.find(
   (entry) => entry.data.lang === lang && entry.slug.split('/').pop() === slug
 );
@@ -15,72 +17,276 @@ if (!post) {
 }
 
 const { Content } = await post.render();
-const { title, pubDate, summary } = post.data;
+const { title, pubDate, summary, categories } = post.data;
+
+// --- Categorías que no queremos usar (idioma) ---
+const excludedCategories = ['es', 'eu', 'eus', 'Euskera', 'Castellano', 'Idioma', 'Language'];
+
+// --- Detectar categoría principal válida ---
+const validCategories = (categories || [])
+  .filter((cat: string) => !excludedCategories.includes(cat))
+  .map((cat: string) => cat.toLowerCase());
+const mainCategory = validCategories.length ? validCategories[0] : null;
+
+// --- Buscar artículos relacionados ---
+const relatedPosts: CollectionEntry<'blog'>[] = mainCategory
+  ? allPosts
+      .filter((entry) => {
+        const entryCats = (entry.data.categories || []).map((c: string) => c.toLowerCase());
+        return (
+          entry.data.lang === lang &&
+          entry.slug.split('/').pop() !== slug &&
+          entryCats.includes(mainCategory)
+        );
+      })
+      .sort(
+        (a, b) =>
+          new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+      )
+  : [];
+
+// --- Función auxiliar para URLs ---
+function postUrl(entry: CollectionEntry<'blog'>): string {
+  const slugPart = entry.slug.split('/').pop();
+  return `/${lang}/${slugPart}`;
+}
 
 export async function getStaticPaths() {
   const all = await getCollection('blog');
   return all.map((entry) => ({
     params: {
       lang: entry.data.lang,
-      slug: entry.slug.split('/').pop(), // <-- basename para la URL
+      slug: entry.slug.split('/').pop(),
     },
   }));
 }
 ---
 
 <BaseLayout lang={lang} title={title}>
-  <div class="post-layout container">
+  <div class="container">
+  <div class="post-layout">
     <aside id="toc" class="toc"></aside>
-      <article class="container blog-post">
-        <header>
-          <h1>{title}</h1>
-          <time datetime={pubDate.toISOString()}>
-            {new Date(pubDate).toLocaleDateString(lang === 'es' ? 'es-ES' : 'eu-ES')}
-          </time>
-          <p class="summary">{summary}</p>
-        </header>
-        
-        <Content />
-        
-        <script is:inline>
-      document.addEventListener('DOMContentLoaded', () => {
-        const article = document.querySelector('.blog-post');
-        if (!article) return;
 
-        // evita duplicar si HMR en dev
-        if (article.dataset.enhanced === '1') return;
-        article.dataset.enhanced = '1';
+    <article class="blog-post">
+      <header>
+        <h1>{title}</h1>
+        <time datetime={pubDate.toISOString()}>
+          {new Date(pubDate).toLocaleDateString(lang === 'es' ? 'es-ES' : 'eu-ES')}
+        </time>
+        <p class="summary">{summary}</p>
+      </header>
 
-        const heads = article.querySelectorAll('h2, h3, h4');
-        heads.forEach(h => {
-          if (!h.id) {
-            h.id = h.textContent.toLowerCase()
-              .replace(/[^\w\s-]/g, '')
-              .trim()
-              .replace(/\s+/g, '-');
-          }
-          const a = document.createElement('a');
-          a.href = `#${h.id}`;
-          a.className = 'anchor';
-          a.textContent = '#';
-          h.appendChild(a);
-        });
+      <Content />
+    </article>
 
-        const toc = document.getElementById('toc');
-        if (toc) {
-          toc.innerHTML = '<h4>Contenido</h4>';
-          heads.forEach(h => {
-            const link = document.createElement('a');
-            link.href = `#${h.id}`;
-            link.textContent = h.textContent.replace('#','').trim();
-            link.style.marginLeft =
-              h.tagName === 'H3' ? '0.5rem' : h.tagName === 'H4' ? '1rem' : '0';
-            toc.appendChild(link);
-          });
+    {mainCategory && (
+      <aside class="related-posts">
+        <h3>{lang === 'es' ? 'Más en esta categoría' : 'Kategoriako beste batzuk'}</h3>
+        <ul>
+          {relatedPosts.map((entry) => (
+            <li>
+              <a href={postUrl(entry)}>{entry.data.title}</a>
+              <time>
+                {new Date(entry.data.pubDate).toLocaleDateString(
+                  lang === 'es' ? 'es-ES' : 'eu-ES'
+                )}
+              </time>
+            </li>
+          ))}
+          {relatedPosts.length === 0 && (
+            <li>
+              <em>
+                {lang === 'es'
+                  ? 'No hay más artículos en esta categoría.'
+                  : 'Ez dago artikulu gehiagorik kategoria honetan.'}
+              </em>
+            </li>
+          )}
+        </ul>
+      </aside>
+    )}
+  </div>
+</div>
+
+
+  <!-- Script para generar el índice -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const article = document.querySelector('.blog-post');
+      if (!article || article.dataset.enhanced === '1') return;
+      article.dataset.enhanced = '1';
+
+      const heads = article.querySelectorAll('h2, h3, h4');
+      heads.forEach(h => {
+        if (!h.id) {
+          h.id = h.textContent.toLowerCase()
+            .replace(/[^\w\s-]/g, '')
+            .trim()
+            .replace(/\s+/g, '-');
         }
+        const a = document.createElement('a');
+        a.href = `#${h.id}`;
+        a.className = 'anchor';
+        a.textContent = '#';
+        h.appendChild(a);
       });
-    </script>
-  </div>  
-  </article>
-</BaseLayout>
 
+      const toc = document.getElementById('toc');
+      if (toc) {
+        toc.innerHTML = '<h4>Contenido</h4>';
+        heads.forEach(h => {
+          const link = document.createElement('a');
+          link.href = `#${h.id}`;
+          link.textContent = h.textContent.replace('#', '').trim();
+          link.style.marginLeft =
+            h.tagName === 'H3' ? '0.5rem' : h.tagName === 'H4' ? '1rem' : '0';
+          toc.appendChild(link);
+        });
+      }
+    });
+  </script>
+
+<style>
+  /* --- Contenedor general --- */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    position: relative;
+  }
+
+  /* --- Layout general: post centrado, TOC y aside flotando --- */
+  .post-layout {
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* --- Contenido principal --- */
+  .blog-post {
+    margin-top: 8rem;
+    flex: 0 1 680px;
+    background: var(--background, #fff);
+    padding: 1.5rem;
+    border-radius: 8px;
+    z-index: 1;
+    transform: translateX(-2rem);
+  }
+
+  /* --- TOC (izquierda) --- */
+  .toc {
+    position: fixed;
+    left: max(calc(50% - 700px), 2rem);
+    top: 12rem;
+    width: 240px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-left: 4px solid var(--accent-color, #f89b0e);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    padding: 1rem 1.2rem;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .toc h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  
+
+  .toc a {
+    display: block;
+    color: var(--text-color, #333);
+    text-decoration: none;
+    padding: 0.25rem 0;
+    font-size: 0.9rem;
+  }
+
+  .toc a:hover {
+    color: var(--accent-color, #f89b0e);
+  }
+
+  /* --- Aside derecho (artículos relacionados) --- */
+  .related-posts {
+    position: fixed;
+    right: max(calc(50% - 700px), 2rem);
+    top: 12rem;
+    width: 300px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-left: 4px solid var(--accent-color, #f89b0e);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    padding: 1rem 1.2rem;
+    max-height: 80vh;
+    overflow-y: auto;
+    
+  }
+
+  .related-posts h3 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .related-posts ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .related-posts li {
+    margin-bottom: 0.75rem;
+  }
+
+  .related-posts a {
+    display: block;
+    font-weight: 500;
+    color: var(--text-color, #333);
+    text-decoration: none;
+  }
+
+  .related-posts a:hover {
+    color: var(--accent-color, #f89b0e);
+  }
+
+  .related-posts time {
+    display: block;
+    font-size: 0.8rem;
+    color: gray;
+  }
+
+  /* --- Responsive (oculta laterales en móvil) --- */
+  @media (max-width: 1100px) {
+    .toc,
+    .related-posts {
+      position: static;
+      width: 100%;
+      margin-bottom: 2rem;
+      box-shadow: none;
+      border: none;
+      border-left: none;
+      padding: 1rem 0;
+    }
+
+    .post-layout {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .blog-post {
+      flex: 1;
+      padding: 1rem;
+    }
+  }
+</style>
+
+
+
+
+
+
+
+</BaseLayout>

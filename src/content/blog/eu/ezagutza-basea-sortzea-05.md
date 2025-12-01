@@ -5,6 +5,9 @@ pubDate: "2025-09-15"
 lang: "eu"
 summary: "JSON fitxategiak ChromaDB bidez indexatzen ditugu; embedding lokalekin (Ollama) ezagutza semantiko bizia sortuz."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Ezagutzea basea
+  - Euskera
 tags:
   - RAG
   - Ezagutza-basea

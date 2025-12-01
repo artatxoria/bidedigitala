@@ -5,6 +5,9 @@ pubDate: "2025-10-13"
 lang: "eu"
 summary: "Planifikatzaile proiektuak heldutasun tekniko garrantzitsua lortzen du fase honetan, datuen interoperabilitatea, segurtasuna eta trazabilitatea bermatzen dituzten zerbitzuak garatuz. Esportazioa, sinkronizazioa eta segurtasun-kopiak jorratzen ditugu."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Prestakuntza zentroa
+  - Euskera
 tags:
   - Prestakuntza
   - Produktibitatea

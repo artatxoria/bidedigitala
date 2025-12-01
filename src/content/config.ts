@@ -12,6 +12,7 @@ const blog = defineCollection({
     lang: z.enum(['es', 'eu']),
     summary: z.string(),
     author: z.string(),
+    categories: z.array(z.string()).optional(),
     tags: z.array(z.string()).optional(),
     tkey: z.string().optional(), // clave de emparejado ES/EU
   }),

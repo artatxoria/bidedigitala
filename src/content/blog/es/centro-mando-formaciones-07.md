@@ -5,6 +5,9 @@ pubDate: "2025-10-13"
 lang: "es"
 summary: "En esta séptima entrega abordamos uno de los hitos más esperados del proyecto: la creación de la interfaz gráfica completa con PyQt6. La aplicación ya permite navegar entre secciones, consultar los datos y gestionar la información de clientes, formaciones e interacciones desde una estructura modular y profesional."
 author: "Juan Carlos Beaskoetxea"
+categories:
+  - Gestión de Formaciones
+  - Castellano
 tags:
   - PyQt6
   - Python
