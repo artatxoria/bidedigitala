@@ -1,8 +1,15 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+    return [{ params: { lang: "es" } }, { params: { lang: "eu" } }];
+}
+
+export const prerender = true;
+const { lang } = Astro.params;
 ---
 
-<BaseLayout title="Ziurgabetasunaren amaiera | BideDigitala" lang="eu">
+<BaseLayout title="Ziurgabetasunaren amaiera | BideDigitala" lang={lang}>
     <section class="geo-core-service">
         <div class="container">
             <div class="hero-content">
