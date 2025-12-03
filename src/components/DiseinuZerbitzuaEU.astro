@@ -1,5 +1,7 @@
 ---
 import '../styles/diseinu-zerbitzua.css';
+import NavegacionPrincipal from './NavegacionPrincipal.astro';
+import { tPath, t } from '../lib/translations';
 ---
 <!doctype html>
 <html
@@ -24,11 +26,9 @@ orientado a KPI" ], "audience": { "@type": "BusinessAudience", "audienceType":
 class="page"> <!-- HEADER --> <header> <div class="nav-inner"> <a
 href="/eu" class="logo"> <img src="/images/BideDigitala.png"
 alt="BideDigitala logoa" /> <div class="logo-text"> <span>BIDEDIGITALA</span>
-<span>BERRIKUNTZA ZURE BIDEAN</span> </div> </a> <nav aria-label="Nabigazioa">
-<ul> <li> <a href="#balio-proposamena" >Balio proposamena</a> </li> <li><a
-href="#prozesua">Prozesua</a></li> <li><a href="#geo-ia">GEO · IA</a></li> <li>
-<a class="nav-cta" href="#diagnostikoa" >Diagnostiko doakoa</a> </li> </ul>
-</nav> </div> </header> <main class="container"> <!-- HERO --> <section
+<span>BERRIKUNTZA ZURE BIDEAN</span> </div> </a>
+<NavegacionPrincipal lang="eu" />
+</div> </header> <main class="container"> <!-- HERO --> <section
 class="hero" id="hasiera"> <div class="hero-grid"> <div class="hero-copy"> <div
 class="hero-eyebrow"> <span class="hero-eyebrow-dot"></span> <span
 >Ziurgabetasun teknologikoaren aurkako estrategia B2B</span > </div> <h1>
