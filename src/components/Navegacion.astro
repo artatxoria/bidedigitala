@@ -2,6 +2,12 @@
 // src/components/Navegacion.astro
 import { tPath, t } from "../lib/translations";
 const { lang } = Astro.props;
+const pathname = Astro.url.pathname;
+const isHome = pathname === `/${lang}` || pathname === `/${lang}/`;
+
+function getLink(anchor: string) {
+    return isHome ? anchor : tPath(anchor, lang);
+}
 ---
 
 <style>
@@ -62,27 +68,27 @@ const { lang } = Astro.props;
 <nav class="cont-nav" aria-label="Navegación secundaria">
     <ul class="nav-menu">
         <li class="nav-item">
-            <a href={tPath("#inicio", lang)} class="nav-link"
+            <a href={getLink("#inicio")} class="nav-link"
                 >{t(lang, "nav.home")}</a
             >
         </li>
         <li class="nav-item">
-            <a href={tPath("#arazoak", lang)} class="nav-link"
+            <a href={getLink("#arazoak")} class="nav-link"
                 >{t(lang, "nav.problemas")}</a
             >
         </li>
         <li class="nav-item">
-            <a href={tPath("#diferenciadores", lang)} class="nav-link"
+            <a href={getLink("#diferenciadores")} class="nav-link"
                 >{t(lang, "nav.valor")}</a
             >
         </li>
         <li class="nav-item">
-            <a href={tPath("#servicios", lang)} class="nav-link"
+            <a href={getLink("#servicios")} class="nav-link"
                 >{t(lang, "nav.servicios")}</a
             >
         </li>
         <li class="nav-item">
-            <a href={tPath("#resultados", lang)} class="nav-link"
+            <a href={getLink("#resultados")} class="nav-link"
                 >{t(lang, "nav.resultados")}</a
             >
         </li>
