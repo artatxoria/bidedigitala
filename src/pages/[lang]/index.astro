@@ -2,24 +2,19 @@
 // src/pages/[lang]/index.astro
 
 //Importaciones
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { t, tPath } from '../../lib/translations';
-import Problemas from '../../components/Problemas.astro';
-import Valores from '../../components/Valores.astro';
-import Servicios from '../../components/Servicios.astro';
-import Onurak from '../../components/Onurak.astro';
-import Proceso from '../../components/Proceso.astro';
-import Especializacion from '../../components/Especializacion.astro';
-import Navegacion from '../../components/Navegacion.astro';
-
-
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { t, tPath } from "../../lib/translations";
+import Problemas from "../../components/Problemas.astro";
+import Valores from "../../components/Valores.astro";
+import Servicios from "../../components/Servicios.astro";
+import Onurak from "../../components/Onurak.astro";
+import Proceso from "../../components/Proceso.astro";
+import Especializacion from "../../components/Especializacion.astro";
+import Navegacion from "../../components/Navegacion.astro";
 
 // Para rutas dinámicas, exportamos getStaticPaths
 export async function getStaticPaths() {
-  return [
-    { params: { lang: 'es' } },
-    { params: { lang: 'eu' } }
-  ];
+  return [{ params: { lang: "es" } }, { params: { lang: "eu" } }];
 }
 
 // Generación estática
@@ -29,7 +24,7 @@ export const prerender = true;
 const langParam = Astro.params.lang;
 
 // Definimos la lista de idiomas admitidos
-const supported = ['es', 'eu'] as const;
+const supported = ["es", "eu"] as const;
 
 // Validamos el parámetro
 
@@ -37,103 +32,104 @@ if (!langParam || !supported.includes(langParam as any)) {
   throw Astro.redirect(`/es/`);
 }
 
-const lang = langParam as typeof supported[number];
+const lang = langParam as (typeof supported)[number];
 
-const title = t(lang, 'home.title');
+const title = t(lang, "home.title");
 ---
-<BaseLayout lang={lang} title={title}>
 
+<BaseLayout lang={lang} title={title}>
   <!-- Navegación secundaria -->
   <Navegacion lang={lang} />
 
-    
   <!-- Hero Section -->
   <section id="inicio" class="hero">
-      <div class="hero-background">
-        <div class="hero-shapes">
-          <div class="shape shape-1"></div>
-          <div class="shape shape-2"></div>
-          <div class="shape shape-3"></div>
-        </div>
-        <div class="hero-overlay"></div>
+    <div class="hero-background">
+      <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
       </div>
-      <div class="container">
-        <div class="hero-content">
-          <h1 class="hero-title">
-            <span class="typing-text">{t(lang, 'hero.title')}</span>
-            <br>
-            <span class="highlight">{t(lang, 'hero.title_')}</span>
-          </h1>
-          <p class="hero-subtitle">
-            <span class="badge">🚀{t(lang, 'hero.badge')}</span>
-            <span class="badge">⚡{t(lang, 'hero.badge_')}</span>
-            <span class="badge">📈{t(lang, 'hero.badge__')}</span>
-          </p>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span class="typing-text">{t(lang, "hero.title")}</span>
+          <br />
+          <span class="highlight">{t(lang, "hero.title_")}</span>
+        </h1>
+        <p class="hero-subtitle">
+          <span class="badge">🚀{t(lang, "hero.badge")}</span>
+          <span class="badge">⚡{t(lang, "hero.badge_")}</span>
+          <span class="badge">📈{t(lang, "hero.badge__")}</span>
+        </p>
 
-          <div class="hero-cta">
-            <a href="#contacto" class="btn btn-primary">
-              <i class="fas fa-rocket"></i>
-              {t(lang, 'hero.contacto')}
-            </a>
-          </div>
-          <a href="#diferenciadores" class="btn btn-secondary">
-              <i class="fas fa-play"></i>
-              {t(lang, 'hero.diferencia')}
+        <div class="hero-cta">
+          <a href="#contacto" class="btn btn-primary">
+            <i class="fas fa-rocket"></i>
+            {t(lang, "hero.contacto")}
           </a>
         </div>
+        <a href="#diferenciadores" class="btn btn-secondary">
+          <i class="fas fa-play"></i>
+          {t(lang, "hero.diferencia")}
+        </a>
       </div>
-    </section> 
-  
+    </div>
+  </section>
+
   <Problemas lang={lang} />
 
   <Valores lang={lang} />
-  
+
   <Servicios lang={lang} />
-  
 
   <!-- Services Section -->
-  <section id="servicios" class="services">
+  <section id="zerbitzuak" class="services">
     <div class="container">
       <div class="section-header">
-        <h2>{t(lang, 'servicios.nuestros')}</h2>
-        <p>{t(lang, 'servicios.servicios')}</p>
+        <h2>{t(lang, "servicios.nuestros")}</h2>
+        <p>{t(lang, "servicios.servicios")}</p>
       </div>
       <div class="services-grid">
-          <div class="service-card">
-              <div class="service-header">
-                  <i class="fas fa-building"></i>
-                  <h3>{t(lang, 'servicios.empresas')}</h3>
-                  <p><span class="service-tag">{t(lang, 'servicios.bonificada')}</span></p>
-              </div>
-              <div class="service-content">
-                  <div class="service-item">
-                      <h4>{t(lang, 'servicios.medida')}</h4>
-                      <p>{t(lang, 'servicios.diseño')}</p>
-                  </div>
-                  <div class="service-item">
-                      <h4>{t(lang, 'servicios.gestión')}</h4>
-                      <p>{t(lang, 'servicios.burocracia')}</p>
-                  </div>
-              </div>
+        <div class="service-card">
+          <div class="service-header">
+            <i class="fas fa-building"></i>
+            <h3>{t(lang, "servicios.empresas")}</h3>
+            <p>
+              <span class="service-tag">{t(lang, "servicios.bonificada")}</span>
+            </p>
           </div>
-          <div class="service-card">
-              <div class="service-header">
-                  <i class="fas fa-users"></i>
-                  <h3>{t(lang, 'servicios.trabajadores')}</h3>
-                  <p><span class="service-tag">{t(lang, 'servicios.online')}</span></p>
-              </div>
-              <div class="service-content">
-                  <div class="service-item">
-                      <h4>{t(lang, 'servicios.síncrona')}</h4>
-                      <p>{t(lang, 'servicios.clases')}</p>
-                  </div>
-                  <div class="service-item">
-                      <h4>{t(lang, 'servicios.programas')}</h4>
-                      <p>{t(lang, 'servicios.itinerario')}</p>
-                  </div>
-              </div>
+          <div class="service-content">
+            <div class="service-item">
+              <h4>{t(lang, "servicios.medida")}</h4>
+              <p>{t(lang, "servicios.diseño")}</p>
+            </div>
+            <div class="service-item">
+              <h4>{t(lang, "servicios.gestión")}</h4>
+              <p>{t(lang, "servicios.burocracia")}</p>
+            </div>
           </div>
-
+        </div>
+        <div class="service-card">
+          <div class="service-header">
+            <i class="fas fa-users"></i>
+            <h3>{t(lang, "servicios.trabajadores")}</h3>
+            <p>
+              <span class="service-tag">{t(lang, "servicios.online")}</span>
+            </p>
+          </div>
+          <div class="service-content">
+            <div class="service-item">
+              <h4>{t(lang, "servicios.síncrona")}</h4>
+              <p>{t(lang, "servicios.clases")}</p>
+            </div>
+            <div class="service-item">
+              <h4>{t(lang, "servicios.programas")}</h4>
+              <p>{t(lang, "servicios.itinerario")}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -144,147 +140,212 @@ const title = t(lang, 'home.title');
 
   <Especializacion lang={lang} />
 
-    <!-- CTA Section -->
-    <section id="contacto" class="cta-section">
-      <div class="container">
-        <div class="cta-content">
-          <h2>{t(lang, 'cta.preparado')}</h2>
-          <p>{t(lang, 'cta.miles')}</p>
-          
-          <div class="contact-grid">
-            <div class="contact-form">
-                <h3>👉 {t(lang, 'cta.solicita')}</h3>
-<form
-  class="form formulario-contacto"
-  id="formulario-contacto"
-  action="/api/contact"
-  method="POST"
-  novalidate
->
-  <!-- Necesario para tracking y i18n del lado servidor -->
-  <input type="hidden" name="lang" value={lang} />
-  <input type="hidden" name="source" value={Astro.url.pathname} />
+  <!-- CTA Section -->
+  <section id="contacto" class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>{t(lang, "cta.preparado")}</h2>
+        <p>{t(lang, "cta.miles")}</p>
 
-  <!-- Honeypot anti-spam (oculto para humanos) -->
-  <p style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
-    <label>Website: <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
-  </p>
+        <div class="contact-grid">
+          <div class="contact-form">
+            <h3>👉 {t(lang, "cta.solicita")}</h3>
+            <form
+              class="form formulario-contacto"
+              id="formulario-contacto"
+              action="/api/contact"
+              method="POST"
+              novalidate
+            >
+              <!-- Necesario para tracking y i18n del lado servidor -->
+              <input type="hidden" name="lang" value={lang} />
+              <input type="hidden" name="source" value={Astro.url.pathname} />
 
-  <div class="form-group">
-    <input id="f-nombre" name="nombre" type="text" placeholder={t(lang, 'cta.nombre')} required autocomplete="name" />
-  </div>
+              <!-- Honeypot anti-spam (oculto para humanos) -->
+              <p
+                style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;"
+              >
+                <label
+                  >Website: <input
+                    type="text"
+                    name="website"
+                    tabindex="-1"
+                    autocomplete="off"
+                  /></label
+                >
+              </p>
 
-  <div class="form-group">
-    <input id="f-email" name="email" type="email" placeholder={t(lang, 'cta.email')} required autocomplete="email" />
-  </div>
-
-  <div class="form-group">
-    <input id="f-telefono" name="telefono" type="tel" placeholder={t(lang, 'cta.teléfono')} required autocomplete="tel" />
-  </div>
-
-  <div class="form-group">
-    <input id="f-empresa" name="empresa" type="text" placeholder={t(lang, 'cta.empresa')} required />
-  </div>
-
-  <div class="form-group">
-    <select id="f-tamano" name="tamano" required>
-      <option value="">{t(lang, 'cta.numero')}</option>
-      <option value="1-10">{t(lang, 'cta.1')}</option>
-      <option value="11-50">{t(lang, 'cta.11')}</option>
-      <option value="51-100">{t(lang, 'cta.51')}</option>
-      <option value="100+">{t(lang, 'cta.mas')}</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <textarea id="f-mensaje" name="mensaje" placeholder={t(lang, 'cta.tareas')}></textarea>
-  </div>
-
-  <!-- Consentimiento RGPD -->
-<label for="f-consent" style="display:flex;gap:.5rem;align-items:center;margin:.5rem 0 1rem">
-  <input id="f-consent" name="consent" type="checkbox" required />
-  <small>
-    {lang === 'es' ? (
-      <>
-        He leído y acepto la{' '}
-        <a href={tPath('/privacidad', lang)} target="_blank" rel="noopener noreferrer">
-          Política de Privacidad
-        </a>.
-      </>
-    ) : (
-      <>
-        Pribatutasun{' '}
-        <a href={tPath('/privacidad', lang)} target="_blank" rel="noopener noreferrer">
-          Politika
-        </a>{' '}
-        irakurri eta onartzen dut.
-      </>
-    )}
-  </small>
-</label>
-
-<!-- Consentimiento de marketing (opcional) -->
-<label for="f-marketing" style="display:flex;gap:.5rem;align-items:center;margin:.25rem 0 1rem">
-  <input id="f-marketing" name="marketing" type="checkbox" value="yes" />
-  <small>
-    {lang === 'es'
-      ? 'Deseo recibir comunicaciones sobre servicios y novedades (opcional).'
-      : 'Zerbitzu eta berriei buruzko komunikazioak jaso nahi ditut (aukerakoa).'
-    }
-  </small>
-</label>
-
-  <!-- Mensajes dinámicos (lo usaremos en el Paso 3) -->
-  <p class="form-msg" aria-live="polite" hidden></p>
-
-  <button type="submit" class="btn btn-primary btn-full">
-    <i class="fas fa-paper-plane"></i>
-    {t(lang, 'cta.solicitar')}
-  </button>
-</form>
+              <div class="form-group">
+                <input
+                  id="f-nombre"
+                  name="nombre"
+                  type="text"
+                  placeholder={t(lang, "cta.nombre")}
+                  required
+                  autocomplete="name"
+                />
               </div>
-              
-              <div class="contact-info">
-                <h3>{t(lang, 'cta.propuesta')}</h3>
-                <p>{t(lang, 'cta.dudas')}</p>
-                
-                <div class="contact-methods">
-                    <div class="contact-method">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <strong>{t(lang, 'cta.email')}</strong>
-                            <p>info@bidedigitala.eus</p>
-                        </div>
-                    </div>
-                    <div class="contact-method">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <strong>{t(lang, 'cta.teléfono')}</strong>
-                            <p>+34 685 756 143</p>
-                        </div>
-                    </div>
-                    <div class="contact-method">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div class="contact-details">
-                            <strong>{t(lang, 'cta.localidad')}</strong>
-                            <p>Aulesti, Bizkaia</p>
-                        </div>
-                    </div>
-                    <div class="contact-method">
-                        <i class="fab fa-linkedin"></i>
-                        <div>
-                            <strong>LinkedIn</strong>
-                            <p><a href="https://www.linkedin.com/in/juancarlosbeaskoetxea/">Juan Carlos Beaskoetxea</a></p>
-                        </div>
-                    </div>
+
+              <div class="form-group">
+                <input
+                  id="f-email"
+                  name="email"
+                  type="email"
+                  placeholder={t(lang, "cta.email")}
+                  required
+                  autocomplete="email"
+                />
+              </div>
+
+              <div class="form-group">
+                <input
+                  id="f-telefono"
+                  name="telefono"
+                  type="tel"
+                  placeholder={t(lang, "cta.teléfono")}
+                  required
+                  autocomplete="tel"
+                />
+              </div>
+
+              <div class="form-group">
+                <input
+                  id="f-empresa"
+                  name="empresa"
+                  type="text"
+                  placeholder={t(lang, "cta.empresa")}
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <select id="f-tamano" name="tamano" required>
+                  <option value="">{t(lang, "cta.numero")}</option>
+                  <option value="1-10">{t(lang, "cta.1")}</option>
+                  <option value="11-50">{t(lang, "cta.11")}</option>
+                  <option value="51-100">{t(lang, "cta.51")}</option>
+                  <option value="100+">{t(lang, "cta.mas")}</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <textarea
+                  id="f-mensaje"
+                  name="mensaje"
+                  placeholder={t(lang, "cta.tareas")}></textarea>
+              </div>
+
+              <!-- Consentimiento RGPD -->
+              <label
+                for="f-consent"
+                style="display:flex;gap:.5rem;align-items:center;margin:.5rem 0 1rem"
+              >
+                <input id="f-consent" name="consent" type="checkbox" required />
+                <small>
+                  {
+                    lang === "es" ? (
+                      <>
+                        He leído y acepto la{" "}
+                        <a
+                          href={tPath("/privacidad", lang)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Política de Privacidad
+                        </a>
+                        .
+                      </>
+                    ) : (
+                      <>
+                        Pribatutasun{" "}
+                        <a
+                          href={tPath("/privacidad", lang)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Politika
+                        </a>{" "}
+                        irakurri eta onartzen dut.
+                      </>
+                    )
+                  }
+                </small>
+              </label>
+
+              <!-- Consentimiento de marketing (opcional) -->
+              <label
+                for="f-marketing"
+                style="display:flex;gap:.5rem;align-items:center;margin:.25rem 0 1rem"
+              >
+                <input
+                  id="f-marketing"
+                  name="marketing"
+                  type="checkbox"
+                  value="yes"
+                />
+                <small>
+                  {
+                    lang === "es"
+                      ? "Deseo recibir comunicaciones sobre servicios y novedades (opcional)."
+                      : "Zerbitzu eta berriei buruzko komunikazioak jaso nahi ditut (aukerakoa)."
+                  }
+                </small>
+              </label>
+
+              <!-- Mensajes dinámicos (lo usaremos en el Paso 3) -->
+              <p class="form-msg" aria-live="polite" hidden></p>
+
+              <button type="submit" class="btn btn-primary btn-full">
+                <i class="fas fa-paper-plane"></i>
+                {t(lang, "cta.solicitar")}
+              </button>
+            </form>
+          </div>
+
+          <div class="contact-info">
+            <h3>{t(lang, "cta.propuesta")}</h3>
+            <p>{t(lang, "cta.dudas")}</p>
+
+            <div class="contact-methods">
+              <div class="contact-method">
+                <i class="fas fa-envelope"></i>
+                <div>
+                  <strong>{t(lang, "cta.email")}</strong>
+                  <p>info@bidedigitala.eus</p>
                 </div>
               </div>
+              <div class="contact-method">
+                <i class="fas fa-phone"></i>
+                <div>
+                  <strong>{t(lang, "cta.teléfono")}</strong>
+                  <p>+34 685 756 143</p>
+                </div>
+              </div>
+              <div class="contact-method">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="contact-details">
+                  <strong>{t(lang, "cta.localidad")}</strong>
+                  <p>Aulesti, Bizkaia</p>
+                </div>
+              </div>
+              <div class="contact-method">
+                <i class="fab fa-linkedin"></i>
+                <div>
+                  <strong>LinkedIn</strong>
+                  <p>
+                    <a href="https://www.linkedin.com/in/juancarlosbeaskoetxea/"
+                      >Juan Carlos Beaskoetxea</a>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Testimonials Section -->
+  <!-- Testimonials Section -->
   <!--   <section class="testimonials">
         <div class="container">
             <div class="section-header">
@@ -299,5 +360,4 @@ const title = t(lang, 'home.title');
             </div>
         </div>
     </section> -->
-
 </BaseLayout>

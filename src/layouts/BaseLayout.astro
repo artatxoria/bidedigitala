@@ -1,31 +1,36 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import '../assets/css/style.css';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../assets/css/style.css";
+import "../styles/global.css";
 const { lang, title } = Astro.props;
 ---
 
-<!DOCTYPE html>
-<html  lang={lang}>
+<!doctype html>
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    <meta name="description" content="Formación bonificada automatizada con IA para PYMES. Gestión sin burocracia, especialización tecnológica y bilingüismo integral en Euskadi.">
-    <link rel="stylesheet" href="/src/styles/global.css" />
-    
+    <meta
+      name="description"
+      content="Formación bonificada automatizada con IA para PYMES. Gestión sin burocracia, especialización tecnológica y bilingüismo integral en Euskadi."
+    />
+
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <title>{title}</title>
-  
-  
-  
-  
   </head>
   <body>
     <!-- Cabecera común -->
