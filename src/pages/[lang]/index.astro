@@ -10,7 +10,7 @@ import Servicios from "../../components/Servicios.astro";
 import Onurak from "../../components/Onurak.astro";
 import Proceso from "../../components/Proceso.astro";
 import Especializacion from "../../components/Especializacion.astro";
-import Navegacion from "../../components/Navegacion.astro";
+import NavegacionSecundaria from "../../components/NavegacionSecundaria.astro";
 
 // Para rutas dinámicas, exportamos getStaticPaths
 export async function getStaticPaths() {
@@ -38,8 +38,7 @@ const title = t(lang, "home.title");
 ---
 
 <BaseLayout lang={lang} title={title}>
-  <!-- Navegación secundaria -->
-  <Navegacion lang={lang} />
+  <NavegacionSecundaria lang={lang} slot="secondary-nav" />
 
   <!-- Hero Section -->
   <section id="inicio" class="hero">
@@ -334,7 +333,8 @@ const title = t(lang, "home.title");
                   <strong>LinkedIn</strong>
                   <p>
                     <a href="https://www.linkedin.com/in/juancarlosbeaskoetxea/"
-                      >Juan Carlos Beaskoetxea</a>
+                      >Juan Carlos Beaskoetxea</a
+                    >
                   </p>
                 </div>
               </div>

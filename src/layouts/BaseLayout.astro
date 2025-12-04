@@ -4,6 +4,7 @@ import Footer from "../components/Footer.astro";
 import "../assets/css/style.css";
 import "../styles/global.css";
 const { lang, title } = Astro.props;
+const hasSecondaryNav = Astro.slots.has("secondary-nav");
 ---
 
 <!doctype html>
@@ -33,8 +34,10 @@ const { lang, title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <!-- Cabecera común -->
-    <Header lang={lang} />
+    <!-- Cabecera común con navegación secundaria opcional -->
+    <Header lang={lang}>
+      {hasSecondaryNav && <slot name="secondary-nav" slot="secondary-nav" />}
+    </Header>
 
     <!-- Contenido dinámico de cada página -->
     <main>

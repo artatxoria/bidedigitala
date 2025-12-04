@@ -1,0 +1,35 @@
+---
+// src/components/NavegacionSecundaria.astro
+// Componente que proporciona los items del menú secundario para la página principal
+import { tPath, t } from "../lib/translations";
+const { lang } = Astro.props;
+const pathname = Astro.url.pathname;
+const isHome = pathname === `/${lang}` || pathname === `/${lang}/`;
+
+function getLink(anchor: string) {
+    return isHome ? anchor : tPath(anchor, lang);
+}
+---
+
+<nav aria-label="Navegación secundaria">
+    <ul>
+        <li>
+            <a href={getLink("#inicio")}>{t(lang, "nav.home")}</a>
+        </li>
+        <li>
+            <a href={getLink("#arazoak")}>{t(lang, "nav.problemas")}</a>
+        </li>
+        <li>
+            <a href={getLink("#balio-proposamena")}>{t(lang, "nav.valor")}</a>
+        </li>
+        <li>
+            <a href={getLink("#zerbitzuak")}>{t(lang, "nav.servicios")}</a>
+        </li>
+        <li>
+            <a href={getLink("#onurak")}>{t(lang, "nav.resultados")}</a>
+        </li>
+        <li class="nav-cta">
+            <a href="#contacto">{t(lang, "nav.diagnostico")}</a>
+        </li>
+    </ul>
+</nav>

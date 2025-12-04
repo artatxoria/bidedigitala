@@ -1,0 +1,26 @@
+---
+// src/components/NavegacionSecundariaCatalogo.astro
+// Componente que proporciona los items del menú secundario para la página de catálogo
+import { t } from "../lib/translations";
+const { lang } = Astro.props;
+---
+
+<nav aria-label="Navegación catálogo">
+    <ul>
+        <li>
+            <a href="#analisis-datos">{t(lang, "nav.categoria1")}</a>
+        </li>
+        <li>
+            <a href="#inteligencia-artificial">{t(lang, "nav.categoria2")}</a>
+        </li>
+        <li>
+            <a href="#automatizacion">{t(lang, "nav.categoria3")}</a>
+        </li>
+        <li>
+            <a href="#programacion">{t(lang, "nav.categoria4")}</a>
+        </li>
+        <li class="nav-cta">
+            <a href="#contacto">{t(lang, "nav.diagnostico")}</a>
+        </li>
+    </ul>
+</nav>

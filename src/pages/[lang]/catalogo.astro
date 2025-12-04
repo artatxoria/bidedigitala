@@ -1,7 +1,7 @@
 ---
 import { string } from "astro:schema";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import NavegacionCatalogo from "../../components/NavegacionCatalogo.astro";
+import NavegacionSecundariaCatalogo from "../../components/NavegacionSecundariaCatalogo.astro";
 import AnalisisDatos from "../../components/AnalisisDatos.astro";
 import InteligenciaArtificial from "../../components/InteligenciaArtificial.astro";
 import Automatizacion from "../../components/Automatizacion.astro";
@@ -52,8 +52,7 @@ const title = dict.title;
 ---
 
 <BaseLayout lang={lang} title={title}>
-  <!-- Navegación cursos -->
-  <NavegacionCatalogo lang={lang} />
+  <NavegacionSecundariaCatalogo lang={lang} slot="secondary-nav" />
 
   <!-- Hero Section -->
   <section class="courses-hero">
