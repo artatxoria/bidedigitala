@@ -47,7 +47,8 @@ html {
 }
 
 .container {
-    max-width: 1200px;
+    width: 80%;
+    max-width: 1600px;
     margin: 0 auto;
     padding: var(--container-padding);
     padding-top: 120px;
