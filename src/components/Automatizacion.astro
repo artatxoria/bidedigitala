@@ -1,71 +1,71 @@
 ---
 // src/components/Problemas.astro
 // Componente autocontenido con CSS y traducciones embebidas
-import { INVALID } from 'astro:schema';
-import IAGenerativa from './cursos/IAGenerativa.astro'
-import IAGenerativa_II from './cursos/IAGenerativa_II.astro'
-import AutomatizacionN8N from './cursos/Automatizacion.astro'
+import { INVALID } from "astro:schema";
+import IAGenerativa from "./cursos/IAGenerativa.astro";
+import IAGenerativa_II from "./cursos/IAGenerativa_II.astro";
+import AutomatizacionN8N from "./cursos/Automatizacion.astro";
 
 export interface Props {
-  lang: 'es' | 'eu';
+  lang: "es" | "eu";
 }
 const { lang } = Astro.props;
 
 // Traducciones embebidas
-const translations: Record<'es' | 'eu', {
-  hero: { title: string; 
-          subtitle: string
-        }
-}> = {
+const translations: Record<
+  "es" | "eu",
+  {
+    hero: { title: string; subtitle: string };
+  }
+> = {
   es: {
     hero: {
-      title: 'Automatización de Procesos y Desarrollo de Eficiencia',
-      subtitle: 'La automatización es la clave para la eficiencia radical en cualquier organización. Este curso, basado en la herramienta n8n, permite a las empresas optimizar tareas repetitivas sin necesidad de conocimientos de programación complejos, reflejando la filosofía de eficiencia interna de BideDigitala, S.L..',
-    }
+      title: "Automatización de Procesos y Desarrollo de Eficiencia",
+      subtitle:
+        "La automatización es la clave para la eficiencia radical en cualquier organización. Este curso, basado en la herramienta n8n, permite a las empresas optimizar tareas repetitivas sin necesidad de conocimientos de programación complejos, reflejando la filosofía de eficiencia interna de BideDigitala, S.L..",
+    },
   },
   eu: {
     hero: {
-      title: 'Prozesuen automatizazioa eta eraginkortasunaren garapena',
-      subtitle: 'Automatizazioa gakoa da edozein erakundetan erabateko eraginkortasuna lortzeko. n8n tresnan oinarritutako ikastaro honek enpresei zeregin errepikakorrak optimizatzeko aukera ematen die programazio-ezagutza konplexuen beharrik gabe, BideDigitala, S.L.ren barne-eraginkortasunaren filosofia islatuz.',
-    }
-  }
+      title: "Prozesuen automatizazioa eta eraginkortasunaren garapena",
+      subtitle:
+        "Automatizazioa gakoa da edozein erakundetan erabateko eraginkortasuna lortzeko. n8n tresnan oinarritutako ikastaro honek enpresei zeregin errepikakorrak optimizatzeko aukera ematen die programazio-ezagutza konplexuen beharrik gabe, BideDigitala, S.L.ren barne-eraginkortasunaren filosofia islatuz.",
+    },
+  },
 };
 
 // Seleccionamos el diccionario según el idioma, fallback a español
 const dict = translations[lang] || translations.es;
 ---
+
 <style>
-.section {
+  .section {
     padding: var(--section-padding);
     background: #f7fbfd;
-}
+  }
 
-.grid {
+  .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, auto);
     gap: 2rem;
-}
-
+  }
 </style>
 <!-- Problemas Section -->
-    <section id="automatizacion" class="section">
-        <div class="container">
-            <div class="section-header">
-                <img src="/public/images/automation_tech.jpg" alt="Adimen Artifiziala" class="section-image">
-                <div class="section-info">
-                    <h2 class="section-title">{dict.hero.title}</h2>
-                    <p class="section-description">{dict.hero.subtitle}</p>
-                </div>
-            </div>
-            <div class="grid">
-                
-            <AutomatizacionN8N lang={lang} />
-    </section>
-
-
-
-
-
-
-   
- 
+<section id="automatizacion" class="section">
+  <div class="container">
+    <div class="section-header">
+      <img
+        src="/images/automation_tech.jpg"
+        alt="Adimen Artifiziala"
+        class="section-image"
+      />
+      <div class="section-info">
+        <h2 class="section-title">{dict.hero.title}</h2>
+        <p class="section-description">{dict.hero.subtitle}</p>
+      </div>
+    </div>
+    <div class="grid">
+      <AutomatizacionN8N lang={lang} />
+    </div>
+  </div>
+</section>

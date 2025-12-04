@@ -1,71 +1,71 @@
 ---
 // src/components/Problemas.astro
 // Componente autocontenido con CSS y traducciones embebidas
-import { INVALID } from 'astro:schema';
-import IAGenerativa from './cursos/IAGenerativa.astro'
-import IAGenerativa_II from './cursos/IAGenerativa_II.astro'
+import { INVALID } from "astro:schema";
+import IAGenerativa from "./cursos/IAGenerativa.astro";
+import IAGenerativa_II from "./cursos/IAGenerativa_II.astro";
 
 export interface Props {
-  lang: 'es' | 'eu';
+  lang: "es" | "eu";
 }
 const { lang } = Astro.props;
 
 // Traducciones embebidas
-const translations: Record<'es' | 'eu', {
-  hero: { title: string; 
-          subtitle: string
-        }
-}> = {
+const translations: Record<
+  "es" | "eu",
+  {
+    hero: { title: string; subtitle: string };
+  }
+> = {
   es: {
     hero: {
-      title: 'Inteligencia Artificial Aplicada',
-      subtitle: 'La Inteligencia Artificial Generativa es una fuerza transformadora. Estos cursos desmitifican la IA y dotan a los profesionales de herramientas prácticas para aumentar su productividad y la innovación dentro de la empresa, alineando la formación con las necesidades de la Industria 4.0.',
-    }
+      title: "Inteligencia Artificial Aplicada",
+      subtitle:
+        "La Inteligencia Artificial Generativa es una fuerza transformadora. Estos cursos desmitifican la IA y dotan a los profesionales de herramientas prácticas para aumentar su productividad y la innovación dentro de la empresa, alineando la formación con las necesidades de la Industria 4.0.",
+    },
   },
   eu: {
     hero: {
-      title: 'Adimen Artifiziala Aplikatua',
-      subtitle: 'Adimen Artifizial Sortzailea indar eraldatzailea da. Ikastaro hauek IA desmitifikatzen dute eta profesionalei tresna praktikoak ematen dizkiete beren produktibitatea eta enpresaren barruko berrikuntza handitzeko, prestakuntza Industria 4.0aren beharrekin lerrokatuz.',
-    }
-  }
+      title: "Adimen Artifiziala Aplikatua",
+      subtitle:
+        "Adimen Artifizial Sortzailea indar eraldatzailea da. Ikastaro hauek IA desmitifikatzen dute eta profesionalei tresna praktikoak ematen dizkiete beren produktibitatea eta enpresaren barruko berrikuntza handitzeko, prestakuntza Industria 4.0aren beharrekin lerrokatuz.",
+    },
+  },
 };
 
 // Seleccionamos el diccionario según el idioma, fallback a español
 const dict = translations[lang] || translations.es;
 ---
+
 <style>
-.section {
+  .section {
     padding: var(--section-padding);
     background: #f7fbfd;
-}
+  }
 
-.grid {
+  .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, auto);
     gap: 2rem;
-}
-
+  }
 </style>
 <!-- Problemas Section -->
-    <section id="inteligencia-artificial" class="section">
-        <div class="container">
-            <div class="section-header">
-                <img src="/public/images/ai_training.jpg" alt="Adimen Artifiziala" class="section-image">
-                <div class="section-info">
-                    <h2 class="section-title">{dict.hero.title}</h2>
-                    <p class="section-description">{dict.hero.subtitle}</p>
-                </div>
-            </div>
-            <div class="grid">
-                
-            <IAGenerativa lang={lang} /> 
-            <IAGenerativa_II lang={lang} /> 
-    </section>
-
-
-
-
-
-
-   
- 
+<section id="inteligencia-artificial" class="section">
+  <div class="container">
+    <div class="section-header">
+      <img
+        src="/images/ai_training.jpg"
+        alt="Adimen Artifiziala"
+        class="section-image"
+      />
+      <div class="section-info">
+        <h2 class="section-title">{dict.hero.title}</h2>
+        <p class="section-description">{dict.hero.subtitle}</p>
+      </div>
+    </div>
+    <div class="grid">
+      <IAGenerativa lang={lang} />
+      <IAGenerativa_II lang={lang} />
+    </div>
+  </div>
+</section>
