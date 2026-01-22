@@ -1,0 +1,16 @@
+---
+import IAFormacionES from "../../components/IAFormacionES.astro";
+import IAFormacionEU from "../../components/IAFormacionEU.astro";
+
+export async function getStaticPaths() {
+  return [
+    { params: { lang: "es" } },
+    { params: { lang: "eu" } },
+  ];
+}
+
+export const prerender = true;
+const { lang } = Astro.params;
+---
+
+{lang === "es" ? <IAFormacionES /> : <IAFormacionEU />}

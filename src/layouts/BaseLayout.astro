@@ -48,6 +48,10 @@ const hasSecondaryNav = Astro.slots.has("secondary-nav");
     <Footer lang={lang} />
 
     <!-- Tu JavaScript de interacción -->
-    <script src="/assets/js/script.js?v=2025-09-03-1" defer></script>
+    <!-- <script src="/assets/js/script.js?v=2025-09-03-1" defer></script> -->
+    {Astro.url.pathname !== `/${lang}/ia-centros-educativos` && (
+  <script src="/assets/js/script.js?v=2025-09-03-1" defer></script>
+)}
+
   </body>
 </html>

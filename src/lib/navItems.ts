@@ -20,5 +20,7 @@ export const mainNav: NavItem[] = [
     ]
   },
   { key: 'nav.designService', path: '/diseinu-zerbitzua' },
-  // añade aquí nuevas páginas: p.ej. { key: 'nav.contact', path: '/contacto' }
+
+  // 👉 NUEVA PÁGINA
+  { key: 'nav.iaFormacion', path: '/ia-centros-educativos' },
 ];

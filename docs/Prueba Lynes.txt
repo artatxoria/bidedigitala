@@ -1,0 +1,2271 @@
+Le he pasado a mi servidor en la nube (debian 12) la aplicación lynes para ver en qué situación se encuentra y me ha respondido con los resultados que ahora te comparto: [ sudo lynis audit system
+
+[ Lynis 3.0.8 ]
+
+################################################################################
+  Lynis comes with ABSOLUTELY NO WARRANTY. This is free software, and you are
+  welcome to redistribute it under the terms of the GNU General Public License.
+  See the LICENSE file for details about using this software.
+
+  2007-2021, CISOfy - https://cisofy.com/lynis/
+  Enterprise support available (compliance, plugins, interface and tools)
+################################################################################
+
+
+[+] Initializing program
+------------------------------------
+  - Detecting OS...                                           [ DONE ]
+  - Checking profiles...                                      [ DONE ]
+
+  ---------------------------------------------------
+  Program version:           3.0.8
+  Operating system:          Linux
+  Operating system name:     Debian
+  Operating system version:  12
+  Kernel version:            6.1.0
+  Hardware platform:         x86_64
+  Hostname:                  my-vps
+  ---------------------------------------------------
+  Profiles:                  /etc/lynis/default.prf
+  Log file:                  /var/log/lynis.log
+  Report file:               /var/log/lynis-report.dat
+  Report version:            1.0
+  Plugin directory:          /etc/lynis/plugins
+  ---------------------------------------------------
+  Auditor:                   [Not Specified]
+  Language:                  en
+  Test category:             all
+  Test group:                all
+  ---------------------------------------------------
+  - Program update status...                                  [ NO UPDATE ]
+
+[+] System tools
+------------------------------------
+  - Scanning available tools...
+  - Checking system binaries...
+
+[+] Plugins (phase 1)
+------------------------------------
+ Note: plugins have more extensive tests and may take several minutes to complete
+  
+  - Plugin: debian
+    [
+[+] Debian Tests
+------------------------------------
+  - Checking for system binaries that are required by Debian Tests...
+    - Checking /bin...                                        [ FOUND ]
+    - Checking /sbin...                                       [ FOUND ]
+    - Checking /usr/bin...                                    [ FOUND ]
+    - Checking /usr/sbin...                                   [ FOUND ]
+    - Checking /usr/local/bin...                              [ FOUND ]
+    - Checking /usr/local/sbin...                             [ FOUND ]
+  - Authentication:
+    - PAM (Pluggable Authentication Modules):
+      - libpam-tmpdir                                         [ Not Installed ]
+  - File System Checks:
+    - DM-Crypt, Cryptsetup & Cryptmount:
+  - Software:
+    - apt-listbugs                                            [ Not Installed ]
+    - apt-listchanges                                         [ Installed and enabled for apt ]
+    - needrestart                                             [ Installed ]
+    - fail2ban                                                [ Not Installed ]
+]
+
+[+] Boot and services
+------------------------------------
+  - Service Manager                                           [ systemd ]
+  - Checking UEFI boot                                        [ DISABLED ]
+  - Checking presence GRUB2                                   [ FOUND ]
+    - Checking for password protection                        [ NONE ]
+  - Check running services (systemctl)                        [ DONE ]
+        Result: found 22 running services
+  - Check enabled services at boot (systemctl)                [ DONE ]
+        Result: found 28 enabled services
+  - Check startup files (permissions)                         [ OK ]
+  - Running 'systemd-analyze security'
+        - ModemManager.service:                               [ MEDIUM ]
+        - avahi-daemon.service:                               [ UNSAFE ]
+        - clamav-daemon.service:                              [ UNSAFE ]
+        - clamav-freshclam.service:                           [ UNSAFE ]
+        - cloud-init-hotplugd.service:                        [ UNSAFE ]
+        - containerd.service:                                 [ UNSAFE ]
+        - cron.service:                                       [ UNSAFE ]
+        - dbus.service:                                       [ UNSAFE ]
+        - docker.service:                                     [ UNSAFE ]
+        - emergency.service:                                  [ UNSAFE ]
+        - exim4.service:                                      [ UNSAFE ]
+        - getty@tty1.service:                                 [ UNSAFE ]
+        - lynis.service:                                      [ UNSAFE ]
+        - polkit.service:                                     [ UNSAFE ]
+        - rc-local.service:                                   [ UNSAFE ]
+        - rescue.service:                                     [ UNSAFE ]
+        - serial-getty@ttyS0.service:                         [ UNSAFE ]
+        - snapd.aa-prompt-listener.service:                   [ UNSAFE ]
+        - snapd.service:                                      [ UNSAFE ]
+        - ssh.service:                                        [ UNSAFE ]
+        - systemd-ask-password-console.service:               [ UNSAFE ]
+        - systemd-ask-password-wall.service:                  [ UNSAFE ]
+        - systemd-fsckd.service:                              [ UNSAFE ]
+        - systemd-initctl.service:                            [ UNSAFE ]
+        - systemd-journald.service:                           [ PROTECTED ]
+        - systemd-logind.service:                             [ PROTECTED ]
+        - systemd-networkd.service:                           [ PROTECTED ]
+        - systemd-resolved.service:                           [ PROTECTED ]
+        - systemd-timesyncd.service:                          [ PROTECTED ]
+        - systemd-udevd.service:                              [ MEDIUM ]
+        - unattended-upgrades.service:                        [ UNSAFE ]
+        - user@1002.service:                                  [ UNSAFE ]
+        - uuidd.service:                                      [ MEDIUM ]
+        - wpa_supplicant.service:                             [ UNSAFE ]
+
+[+] Kernel
+------------------------------------
+  - Checking default run level                                [ RUNLEVEL 5 ]
+  - Checking CPU support (NX/PAE)
+    CPU support: PAE and/or NoeXecute supported               [ FOUND ]
+  - Checking kernel version and release                       [ DONE ]
+  - Checking kernel type                                      [ DONE ]
+  - Checking loaded kernel modules                            [ DONE ]
+      Found 81 active modules
+  - Checking Linux kernel configuration file                  [ FOUND ]
+  - Checking default I/O kernel scheduler                     [ NOT FOUND ]
+  - Checking core dumps configuration
+    - configuration in systemd conf files                     [ DEFAULT ]
+    - configuration in /etc/profile                           [ DEFAULT ]
+    - 'hard' configuration in /etc/security/limits.conf       [ DEFAULT ]
+    - 'soft' configuration in /etc/security/limits.conf       [ DEFAULT ]
+    - Checking setuid core dumps configuration                [ DISABLED ]
+  - Check if reboot is needed                                 [ YES ]
+
+[+] Memory and Processes
+------------------------------------
+  - Checking /proc/meminfo                                    [ FOUND ]
+  - Searching for dead/zombie processes                       [ NOT FOUND ]
+  - Searching for IO waiting processes                        [ NOT FOUND ]
+  - Search prelink tooling                                    [ NOT FOUND ]
+
+[+] Users, Groups and Authentication
+------------------------------------
+  - Administrator accounts                                    [ OK ]
+  - Unique UIDs                                               [ OK ]
+  - Consistency of group files (grpck)                        [ OK ]
+  - Unique group IDs                                          [ OK ]
+  - Unique group names                                        [ OK ]
+  - Password file consistency                                 [ OK ]
+  - Password hashing methods                                  [ SUGGESTION ]
+  - Checking password hashing rounds                          [ DISABLED ]
+  - Query system users (non daemons)                          [ DONE ]
+  - NIS+ authentication support                               [ NOT ENABLED ]
+  - NIS authentication support                                [ NOT ENABLED ]
+  - Sudoers file(s)                                           [ FOUND ]
+    - Permissions for directory: /etc/sudoers.d               [ OK ]
+    - Permissions for: /etc/sudoers                           [ OK ]
+    - Permissions for: /etc/sudoers.d/90-cloud-init-users     [ OK ]
+    - Permissions for: /etc/sudoers.d/README                  [ OK ]
+  - PAM password strength tools                               [ SUGGESTION ]
+  - PAM configuration files (pam.conf)                        [ FOUND ]
+  - PAM configuration files (pam.d)                           [ FOUND ]
+  - PAM modules                                               [ FOUND ]
+  - LDAP module in PAM                                        [ NOT FOUND ]
+  - Accounts without expire date                              [ SUGGESTION ]
+  - Accounts without password                                 [ OK ]
+  - Locked accounts                                           [ FOUND ]
+  - Checking user password aging (minimum)                    [ DISABLED ]
+  - User password aging (maximum)                             [ DISABLED ]
+  - Checking expired passwords                                [ OK ]
+  - Checking Linux single user mode authentication            [ OK ]
+  - Determining default umask
+    - umask (/etc/profile)                                    [ NOT FOUND ]
+    - umask (/etc/login.defs)                                 [ SUGGESTION ]
+  - LDAP authentication support                               [ NOT ENABLED ]
+  - Logging failed login attempts                             [ ENABLED ]
+
+[+] Shells
+------------------------------------
+  - Checking shells from /etc/shells
+    Result: found 9 shells (valid shells: 9).
+    - Session timeout settings/tools                          [ NONE ]
+  - Checking default umask values
+    - Checking default umask in /etc/bash.bashrc              [ NONE ]
+    - Checking default umask in /etc/profile                  [ NONE ]
+
+[+] File systems
+------------------------------------
+  - Checking mount points
+    - Checking /home mount point                              [ SUGGESTION ]
+    - Checking /tmp mount point                               [ SUGGESTION ]
+    - Checking /var mount point                               [ SUGGESTION ]
+  - Query swap partitions (fstab)                             [ OK ]
+  - Testing swap partitions                                   [ OK ]
+  - Checking for old files in /tmp                            [ OK ]
+  - Checking /tmp sticky bit                                  [ OK ]
+  - Checking /var/tmp sticky bit                              [ OK ]
+  - ACL support root file system                              [ ENABLED ]
+  - Mount options of /                                        [ NON DEFAULT ]
+  - Mount options of /dev                                     [ PARTIALLY HARDENED ]
+  - Mount options of /dev/shm                                 [ PARTIALLY HARDENED ]
+  - Mount options of /run                                     [ HARDENED ]
+  - Total without nodev:51 noexec:58 nosuid:55 ro or noexec (W^X): 52 of total 77
+  - Disable kernel support of some filesystems
+
+[+] USB Devices
+------------------------------------
+  - Checking usb-storage driver (modprobe config)             [ NOT DISABLED ]
+  - Checking USBGuard                                         [ NOT FOUND ]
+
+[+] Storage
+------------------------------------
+  - Checking firewire ohci driver (modprobe config)           [ NOT DISABLED ]
+
+[+] NFS
+------------------------------------
+  - Check running NFS daemon                                  [ NOT FOUND ]
+
+[+] Name services
+------------------------------------
+  - Checking search domains                                   [ FOUND ]
+  - Searching DNS domain name                                 [ UNKNOWN ]
+  - Checking Unbound status                                   [ RUNNING ]
+  - Checking /etc/hosts
+    - Duplicate entries in hosts file                         [ NONE ]
+    - Presence of configured hostname in /etc/hosts           [ NOT FOUND ]
+    - Hostname mapped to localhost                            [ NOT FOUND ]
+    - Localhost mapping to IP address                         [ OK ]
+
+[+] Ports and packages
+------------------------------------
+  - Searching package managers
+    - Searching dpkg package manager                          [ FOUND ]
+      - Querying package manager
+    - Query unpurged packages                                 [ FOUND ]
+  - Checking security repository in sources.list file or directory  [ WARNING ]
+  - Checking APT package database                             [ OK ]
+  - Checking vulnerable packages (apt-get only)               [ DONE ]
+  - Checking upgradeable packages                             [ SKIPPED ]
+  - Checking package audit tool                               [ INSTALLED ]
+    Found: apt-get
+  - Toolkit for automatic upgrades (unattended-upgrade)       [ FOUND ]
+
+[+] Networking
+------------------------------------
+  - Checking IPv6 configuration                               [ ENABLED ]
+      Configuration method                                    [ AUTO ]
+      IPv6 only                                               [ NO ]
+  - Checking configured nameservers
+    - Testing nameservers
+        Nameserver: 212.227.123.16                            [ OK ]
+        Nameserver: 212.227.123.17                            [ OK ]
+    - Minimal of 2 responsive nameservers                     [ OK ]
+    - DNSSEC supported (systemd-resolved)                     [ NO ]
+  - Checking default gateway                                  [ DONE ]
+  - Getting listening ports (TCP/UDP)                         [ DONE ]
+  - Checking promiscuous interfaces                           [ OK ]
+  - Checking waiting connections                              [ OK ]
+  - Checking status DHCP client
+  - Checking for ARP monitoring software                      [ NOT FOUND ]
+  - Uncommon network protocols                                [ 0 ]
+
+[+] Printers and Spools
+------------------------------------
+  - Checking cups daemon                                      [ NOT FOUND ]
+  - Checking lp daemon                                        [ NOT RUNNING ]
+
+[+] Software: e-mail and messaging
+------------------------------------
+  - Postfix status                                            [ RUNNING ]
+  - Dovecot status                                            [ RUNNING ]
+
+[+] Software: firewalls
+------------------------------------
+  - Checking iptables kernel module                           [ FOUND ]
+    - Checking iptables policies of chains                    [ FOUND ]
+    - Checking for empty ruleset                              [ OK ]
+    - Checking for unused rules                               [ FOUND ]
+  - Checking host based firewall                              [ ACTIVE ]
+
+[+] Software: webserver
+------------------------------------
+  - Checking Apache                                           [ NOT FOUND ]
+  - Checking nginx                                            [ FOUND ]
+  - Searching nginx configuration file                        [ NOT FOUND ]
+
+[+] SSH Support
+------------------------------------
+  - Checking running SSH daemon                               [ FOUND ]
+    - Searching SSH configuration                             [ FOUND ]
+    - OpenSSH option: AllowTcpForwarding                      [ SUGGESTION ]
+    - OpenSSH option: ClientAliveCountMax                     [ SUGGESTION ]
+    - OpenSSH option: ClientAliveInterval                     [ OK ]
+    - OpenSSH option: Compression                             [ SUGGESTION ]
+    - OpenSSH option: FingerprintHash                         [ OK ]
+    - OpenSSH option: GatewayPorts                            [ OK ]
+    - OpenSSH option: IgnoreRhosts                            [ OK ]
+    - OpenSSH option: LoginGraceTime                          [ OK ]
+    - OpenSSH option: LogLevel                                [ SUGGESTION ]
+    - OpenSSH option: MaxAuthTries                            [ OK ]
+    - OpenSSH option: MaxSessions                             [ SUGGESTION ]
+    - OpenSSH option: PermitRootLogin                         [ OK ]
+    - OpenSSH option: PermitUserEnvironment                   [ OK ]
+    - OpenSSH option: PermitTunnel                            [ OK ]
+    - OpenSSH option: Port                                    [ SUGGESTION ]
+    - OpenSSH option: PrintLastLog                            [ OK ]
+    - OpenSSH option: StrictModes                             [ OK ]
+    - OpenSSH option: TCPKeepAlive                            [ SUGGESTION ]
+    - OpenSSH option: UseDNS                                  [ OK ]
+    - OpenSSH option: X11Forwarding                           [ OK ]
+    - OpenSSH option: AllowAgentForwarding                    [ SUGGESTION ]
+    - OpenSSH option: AllowUsers                              [ NOT FOUND ]
+    - OpenSSH option: AllowGroups                             [ NOT FOUND ]
+
+[+] SNMP Support
+------------------------------------
+  - Checking running SNMP daemon                              [ NOT FOUND ]
+
+[+] Databases
+------------------------------------
+  - MySQL process status                                      [ FOUND ]
+  - Redis (server) status                                     [ FOUND ]
+
+=================================================================
+
+  Exception found!
+
+  Function/test:  [DBS-1882]
+  Message:        Found Redis, but no configuration file. Report this if you know where it is located on your system.
+
+  Help improving the Lynis community with your feedback!
+
+  Steps:
+  - Ensure you are running the latest version (/usr/sbin/lynis update check)
+  - If so, create a GitHub issue at https://github.com/CISOfy/lynis
+  - Include relevant parts of the log file or configuration file
+
+  Thanks!
+
+=================================================================
+
+
+[+] LDAP Services
+------------------------------------
+  - Checking OpenLDAP instance                                [ NOT FOUND ]
+
+[+] PHP
+------------------------------------
+  - Checking PHP                                              [ NOT FOUND ]
+
+[+] Squid Support
+------------------------------------
+  - Checking running Squid daemon                             [ NOT FOUND ]
+
+[+] Logging and files
+------------------------------------
+  - Checking for a running log daemon                         [ OK ]
+    - Checking Syslog-NG status                               [ FOUND ]
+    - Checking systemd journal status                         [ FOUND ]
+    - Checking Metalog status                                 [ NOT FOUND ]
+    - Checking RSyslog status                                 [ NOT FOUND ]
+    - Checking RFC 3195 daemon status                         [ NOT FOUND ]
+    - Checking minilogd instances                             [ NOT FOUND ]
+  - Checking logrotate presence                               [ OK ]
+  - Checking remote logging                                   [ NOT ENABLED ]
+  - Checking log directories (static list)                    [ DONE ]
+  - Checking open log files                                   [ DONE ]
+  - Checking deleted files in use                             [ FILES FOUND ]
+
+[+] Insecure services
+------------------------------------
+  - Installed inetd package                                   [ NOT FOUND ]
+  - Installed xinetd package                                  [ OK ]
+    - xinetd status
+  - Installed rsh client package                              [ OK ]
+  - Installed rsh server package                              [ OK ]
+  - Installed telnet client package                           [ OK ]
+  - Installed telnet server package                           [ NOT FOUND ]
+  - Checking NIS client installation                          [ OK ]
+  - Checking NIS server installation                          [ OK ]
+  - Checking TFTP client installation                         [ OK ]
+  - Checking TFTP server installation                         [ OK ]
+
+[+] Banners and identification
+------------------------------------
+  - /etc/issue                                                [ FOUND ]
+    - /etc/issue contents                                     [ WEAK ]
+  - /etc/issue.net                                            [ FOUND ]
+    - /etc/issue.net contents                                 [ WEAK ]
+
+[+] Scheduled tasks
+------------------------------------
+  - Checking crontab and cronjob files                        [ DONE ]
+
+[+] Accounting
+------------------------------------
+  - Checking accounting information                           [ NOT FOUND ]
+  - Checking sysstat accounting data                          [ DISABLED ]
+  - Checking auditd                                           [ NOT FOUND ]
+
+[+] Time and Synchronization
+------------------------------------
+  - NTP daemon found: systemd (timesyncd)                     [ FOUND ]
+  - Checking for a running NTP daemon or client               [ OK ]
+  - Last time synchronization                                 [ 21s ]
+
+[+] Cryptography
+------------------------------------
+  - Checking for expired SSL certificates [0/145]             [ NONE ]
+  - Kernel entropy is sufficient                              [ YES ]
+  - HW RNG & rngd                                             [ NO ]
+  - SW prng                                                   [ NO ]
+  - MOR variable not found                                    [ WEAK ]
+
+[+] Virtualization
+------------------------------------
+
+[+] Containers
+------------------------------------
+    - Docker
+      - Docker daemon                                         [ RUNNING ]
+        - Docker info output (warnings)                       [ NONE ]
+      - Containers
+        - Total containers                                    [ 23 ]
+          - Running containers                                [ 23 ]
+        - Unused containers                                   [ 0 ]
+    - File permissions                                        [ OK ]
+
+[+] Security frameworks
+------------------------------------
+  - Checking presence AppArmor                                [ FOUND ]
+    - Checking AppArmor status                                [ ENABLED ]
+        Found 74 unconfined processes
+  - Checking presence SELinux                                 [ NOT FOUND ]
+  - Checking presence TOMOYO Linux                            [ NOT FOUND ]
+  - Checking presence grsecurity                              [ NOT FOUND ]
+  - Checking for implemented MAC framework                    [ OK ]
+
+[+] Software: file integrity
+------------------------------------
+  - Checking file integrity tools
+  - Checking presence integrity tool                          [ NOT FOUND ]
+
+[+] Software: System tooling
+------------------------------------
+  - Checking automation tooling
+  - Automation tooling                                        [ NOT FOUND ]
+  - Checking for IDS/IPS tooling                              [ NONE ]
+
+[+] Software: Malware
+------------------------------------
+pgrep: pattern that searches for process name longer than 15 characters will result in zero matches
+Try pgrep -f' option to match against the complete command line.
+  - Checking ClamAV scanner                                   [ FOUND ]
+  - Checking ClamAV daemon                                    [ FOUND ]
+    - Checking freshclam                                      [ FOUND ]
+  - Malware software components                               [ FOUND ]
+    - Active agent                                            [ FOUND ]
+    - Rootkit scanner                                         [ NOT FOUND ]
+
+[+] File Permissions
+------------------------------------
+  - Starting file permissions check
+    File: /boot/grub/grub.cfg                                 [ SUGGESTION ]
+    File: /etc/crontab                                        [ SUGGESTION ]
+    File: /etc/group                                          [ OK ]
+    File: /etc/group-                                         [ OK ]
+    File: /etc/hosts.allow                                    [ OK ]
+    File: /etc/hosts.deny                                     [ OK ]
+    File: /etc/issue                                          [ OK ]
+    File: /etc/issue.net                                      [ OK ]
+    File: /etc/motd                                           [ OK ]
+    File: /etc/passwd                                         [ OK ]
+    File: /etc/passwd-                                        [ OK ]
+    File: /etc/ssh/sshd_config                                [ SUGGESTION ]
+    Directory: /root/.ssh                                     [ OK ]
+    Directory: /etc/cron.d                                    [ SUGGESTION ]
+    Directory: /etc/cron.daily                                [ SUGGESTION ]
+    Directory: /etc/cron.hourly                               [ SUGGESTION ]
+    Directory: /etc/cron.weekly                               [ SUGGESTION ]
+    Directory: /etc/cron.monthly                              [ SUGGESTION ]
+
+[+] Home directories
+------------------------------------
+  - Permissions of home directories                           [ WARNING ]
+  - Ownership of home directories                             [ OK ]
+  - Checking shell history files                              [ OK ]
+
+[+] Kernel Hardening
+------------------------------------
+  - Comparing sysctl key pairs with scan profile
+    - dev.tty.ldisc_autoload (exp: 0)                         [ DIFFERENT ]
+    - fs.protected_fifos (exp: 2)                             [ DIFFERENT ]
+    - fs.protected_hardlinks (exp: 1)                         [ OK ]
+    - fs.protected_regular (exp: 2)                           [ OK ]
+    - fs.protected_symlinks (exp: 1)                          [ OK ]
+    - fs.suid_dumpable (exp: 0)                               [ OK ]
+    - kernel.core_uses_pid (exp: 1)                           [ DIFFERENT ]
+    - kernel.ctrl-alt-del (exp: 0)                            [ OK ]
+    - kernel.dmesg_restrict (exp: 1)                          [ OK ]
+    - kernel.kptr_restrict (exp: 2)                           [ DIFFERENT ]
+    - kernel.modules_disabled (exp: 1)                        [ DIFFERENT ]
+    - kernel.perf_event_paranoid (exp: 3)                     [ OK ]
+    - kernel.randomize_va_space (exp: 2)                      [ OK ]
+    - kernel.sysrq (exp: 0)                                   [ DIFFERENT ]
+    - kernel.unprivileged_bpf_disabled (exp: 1)               [ DIFFERENT ]
+    - kernel.yama.ptrace_scope (exp: 1 2 3)                   [ DIFFERENT ]
+    - net.core.bpf_jit_harden (exp: 2)                        [ DIFFERENT ]
+    - net.ipv4.conf.all.accept_redirects (exp: 0)             [ OK ]
+    - net.ipv4.conf.all.accept_source_route (exp: 0)          [ OK ]
+    - net.ipv4.conf.all.bootp_relay (exp: 0)                  [ OK ]
+    - net.ipv4.conf.all.forwarding (exp: 0)                   [ DIFFERENT ]
+    - net.ipv4.conf.all.log_martians (exp: 1)                 [ DIFFERENT ]
+    - net.ipv4.conf.all.mc_forwarding (exp: 0)                [ OK ]
+    - net.ipv4.conf.all.proxy_arp (exp: 0)                    [ OK ]
+    - net.ipv4.conf.all.rp_filter (exp: 1)                    [ DIFFERENT ]
+    - net.ipv4.conf.all.send_redirects (exp: 0)               [ DIFFERENT ]
+    - net.ipv4.conf.default.accept_redirects (exp: 0)         [ DIFFERENT ]
+    - net.ipv4.conf.default.accept_source_route (exp: 0)      [ DIFFERENT ]
+    - net.ipv4.conf.default.log_martians (exp: 1)             [ DIFFERENT ]
+    - net.ipv4.icmp_echo_ignore_broadcasts (exp: 1)           [ OK ]
+    - net.ipv4.icmp_ignore_bogus_error_responses (exp: 1)     [ OK ]
+    - net.ipv4.tcp_syncookies (exp: 1)                        [ OK ]
+    - net.ipv4.tcp_timestamps (exp: 0 1)                      [ OK ]
+    - net.ipv6.conf.all.accept_redirects (exp: 0)             [ DIFFERENT ]
+    - net.ipv6.conf.all.accept_source_route (exp: 0)          [ OK ]
+    - net.ipv6.conf.default.accept_redirects (exp: 0)         [ DIFFERENT ]
+    - net.ipv6.conf.default.accept_source_route (exp: 0)      [ OK ]
+
+[+] Hardening
+------------------------------------
+    - Installed compiler(s)                                   [ FOUND ]
+    - Installed malware scanner                               [ FOUND ]
+    - Non-native binary formats                               [ FOUND ]
+
+[+] Custom tests
+------------------------------------
+  - Running custom tests...                                   [ NONE ]
+
+[+] Plugins (phase 2)
+------------------------------------
+
+================================================================================
+
+  -[ Lynis 3.0.8 Results ]-
+
+  Warnings (2):
+  ----------------------------
+  ! Reboot of system is most likely needed [KRNL-5830] 
+    - Solution : reboot
+      https://cisofy.com/lynis/controls/KRNL-5830/
+
+  ! Can't find any security repository in /etc/apt/sources.list or sources.list.d directory [PKGS-7388] 
+      https://cisofy.com/lynis/controls/PKGS-7388/
+
+  Suggestions (53):
+  ----------------------------
+  * This release is more than 4 months old. Check the website or GitHub to see if there is an update available. [LYNIS] 
+      https://cisofy.com/lynis/controls/LYNIS/
+
+  * Install libpam-tmpdir to set $TMP and $TMPDIR for PAM sessions [DEB-0280] 
+      https://cisofy.com/lynis/controls/DEB-0280/
+
+  * Install apt-listbugs to display a list of critical bugs prior to each APT installation. [DEB-0810] 
+      https://cisofy.com/lynis/controls/DEB-0810/
+
+  * Install fail2ban to automatically ban hosts that commit multiple authentication errors. [DEB-0880] 
+      https://cisofy.com/lynis/controls/DEB-0880/
+
+  * Set a password on GRUB boot loader to prevent altering boot configuration (e.g. boot in single user mode without password) [BOOT-5122] 
+      https://cisofy.com/lynis/controls/BOOT-5122/
+
+  * Consider hardening system services [BOOT-5264] 
+    - Details  : Run '/usr/bin/systemd-analyze security SERVICE' for each service
+      https://cisofy.com/lynis/controls/BOOT-5264/
+
+  * Determine why /vmlinuz or /boot/vmlinuz is missing on this Debian/Ubuntu system. [KRNL-5788] 
+    - Details  : /vmlinuz or /boot/vmlinuz
+      https://cisofy.com/lynis/controls/KRNL-5788/
+
+  * If not required, consider explicit disabling of core dump in /etc/security/limits.conf file [KRNL-5820] 
+      https://cisofy.com/lynis/controls/KRNL-5820/
+
+  * Check PAM configuration, add rounds if applicable and expire passwords to encrypt with new values [AUTH-9229] 
+      https://cisofy.com/lynis/controls/AUTH-9229/
+
+  * Configure password hashing rounds in /etc/login.defs [AUTH-9230] 
+      https://cisofy.com/lynis/controls/AUTH-9230/
+
+  * Install a PAM module for password strength testing like pam_cracklib or pam_passwdqc [AUTH-9262] 
+      https://cisofy.com/lynis/controls/AUTH-9262/
+
+  * When possible set expire dates for all password protected accounts [AUTH-9282] 
+      https://cisofy.com/lynis/controls/AUTH-9282/
+
+  * Look at the locked accounts and consider removing them [AUTH-9284] 
+      https://cisofy.com/lynis/controls/AUTH-9284/
+
+  * Configure minimum password age in /etc/login.defs [AUTH-9286] 
+      https://cisofy.com/lynis/controls/AUTH-9286/
+
+  * Configure maximum password age in /etc/login.defs [AUTH-9286] 
+      https://cisofy.com/lynis/controls/AUTH-9286/
+
+  * Default umask in /etc/login.defs could be more strict like 027 [AUTH-9328] 
+      https://cisofy.com/lynis/controls/AUTH-9328/
+
+  * To decrease the impact of a full /home file system, place /home on a separate partition [FILE-6310] 
+      https://cisofy.com/lynis/controls/FILE-6310/
+
+  * To decrease the impact of a full /tmp file system, place /tmp on a separate partition [FILE-6310] 
+      https://cisofy.com/lynis/controls/FILE-6310/
+
+  * To decrease the impact of a full /var file system, place /var on a separate partition [FILE-6310] 
+      https://cisofy.com/lynis/controls/FILE-6310/
+
+  * Disable drivers like USB storage when not used, to prevent unauthorized storage or data theft [USB-1000] 
+      https://cisofy.com/lynis/controls/USB-1000/
+
+  * Disable drivers like firewire storage when not used, to prevent unauthorized storage or data theft [STRG-1846] 
+      https://cisofy.com/lynis/controls/STRG-1846/
+
+  * Check DNS configuration for the dns domain name [NAME-4028] 
+      https://cisofy.com/lynis/controls/NAME-4028/
+
+  * Add the IP name and FQDN to /etc/hosts for proper name resolving [NAME-4404] 
+      https://cisofy.com/lynis/controls/NAME-4404/
+
+  * Purge old/removed packages (26 found) with aptitude purge or dpkg --purge command. This will cleanup old configuration files, cron jobs and startup scripts. [PKGS-7346] 
+      https://cisofy.com/lynis/controls/PKGS-7346/
+
+  * Install debsums utility for the verification of packages with known good database. [PKGS-7370] 
+      https://cisofy.com/lynis/controls/PKGS-7370/
+
+  * Install package apt-show-versions for patch management purposes [PKGS-7394] 
+      https://cisofy.com/lynis/controls/PKGS-7394/
+
+  * Remove any unneeded kernel packages [PKGS-7410] 
+    - Details  : 17 kernels
+    - Solution : validate dpkg -l output and perform cleanup with apt autoremove
+      https://cisofy.com/lynis/controls/PKGS-7410/
+
+  * Determine if protocol 'dccp' is really needed on this system [NETW-3200] 
+      https://cisofy.com/lynis/controls/NETW-3200/
+
+  * Determine if protocol 'sctp' is really needed on this system [NETW-3200] 
+      https://cisofy.com/lynis/controls/NETW-3200/
+
+  * Determine if protocol 'rds' is really needed on this system [NETW-3200] 
+      https://cisofy.com/lynis/controls/NETW-3200/
+
+  * Determine if protocol 'tipc' is really needed on this system [NETW-3200] 
+      https://cisofy.com/lynis/controls/NETW-3200/
+
+  * Check iptables rules to see which rules are currently not used [FIRE-4513] 
+      https://cisofy.com/lynis/controls/FIRE-4513/
+
+  * Consider hardening SSH configuration [SSH-7408] 
+    - Details  : AllowTcpForwarding (set YES to NO)
+      https://cisofy.com/lynis/controls/SSH-7408/
+
+  * Consider hardening SSH configuration [SSH-7408] 
+    - Details  : ClientAliveCountMax (set 3 to 2)
+      https://cisofy.com/lynis/controls/SSH-7408/
+
+  * Consider hardening SSH configuration [SSH-7408] 
+    - Details  : Compression (set YES to NO)
+      https://cisofy.com/lynis/controls/SSH-7408/
+
+  * Consider hardening SSH configuration [SSH-7408] 
+    - Details  : LogLevel (set INFO to VERBOSE)
+      https://cisofy.com/lynis/controls/SSH-7408/
+
+  * Consider hardening SSH configuration [SSH-7408] 
+    - Details  : MaxSessions (set 10 to 2)
+      https://cisofy.com/lynis/controls/SSH-7408/
+
+  * Consider hardening SSH configuration [SSH-7408] 
+    - Details  : Port (set 22 to )
+      https://cisofy.com/lynis/controls/SSH-7408/
+
+  * Consider hardening SSH configuration [SSH-7408] 
+    - Details  : TCPKeepAlive (set YES to NO)
+      https://cisofy.com/lynis/controls/SSH-7408/
+
+  * Consider hardening SSH configuration [SSH-7408] 
+    - Details  : AllowAgentForwarding (set YES to NO)
+      https://cisofy.com/lynis/controls/SSH-7408/
+
+  * Enable logging to an external logging host for archiving purposes and additional protection [LOGG-2154] 
+      https://cisofy.com/lynis/controls/LOGG-2154/
+
+  * Check what deleted files are still in use and why. [LOGG-2190] 
+      https://cisofy.com/lynis/controls/LOGG-2190/
+
+  * Add a legal banner to /etc/issue, to warn unauthorized users [BANN-7126] 
+      https://cisofy.com/lynis/controls/BANN-7126/
+
+  * Add legal banner to /etc/issue.net, to warn unauthorized users [BANN-7130] 
+      https://cisofy.com/lynis/controls/BANN-7130/
+
+  * Enable process accounting [ACCT-9622] 
+      https://cisofy.com/lynis/controls/ACCT-9622/
+
+  * Enable sysstat to collect accounting (disabled) [ACCT-9626] 
+      https://cisofy.com/lynis/controls/ACCT-9626/
+
+  * Enable auditd to collect audit information [ACCT-9628] 
+      https://cisofy.com/lynis/controls/ACCT-9628/
+
+  * Install a file integrity tool to monitor changes to critical and sensitive files [FINT-4350] 
+      https://cisofy.com/lynis/controls/FINT-4350/
+
+  * Determine if automation tools are present for system management [TOOL-5002] 
+      https://cisofy.com/lynis/controls/TOOL-5002/
+
+  * Consider restricting file permissions [FILE-7524] 
+    - Details  : See screen output or log file
+    - Solution : Use chmod to change file permissions
+      https://cisofy.com/lynis/controls/FILE-7524/
+
+  * Double check the permissions of home directories as some might be not strict enough. [HOME-9304] 
+      https://cisofy.com/lynis/controls/HOME-9304/
+
+  * One or more sysctl values differ from the scan profile and could be tweaked [KRNL-6000] 
+    - Solution : Change sysctl value or disable test (skip-test=KRNL-6000:<sysctl-key>)
+      https://cisofy.com/lynis/controls/KRNL-6000/
+
+  * Harden compilers like restricting access to root user only [HRDN-7222] 
+      https://cisofy.com/lynis/controls/HRDN-7222/
+
+  Follow-up:
+  ----------------------------
+  - Show details of a test (lynis show details TEST-ID)
+  - Check the logfile for all details (less /var/log/lynis.log)
+  - Read security controls texts (https://cisofy.com)
+  - Use --upload to upload data to central system (Lynis Enterprise users)
+
+================================================================================
+
+  Lynis security scan details:
+
+  Hardening index : 65 [#############       ]
+  Tests performed : 258
+  Plugins enabled : 1
+
+  Components:
+  - Firewall               [V]
+  - Malware scanner        [V]
+
+  Scan mode:
+  Normal [V]  Forensics [ ]  Integration [ ]  Pentest [ ]
+
+  Lynis modules:
+  - Compliance status      [?]
+  - Security audit         [V]
+  - Vulnerability scan     [V]
+
+  Files:
+  - Test and debug information      : /var/log/lynis.log
+  - Report data                     : /var/log/lynis-report.dat
+
+================================================================================
+
+  Exceptions found
+  Some exceptional events or information was found!
+
+  What to do:
+  You can help by providing your log file (/var/log/lynis.log).
+  Go to https://cisofy.com/contact/ and send your file to the e-mail address listed
+
+================================================================================
+
+  Lynis 3.0.8
+
+  Auditing, system hardening, and compliance for UNIX-based systems
+  (Linux, macOS, BSD, and others)
+
+  2007-2021, CISOfy - https://cisofy.com/lynis/
+  Enterprise support available (compliance, plugins, interface and tools)
+
+================================================================================
+
+  [TIP]: Enhance Lynis audits by adding your settings to custom.prf (see /etc/lynis/default.prf for all settings)
+]
+
+Ahora quiero que me indiques qué cambios tengo que realizar para tener una configuración segura y eficiente. primero me vas a crear una lista de los cambios que debería realizar y luego empezaremos uno por uno a realizarlos. 
+Primero harás un análisis profundo de la situación actual y de los servicios que están corriendo y estudiarás cada uno de ellos para que a la hora de proponerme mejoras, no corramos el riesgo de que alguna de ellas se vea afectada por algún fallo. Pondrás especial atención a los certificados de correo, webs etc. y después de haberlo estudiado todo en profundidad me harás la lista de cambios que consideras necesarios.
+Tú dijiste:
+Sin olvidarnos de todos los procesos que tengo que realizar, necesito primero la opción B. Necesito saber con total certeza qué servicios tengo corriendo y que dan servicio al esterior. Se que hay un servidor de correo electrónico, hay un blog y hay una página web con wordpress, creo que tengo un servidor n8n pero no estoy seguro. En fín, quiero un análisis completo.
+Tú dijiste:
+sudo ss -tulnp
+[sudo] password for bidedigitala: 
+Netid     State      Recv-Q      Send-Q                Local Address:Port            Peer Address:Port     Process                                            
+udp       UNCONN     0           0                           0.0.0.0:5353                 0.0.0.0:*         users:(("avahi-daemon",pid=4154536,fd=12))        
+udp       UNCONN     0           0                           0.0.0.0:5355                 0.0.0.0:*         users:(("systemd-resolve",pid=2475476,fd=11))     
+udp       UNCONN     0           0                           0.0.0.0:50816                0.0.0.0:*         users:(("avahi-daemon",pid=4154536,fd=14))        
+udp       UNCONN     0           0                        127.0.0.54:53                   0.0.0.0:*         users:(("systemd-resolve",pid=2475476,fd=19))     
+udp       UNCONN     0           0                     127.0.0.53%lo:53                   0.0.0.0:*         users:(("systemd-resolve",pid=2475476,fd=17))     
+udp       UNCONN     0           0                213.165.65.69%ens6:68                   0.0.0.0:*         users:(("systemd-network",pid=2475479,fd=18))     
+udp       UNCONN     0           0                              [::]:5353                    [::]:*         users:(("avahi-daemon",pid=4154536,fd=13))        
+udp       UNCONN     0           0                              [::]:5355                    [::]:*         users:(("systemd-resolve",pid=2475476,fd=13))     
+udp       UNCONN     0           0                              [::]:57419                   [::]:*         users:(("avahi-daemon",pid=4154536,fd=15))        
+tcp       LISTEN     0           4096                      127.0.0.1:13306                0.0.0.0:*         users:(("docker-proxy",pid=1541033,fd=7))         
+tcp       LISTEN     0           4096                        0.0.0.0:8080                 0.0.0.0:*         users:(("docker-proxy",pid=1541105,fd=7))         
+tcp       LISTEN     0           4096                     127.0.0.54:53                   0.0.0.0:*         users:(("systemd-resolve",pid=2475476,fd=20))     
+tcp       LISTEN     0           4096                        0.0.0.0:5355                 0.0.0.0:*         users:(("systemd-resolve",pid=2475476,fd=12))     
+tcp       LISTEN     0           4096                        0.0.0.0:993                  0.0.0.0:*         users:(("docker-proxy",pid=1540737,fd=7))         
+tcp       LISTEN     0           4096                        0.0.0.0:995                  0.0.0.0:*         users:(("docker-proxy",pid=1540746,fd=7))         
+tcp       LISTEN     0           4096                        0.0.0.0:587                  0.0.0.0:*         users:(("docker-proxy",pid=1540811,fd=7))         
+tcp       LISTEN     0           4096                  127.0.0.53%lo:53                   0.0.0.0:*         users:(("systemd-resolve",pid=2475476,fd=18))     
+tcp       LISTEN     0           4096                      127.0.0.1:19991                0.0.0.0:*         users:(("docker-proxy",pid=1540761,fd=7))         
+tcp       LISTEN     0           4096                      127.0.0.1:7654                 0.0.0.0:*         users:(("docker-proxy",pid=1540518,fd=7))         
+tcp       LISTEN     0           4096                        0.0.0.0:465                  0.0.0.0:*         users:(("docker-proxy",pid=1540800,fd=7))         
+tcp       LISTEN     0           4096                        0.0.0.0:443                  0.0.0.0:*         users:(("docker-proxy",pid=230429,fd=7))          
+tcp       LISTEN     0           4096                        0.0.0.0:4190                 0.0.0.0:*         users:(("docker-proxy",pid=1540752,fd=7))         
+tcp       LISTEN     0           4096                        0.0.0.0:80                   0.0.0.0:*         users:(("docker-proxy",pid=230423,fd=7))          
+tcp       LISTEN     0           4096                        0.0.0.0:110                  0.0.0.0:*         users:(("docker-proxy",pid=1540722,fd=7))         
+tcp       LISTEN     0           4096                        0.0.0.0:25                   0.0.0.0:*         users:(("docker-proxy",pid=1540795,fd=7))         
+tcp       LISTEN     0           128                         0.0.0.0:22                   0.0.0.0:*         users:(("sshd",pid=2475477,fd=3))                 
+tcp       LISTEN     0           4096                        0.0.0.0:8443                 0.0.0.0:*         users:(("docker-proxy",pid=1541113,fd=7))         
+tcp       LISTEN     0           4096                        0.0.0.0:143                  0.0.0.0:*         users:(("docker-proxy",pid=1540728,fd=7))         
+tcp       LISTEN     0           128                            [::]:22                      [::]:*         users:(("sshd",pid=2475477,fd=4))       
+
+sudo docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}"
+NAMES                                   IMAGE                            PORTS                                                                                                                                        STATUS
+astro-bidedigitala                      bidedigitala-app                 8080/tcp                                                                                                                                     Up 3 weeks
+nginx-bidedigitala                      nginx:latest                     0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp                                                                                                     Up 2 months
+n8n-bidedigitala                        n8nio/n8n:latest                 5678/tcp                                                                                                                                     Up 2 months
+izkilimine-wp                           wordpress:latest                 80/tcp                                                                                                                                       Up 2 months
+izkilimine-db                           mariadb:10.6                     3306/tcp                                                                                                                                     Up 2 months
+mailcowdockerized-ipv6nat-mailcow-1     robbertkl/ipv6nat                                                                                                                                                             Up 2 months
+mailcowdockerized-watchdog-mailcow-1    ghcr.io/mailcow/watchdog:2.08                                                                                                                                                 Up 2 months
+mailcowdockerized-acme-mailcow-1        ghcr.io/mailcow/acme:1.93                                                                                                                                                     Up 2 months
+mailcowdockerized-nginx-mailcow-1       ghcr.io/mailcow/nginx:1.03       0.0.0.0:8080->8080/tcp, 80/tcp, 0.0.0.0:8443->8443/tcp                                                                                       Up 2 months
+mailcowdockerized-rspamd-mailcow-1      ghcr.io/mailcow/rspamd:2.2                                                                                                                                                    Up 24 hours
+mailcowdockerized-ofelia-mailcow-1      mcuadros/ofelia:latest                                                                                                                                                        Up 2 months
+mailcowdockerized-dovecot-mailcow-1     ghcr.io/mailcow/dovecot:2.34     0.0.0.0:110->110/tcp, 0.0.0.0:143->143/tcp, 0.0.0.0:993->993/tcp, 0.0.0.0:995->995/tcp, 0.0.0.0:4190->4190/tcp, 127.0.0.1:19991->12345/tcp   Up 2 months
+mailcowdockerized-postfix-mailcow-1     ghcr.io/mailcow/postfix:1.80     0.0.0.0:25->25/tcp, 0.0.0.0:465->465/tcp, 0.0.0.0:587->587/tcp, 588/tcp                                                                      Up 2 months
+mailcowdockerized-php-fpm-mailcow-1     ghcr.io/mailcow/phpfpm:1.93      9000/tcp                                                                                                                                     Up 2 months
+mailcowdockerized-mysql-mailcow-1       mariadb:10.11                    127.0.0.1:13306->3306/tcp                                                                                                                    Up 2 months
+mailcowdockerized-redis-mailcow-1       redis:7.4.2-alpine               127.0.0.1:7654->6379/tcp                                                                                                                     Up 2 months
+mailcowdockerized-clamd-mailcow-1       ghcr.io/mailcow/clamd:1.70                                                                                                                                                    Up 2 months (healthy)
+mailcowdockerized-dockerapi-mailcow-1   ghcr.io/mailcow/dockerapi:2.11                                                                                                                                                Up 2 months
+mailcowdockerized-memcached-mailcow-1   memcached:alpine                 11211/tcp                                                                                                                                    Up 2 months
+mailcowdockerized-unbound-mailcow-1     ghcr.io/mailcow/unbound:1.24     53/tcp, 53/udp                                                                                                                               Up 2 months (healthy)
+mailcowdockerized-netfilter-mailcow-1   ghcr.io/mailcow/netfilter:1.61                                                                                                                                                Up 8 weeks
+mailcowdockerized-sogo-mailcow-1        ghcr.io/mailcow/sogo:1.133                                                                                                                                                    Up 2 months
+mailcowdockerized-olefy-mailcow-1       ghcr.io/mailcow/olefy:1.15                                                                                                                                                    Up 2 months
+
+sudo docker inspect $(docker ps -q) --format='{{.Name}} -> {{range.NetworkSettings.Ports}}{{println .}}{{end}}'
+/astro-bidedigitala -> []
+
+/nginx-bidedigitala -> [{0.0.0.0 443}]
+[{0.0.0.0 80}]
+
+/n8n-bidedigitala -> []
+
+/izkilimine-wp -> []
+
+/izkilimine-db -> []
+
+/mailcowdockerized-ipv6nat-mailcow-1 -> 
+/mailcowdockerized-watchdog-mailcow-1 -> 
+/mailcowdockerized-acme-mailcow-1 -> 
+/mailcowdockerized-nginx-mailcow-1 -> []
+[{0.0.0.0 8080}]
+[{0.0.0.0 8443}]
+
+/mailcowdockerized-rspamd-mailcow-1 -> 
+/mailcowdockerized-ofelia-mailcow-1 -> 
+/mailcowdockerized-dovecot-mailcow-1 -> [{0.0.0.0 110}]
+[{127.0.0.1 19991}]
+[{0.0.0.0 143}]
+[{0.0.0.0 4190}]
+[{0.0.0.0 993}]
+[{0.0.0.0 995}]
+
+/mailcowdockerized-postfix-mailcow-1 -> [{0.0.0.0 25}]
+[{0.0.0.0 465}]
+[{0.0.0.0 587}]
+[]
+
+/mailcowdockerized-php-fpm-mailcow-1 -> []
+
+/mailcowdockerized-mysql-mailcow-1 -> [{127.0.0.1 13306}]
+
+/mailcowdockerized-redis-mailcow-1 -> [{127.0.0.1 7654}]
+
+/mailcowdockerized-clamd-mailcow-1 -> 
+/mailcowdockerized-dockerapi-mailcow-1 -> 
+/mailcowdockerized-memcached-mailcow-1 -> []
+
+/mailcowdockerized-unbound-mailcow-1 -> []
+[]
+
+/mailcowdockerized-netfilter-mailcow-1 -> 
+/mailcowdockerized-sogo-mailcow-1 -> 
+/mailcowdockerized-olefy-mailcow-1 -> 
+
+systemctl list-units --type=service --state=running
+  UNIT                        LOAD   ACTIVE SUB     DESCRIPTION                                   
+  avahi-daemon.service        loaded active running Avahi mDNS/DNS-SD Stack
+  clamav-daemon.service       loaded active running Clam AntiVirus userspace daemon
+  clamav-freshclam.service    loaded active running ClamAV virus database updater
+  containerd.service          loaded active running containerd container runtime
+  cron.service                loaded active running Regular background program processing daemon
+  dbus.service                loaded active running D-Bus System Message Bus
+  docker.service              loaded active running Docker Application Container Engine
+  getty@tty1.service          loaded active running Getty on tty1
+  ModemManager.service        loaded active running Modem Manager
+  polkit.service              loaded active running Authorization Manager
+  serial-getty@ttyS0.service  loaded active running Serial Getty on ttyS0
+  snapd.service               loaded active running Snap Daemon
+  ssh.service                 loaded active running OpenBSD Secure Shell server
+  systemd-journald.service    loaded active running Journal Service
+  systemd-logind.service      loaded active running User Login Management
+  systemd-networkd.service    loaded active running Network Configuration
+  systemd-resolved.service    loaded active running Network Name Resolution
+  systemd-timesyncd.service   loaded active running Network Time Synchronization
+  systemd-udevd.service       loaded active running Rule-based Manager for Device Events and Files
+  unattended-upgrades.service loaded active running Unattended Upgrades Shutdown
+  user@1002.service           loaded active running User Manager for UID 1002
+  wpa_supplicant.service      loaded active running WPA supplicant
+
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+SUB    = The low-level unit activation state, values depend on unit type.
+22 loaded units listed.
+
+dig A bidedigitala.eus
+
+; <<>> DiG 9.18.41-1~deb12u1-Debian <<>> A bidedigitala.eus
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 5233
+;; flags: qr rd ra ad; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;bidedigitala.eus.		IN	A
+
+;; ANSWER SECTION:
+bidedigitala.eus.	3600	IN	A	213.165.65.69
+
+;; Query time: 44 msec
+;; SERVER: 212.227.123.16#53(212.227.123.16) (UDP)
+;; WHEN: Sat Nov 15 16:35:33 CET 2025
+;; MSG SIZE  rcvd: 61
+
+dig A www.bidedigitala.eus
+
+; <<>> DiG 9.18.41-1~deb12u1-Debian <<>> A www.bidedigitala.eus
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 41686
+;; flags: qr rd ra ad; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;www.bidedigitala.eus.		IN	A
+
+;; ANSWER SECTION:
+www.bidedigitala.eus.	3600	IN	A	213.165.65.69
+
+;; Query time: 0 msec
+;; SERVER: 212.227.123.16#53(212.227.123.16) (UDP)
+;; WHEN: Sat Nov 15 16:36:15 CET 2025
+;; MSG SIZE  rcvd: 65
+
+dig A izkilimine.eus
+
+; <<>> DiG 9.18.41-1~deb12u1-Debian <<>> A izkilimine.eus
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 6590
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;izkilimine.eus.			IN	A
+
+;; ANSWER SECTION:
+izkilimine.eus.		2663	IN	A	213.165.65.69
+
+;; Query time: 44 msec
+;; SERVER: 212.227.123.16#53(212.227.123.16) (UDP)
+;; WHEN: Sat Nov 15 16:36:40 CET 2025
+;; MSG SIZE  rcvd: 59
+
+dig A www.izkilimine.eus
+
+; <<>> DiG 9.18.41-1~deb12u1-Debian <<>> A www.izkilimine.eus
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 21776
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;www.izkilimine.eus.		IN	A
+
+;; ANSWER SECTION:
+www.izkilimine.eus.	3600	IN	A	213.165.65.69
+
+;; Query time: 0 msec
+;; SERVER: 212.227.123.16#53(212.227.123.16) (UDP)
+;; WHEN: Sat Nov 15 16:37:07 CET 2025
+;; MSG SIZE  rcvd: 63
+sudo systemctl status postfix
+sudo systemctl status dovecot
+sudo postconf -n
+sudo doveconf -n
+Unit postfix.service could not be found.
+Unit dovecot.service could not be found.
+sudo: postconf: command not found
+sudo: doveconf: command not found
+sudo systemctl status nginx
+sudo systemctl status apache2
+Unit nginx.service could not be found.
+Unit apache2.service could not be found.
+
+sudo ls -l /etc/letsencrypt/live/
+ls: cannot access '/etc/letsencrypt/live/': No such file or directory
+sudo docker ps | grep n8n
+sudo systemctl status n8n
+3461cb54eae0   n8nio/n8n:latest                 "tini -- /docker-ent…"   2 months ago   Up 2 months             5678/tcp                                                                                                                                     n8n-bidedigitala
+○ n8n.service - N8N process manager
+     Loaded: loaded (/etc/systemd/system/n8n.service; disabled; preset: enabled)
+    Drop-In: /etc/systemd/system/n8n.service.d
+             └─30-env.conf
+     Active: inactive (dead)
+       Docs: https://n8n.io/
+
+
+
+Tú dijiste:
+
+SSH – Expuesto (puerto 22)
+
+Yo no he dicho que no quiero tener ssh activo, de hecho lo necesito para poder conectarme al servidor, sin ello ¿cómo me conectaría?
+Tú dijiste:
+antes de decir nada, tengo que comentar que accedo con clave pública, es decir, no introduzco nombre de usuario y contraseña, sino que tengo configurada mi clave pública para acceder, y quiero que esto siga siendo así.
+Tú dijiste:
+a
+Tú dijiste:
+La ip del servidor es:
+213.165.65.69
+
+La ip de mi pc es:
+67.218.229.154
+Tú dijiste:
+No tengo una ip fija, pero se suele mantener a lo largo del tiempo. Pienso que no me la voy a jugar con eso, si cambiamos el puerto del servicio ssh y acceso a partir de clave pública con el script que te muestro ahora:
+ssh bidedigitala@213.165.65.69
+creo que será suficiente
+
+Tú dijiste:
+asudo grep -i 'passwordauthentication' /etc/ssh/sshd_configh/sshd_config
+[sudo] password for bidedigitala: 
+PasswordAuthentication no
+# PasswordAuthentication.  Depending on your PAM configuration,
+# PAM authentication, then enable this but set PasswordAuthentication
+sudo grep -i 'pubkeyauthentication' /etc/ssh/sshd_config
+#PubkeyAuthentication yes
+Quiero el puerto número 37981 y deverás indicarme cómo debo modificar mi modo de acceso para acceder sin problemas.
+
+
+Tú dijiste:
+
+sudo nft add rule inet firewall input tcp dport 37981 accept
+
+sudo nft add rule inet firewall input tcp dport 37981 accept
+sudo: nft: command not found
+Tú dijiste:
+dpkg -l | grep nftables
+ii  libnftnl11:amd64                     1.2.4-2                             amd64        Netfilter nftables userspace API library
+
+which nft
+bidedigitala@my-vps:~$ 
+whereis nft
+nft:
+
+sudo update-alternatives --list iptables
+/usr/sbin/iptables-legacy
+/usr/sbin/iptables-nft
+
+sudo update-alternatives --config iptables
+There are 2 choices for the alternative iptables (providing /usr/sbin/iptables).
+
+  Selection    Path                       Priority   Status
+------------------------------------------------------------
+* 0            /usr/sbin/iptables-nft      20        auto mode
+  1            /usr/sbin/iptables-legacy   10        manual mode
+  2            /usr/sbin/iptables-nft      20        manual mode
+
+Press <enter> to keep the current choice[*], or type selection number: 
+
+
+Tú dijiste:
+which nft
+bidedigitala@my-vps:~$ 
+Tú dijiste:
+sudo apt update
+sudo apt install nftables
+Get:1 file:/etc/apt/mirrors/debian.list Mirrorlist [30 B]
+Get:5 file:/etc/apt/mirrors/debian-security.list Mirrorlist [39 B]                     
+Hit:7 https://download.docker.com/linux/debian bookworm InRelease                      
+Hit:8 https://deb.nodesource.com/node_20.x nodistro InRelease                                               
+Hit:2 https://deb.debian.org/debian bookworm InRelease                                                      
+Get:3 https://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+Get:4 https://deb.debian.org/debian bookworm-backports InRelease [59.4 kB]
+Hit:6 https://deb.debian.org/debian-security bookworm-security InRelease
+Fetched 115 kB in 1s (153 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+7 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libnftables1
+Suggested packages:
+  firewalld
+The following NEW packages will be installed:
+  libnftables1 nftables
+0 upgraded, 2 newly installed, 0 to remove and 7 not upgraded.
+Need to get 369 kB of archives.
+After this operation, 1122 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 file:/etc/apt/mirrors/debian.list Mirrorlist [30 B]
+Get:2 https://deb.debian.org/debian bookworm/main amd64 libnftables1 amd64 1.0.6-2+deb12u2 [299 kB]
+Get:3 https://deb.debian.org/debian bookworm/main amd64 nftables amd64 1.0.6-2+deb12u2 [70.3 kB]
+Fetched 369 kB in 0s (995 kB/s)
+Selecting previously unselected package libnftables1:amd64.
+(Reading database ... 60646 files and directories currently installed.)
+Preparing to unpack .../libnftables1_1.0.6-2+deb12u2_amd64.deb ...
+Unpacking libnftables1:amd64 (1.0.6-2+deb12u2) ...
+Selecting previously unselected package nftables.
+Preparing to unpack .../nftables_1.0.6-2+deb12u2_amd64.deb ...
+Unpacking nftables (1.0.6-2+deb12u2) ...
+Setting up libnftables1:amd64 (1.0.6-2+deb12u2) ...
+Setting up nftables (1.0.6-2+deb12u2) ...
+Processing triggers for man-db (2.11.2-2) ...
+Processing triggers for libc-bin (2.36-9+deb12u13) ...
+Scanning processes...                                                                                                                                                                                                                                                                     
+Scanning candidates...                                                                                                                                                                                                                                                                    
+Scanning linux images...                                                                                                                                                                                                                                                                  
+
+Restarting services...
+Service restarts being deferred:
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart docker.service
+ systemctl restart getty@tty1.service
+ systemctl restart serial-getty@ttyS0.service
+ systemctl restart systemd-logind.service
+ systemctl restart unattended-upgrades.service
+ systemctl restart wpa_supplicant.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ bidedigitala @ user manager service: systemd[2474411]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+bidedigitala@my-vps:~$ which nft
+bidedigitala@my-vps:~$ 
+
+Tú dijiste:
+sudo find / -name nft 2>/dev/null
+/usr/sbin/nft
+/var/lib/docker/overlay2/a60d97743e0f30aa51299b62adfd2300d0a108d47a9d2d470d38f0d8babbbbc1/merged/usr/sbin/nft
+/var/lib/docker/overlay2/5ed6a0b2570474b84bb915342ce4fd3f77d7c7687626518ffd2b875d3ea35dd7/diff/usr/sbin/nft
+Tú dijiste:
+sudo /usr/sbin/nft add rule inet firewall input tcp dport 37981 accept
+Error: Could not process rule: No such file or directory
+add rule inet firewall input tcp dport 37981 accept
+              ^^^^^^^^
+Tú dijiste:
+
+Vamos a detectarlo **con precisión**, porque cada VPS puede tener su propio nombre de tabla, y no queremos tocar nada que no exista.
+
+Hay que tener en cuenta que el servicio de vps ya tiene un firewall configurado en el panel del proveedor, se me había olvidado.
+Tú dijiste:
+Tengo el panel abierto, he modificado el puerto de conexión al nuevo definido, he cerrado la sesión y he accedido a través del nuevo puerto y ahora estoy eliminando del firewall del proveedor el puerto 22. Listo
+Tú dijiste:
+el ssh ya lo había configurado antes
+Tú dijiste:
+¿y lo de fail2ban?
+Tú dijiste:
+sudo fail2ban-client status sshd
+Status for the jail: sshd
+|- Filter
+|  |- Currently failed:	1
+|  |- Total failed:	1
+|  - Journal matches:	_SYSTEMD_UNIT=sshd.service + _COMM=sshd
+- Actions
+   |- Currently banned:	0
+   |- Total banned:	0
+   - Banned IP list:	
+bidedigitala@my-vps:~$ 
+Tú dijiste:
+a
+Tú dijiste:
+
+sudo systemctl stop avahi-daemon sudo systemctl disable avahi-daemon sudo apt purge avahi-daemon -y
+
+sudo systemctl stop avahi-daemon
+sudo systemctl disable avahi-daemon
+sudo apt purge avahi-daemon -y
+Warning: Stopping avahi-daemon.service, but it can still be activated by:
+  avahi-daemon.socket
+Removed "/etc/systemd/system/sockets.target.wants/avahi-daemon.socket".
+Removed "/etc/systemd/system/multi-user.target.wants/avahi-daemon.service".
+Removed "/etc/systemd/system/dbus-org.freedesktop.Avahi.service".
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  libavahi-core7 libdaemon0 libnss-mdns
+Use 'sudo apt autoremove' to remove them.
+The following packages will be REMOVED:
+  avahi-daemon*
+0 upgraded, 0 newly installed, 1 to remove and 7 not upgraded.
+After this operation, 273 kB disk space will be freed.
+(Reading database ... 61197 files and directories currently installed.)
+Removing avahi-daemon (0.8-10+deb12u1) ...
+Created symlink /run/systemd/system/avahi-daemon.service → /dev/null.
+Removed "/run/systemd/system/avahi-daemon.service".
+Processing triggers for dbus (1.14.10-1~deb12u1) ...
+Processing triggers for man-db (2.11.2-2) ...
+(Reading database ... 61167 files and directories currently installed.)
+Purging configuration files for avahi-daemon (0.8-10+deb12u1) ...
+rmdir: failed to remove '/run/avahi-daemon': Directory not empty
+bidedigitala@my-vps:~$ 
+Tú dijiste:
+sudo systemctl stop ModemManager
+sudo systemctl disable ModemManager
+sudo apt purge modemmanager -y
+Removed "/etc/systemd/system/multi-user.target.wants/ModemManager.service".
+Removed "/etc/systemd/system/dbus-org.freedesktop.ModemManager1.service".
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  libavahi-core7 libdaemon0 libjim0.81 libmbim-glib4 libmbim-proxy libmbim-utils libnss-mdns libqmi-glib5 libqmi-proxy libqmi-utils libqrtr-glib0 usb-modeswitch usb-modeswitch-data
+Use 'sudo apt autoremove' to remove them.
+The following packages will be REMOVED:
+  modemmanager*
+0 upgraded, 0 newly installed, 1 to remove and 7 not upgraded.
+After this operation, 4552 kB disk space will be freed.
+(Reading database ... 61163 files and directories currently installed.)
+Removing modemmanager (1.20.4-1) ...
+Unknown option: runtime
+Processing triggers for man-db (2.11.2-2) ...
+Processing triggers for dbus (1.14.10-1~deb12u1) ...
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+(Reading database ... 61029 files and directories currently installed.)
+Purging configuration files for modemmanager (1.20.4-1) ...
+Processing triggers for dbus (1.14.10-1~deb12u1) ...
+Tú dijiste:
+sudo systemctl stop wpa_supplicant
+sudo systemctl disable wpa_supplicant
+sudo apt purge wpasupplicant -y
+Removed "/etc/systemd/system/multi-user.target.wants/wpa_supplicant.service".
+Removed "/etc/systemd/system/dbus-fi.w1.wpa_supplicant1.service".
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  libavahi-core7 libdaemon0 libjim0.81 libmbim-glib4 libmbim-proxy libmbim-utils libnl-3-200 libnl-genl-3-200 libnl-route-3-200 libnss-mdns libpcsclite1 libqmi-glib5 libqmi-proxy libqmi-utils libqrtr-glib0 usb-modeswitch usb-modeswitch-data
+Use 'sudo apt autoremove' to remove them.
+The following packages will be REMOVED:
+  wpasupplicant*
+0 upgraded, 0 newly installed, 1 to remove and 7 not upgraded.
+After this operation, 3949 kB disk space will be freed.
+(Reading database ... 61028 files and directories currently installed.)
+Removing wpasupplicant (2:2.10-12+deb12u3) ...
+Processing triggers for dbus (1.14.10-1~deb12u1) ...
+Processing triggers for man-db (2.11.2-2) ...
+(Reading database ... 60975 files and directories currently installed.)
+Purging configuration files for wpasupplicant (2:2.10-12+deb12u3) ...
+Processing triggers for dbus (1.14.10-1~deb12u1) ...
+Tú dijiste:
+sudo systemctl stop snapd
+sudo systemctl disable snapd
+sudo apt purge snapd -y
+sudo rm -rf /var/cache/snapd/
+Warning: Stopping snapd.service, but it can still be activated by:
+  snapd.socket
+Removed "/etc/systemd/system/multi-user.target.wants/snapd.service".
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  libavahi-core7 libdaemon0 libjim0.81 liblzo2-2 libmbim-glib4 libmbim-proxy libmbim-utils libnl-3-200 libnl-genl-3-200 libnl-route-3-200 libnss-mdns libpcsclite1 libqmi-glib5 libqmi-proxy libqmi-utils libqrtr-glib0 squashfs-tools usb-modeswitch usb-modeswitch-data
+Use 'sudo apt autoremove' to remove them.
+The following packages will be REMOVED:
+  snapd*
+0 upgraded, 0 newly installed, 1 to remove and 7 not upgraded.
+After this operation, 61.4 MB disk space will be freed.
+(Reading database ... 60970 files and directories currently installed.)
+Removing snapd (2.57.6-1+b6) ...
+Stopping snap.certbot.renew.service
+Stopping unit snap.certbot.renew.service
+Waiting until unit snap.certbot.renew.service is stopped [attempt 1]
+snap.certbot.renew.service is stopped.
+Stopping snap.certbot.renew.timer
+Stopping unit snap.certbot.renew.timer
+Waiting until unit snap.certbot.renew.timer is stopped [attempt 1]
+snap.certbot.renew.timer is stopped.
+Processing triggers for dbus (1.14.10-1~deb12u1) ...
+Processing triggers for mailcap (3.70+nmu1) ...
+Processing triggers for man-db (2.11.2-2) ...
+(Reading database ... 60901 files and directories currently installed.)
+Purging configuration files for snapd (2.57.6-1+b6) ...
+Stopping snap.certbot.renew.service
+Stopping unit snap.certbot.renew.service
+Waiting until unit snap.certbot.renew.service is stopped [attempt 1]
+snap.certbot.renew.service is stopped.
+Removing snap.certbot.renew.service
+Stopping snap-certbot-4965.mount
+Stopping unit snap-certbot-4965.mount
+Waiting until unit snap-certbot-4965.mount is stopped [attempt 1]
+snap-certbot-4965.mount is stopped.
+Removing snap certbot and revision 4965
+Stopping unit snap.certbot.renew.timer
+Waiting until unit snap.certbot.renew.timer is stopped [attempt 1]
+snap.certbot.renew.timer is stopped.
+Stopping unit snap.certbot.renew.timer
+Warning: The unit file, source configuration file or drop-ins of snap.certbot.renew.timer changed on disk. Run 'systemctl daemon-reload' to reload units.
+Waiting until unit snap.certbot.renew.timer is stopped [attempt 1]
+snap.certbot.renew.timer is stopped.
+Removing snap-certbot-4965.mount
+Stopping snap-certbot-5057.mount
+Stopping unit snap-certbot-5057.mount
+Waiting until unit snap-certbot-5057.mount is stopped [attempt 1]
+snap-certbot-5057.mount is stopped.
+Removing snap certbot and revision 5057
+Removing snap-certbot-5057.mount
+Stopping snap-core-17212.mount
+Stopping unit snap-core-17212.mount
+Waiting until unit snap-core-17212.mount is stopped [attempt 1]
+snap-core-17212.mount is stopped.
+Removing snap core and revision 17212
+Removing snap-core-17212.mount
+Stopping snap-core-17247.mount
+Stopping unit snap-core-17247.mount
+Waiting until unit snap-core-17247.mount is stopped [attempt 1]
+snap-core-17247.mount is stopped.
+Removing snap core and revision 17247
+Removing snap-core-17247.mount
+Stopping snap-core24-1196.mount
+Stopping unit snap-core24-1196.mount
+Waiting until unit snap-core24-1196.mount is stopped [attempt 1]
+snap-core24-1196.mount is stopped.
+Removing snap core24 and revision 1196
+Removing snap-core24-1196.mount
+Stopping snap-core24-1225.mount
+Stopping unit snap-core24-1225.mount
+Waiting until unit snap-core24-1225.mount is stopped [attempt 1]
+snap-core24-1225.mount is stopped.
+Removing snap core24 and revision 1225
+Removing snap-core24-1225.mount
+Discarding preserved snap namespaces
+Final directory cleanup
+Removing extra snap-confine apparmor rules
+Removing snapd cache
+Removing snapd state
+bidedigitala@my-vps:~$ 
+Tú dijiste:
+systemctl list-units --type=service --state=running
+  UNIT                        LOAD   ACTIVE SUB     DESCRIPTION                                   
+  clamav-daemon.service       loaded active running Clam AntiVirus userspace daemon
+  containerd.service          loaded active running containerd container runtime
+  cron.service                loaded active running Regular background program processing daemon
+  dbus.service                loaded active running D-Bus System Message Bus
+  docker.service              loaded active running Docker Application Container Engine
+  fail2ban.service            loaded active running Fail2Ban Service
+  getty@tty1.service          loaded active running Getty on tty1
+  polkit.service              loaded active running Authorization Manager
+  serial-getty@ttyS0.service  loaded active running Serial Getty on ttyS0
+  ssh.service                 loaded active running OpenBSD Secure Shell server
+  systemd-journald.service    loaded active running Journal Service
+  systemd-logind.service      loaded active running User Login Management
+  systemd-networkd.service    loaded active running Network Configuration
+  systemd-resolved.service    loaded active running Network Name Resolution
+  systemd-timesyncd.service   loaded active running Network Time Synchronization
+  systemd-udevd.service       loaded active running Rule-based Manager for Device Events and Files
+  unattended-upgrades.service loaded active running Unattended Upgrades Shutdown
+  user@1002.service           loaded active running User Manager for UID 1002
+
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+SUB    = The low-level unit activation state, values depend on unit type.
+18 loaded units listed.
+bidedigitala@my-vps:~$ 
+Tú dijiste:
+1
+Tú dijiste:
+bidedigitala@my-vps:~$ hostname
+my-vps
+bidedigitala@my-vps:~$ hostname -f
+my-vps
+bidedigitala@my-vps:~$ cat /etc/hosts
+127.0.0.1	localhost
+::1		localhost ip6-localhost ip6-loopback
+ff02::1		ip6-allnodes
+ff02::2		ip6-allrouters
+Tú dijiste:
+hosts actualizado
+Tú dijiste:
+cat /etc/apt/sources.list
+ls /etc/apt/sources.list.d
+# See /etc/apt/sources.list.d/debian.sources
+debian.sources  docker.list  nodesource.list
+Tú dijiste:
+cat /etc/apt/sources.list.d/debian.sources
+Types: deb deb-src
+URIs: mirror+file:///etc/apt/mirrors/debian.list
+Suites: bookworm bookworm-updates bookworm-backports
+Components: main
+
+Types: deb deb-src
+URIs: mirror+file:///etc/apt/mirrors/debian-security.list
+Suites: bookworm-security
+Components: main
+bidedigitala@my-vps:~$ 
+Tú dijiste:
+sudo apt update
+Get:1 file:/etc/apt/mirrors/debian.list Mirrorlist [30 B]
+Get:2 file:/etc/apt/mirrors/debian-security.list Mirrorlist [39 B]
+Hit:7 https://download.docker.com/linux/debian bookworm InRelease                                       
+Hit:8 https://deb.nodesource.com/node_20.x nodistro InRelease                                           
+Hit:3 https://deb.debian.org/debian bookworm InRelease                         
+Hit:4 https://deb.debian.org/debian bookworm-updates InRelease
+Hit:5 https://deb.debian.org/debian bookworm-backports InRelease
+Hit:6 https://deb.debian.org/debian-security bookworm-security InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+7 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Tú dijiste:
+sudo sysctl --system
+* Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+* Applying /etc/sysctl.d/99-hardening.conf ...
+* Applying /usr/lib/sysctl.d/99-protect-links.conf ...
+* Applying /etc/sysctl.d/99-sysctl.conf ...
+* Applying /etc/sysctl.conf ...
+kernel.pid_max = 4194304
+net.ipv4.ip_forward = 0
+net.ipv6.conf.all.forwarding = 0
+net.ipv4.conf.all.accept_source_route = 0
+net.ipv4.conf.default.accept_source_route = 0
+net.ipv6.conf.all.accept_source_route = 0
+net.ipv6.conf.default.accept_source_route = 0
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv4.conf.default.accept_redirects = 0
+net.ipv6.conf.all.accept_redirects = 0
+net.ipv6.conf.default.accept_redirects = 0
+net.ipv4.conf.all.send_redirects = 0
+net.ipv4.conf.default.send_redirects = 0
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.conf.default.rp_filter = 1
+net.ipv4.conf.all.log_martians = 1
+net.ipv4.conf.default.log_martians = 1
+net.ipv4.tcp_syncookies = 1
+net.ipv6.conf.all.use_tempaddr = 0
+net.ipv6.conf.default.use_tempaddr = 0
+kernel.kptr_restrict = 2
+kernel.dmesg_restrict = 1
+fs.suid_dumpable = 0
+kernel.yama.ptrace_scope = 1
+fs.protected_fifos = 1
+fs.protected_hardlinks = 1
+fs.protected_regular = 2
+fs.protected_symlinks = 1
+net.ipv4.ip_forward = 1
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+net.ipv4.ip_forward = 1
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+bidedigitala@my-vps:~$ 
+Tú dijiste:
+
+Explicación rápida: * `UMASK 027` → nuevos ficheros no serán accesibles por “otros” * `SHA512` → encriptación fuerte * `PASS_MAX_DAYS` → 3 meses de vida * `PASS_MIN_DAYS` → no se puede cambiar varias veces al día * `PASS_WARN_AGE` → avisa 2 semanas antes
+
+¿esto no me afecta a mí para entrar verdad, ni a la clave de sudo que tengo?
+Tú dijiste:
+LISTO
+Tú dijiste:
+
+No tienes definida una UMASK en `/etc/login.defs`
+
+la acabo de poner
+Tú dijiste:
+
+grep -i umask /etc/login.defs
+
+grep -i umask /etc/login.defs
+#	UMASK		Default "umask" value.
+# UMASK is the default umask value for pam_umask and is used by
+# 022 is the "historical" value in Debian for UMASK
+# If USERGROUPS_ENAB is set to "yes", that will modify this UMASK default value
+UMASK		027
+# If HOME_MODE is not set, the value of UMASK is used to create the mode.
+# Other former uses of this variable such as setting the umask when
+Tú dijiste:
+
+grep -i umask /etc/profile
+
+grep -i umask /etc/profile
+bidedigitala@my-vps:~$ 
+Tú dijiste:
+umask aplicada
+antes me salía la línea del prompt de color verde y ahora de color normal (negro y fino)
+Tú dijiste:
+prompt recuperado
+Tú dijiste:
+ grep -i banner /etc/ssh/sshd_config
+# no default banner path
+#Banner none
+bidedigitala@my-vps:~$ 
+Tú dijiste:
+banners configurados
+Tú dijiste:
+systemctl list-unit-files --state=enabled
+UNIT FILE                            STATE   PRESET  
+apparmor.service                     enabled enabled 
+clamav-daemon.service                enabled enabled 
+cloud-config.service                 enabled enabled 
+cloud-final.service                  enabled enabled 
+cloud-init-local.service             enabled enabled 
+cloud-init.service                   enabled enabled 
+containerd.service                   enabled enabled 
+cron.service                         enabled enabled 
+docker.service                       enabled enabled 
+e2scrub_reap.service                 enabled enabled 
+fail2ban.service                     enabled enabled 
+netfilter-persistent.service         enabled enabled 
+ssh.service                          enabled enabled 
+systemd-network-generator.service    enabled enabled 
+systemd-networkd-wait-online.service enabled disabled
+systemd-networkd.service             enabled enabled 
+systemd-pstore.service               enabled enabled 
+systemd-resolved.service             enabled enabled 
+systemd-timesyncd.service            enabled enabled 
+unattended-upgrades.service          enabled enabled 
+clamav-daemon.socket                 enabled enabled 
+cloud-init-hotplugd.socket           enabled enabled 
+docker.socket                        enabled enabled 
+systemd-networkd.socket              enabled enabled 
+uuidd.socket                         enabled enabled 
+remote-fs.target                     enabled enabled 
+apt-daily-upgrade.timer              enabled enabled 
+apt-daily.timer                      enabled enabled 
+dpkg-db-backup.timer                 enabled enabled 
+e2scrub_all.timer                    enabled enabled 
+exim4-base.timer                     enabled enabled 
+fstrim.timer                         enabled enabled 
+logrotate.timer                      enabled enabled 
+lynis.timer                          enabled enabled 
+man-db.timer                         enabled enabled 
+
+Tú dijiste:
+a
+Tú dijiste:
+dpkg -l | grep exim
+ii  exim4-base                           4.96-15+deb12u7                     amd64        support files for all Exim MTA (v4) packages
+ii  exim4-config                         4.96-15+deb12u7                     all          configuration for the Exim MTA (v4)
+ii  exim4-daemon-light                   4.96-15+deb12u7                     amd64        lightweight Exim MTA (v4) daemon
+
+systemctl status clamav-daemon
+● clamav-daemon.service - Clam AntiVirus userspace daemon
+     Loaded: loaded (/lib/systemd/system/clamav-daemon.service; enabled; preset: enabled)
+    Drop-In: /etc/systemd/system/clamav-daemon.service.d
+             └─extend.conf
+     Active: active (running) since Sat 2025-11-15 17:23:52 CET; 1h 9min ago
+TriggeredBy: ● clamav-daemon.socket
+       Docs: man:clamd(8)
+             man:clamd.conf(5)
+             https://docs.clamav.net/
+   Main PID: 519 (clamd)
+      Tasks: 2 (limit: 9475)
+     Memory: 1.6G
+        CPU: 15.643s
+     CGroup: /system.slice/clamav-daemon.service
+             └─519 /usr/sbin/clamd --foreground=true
+
+Warning: some journal files were not opened due to insufficient permissions.
+
+sudo iptables -L -nv
+sudo ip6tables -L -nv
+Chain INPUT (policy ACCEPT 7368 packets, 2957K bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+ 7323 2950K MAILCOW    0    --  *      *       0.0.0.0/0            0.0.0.0/0            /* mailcow */
+ 7374 2957K ufw-before-logging-input  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 7374 2957K ufw-before-input  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 7374 2957K ufw-after-input  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 7374 2957K ufw-after-logging-input  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 7374 2957K ufw-reject-input  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 7374 2957K ufw-track-input  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  wg0    *       0.0.0.0/0            0.0.0.0/0           
+    6   504 ACCEPT     1    --  *      *       0.0.0.0/0            0.0.0.0/0            icmptype 8
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+21131   27M MAILCOW    0    --  *      *       0.0.0.0/0            0.0.0.0/0            /* mailcow */
+21131   27M DOCKER-USER  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+21131   27M DOCKER-FORWARD  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  wg0    ens6    0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  ens6   wg0     0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+    0     0 ACCEPT     0    --  wg0    *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  *      wg0     0.0.0.0/0            0.0.0.0/0           
+
+Chain OUTPUT (policy ACCEPT 8522 packets, 1036K bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+ 8528 1037K ufw-before-logging-output  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 8528 1037K ufw-before-output  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 8528 1037K ufw-after-output  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 8528 1037K ufw-after-logging-output  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 8528 1037K ufw-reject-output  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 8528 1037K ufw-track-output  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  *      wg0     0.0.0.0/0            0.0.0.0/0           
+    6   504 ACCEPT     1    --  *      *       0.0.0.0/0            0.0.0.0/0            icmptype 0
+
+Chain DOCKER (5 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    3   172 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.10          tcp dpt:8443
+   10   532 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.10          tcp dpt:8080
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.9           tcp dpt:3306
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:12345
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:4190
+    4   220 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:995
+   48  2824 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:993
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:143
+    1    40 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:110
+   60  3536 ACCEPT     6    --  !br-c7a44aa3c8fd br-c7a44aa3c8fd  0.0.0.0/0            172.18.0.4           tcp dpt:443
+   11   584 ACCEPT     6    --  !br-c7a44aa3c8fd br-c7a44aa3c8fd  0.0.0.0/0            172.18.0.4           tcp dpt:80
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.249         tcp dpt:6379
+    0     0 DROP       0    --  !br-53e24c03607c br-53e24c03607c  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  !br-8e9e2266c76f br-8e9e2266c76f  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  !br-c7a44aa3c8fd br-c7a44aa3c8fd  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  !br-mailcow br-mailcow  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  !docker0 docker0  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-BRIDGE (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DOCKER     0    --  *      br-53e24c03607c  0.0.0.0/0            0.0.0.0/0           
+    0     0 DOCKER     0    --  *      br-8e9e2266c76f  0.0.0.0/0            0.0.0.0/0           
+   71  4120 DOCKER     0    --  *      br-c7a44aa3c8fd  0.0.0.0/0            0.0.0.0/0           
+   66  3788 DOCKER     0    --  *      br-mailcow  0.0.0.0/0            0.0.0.0/0           
+    0     0 DOCKER     0    --  *      docker0  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-CT (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     0    --  *      br-53e24c03607c  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+   14 12647 ACCEPT     0    --  *      br-8e9e2266c76f  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+  780  100K ACCEPT     0    --  *      br-c7a44aa3c8fd  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+ 9369   25M ACCEPT     0    --  *      br-mailcow  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+    0     0 ACCEPT     0    --  *      docker0  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+
+Chain DOCKER-FORWARD (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+21131   27M DOCKER-CT  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+10968 2334K DOCKER-ISOLATION-STAGE-1  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+10968 2334K DOCKER-BRIDGE  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  br-53e24c03607c *       0.0.0.0/0            0.0.0.0/0           
+   12  2637 ACCEPT     0    --  br-8e9e2266c76f *       0.0.0.0/0            0.0.0.0/0           
+  867 1087K ACCEPT     0    --  br-c7a44aa3c8fd *       0.0.0.0/0            0.0.0.0/0           
+ 9952 1236K ACCEPT     0    --  br-mailcow *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  docker0 *       0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-ISOLATION-STAGE-1 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DOCKER-ISOLATION-STAGE-2  0    --  br-53e24c03607c !br-53e24c03607c  0.0.0.0/0            0.0.0.0/0           
+   12  2637 DOCKER-ISOLATION-STAGE-2  0    --  br-8e9e2266c76f !br-8e9e2266c76f  0.0.0.0/0            0.0.0.0/0           
+  867 1087K DOCKER-ISOLATION-STAGE-2  0    --  br-c7a44aa3c8fd !br-c7a44aa3c8fd  0.0.0.0/0            0.0.0.0/0           
+ 9952 1236K DOCKER-ISOLATION-STAGE-2  0    --  br-mailcow !br-mailcow  0.0.0.0/0            0.0.0.0/0           
+    0     0 DOCKER-ISOLATION-STAGE-2  0    --  docker0 !docker0  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-ISOLATION-STAGE-2 (5 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DROP       0    --  *      docker0  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  *      br-mailcow  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  *      br-c7a44aa3c8fd  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  *      br-8e9e2266c76f  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  *      br-53e24c03607c  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-USER (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain MAILCOW (2 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DROP       6    --  !br-mailcow br-mailcow  0.0.0.0/0            0.0.0.0/0            /* mailcow isolation */
+
+Chain ufw-after-forward (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-after-input (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-after-logging-forward (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-after-logging-input (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-after-logging-output (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-after-output (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-before-forward (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-before-input (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-before-logging-forward (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-before-logging-input (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-before-logging-output (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-before-output (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-reject-forward (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-reject-input (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-reject-output (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-track-forward (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-track-input (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-track-output (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+Chain INPUT (policy ACCEPT 404 packets, 26974 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+  391 25318 MAILCOW    0    --  *      *       ::/0                 ::/0                 /* mailcow */
+    0     0 ACCEPT     0    --  lo     *       ::/0                 ::/0                
+
+Chain FORWARD (policy DROP 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 MAILCOW    0    --  *      *       ::/0                 ::/0                 /* mailcow */
+    0     0 DOCKER-USER  0    --  *      *       ::/0                 ::/0                
+    0     0 DOCKER     0    --  *      br-mailcow  ::/0                 ::/0                
+    0     0 ACCEPT     0    --  *      br-mailcow  ::/0                 ::/0                 ctstate RELATED,ESTABLISHED
+    0     0 ACCEPT     0    --  br-mailcow !br-mailcow  ::/0                 ::/0                
+    0     0 ACCEPT     0    --  br-mailcow br-mailcow  ::/0                 ::/0                
+    0     0 DOCKER-ISOLATION-STAGE-1  0    --  *      *       ::/0                 ::/0                
+    0     0 DOCKER-FORWARD  0    --  *      *       ::/0                 ::/0                
+
+Chain OUTPUT (policy ACCEPT 564 packets, 59751 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     0    --  *      lo      ::/0                 ::/0                
+
+Chain DOCKER (2 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  ::/0                 fd4d:6169:6c63:6f77::d  tcp dpt:8443
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  ::/0                 fd4d:6169:6c63:6f77::d  tcp dpt:8080
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  ::/0                 fd4d:6169:6c63:6f77::8  tcp dpt:110
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  ::/0                 fd4d:6169:6c63:6f77::8  tcp dpt:143
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  ::/0                 fd4d:6169:6c63:6f77::8  tcp dpt:4190
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  ::/0                 fd4d:6169:6c63:6f77::8  tcp dpt:993
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  ::/0                 fd4d:6169:6c63:6f77::8  tcp dpt:995
+
+Chain DOCKER-BRIDGE (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DOCKER     0    --  *      br-mailcow  ::/0                 ::/0                
+
+Chain DOCKER-CT (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     0    --  *      br-mailcow  ::/0                 ::/0                 ctstate RELATED,ESTABLISHED
+
+Chain DOCKER-FORWARD (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DOCKER-CT  0    --  *      *       ::/0                 ::/0                
+    0     0 DOCKER-ISOLATION-STAGE-1  0    --  *      *       ::/0                 ::/0                
+    0     0 DOCKER-BRIDGE  0    --  *      *       ::/0                 ::/0                
+    0     0 ACCEPT     0    --  br-mailcow *       ::/0                 ::/0                
+
+Chain DOCKER-ISOLATION-STAGE-1 (2 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DOCKER-ISOLATION-STAGE-2  0    --  br-mailcow !br-mailcow  ::/0                 ::/0                
+    0     0 RETURN     0    --  *      *       ::/0                 ::/0                
+
+Chain DOCKER-ISOLATION-STAGE-2 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DROP       0    --  *      br-mailcow  ::/0                 ::/0                
+    0     0 RETURN     0    --  *      *       ::/0                 ::/0                
+
+Chain DOCKER-USER (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 RETURN     0    --  *      *       ::/0                 ::/0                
+
+Chain MAILCOW (2 references)
+ pkts bytes target     prot opt in     out     source               destination         
+bidedigitala@my-vps:~$ 
+
+dpkg -l | grep exim
+ii  exim4-base                           4.96-15+deb12u7                     amd64        support files for all Exim MTA (v4) packages
+ii  exim4-config                         4.96-15+deb12u7                     all          configuration for the Exim MTA (v4)
+ii  exim4-daemon-light                   4.96-15+deb12u7                     amd64        lightweight Exim MTA (v4) daemon
+bidedigitala@my-vps:~$ 
+
+ systemctl list-sockets
+LISTEN                                 UNIT                            ACTIVATES                  
+/run/clamav/clamd.ctl                  clamav-daemon.socket            clamav-daemon.service
+/run/cloud-init/share/hook-hotplug-cmd cloud-init-hotplugd.socket      cloud-init-hotplugd.service
+/run/dbus/system_bus_socket            dbus.socket                     dbus.service
+/run/docker.sock                       docker.socket                   docker.service
+/run/initctl                           systemd-initctl.socket          systemd-initctl.service
+/run/systemd/fsck.progress             systemd-fsckd.socket            systemd-fsckd.service
+/run/systemd/journal/dev-log           systemd-journald-dev-log.socket systemd-journald.service
+/run/systemd/journal/socket            systemd-journald.socket         systemd-journald.service
+/run/systemd/journal/stdout            systemd-journald.socket         systemd-journald.service
+/run/udev/control                      systemd-udevd-control.socket    systemd-udevd.service
+/run/uuidd/request                     uuidd.socket                    uuidd.service
+audit 1                                systemd-journald-audit.socket   systemd-journald.service
+kobject-uevent 1                       systemd-udevd-kernel.socket     systemd-udevd.service
+route 1361                             systemd-networkd.socket         systemd-networkd.service
+
+14 sockets listed.
+Pass --all to see loaded but inactive sockets, too.
+bidedigitala@my-vps:~$ 
+
+
+Tú dijiste:
+ya los he eliminado
+Tú dijiste:
+sudo systemctl stop exim4
+sudo systemctl disable exim4
+sudo apt purge --autoremove exim4-base exim4-config exim4-daemon-light -y
+exim4.service is not a native service, redirecting to systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install disable exim4
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages will be REMOVED:
+  bsd-mailx* exim4-base* exim4-config* exim4-daemon-light* libevent-2.1-7* libgnutls-dane0* libidn12* liblockfile-bin* liblockfile1* libunbound8*
+0 upgraded, 0 newly installed, 10 to remove and 7 not upgraded.
+After this operation, 6944 kB disk space will be freed.
+(Reading database ... 60730 files and directories currently installed.)
+Removing bsd-mailx (8.1.2-0.20220412cvs-1) ...
+Removing exim4-daemon-light (4.96-15+deb12u7) ...
+Removing exim4-base (4.96-15+deb12u7) ...
+Removing exim4-config (4.96-15+deb12u7) ...
+Removing libgnutls-dane0:amd64 (3.7.9-2+deb12u5) ...
+Removing libunbound8:amd64 (1.17.1-2+deb12u3) ...
+Removing libevent-2.1-7:amd64 (2.1.12-stable-8) ...
+Removing libidn12:amd64 (1.41-1) ...
+Removing liblockfile1:amd64 (1.17-1+b1) ...
+Removing liblockfile-bin (1.17-1+b1) ...
+Processing triggers for man-db (2.11.2-2) ...
+Processing triggers for libc-bin (2.36-9+deb12u13) ...
+(Reading database ... 60547 files and directories currently installed.)
+Purging configuration files for exim4-base (4.96-15+deb12u7) ...
+Purging configuration files for bsd-mailx (8.1.2-0.20220412cvs-1) ...
+Purging configuration files for exim4-config (4.96-15+deb12u7) ...
+dpkg-statoverride: warning: no override present
+Purging configuration files for exim4-daemon-light (4.96-15+deb12u7) ...
+bidedigitala@my-vps:~$ sudo systemctl stop clamav-daemon
+sudo systemctl disable clamav-daemon
+sudo apt purge --autoremove clamav-daemon clamav-freshclam -y
+Warning: Stopping clamav-daemon.service, but it can still be activated by:
+  clamav-daemon.socket
+Synchronizing state of clamav-daemon.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install disable clamav-daemon
+Removed "/etc/systemd/system/sockets.target.wants/clamav-daemon.socket".
+Removed "/etc/systemd/system/multi-user.target.wants/clamav-daemon.service".
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages will be REMOVED:
+  clamav* clamav-base* clamav-daemon* clamav-freshclam* clamdscan* libclamav11* libmspack0* libncurses6*
+0 upgraded, 0 newly installed, 8 to remove and 7 not upgraded.
+After this operation, 64.0 MB disk space will be freed.
+(Reading database ... 60488 files and directories currently installed.)
+Removing clamav (1.0.9+dfsg-1~deb12u1) ...
+Removing clamav-daemon (1.0.9+dfsg-1~deb12u1) ...
+Removing clamdscan (1.0.9+dfsg-1~deb12u1) ...
+Removing clamav-freshclam (1.0.9+dfsg-1~deb12u1) ...
+Removing libclamav11:amd64 (1.0.9+dfsg-1~deb12u1) ...
+Removing libmspack0:amd64 (0.11-1) ...
+Removing libncurses6:amd64 (6.4-4) ...
+Removing clamav-base (1.0.9+dfsg-1~deb12u1) ...
+Processing triggers for man-db (2.11.2-2) ...
+Processing triggers for libc-bin (2.36-9+deb12u13) ...
+(Reading database ... 60383 files and directories currently installed.)
+Purging configuration files for clamav-freshclam (1.0.9+dfsg-1~deb12u1) ...
+Purging configuration files for clamav-daemon (1.0.9+dfsg-1~deb12u1) ...
+Purging configuration files for clamav-base (1.0.9+dfsg-1~deb12u1) ...
+bidedigitala@my-vps:~$ dpkg -l | grep exim
+systemctl status exim4
+Unit exim4.service could not be found.
+bidedigitala@my-vps:~$ dpkg -l | grep clamav
+systemctl status clamav-daemon
+Unit clamav-daemon.service could not be found.
+bidedigitala@my-vps:~$ sudo apt autoremove --purge -y
+sudo apt autoclean
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+0 upgraded, 0 newly installed, 0 to remove and 7 not upgraded.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+bidedigitala@my-vps:~$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           7.7Gi       3.9Gi       2.0Gi        61Mi       2.2Gi       3.9Gi
+Swap:          2.0Gi       524Ki       2.0Gi
+Tú dijiste:
+1
+Tú dijiste:
+dpkg -l | grep ufw
+rc  ufw                                  0.36.2-1                            all          program for managing a Netfilter firewall
+bidedigitala@my-vps:~$ sudo systemctl status ufw
+Unit ufw.service could not be found.
+bidedigitala@my-vps:~$ 
+Tú dijiste:
+sudo iptables -L -nv
+Chain INPUT (policy ACCEPT 8326 packets, 3212K bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+ 8281 3205K MAILCOW    0    --  *      *       0.0.0.0/0            0.0.0.0/0            /* mailcow */
+ 8332 3212K ufw-before-logging-input  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 8332 3212K ufw-before-input  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 8332 3212K ufw-after-input  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 8332 3212K ufw-after-logging-input  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 8332 3212K ufw-reject-input  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 8332 3212K ufw-track-input  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  wg0    *       0.0.0.0/0            0.0.0.0/0           
+    6   504 ACCEPT     1    --  *      *       0.0.0.0/0            0.0.0.0/0            icmptype 8
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+24874   32M MAILCOW    0    --  *      *       0.0.0.0/0            0.0.0.0/0            /* mailcow */
+24874   32M DOCKER-USER  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+24874   32M DOCKER-FORWARD  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  wg0    ens6    0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  ens6   wg0     0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+    0     0 ACCEPT     0    --  wg0    *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  *      wg0     0.0.0.0/0            0.0.0.0/0           
+
+Chain OUTPUT (policy ACCEPT 9645 packets, 1209K bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+ 9651 1210K ufw-before-logging-output  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 9651 1210K ufw-before-output  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 9651 1210K ufw-after-output  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 9651 1210K ufw-after-logging-output  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 9651 1210K ufw-reject-output  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 9651 1210K ufw-track-output  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  *      wg0     0.0.0.0/0            0.0.0.0/0           
+    6   504 ACCEPT     1    --  *      *       0.0.0.0/0            0.0.0.0/0            icmptype 0
+
+Chain DOCKER (5 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    3   172 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.10          tcp dpt:8443
+   10   532 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.10          tcp dpt:8080
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.9           tcp dpt:3306
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:12345
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:4190
+    4   220 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:995
+   48  2824 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:993
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:143
+    1    40 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:110
+   69  4068 ACCEPT     6    --  !br-c7a44aa3c8fd br-c7a44aa3c8fd  0.0.0.0/0            172.18.0.4           tcp dpt:443
+   13   684 ACCEPT     6    --  !br-c7a44aa3c8fd br-c7a44aa3c8fd  0.0.0.0/0            172.18.0.4           tcp dpt:80
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.249         tcp dpt:6379
+    0     0 DROP       0    --  !br-53e24c03607c br-53e24c03607c  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  !br-8e9e2266c76f br-8e9e2266c76f  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  !br-c7a44aa3c8fd br-c7a44aa3c8fd  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  !br-mailcow br-mailcow  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  !docker0 docker0  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-BRIDGE (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DOCKER     0    --  *      br-53e24c03607c  0.0.0.0/0            0.0.0.0/0           
+    0     0 DOCKER     0    --  *      br-8e9e2266c76f  0.0.0.0/0            0.0.0.0/0           
+   82  4752 DOCKER     0    --  *      br-c7a44aa3c8fd  0.0.0.0/0            0.0.0.0/0           
+   66  3788 DOCKER     0    --  *      br-mailcow  0.0.0.0/0            0.0.0.0/0           
+    0     0 DOCKER     0    --  *      docker0  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-CT (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     0    --  *      br-53e24c03607c  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+   14 12647 ACCEPT     0    --  *      br-8e9e2266c76f  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+ 1355  148K ACCEPT     0    --  *      br-c7a44aa3c8fd  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+10766   29M ACCEPT     0    --  *      br-mailcow  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+    0     0 ACCEPT     0    --  *      docker0  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+
+Chain DOCKER-FORWARD (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+24874   32M DOCKER-CT  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+12739 3734K DOCKER-ISOLATION-STAGE-1  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+12739 3734K DOCKER-BRIDGE  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  br-53e24c03607c *       0.0.0.0/0            0.0.0.0/0           
+   12  2637 ACCEPT     0    --  br-8e9e2266c76f *       0.0.0.0/0            0.0.0.0/0           
+ 1225 2362K ACCEPT     0    --  br-c7a44aa3c8fd *       0.0.0.0/0            0.0.0.0/0           
+11354 1360K ACCEPT     0    --  br-mailcow *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  docker0 *       0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-ISOLATION-STAGE-1 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DOCKER-ISOLATION-STAGE-2  0    --  br-53e24c03607c !br-53e24c03607c  0.0.0.0/0            0.0.0.0/0           
+   12  2637 DOCKER-ISOLATION-STAGE-2  0    --  br-8e9e2266c76f !br-8e9e2266c76f  0.0.0.0/0            0.0.0.0/0           
+ 1225 2362K DOCKER-ISOLATION-STAGE-2  0    --  br-c7a44aa3c8fd !br-c7a44aa3c8fd  0.0.0.0/0            0.0.0.0/0           
+11354 1360K DOCKER-ISOLATION-STAGE-2  0    --  br-mailcow !br-mailcow  0.0.0.0/0            0.0.0.0/0           
+    0     0 DOCKER-ISOLATION-STAGE-2  0    --  docker0 !docker0  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-ISOLATION-STAGE-2 (5 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DROP       0    --  *      docker0  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  *      br-mailcow  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  *      br-c7a44aa3c8fd  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  *      br-8e9e2266c76f  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  *      br-53e24c03607c  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-USER (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain MAILCOW (2 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DROP       6    --  !br-mailcow br-mailcow  0.0.0.0/0            0.0.0.0/0            /* mailcow isolation */
+
+Chain ufw-after-input (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-after-logging-input (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-after-logging-output (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-after-output (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-before-input (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-before-logging-input (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-before-logging-output (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-before-output (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-reject-input (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-reject-output (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-track-forward (0 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-track-input (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain ufw-track-output (1 references)
+ pkts bytes target     prot opt in     out     source               destination 
+Tú dijiste:
+sudo systemctl restart docker
+bidedigitala@my-vps:~$ sudo iptables -L -nv
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+  180 62007 MAILCOW    0    --  *      *       0.0.0.0/0            0.0.0.0/0            /* mailcow */
+  180 62007 DOCKER-USER  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+  180 62007 DOCKER-FORWARD  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain DOCKER (5 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.249         tcp dpt:6379
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.8           tcp dpt:3306
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.5           tcp dpt:8443
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.5           tcp dpt:8080
+    0     0 ACCEPT     6    --  !br-c7a44aa3c8fd br-c7a44aa3c8fd  0.0.0.0/0            172.18.0.4           tcp dpt:443
+    0     0 ACCEPT     6    --  !br-c7a44aa3c8fd br-c7a44aa3c8fd  0.0.0.0/0            172.18.0.4           tcp dpt:80
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:12345
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:4190
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:995
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:993
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:143
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.250         tcp dpt:110
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.253         tcp dpt:587
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.253         tcp dpt:465
+    0     0 ACCEPT     6    --  !br-mailcow br-mailcow  0.0.0.0/0            172.22.1.253         tcp dpt:25
+    0     0 DROP       0    --  !br-mailcow br-mailcow  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  !br-53e24c03607c br-53e24c03607c  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  !br-8e9e2266c76f br-8e9e2266c76f  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  !br-c7a44aa3c8fd br-c7a44aa3c8fd  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  !docker0 docker0  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-BRIDGE (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DOCKER     0    --  *      br-mailcow  0.0.0.0/0            0.0.0.0/0           
+    0     0 DOCKER     0    --  *      br-53e24c03607c  0.0.0.0/0            0.0.0.0/0           
+    0     0 DOCKER     0    --  *      br-8e9e2266c76f  0.0.0.0/0            0.0.0.0/0           
+    0     0 DOCKER     0    --  *      br-c7a44aa3c8fd  0.0.0.0/0            0.0.0.0/0           
+    0     0 DOCKER     0    --  *      docker0  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-CT (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+   83 47780 ACCEPT     0    --  *      br-mailcow  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+    0     0 ACCEPT     0    --  *      br-53e24c03607c  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+    0     0 ACCEPT     0    --  *      br-8e9e2266c76f  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+    6  3794 ACCEPT     0    --  *      br-c7a44aa3c8fd  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+    0     0 ACCEPT     0    --  *      docker0  0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+
+Chain DOCKER-FORWARD (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+  180 62007 DOCKER-CT  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+   91 10433 DOCKER-ISOLATION-STAGE-1  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+   91 10433 DOCKER-BRIDGE  0    --  *      *       0.0.0.0/0            0.0.0.0/0           
+   84  6438 ACCEPT     0    --  br-mailcow *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  br-53e24c03607c *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  br-8e9e2266c76f *       0.0.0.0/0            0.0.0.0/0           
+    7  3995 ACCEPT     0    --  br-c7a44aa3c8fd *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     0    --  docker0 *       0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-ISOLATION-STAGE-1 (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+   84  6438 DOCKER-ISOLATION-STAGE-2  0    --  br-mailcow !br-mailcow  0.0.0.0/0            0.0.0.0/0           
+    0     0 DOCKER-ISOLATION-STAGE-2  0    --  br-53e24c03607c !br-53e24c03607c  0.0.0.0/0            0.0.0.0/0           
+    0     0 DOCKER-ISOLATION-STAGE-2  0    --  br-8e9e2266c76f !br-8e9e2266c76f  0.0.0.0/0            0.0.0.0/0           
+    7  3995 DOCKER-ISOLATION-STAGE-2  0    --  br-c7a44aa3c8fd !br-c7a44aa3c8fd  0.0.0.0/0            0.0.0.0/0           
+    0     0 DOCKER-ISOLATION-STAGE-2  0    --  docker0 !docker0  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-ISOLATION-STAGE-2 (5 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DROP       0    --  *      docker0  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  *      br-c7a44aa3c8fd  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  *      br-8e9e2266c76f  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  *      br-53e24c03607c  0.0.0.0/0            0.0.0.0/0           
+    0     0 DROP       0    --  *      br-mailcow  0.0.0.0/0            0.0.0.0/0           
+
+Chain DOCKER-USER (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain MAILCOW (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DROP       6    --  !br-mailcow br-mailcow  0.0.0.0/0            0.0.0.0/0            /* mailcow isolation */
+Tú dijiste:
+Pero ¿no recuerdas que mi firewall lo configura mi proveedor en su panel de vps?
+Tú dijiste:
+No, eso  ya lo tengo correcto
+Tú dijiste:
+No se lo que tocaría ahora, pero creo que me urge el tema de comprobar los certificados de mi web
+Tú dijiste:
+echo | openssl s_client -connect bidedigitala.eus:443 -servername bidedigitala.eus 2>/dev/null | openssl x509 -noout -dates -issuer -subject
+notBefore=Aug  4 09:24:45 2025 GMT
+notAfter=Nov  2 09:24:44 2025 GMT
+issuer=C = US, O = Let's Encrypt, CN = E6
+subject=CN = bidedigitala.eus
+
+ten en cuenta que hoy es 15/11/25
+
+Tú dijiste:
+creo que los certificados de bidedigitala.eus van por un lado y los de maicow por otro, del mismo modo que izkilimiñe va por otro lado. Esto debería de estar de algun modo unificado
+Tú dijiste:
+Antes de hacer esto, que lo haremos, primero vamos a eliminar el servicio n8n, ya que no lo uso, pero dejaremos toda la infraestructura para poder instalarlo de nuevo si fuera necesario. ¿es esto posible, sin dañar ningún otro servicio? Quiero tener alguna forma de gestionar todos los servicios de manera unifiada, a pesar de que algunos están sobre docker y otros no. Te recuerdo que todo nuestro chat se desarrolla en español de españa
+Tú dijiste:
+ls -R /opt
+/opt:
+containerd
+ls: cannot open directory '/opt/containerd': Permission denied
+Tú dijiste:
+docker ps -a
+CONTAINER ID   IMAGE                            COMMAND                  CREATED        STATUS                    PORTS                                                                                                                                        NAMES
+c9840d7e1a33   bidedigitala-app                 "docker-entrypoint.s…"   3 weeks ago    Up 11 minutes             8080/tcp                                                                                                                                     astro-bidedigitala
+bdec5a2577f6   nginx:latest                     "/docker-entrypoint.…"   2 months ago   Up 11 minutes             0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp                                                                                                     nginx-bidedigitala
+3461cb54eae0   n8nio/n8n:latest                 "tini -- /docker-ent…"   2 months ago   Up 11 minutes             5678/tcp                                                                                                                                     n8n-bidedigitala
+886852fc8516   wordpress:latest                 "docker-entrypoint.s…"   2 months ago   Up 11 minutes             80/tcp                                                                                                                                       izkilimine-wp
+441d60cf9dc7   mariadb:10.6                     "docker-entrypoint.s…"   2 months ago   Up 11 minutes             3306/tcp                                                                                                                                     izkilimine-db
+fb328e5cd59e   robbertkl/ipv6nat                "/docker-ipv6nat-com…"   3 months ago   Up 11 minutes                                                                                                                                                          mailcowdockerized-ipv6nat-mailcow-1
+f34314412d0c   ghcr.io/mailcow/watchdog:2.08    "/watchdog.sh"           3 months ago   Up 11 minutes                                                                                                                                                          mailcowdockerized-watchdog-mailcow-1
+b7b02d489949   ghcr.io/mailcow/acme:1.93        "/sbin/tini -g -- /s…"   3 months ago   Up 11 minutes                                                                                                                                                          mailcowdockerized-acme-mailcow-1
+f4bce7f1e13c   ghcr.io/mailcow/nginx:1.03       "/docker-entrypoint.…"   3 months ago   Up 11 minutes             0.0.0.0:8080->8080/tcp, 80/tcp, 0.0.0.0:8443->8443/tcp                                                                                       mailcowdockerized-nginx-mailcow-1
+ac0b2aa20e92   ghcr.io/mailcow/rspamd:2.2       "/docker-entrypoint.…"   3 months ago   Up 11 minutes                                                                                                                                                          mailcowdockerized-rspamd-mailcow-1
+c28c0a2bce03   mcuadros/ofelia:latest           "/usr/bin/ofelia dae…"   3 months ago   Up 11 minutes                                                                                                                                                          mailcowdockerized-ofelia-mailcow-1
+ebb5205bb39d   ghcr.io/mailcow/dovecot:2.34     "/docker-entrypoint.…"   3 months ago   Up 11 minutes             0.0.0.0:110->110/tcp, 0.0.0.0:143->143/tcp, 0.0.0.0:993->993/tcp, 0.0.0.0:995->995/tcp, 0.0.0.0:4190->4190/tcp, 127.0.0.1:19991->12345/tcp   mailcowdockerized-dovecot-mailcow-1
+5820b3bf51eb   ghcr.io/mailcow/postfix:1.80     "/docker-entrypoint.…"   3 months ago   Up 11 minutes             0.0.0.0:25->25/tcp, 0.0.0.0:465->465/tcp, 0.0.0.0:587->587/tcp, 588/tcp                                                                      mailcowdockerized-postfix-mailcow-1
+731be6e28d04   ghcr.io/mailcow/phpfpm:1.93      "/docker-entrypoint.…"   3 months ago   Up 11 minutes             9000/tcp                                                                                                                                     mailcowdockerized-php-fpm-mailcow-1
+4b993f5f2c0f   mariadb:10.11                    "docker-entrypoint.s…"   3 months ago   Up 11 minutes             127.0.0.1:13306->3306/tcp                                                                                                                    mailcowdockerized-mysql-mailcow-1
+75d7fc0d75ae   redis:7.4.2-alpine               "/bin/sh /redis-conf…"   3 months ago   Up 11 minutes             127.0.0.1:7654->6379/tcp                                                                                                                     mailcowdockerized-redis-mailcow-1
+6db15e702a7c   ghcr.io/mailcow/clamd:1.70       "/sbin/tini -g -- /c…"   3 months ago   Up 11 minutes (healthy)                                                                                                                                                mailcowdockerized-clamd-mailcow-1
+a3fec7d03978   ghcr.io/mailcow/dockerapi:2.11   "/bin/sh /app/docker…"   3 months ago   Up 11 minutes                                                                                                                                                          mailcowdockerized-dockerapi-mailcow-1
+74976d97ecfe   memcached:alpine                 "docker-entrypoint.s…"   3 months ago   Up 11 minutes             11211/tcp                                                                                                                                    mailcowdockerized-memcached-mailcow-1
+4c781766ddf0   ghcr.io/mailcow/unbound:1.24     "/docker-entrypoint.…"   3 months ago   Up 11 minutes (healthy)   53/tcp, 53/udp                                                                                                                               mailcowdockerized-unbound-mailcow-1
+4f324ddd5b72   ghcr.io/mailcow/netfilter:1.61   "/bin/sh -c /app/doc…"   3 months ago   Up 11 minutes                                                                                                                                                          mailcowdockerized-netfilter-mailcow-1
+92b5365f7265   ghcr.io/mailcow/sogo:1.133       "/docker-entrypoint.…"   3 months ago   Up 11 minutes                                                                                                                                                          mailcowdockerized-sogo-mailcow-1
+6207e33c3a1a   ghcr.io/mailcow/olefy:1.15       "python3 -u /app/ole…"   3 months ago   Up 11 minutes                                                                                                                                                          mailcowdockerized-olefy-mailcow-1
+Tú dijiste:
+Te listo los archivos de mi carpeta /srv/bidedigitala/:
+
+ ls -alF /srv/bidedigitala
+total 416
+drwxr-xr-x  19 bidedigitala bidedigitala   4096 Oct 20 11:48 ./
+drwxr-xr-x   7 root         root           4096 Aug 20 18:42 ../
+drwxr-xr-x   3 bidedigitala bidedigitala   4096 Sep  2 17:36 .astro/
+-rw-r--r--   1 bidedigitala bidedigitala    194 Sep  4 12:42 .dockerignore
+-rw-r--r--   1 bidedigitala bidedigitala    302 Sep  3 18:32 .env
+drwxr-xr-x   8 bidedigitala bidedigitala   4096 Oct 20 11:41 .git/
+-rw-r--r--   1 bidedigitala bidedigitala    513 Sep  4 12:42 .gitignore
+-rw-r--r--   1 bidedigitala bidedigitala      0 Jul 23 13:02 .gitkeep
+drwxr-xr-x   2 bidedigitala bidedigitala   4096 Jul 23 13:02 .vscode/
+-rw-r--r--   1 bidedigitala bidedigitala    612 Sep  3 19:00 Dockerfile.app
+-rw-r--r--   1 bidedigitala bidedigitala   2962 Jul 23 13:02 README.md
+drwxr-xr-x   2 bidedigitala bidedigitala   4096 Sep 10 19:18 analytics/
+-rw-r--r--   1 bidedigitala bidedigitala    126 Jul 23 13:02 astro-i18next.config.mjs
+-rw-r--r--   1 bidedigitala bidedigitala    455 Sep  3 18:46 astro.config.mjs
+drwxr-xr-x   4 bidedigitala bidedigitala   4096 Jul 23 13:04 certbot/
+drwxr-xr-x   7 root         root           4096 Aug 20 21:27 certs/
+drwxr-xr-x   2 bidedigitala bidedigitala   4096 Sep  3 19:59 data/
+-rwxr-xr-x   1 bidedigitala bidedigitala   1557 Sep  4 13:12 deploy.sh*
+drwxr-xr-x   4 bidedigitala bidedigitala   4096 Oct 20 11:48 dist/
+-rw-r--r--   1 bidedigitala bidedigitala   2018 Sep 10 19:45 docker-compose.yml
+drwxr-xr-x   3 bidedigitala bidedigitala   4096 Jul 23 13:04 logs/
+drwxr-xr-x   6 n8n          n8n            4096 Nov 15 18:45 n8n_data/
+drwxr-xr-x   3 bidedigitala bidedigitala   4096 Jul 23 13:04 nginx/
+-rw-r--r--   1 bidedigitala bidedigitala    362 Jul 23 13:52 nginx.conf
+-rw-r--r--   1 bidedigitala bidedigitala     51 Sep 10 19:21 nginx.htpasswd
+-rw-r--r--   1 bidedigitala bidedigitala   1188 Sep  4 12:56 nginx.izkilimine.conf
+-rw-r--r--   1 bidedigitala bidedigitala   1697 Sep  4 12:56 nginx.n8n.conf
+drwxr-xr-x   2 root         root           4096 Sep 10 19:45 nginx.privado.conf/
+-rw-r--r--   1 bidedigitala bidedigitala    633 Jul 23 13:23 nginx.ssl
+-rw-r--r--   1 bidedigitala bidedigitala   2113 Sep 10 19:43 nginx.ssl.conf
+-rw-r--r--   1 bidedigitala bidedigitala    669 Sep  3 19:37 nginx.ssl.conf.bak.2025-09-03-1937
+drwxr-xr-x 342 bidedigitala bidedigitala  20480 Oct 20 11:48 node_modules/
+-rw-r--r--   1 bidedigitala bidedigitala 251632 Sep  3 18:46 package-lock.json
+-rw-r--r--   1 bidedigitala bidedigitala    580 Sep  3 18:46 package.json
+drwxr-xr-x   6 bidedigitala bidedigitala   4096 Jul 28 20:41 public/
+-rwxr-xr-x   1 bidedigitala bidedigitala    378 Jul 23 21:24 renew.sh*
+drwxr-xr-x   2 bidedigitala bidedigitala   4096 Sep 10 20:26 scripts/
+drwxr-xr-x  11 bidedigitala bidedigitala   4096 Sep  2 17:36 src/
+-rw-r--r--   1 bidedigitala bidedigitala    730 Jul 28 20:41 tsconfig.json
+drwxr-xr-x   3 bidedigitala bidedigitala   4096 Aug 20 19:32 webroot/
+
+ChatGPT puede cometer errores. Considera verificar la información importante. Ver preferencias de cookies.
