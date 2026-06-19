@@ -13,6 +13,7 @@
     --color-blue: #074AA3;          /* acento secundario, con moderación */
     --color-text-primary: #2C2C2A;  /* texto principal (gris cálido casi negro) */
     --color-text-secondary: #5F5E5A;
+    --color-text-invert: #FFFFFF;   /* texto sobre fondos de color/marca */
     --color-bg: #FFFFFF;
     --color-bg-secondary: #F7F6F3;  /* blanco roto cálido, fondo de sección */
     --color-border: rgba(0, 0, 0, 0.08);
