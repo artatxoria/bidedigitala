@@ -6,6 +6,19 @@
 }
 
 :root {
+    /* === Sistema de diseño 2026 (tokens base) ===
+       Fuente única de verdad de color/tipografía. Los componentes
+       todavía usan las variables --primary-color/--text-dark/etc. de
+       abajo; la migración a estos tokens se hará después. */
+    --color-purple: #6E4F9E;        /* marca: CTAs, números destacados, enlaces activos */
+    --color-purple-light: #AA96DA;  /* solo hover/estados secundarios, no fondos grandes */
+    --color-blue: #074AA3;          /* acento secundario, con moderación */
+    --color-text-primary: #2C2C2A;  /* texto principal (gris cálido casi negro) */
+    --color-text-secondary: #5F5E5A;
+    --color-bg: #FFFFFF;
+    --color-bg-secondary: #F7F6F3;  /* blanco roto cálido, fondo de sección */
+    --color-border: rgba(0, 0, 0, 0.08);
+
     /* Colores principales */
     --primary-color: #2563eb;
     --primary-dark: #1d4ed8;
@@ -18,9 +31,10 @@
     --bg-white: #ffffff;
     --border-light: #e5e7eb;
 
-    /* Tipografía */
-    --font-primary: 'Poppins', sans-serif;
-    --font-secondary: 'Inter', sans-serif;
+    /* Tipografía — Inter para cuerpo y titulares.
+       (El logo es una imagen; su tipografía de marca no se ve afectada.) */
+    --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-secondary: 'Inter', system-ui, -apple-system, sans-serif;
 
     /* Espaciado */
     --section-padding: 80px 0;
