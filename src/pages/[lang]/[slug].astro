@@ -166,7 +166,7 @@ export async function getStaticPaths() {
   .blog-post {
     margin-top: 8rem;
     flex: 0 1 680px;
-    background: var(--background, #fff);
+    background: var(--color-bg);
     padding: 1.5rem;
     border-radius: 8px;
     z-index: 1;
@@ -179,9 +179,9 @@ export async function getStaticPaths() {
     left: max(calc(50% - 700px), 2rem);
     top: 12rem;
     width: 240px;
-    background: #fff;
-    border: 1px solid #eee;
-    border-left: 4px solid var(--accent-color, #f89b0e);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-purple);
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     padding: 1rem 1.2rem;
@@ -198,14 +198,14 @@ export async function getStaticPaths() {
 
   .toc a {
     display: block;
-    color: var(--text-color, #333);
+    color: var(--color-text-primary);
     text-decoration: none;
     padding: 0.25rem 0;
     font-size: 0.9rem;
   }
 
   .toc a:hover {
-    color: var(--accent-color, #f89b0e);
+    color: var(--color-purple);
   }
 
   /* --- Aside derecho (artículos relacionados) --- */
@@ -214,9 +214,9 @@ export async function getStaticPaths() {
     right: max(calc(50% - 700px), 2rem);
     top: 12rem;
     width: 300px;
-    background: #fff;
-    border: 1px solid #eee;
-    border-left: 4px solid var(--accent-color, #f89b0e);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-purple);
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     padding: 1rem 1.2rem;
@@ -244,12 +244,12 @@ export async function getStaticPaths() {
   .related-posts a {
     display: block;
     font-weight: 500;
-    color: var(--text-color, #333);
+    color: var(--color-text-primary);
     text-decoration: none;
   }
 
   .related-posts a:hover {
-    color: var(--accent-color, #f89b0e);
+    color: var(--color-purple);
   }
 
   .related-posts time {
