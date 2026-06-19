@@ -58,11 +58,23 @@ const { lang } = Astro.props;
 <style>
   .hero {
     position: relative;
-    min-height: 100vh;
     display: flex;
     align-items: center;
     overflow: hidden;
+    /* Altura natural según contenido (no forzamos 100vh: con la cabecera fija
+       y la fila de métricas, centrar en 100vh dejaba los CTAs/métricas fuera
+       del viewport). min-height da presencia sin recortar nada.
+       El padding-top despeja la cabecera fija; anula el `section{padding:5rem}`. */
+    min-height: 88vh;
+    padding: 130px 0 4rem;
     background: linear-gradient(160deg, var(--color-bg-secondary) 0%, var(--color-bg) 60%);
+  }
+
+  /* El .container global trae padding-top:120px para separarse de la cabecera
+     fija en páginas normales. Dentro del hero ya centramos con flex, así que
+     lo anulamos: si no, empuja los CTAs y las métricas fuera del viewport. */
+  .hero .container {
+    padding-top: 0;
   }
 
   /* --- Formas decorativas (derivadas de la marca, opacidad baja) --- */
@@ -230,9 +242,22 @@ const { lang } = Astro.props;
   }
 
   @media (max-width: 768px) {
+    .hero {
+      padding-top: 100px;
+    }
+
+    .hero-title {
+      font-size: 2.4rem;
+    }
+
     .hero-cta {
       flex-direction: column;
       align-items: center;
+    }
+
+    .hero-cta .btn {
+      width: 100%;
+      max-width: 320px;
     }
 
     .hero-metrics {
@@ -245,6 +270,10 @@ const { lang } = Astro.props;
   }
 
   @media (max-width: 480px) {
+    .hero-title {
+      font-size: 1.95rem;
+    }
+
     .hero-subtitle {
       font-size: 1rem;
     }
