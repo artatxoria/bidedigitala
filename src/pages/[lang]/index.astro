@@ -4,6 +4,7 @@
 //Importaciones
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { t, tPath } from "../../lib/translations";
+import Hero from "../../components/Hero.astro";
 import Problemas from "../../components/Problemas.astro";
 import Valores from "../../components/Valores.astro";
 import Servicios from "../../components/Servicios.astro";
@@ -40,42 +41,7 @@ const title = t(lang, "home.title");
 <BaseLayout lang={lang} title={title}>
   <NavegacionSecundaria lang={lang} slot="secondary-nav" />
 
-  <!-- Hero Section -->
-  <section id="inicio" class="hero">
-    <div class="hero-background">
-      <div class="hero-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-      </div>
-      <div class="hero-overlay"></div>
-    </div>
-    <div class="container">
-      <div class="hero-content">
-        <h1 class="hero-title">
-          <span class="typing-text">{t(lang, "hero.title")}</span>
-          <br />
-          <span class="highlight">{t(lang, "hero.title_")}</span>
-        </h1>
-        <p class="hero-subtitle">
-          <span class="badge">🚀{t(lang, "hero.badge")}</span>
-          <span class="badge">⚡{t(lang, "hero.badge_")}</span>
-          <span class="badge">📈{t(lang, "hero.badge__")}</span>
-        </p>
-
-        <div class="hero-cta">
-          <a href="#contacto" class="btn btn-primary">
-            <i class="fas fa-rocket"></i>
-            {t(lang, "hero.contacto")}
-          </a>
-        </div>
-        <a href="#diferenciadores" class="btn btn-secondary">
-          <i class="fas fa-play"></i>
-          {t(lang, "hero.diferencia")}
-        </a>
-      </div>
-    </div>
-  </section>
+  <Hero lang={lang} />
 
   <Problemas lang={lang} />
 

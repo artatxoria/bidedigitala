@@ -70,3 +70,35 @@ const title = dict.title;
   <Automatizacion lang={lang} />
   <Programacion lang={lang} />
 </BaseLayout>
+
+<style>
+  /* Hero del catálogo. Antes dependía de las reglas .hero* globales de
+     style.css (eliminadas al extraer el Hero de la home a Hero.astro).
+     Estilos propios basados en tokens. */
+  .courses-hero {
+    text-align: center;
+  }
+
+  .courses-hero .hero-content {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .courses-hero .hero-title {
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+  }
+
+  .courses-hero .hero-subtitle {
+    margin-bottom: 0.75rem;
+    color: var(--color-text-secondary);
+    font-size: 1.25rem;
+  }
+
+  .courses-hero .hero-description {
+    max-width: 640px;
+    margin: 0 auto;
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+  }
+</style>
