@@ -77,34 +77,6 @@ function initTooltips() {
 }
 
 
-// Typing Animation
-function initTypingAnimation() {
-    const typingElement = document.querySelector('.typing-text');
-    if (!typingElement) return;
-
-    const text = typingElement.textContent;
-    typingElement.textContent = '';
-    
-    let index = 0;
-    const speed = 50; // milliseconds per character
-
-    function typeWriter() {
-        if (index < text.length) {
-            typingElement.textContent += text.charAt(index);
-            index++;
-            setTimeout(typeWriter, speed);
-        } else {
-            // Add blinking cursor effect
-            typingElement.style.borderRight = '3px solid #1e3a8a';
-            typingElement.style.animation = 'blink 1s infinite';
-        }
-    }
-
-    // Start typing animation after a short delay
-    setTimeout(typeWriter, 1000);
-}
-
-
 // Mobile Navigation
 function initMobileNavigation() {
     const navToggle = document.querySelector('.nav-toggle');
@@ -152,9 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Mobile Navigation
     initMobileNavigation();
-  
-  // Typing Animation
-    initTypingAnimation();
 
 
   // 1) Toggle menú móvil
