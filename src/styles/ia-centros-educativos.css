@@ -1,17 +1,13 @@
 
 /* ======================================================
    BideDigitala · Estilo base
-   Paleta: BideDigitala (bide_purple, bide_blue, etc.)
+   Paleta de marca (--bide-*) definida en styles/tokens.css
    ====================================================== */
+@import "./tokens.css";
 
 /* Paleta principal */
 :root {
-  --bide-purple: #AA96DA; 
-  --bide-purple-dark: #6E4F9E; 
-  --bide-blue: #074AA3; 
-  --bide-gray: #4A4A4A; 
-  --bide-light: #F5F4FA; 
-  --bg-main: #ffffff; 
+  --bg-main: #ffffff;
   --bg-alt: #f1f3f8; 
   --bg-soft: #ffffff; 
   --text-main: #111827; 

@@ -1,0 +1,28 @@
+/* ======================================================
+   BideDigitala · Tokens de diseño (fuente única de verdad)
+   Importado por: assets/css/style.css, styles/diseinu-zerbitzua.css,
+   styles/ia-centros-educativos.css.
+   El blog (global.css) todavía NO usa estos tokens.
+   ====================================================== */
+
+:root {
+    /* === Paleta base 2026 === */
+    --color-purple: #6E4F9E;        /* marca: CTAs, números destacados, enlaces activos */
+    --color-purple-light: #AA96DA;  /* solo hover/estados secundarios, no fondos grandes */
+    --color-purple-dark: #5A3F80;   /* estado oscuro/hover de la marca (~15% más oscuro) */
+    --color-blue: #074AA3;          /* acento secundario, con moderación */
+    --color-text-primary: #2C2C2A;  /* texto principal (gris cálido casi negro) */
+    --color-text-secondary: #5F5E5A;
+    --color-bg: #FFFFFF;
+    --color-bg-secondary: #F7F6F3;  /* blanco roto cálido, fondo de sección */
+    --color-border: rgba(0, 0, 0, 0.08);
+
+    /* === Alias de marca (sistema --bide-*) ===
+       Antes duplicados en diseinu-zerbitzua.css e ia-centros-educativos.css.
+       Ahora apuntan a la paleta base; no asignar colores aquí directamente. */
+    --bide-purple: var(--color-purple-light);
+    --bide-purple-dark: var(--color-purple);
+    --bide-blue: var(--color-blue);
+    --bide-gray: var(--color-text-primary);
+    --bide-light: var(--color-bg-secondary);
+}

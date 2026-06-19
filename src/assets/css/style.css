@@ -1,4 +1,6 @@
 /* Reset y Variables CSS */
+@import "../../styles/tokens.css";
+
 * {
     margin: 0;
     padding: 0;
@@ -6,28 +8,17 @@
 }
 
 :root {
-    /* === Sistema de diseño 2026 (tokens base) ===
-       Fuente única de verdad de color/tipografía. Los componentes
-       todavía usan las variables --primary-color/--text-dark/etc. de
-       abajo; la migración a estos tokens se hará después. */
-    --color-purple: #6E4F9E;        /* marca: CTAs, números destacados, enlaces activos */
-    --color-purple-light: #AA96DA;  /* solo hover/estados secundarios, no fondos grandes */
-    --color-blue: #074AA3;          /* acento secundario, con moderación */
-    --color-text-primary: #2C2C2A;  /* texto principal (gris cálido casi negro) */
-    --color-text-secondary: #5F5E5A;
-    --color-bg: #FFFFFF;
-    --color-bg-secondary: #F7F6F3;  /* blanco roto cálido, fondo de sección */
-    --color-border: rgba(0, 0, 0, 0.08);
-
-    /* Colores principales */
-    --primary-color: #2563eb;
-    --primary-dark: #1d4ed8;
-    --secondary-color: #10b981;
-    --accent-color: #f59e0b;
-    --text-dark: #111827;
-    --text-light: #6b7280;
+    /* Colores principales — remapeados a los tokens base (tokens.css).
+       Los componentes siguen usando estos nombres; el color real vive
+       en los --color-*, así que cambiar la paleta es un único punto. */
+    --primary-color: var(--color-purple);
+    --primary-dark: var(--color-purple-dark);
+    --secondary-color: var(--color-blue);
+    --accent-color: var(--color-purple-light);
+    --text-dark: var(--color-text-primary);
+    --text-light: var(--color-text-secondary);
     --text-white: #ffffff;
-    --bg-light: #f8fafc;
+    --bg-light: var(--color-bg-secondary);
     --bg-white: #ffffff;
     --border-light: #e5e7eb;
 
