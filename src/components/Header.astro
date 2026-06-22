@@ -111,24 +111,6 @@ const hasSecondaryNav = Astro.slots.has("secondary-nav");
     width: auto;
   }
 
-  .nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    padding: 0;
-    flex-direction: column;
-    cursor: pointer;
-  }
-
-  .bar {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px auto;
-    background-color: var(--color-purple);
-    transition: background-color 0.3s ease;
-  }
-
   @media (max-width: 768px) {
     .nav-top {
       flex-direction: column;
@@ -143,22 +125,6 @@ const hasSecondaryNav = Astro.slots.has("secondary-nav");
     .nav-bottom :global(ul) {
       flex-wrap: wrap;
       justify-content: center;
-    }
-
-    .nav-toggle {
-      display: flex;
-    }
-
-    .nav-toggle.active .bar:nth-child(2) {
-      opacity: 0;
-    }
-
-    .nav-toggle.active .bar:nth-child(1) {
-      transform: translateY(8px) rotate(45deg);
-    }
-
-    .nav-toggle.active .bar:nth-child(3) {
-      transform: translateY(-8px) rotate(-45deg);
     }
   }
 </style>
@@ -175,12 +141,6 @@ const hasSecondaryNav = Astro.slots.has("secondary-nav");
       </a>
 
       <NavegacionPrincipal lang={lang} />
-
-      <div class="nav-toggle">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </div>
     </div>
 
     {
