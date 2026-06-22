@@ -63,9 +63,42 @@ const { lang, altLinks } = Astro.props;
 .dropdown-content a:hover {
   background-color: var(--bg-light);
 }
+
+@media (max-width: 768px) {
+  .primary-nav {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 70px;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+    padding: 1rem 0;
+    gap: 0;
+  }
+
+  .primary-nav.active {
+    display: flex;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: static;
+    box-shadow: none;
+    padding-left: 1rem;
+  }
+
+  .dropdown:hover .dropdown-content,
+  .dropdown:focus-within .dropdown-content {
+    display: block;
+  }
+}
 </style>
 
-<nav class="primary-nav" role="navigation" aria-label="Menú principal">
+<nav class="primary-nav nav-menu" role="navigation" aria-label="Menú principal">
   <CambioIdioma lang={lang} links={altLinks} />
 
   {mainNav.map(item => (
@@ -81,7 +114,7 @@ const { lang, altLinks } = Astro.props;
         </div>
       </div>
     ) : (
-      <a href={tPath(item.path!, lang)}>{t(lang, item.key)}</a>
+      <a href={tPath(item.path!, lang)} class="nav-link">{t(lang, item.key)}</a>
     )
   ))}
 </nav>

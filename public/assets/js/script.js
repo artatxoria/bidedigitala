@@ -338,9 +338,9 @@ if (contactForm) {
 
   // 8) Cerrar menú al cambiar a escritorio
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 768 && menu) {
-      menu.classList.remove('open');
-      toggle?.setAttribute('aria-expanded', 'false');
+    if (window.innerWidth > 768) {
+      document.querySelector('.nav-toggle')?.classList.remove('active');
+      document.querySelector('.nav-menu')?.classList.remove('active');
     }
   });
 });
