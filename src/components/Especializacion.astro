@@ -131,6 +131,16 @@ const dict = translations[lang] || translations.es;
     box-shadow: var(--shadow-lg);
 }
 
+@media (max-width: 768px) {
+    .specialization-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .specialization-image img {
+        height: 220px;
+    }
+}
 
 </style>
 

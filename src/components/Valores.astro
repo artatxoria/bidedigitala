@@ -110,6 +110,22 @@ const dict = translations[lang] || translations.es;
     color: var(--text-white);
 }
 
+@media (max-width: 768px) {
+    .value-card {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .value-card:nth-child(even) {
+        direction: ltr;
+    }
+
+    .value-image img {
+        height: 220px;
+    }
+}
+
 </style>
 <!-- Propuesta de Valor Section -->
     <section id="balio-proposamena" class="value-proposition">
