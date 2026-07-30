@@ -29,10 +29,11 @@
 }
 
 /* === Fondo de cuadrícula (papel cuadriculado) ===
-   Aplicado vía ::before para no interferir con el flujo normal del
-   documento; position:absolute + z-index:-1 lo deja detrás de cualquier
-   sección con fondo propio, cubriendo toda la altura de la página (no
-   solo el viewport) para que se note al recorrer todo el scroll. */
+   Aplicado vía ::before por encima de TODO el contenido (z-index alto,
+   pointer-events:none) en vez de detrás: así también se aprecia sobre
+   las secciones con fondo propio, aunque más tenue por el contraste
+   con esos fondos. position:absolute cubre toda la altura de la
+   página (no solo el viewport) para que se note en todo el scroll. */
 body {
     position: relative;
 }
@@ -41,13 +42,13 @@ body::before {
     content: "";
     position: absolute;
     inset: 0;
-    z-index: -1;
+    z-index: 9999;
     pointer-events: none;
     background-image:
         linear-gradient(var(--color-purple) 1px, transparent 1px),
         linear-gradient(90deg, var(--color-purple) 1px, transparent 1px);
     background-size: 52px 52px;
-    opacity: 0.18;
+    opacity: 0.14;
     mask-image: linear-gradient(to bottom, transparent 0, #000 300px);
     -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 300px);
 }
