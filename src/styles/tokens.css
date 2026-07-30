@@ -30,15 +30,16 @@
 
 /* === Fondo de cuadrícula (papel cuadriculado) ===
    Aplicado vía ::before para no interferir con el flujo normal del
-   documento; position:fixed + z-index:-1 lo deja detrás de cualquier
-   sección con fondo propio (solo se ve donde el fondo es transparente). */
+   documento; position:absolute + z-index:-1 lo deja detrás de cualquier
+   sección con fondo propio, cubriendo toda la altura de la página (no
+   solo el viewport) para que se note al recorrer todo el scroll. */
 body {
     position: relative;
 }
 
 body::before {
     content: "";
-    position: fixed;
+    position: absolute;
     inset: 0;
     z-index: -1;
     pointer-events: none;
@@ -46,7 +47,7 @@ body::before {
         linear-gradient(var(--color-purple) 1px, transparent 1px),
         linear-gradient(90deg, var(--color-purple) 1px, transparent 1px);
     background-size: 52px 52px;
-    opacity: 0.06;
-    mask-image: radial-gradient(circle at 50% 10%, #000 35%, transparent 100%);
-    -webkit-mask-image: radial-gradient(circle at 50% 10%, #000 35%, transparent 100%);
+    opacity: 0.1;
+    mask-image: linear-gradient(to bottom, transparent 0, #000 300px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 300px);
 }
