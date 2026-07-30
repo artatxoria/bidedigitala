@@ -12,6 +12,7 @@ import Onurak from "../../components/Onurak.astro";
 import Proceso from "../../components/Proceso.astro";
 import Especializacion from "../../components/Especializacion.astro";
 import NavegacionSecundaria from "../../components/NavegacionSecundaria.astro";
+import SectionDivider from "../../components/SectionDivider.astro";
 
 // Para rutas dinámicas, exportamos getStaticPaths
 export async function getStaticPaths() {
@@ -44,6 +45,8 @@ const title = t(lang, "home.title");
   <Hero lang={lang} />
 
   <Problemas lang={lang} />
+
+  <SectionDivider />
 
   <Valores lang={lang} />
 
@@ -99,9 +102,13 @@ const title = t(lang, "home.title");
     </div>
   </section>
 
+  <SectionDivider />
+
   <Onurak lang={lang} />
 
   <Proceso lang={lang} />
+
+  <SectionDivider />
 
   <Especializacion lang={lang} />
 

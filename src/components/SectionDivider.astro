@@ -1,0 +1,78 @@
+---
+// src/components/SectionDivider.astro
+// Separador de secciones: línea difuminada en los bordes + mancha
+// luminosa que recorre la línea de izquierda a derecha en bucle.
+// Inspirado en orpira.es, adaptado a la paleta morada de marca.
+---
+
+<div class="section-divider-wrap" aria-hidden="true">
+  <div class="section-divider"></div>
+</div>
+
+<style>
+  .section-divider-wrap {
+    /* overflow:hidden contiene el barrido de la mancha (se mueve
+       120px más allá de cada borde) para que nunca provoque scroll
+       horizontal; el padding da margen vertical al blur. */
+    overflow: hidden;
+    padding: 6px 0;
+  }
+
+  .section-divider {
+    position: relative;
+    height: 1px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--card-border) 20%,
+      var(--card-border) 80%,
+      transparent 100%
+    );
+  }
+
+  .section-divider::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -120px;
+    width: 120px;
+    height: 3px;
+    border-radius: 9999px;
+    filter: blur(1px);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(170, 150, 218, 0.9),
+      rgba(170, 150, 218, 0.4),
+      transparent
+    );
+    animation: shimmerSlide 7s ease-in-out infinite;
+  }
+
+  @keyframes shimmerSlide {
+    0% {
+      left: -120px;
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      left: calc(100% + 120px);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .section-divider::after {
+      animation: none;
+      opacity: 0.5;
+      left: 40%;
+    }
+  }
+</style>
