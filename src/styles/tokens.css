@@ -27,3 +27,26 @@
     --bide-gray: var(--color-text-primary);
     --bide-light: var(--color-bg-secondary);
 }
+
+/* === Fondo de cuadrícula (papel cuadriculado) ===
+   Aplicado vía ::before para no interferir con el flujo normal del
+   documento; position:fixed + z-index:-1 lo deja detrás de cualquier
+   sección con fondo propio (solo se ve donde el fondo es transparente). */
+body {
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+        linear-gradient(var(--color-purple) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-purple) 1px, transparent 1px);
+    background-size: 52px 52px;
+    opacity: 0.06;
+    mask-image: radial-gradient(circle at 50% 10%, #000 35%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle at 50% 10%, #000 35%, transparent 100%);
+}
