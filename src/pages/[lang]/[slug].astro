@@ -279,7 +279,15 @@ export async function getStaticPaths() {
     .blog-post {
       flex: 1;
       padding: 1rem;
+      transform: none;
+      margin: 0;
     }
+  }
+
+  .blog-post :global(table) {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
   }
 </style>
 
