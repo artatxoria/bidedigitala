@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SectionDivider from '../../../components/SectionDivider.astro';
 import { getCollection } from 'astro:content';
 
 // ✅ Primero definimos las rutas
@@ -36,8 +37,10 @@ const categories = [...new Set(
 
 <BaseLayout lang={lang} title={lang === 'es' ? 'Blog' : 'Bloga'}>
   <section class="blog-index container">
-    {categories.map((category) => (
-      <div class="category-section">
+    {categories.map((category, i) => (
+      <>
+        {i > 0 && <SectionDivider />}
+        <div class="category-section">
         <h2>{category}</h2>
         <ul class="post-list">
           {posts
@@ -59,7 +62,8 @@ const categories = [...new Set(
               );
             })}
         </ul>
-      </div>
+        </div>
+      </>
     ))}
   </section>
 </BaseLayout>

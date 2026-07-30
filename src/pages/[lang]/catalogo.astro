@@ -6,6 +6,7 @@ import AnalisisDatos from "../../components/AnalisisDatos.astro";
 import InteligenciaArtificial from "../../components/InteligenciaArtificial.astro";
 import Automatizacion from "../../components/Automatizacion.astro";
 import Programacion from "../../components/Programacion.astro";
+import SectionDivider from "../../components/SectionDivider.astro";
 
 export async function getStaticPaths() {
   return [{ params: { lang: "es" } }, { params: { lang: "eu" } }];
@@ -66,8 +67,11 @@ const title = dict.title;
   </section>
   <!-- Análisis de datos -->
   <AnalisisDatos lang={lang} />
+  <SectionDivider />
   <InteligenciaArtificial lang={lang} />
+  <SectionDivider />
   <Automatizacion lang={lang} />
+  <SectionDivider />
   <Programacion lang={lang} />
 </BaseLayout>
 

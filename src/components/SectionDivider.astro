@@ -53,7 +53,7 @@
 
   @keyframes shimmerSlide {
     0% {
-      left: -120px;
+      left: calc(100% + 120px);
       opacity: 0;
     }
     10% {
@@ -63,7 +63,7 @@
       opacity: 1;
     }
     100% {
-      left: calc(100% + 120px);
+      left: -120px;
       opacity: 0;
     }
   }
