@@ -1,7 +1,7 @@
 ---
 title: "El espejismo del Agentic Coding local: ¿hardware, pasarelas o suscripción?"
 description: "Un análisis técnico y financiero sobre los límites de cuota al programar con agentes como Claude Code, el mito de las pasarelas tipo OmniRoute y el coste real del hardware."
-pubDate: "2026-03-26"
+pubDate: "2026-07-29"
 lang: "es"
 summary: "Analizamos el cuello de botella al usar agentes de programación en la terminal: probamos la viabilidad de AI Gateways, evaluamos el mercado real de GPUs de 24 GB y calculamos la rentabilidad del hardware local frente a las suscripciones de nube."
 author: "Juan Carlos Beaskoetxea"

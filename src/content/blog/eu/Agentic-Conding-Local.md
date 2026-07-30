@@ -1,7 +1,7 @@
 ---
 title: "Agentic Coding tokiaren ameskeria: hardwarea, bide-gailuak ala harpidetza?"
 description: "Analisi tekniko eta finantzarioa Claude Code bezalako agenteekin programatzean agertzen diren kuota-muga, OmniRoute motako bide-gailuen mito eta hardwarearen benetako kostuen inguruan."
-pubDate: "2026-03-26"
+pubDate: "2026-07-29"
 lang: "eu"
 summary: "Terminalean kodeketa-agenteak erabiltzeko mugak aztertu ditugu: AI Gateway-en bideragarritasuna probatu, 24 GB-ko GPUen merkatu erreala ebaluatu eta tokiko hardwarearen errentagarritasuna hodeiko harpidetzekin alderatu dugu."
 author: "Juan Carlos Beaskoetxea"
