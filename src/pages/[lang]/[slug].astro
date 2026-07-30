@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionDivider from '../../components/SectionDivider.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 const { lang, slug } = Astro.params;
@@ -75,6 +76,8 @@ export async function getStaticPaths() {
         </time>
         <p class="summary">{summary}</p>
       </header>
+
+      <SectionDivider />
 
       <Content />
     </article>
