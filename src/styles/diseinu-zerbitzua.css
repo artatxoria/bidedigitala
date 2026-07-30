@@ -8,7 +8,7 @@
 :root {
     --bg-main: #ffffff;
     --bg-alt: #f1f3f8;
-    --bg-soft: #ffffff;
+    --bg-soft: var(--card-gradient);
 
     --text-main: #111827;
     --text-soft: #6b7280;
@@ -457,7 +457,7 @@ section {
 .pillar-card {
     border-radius: var(--radius-lg);
     background: var(--bg-soft);
-    border: 1px solid var(--border-subtle);
+    border: 1px solid var(--card-border);
     padding: 1rem 1.1rem 1.2rem;
     box-shadow: var(--shadow-soft);
 }
@@ -495,7 +495,7 @@ section {
 .process-step {
     border-radius: var(--radius-lg);
     background: var(--bg-soft);
-    border: 1px solid var(--border-subtle);
+    border: 1px solid var(--card-border);
     padding: 0.9rem 1rem 1rem;
     position: relative;
     box-shadow: var(--shadow-soft);
@@ -525,8 +525,8 @@ section {
 
 .block {
     border-radius: var(--radius-xl);
-    background: linear-gradient(135deg, var(--bide-light), #ffffff);
-    border: 1px solid var(--border-subtle);
+    background: var(--card-gradient);
+    border: 1px solid var(--card-border);
     padding: 1.4rem 1.3rem 1.5rem;
     box-shadow: var(--shadow-soft);
 }

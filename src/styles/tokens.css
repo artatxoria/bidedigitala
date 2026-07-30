@@ -26,6 +26,15 @@
     --bide-blue: var(--color-blue);
     --bide-gray: var(--color-text-primary);
     --bide-light: var(--color-bg-secondary);
+
+    /* === Fichas / tarjetas: degradado de marca ===
+       Inspirado en las tarjetas de orpira.es (wash diagonal muy sutil +
+       borde tintado), adaptado a la paleta morada. Fuente única para
+       que todas las fichas del sitio compartan el mismo tratamiento. */
+    --card-gradient: linear-gradient(135deg, rgba(170, 150, 218, 0.2), var(--color-bg) 65%);
+    --card-border: rgba(110, 79, 158, 0.25);
+    --tag-bg: rgba(110, 79, 158, 0.08);
+    --tag-border: rgba(110, 79, 158, 0.25);
 }
 
 /* === Fondo de cuadrícula (papel cuadriculado) ===

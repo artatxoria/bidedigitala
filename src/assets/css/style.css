@@ -439,7 +439,8 @@ section {
 }
 
 .service-card {
-    background: white;
+    background: var(--card-gradient);
+    border: 1px solid var(--card-border);
     padding: 2rem;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -836,8 +837,8 @@ section {
 }
 
 .post-card {
-    background: #fff;
-    border: 1px solid #e6e6e6;
+    background: var(--card-gradient);
+    border: 1px solid var(--card-border);
     border-radius: 12px;
     padding: 1.5rem;
     transition: box-shadow 0.3s ease, transform 0.2s ease;
