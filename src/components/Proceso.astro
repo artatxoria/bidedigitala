@@ -114,6 +114,7 @@ const dict = translations[lang] || translations.es;
 
 .process-steps {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 2rem;
     max-width: 800px;
     margin: 0 auto;
@@ -141,6 +142,10 @@ const dict = translations[lang] || translations.es;
     font-weight: bold;
     font-size: 1.2rem;
     flex-shrink: 0;
+}
+
+.step-content {
+    min-width: 0;
 }
 
 .step-content h3 {

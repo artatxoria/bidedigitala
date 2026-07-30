@@ -152,6 +152,12 @@ const dict = translations[lang] || translations.es;
     color: var(--secondary-color);
     font-weight: bold;
 }
+
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
 </style>
     <!-- Servicios Section -->
     <section id="zerbitzuak" class="services">
