@@ -181,14 +181,16 @@ p { font-size: 1.1rem; }
 .benefits-col li {
     font-size: 1.1rem;
     margin-bottom: 1rem;
-    display: flex;
-    align-items: flex-start;
+    position: relative;
+    padding-left: 2.25rem;
 }
 .benefits-col li::before {
     content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
     color: var(--secondary-color);
     font-weight: bold;
-    margin-right: 1rem;
     font-size: 1.5rem;
     line-height: 1;
 }
