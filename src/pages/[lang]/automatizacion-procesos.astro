@@ -1,0 +1,372 @@
+---
+// src/pages/[lang]/automatizacion-procesos.astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { t, tPath } from "../../lib/translations";
+import SectionDivider from "../../components/SectionDivider.astro";
+
+export async function getStaticPaths() {
+  return [{ params: { lang: "es" } }, { params: { lang: "eu" } }];
+}
+export const prerender = true;
+
+const supported = ["es", "eu"] as const;
+type Lang = (typeof supported)[number];
+
+const langParam = Astro.params.lang;
+const lang: Lang = supported.includes(langParam as any)
+  ? (langParam as Lang)
+  : "es";
+
+const translations: Record<
+  Lang,
+  {
+    title: string;
+    subtitulo: string;
+    intro: string;
+    ctaHero: string;
+    queTitle: string;
+    queSubtitle: string;
+    que: { icon: string; title: string; desc: string }[];
+    procesoTitle: string;
+    proceso: { titulo: string; contenido: string }[];
+    ctaTitle: string;
+    ctaBody: string;
+    ctaButton: string;
+  }
+> = {
+  es: {
+    title: "Automatización de Proyectos",
+    subtitulo: "Libera a tu equipo de las tareas repetitivas",
+    intro:
+      "Usamos la misma hiper-automatización con la que gestionamos internamente FUNDAE y Lanbide para automatizar los procesos manuales de tu empresa: menos errores, menos tiempo perdido, más foco en lo que aporta valor.",
+    ctaHero: "Cuéntanos qué automatizar",
+    queTitle: "Qué automatizamos",
+    queSubtitle: "Si es repetitivo y sigue un patrón, probablemente se puede automatizar.",
+    que: [
+      {
+        icon: "fa-file-invoice",
+        title: "Gestión documental y administrativa",
+        desc: "Generación de documentos, informes y notificaciones automáticas a partir de tus datos, sin copiar y pegar manualmente.",
+      },
+      {
+        icon: "fa-diagram-project",
+        title: "Integraciones entre herramientas",
+        desc: "Conectamos tu CRM, ERP, correo, hojas de cálculo o LMS entre sí con n8n, para que la información viaje sola.",
+      },
+      {
+        icon: "fa-bell",
+        title: "Avisos y flujos de trabajo",
+        desc: "Notificaciones, recordatorios y tareas que se disparan solas cuando ocurre algo en tu negocio, sin que nadie tenga que vigilarlo.",
+      },
+      {
+        icon: "fa-chart-line",
+        title: "Informes y seguimiento automático",
+        desc: "Paneles y reportes que se actualizan solos, para que tengas visibilidad real sin dedicarle tiempo cada semana.",
+      },
+    ],
+    procesoTitle: "Cómo trabajamos",
+    proceso: [
+      {
+        titulo: "Mapeo del proceso actual",
+        contenido:
+          "Identificamos juntos qué tareas repetitivas consumen más tiempo a tu equipo y dónde hay más riesgo de error humano.",
+      },
+      {
+        titulo: "Diseño del flujo automatizado",
+        contenido:
+          "Diseñamos el flujo de automatización (con n8n u otras herramientas) que conecta tus sistemas actuales sin sustituirlos.",
+      },
+      {
+        titulo: "Implementación y pruebas",
+        contenido:
+          "Implementamos y probamos el flujo con datos reales antes de ponerlo en marcha, para evitar sorpresas.",
+      },
+      {
+        titulo: "Puesta en marcha y ajuste",
+        contenido:
+          "Activamos la automatización, monitorizamos su funcionamiento y la ajustamos según tu proceso evoluciona.",
+      },
+    ],
+    ctaTitle: "¿Qué proceso te quita más tiempo cada semana?",
+    ctaBody:
+      "Cuéntanos qué tarea repetitiva te gustaría dejar de hacer a mano y te decimos si (y cómo) la podemos automatizar.",
+    ctaButton: "Solicitar información",
+  },
+  eu: {
+    title: "Prozesuen Automatizazioa",
+    subtitulo: "Askatu zure taldea lan errepikakorretatik",
+    intro:
+      "FUNDAE eta Lanbide barne-mailan kudeatzeko erabiltzen dugun hiper-automatizazio bera erabiltzen dugu zure enpresako eskuzko prozesuak automatizatzeko: akats gutxiago, denbora gutxiago galduta, balioa ematen duenean fokua gehiago.",
+    ctaHero: "Kontatu iguzu zer automatizatu",
+    queTitle: "Zer automatizatzen dugu",
+    queSubtitle: "Errepikakorra bada eta eredu bat jarraitzen badu, ziurrenik automatiza daiteke.",
+    que: [
+      {
+        icon: "fa-file-invoice",
+        title: "Dokumentazio eta administrazio kudeaketa",
+        desc: "Dokumentu, txosten eta jakinarazpen automatikoak zure datuetatik abiatuta, eskuz kopiatu eta itsatsi gabe.",
+      },
+      {
+        icon: "fa-diagram-project",
+        title: "Tresnen arteko integrazioak",
+        desc: "Zure CRM, ERP, posta, kalkulu-orriak edo LMS elkarren artean konektatzen ditugu n8n bidez, informazioa bakarrik ibil dadin.",
+      },
+      {
+        icon: "fa-bell",
+        title: "Abisuak eta lan-fluxuak",
+        desc: "Zure negozioan zerbait gertatzean bakarrik abiarazten diren jakinarazpen, gogorarazpen eta zereginak, inork zaindu beharrik gabe.",
+      },
+      {
+        icon: "fa-chart-line",
+        title: "Txostenak eta jarraipen automatikoa",
+        desc: "Bakarrik eguneratzen diren panelak eta txostenak, astero denbora eskaini gabe benetako ikusgarritasuna izateko.",
+      },
+    ],
+    procesoTitle: "Nola lan egiten dugu",
+    proceso: [
+      {
+        titulo: "Oraingo prozesuaren mapaketa",
+        contenido:
+          "Elkarrekin identifikatzen dugu zein lan errepikakorrek denbora gehien kentzen dion zure taldeari eta non dagoen giza akatsen arrisku handiena.",
+      },
+      {
+        titulo: "Fluxu automatizatuaren diseinua",
+        contenido:
+          "Automatizazio-fluxua diseinatzen dugu (n8n edo beste tresna batzuekin), zure oraingo sistemak konektatuz, ordezkatu gabe.",
+      },
+      {
+        titulo: "Ezarpena eta probak",
+        contenido:
+          "Fluxua ezarri eta benetako datuekin probatzen dugu martxan jarri aurretik, ezustekoak saihesteko.",
+      },
+      {
+        titulo: "Abian jartzea eta doikuntza",
+        contenido:
+          "Automatizazioa aktibatzen dugu, funtzionamendua monitorizatzen dugu eta zure prozesua bilakatu ahala doitzen dugu.",
+      },
+    ],
+    ctaTitle: "Zein prozesuk kentzen dizu denbora gehien astero?",
+    ctaBody:
+      "Kontatu iguzu eskuz egiteari utzi nahi diozun lan errepikakorra, eta esango dizugu automatiza daitekeen (eta nola).",
+    ctaButton: "Informazioa eskatu",
+  },
+};
+
+const dict = translations[lang] || translations.es;
+const title = `${dict.title} – BideDigitala`;
+---
+
+<BaseLayout lang={lang} title={title}>
+  <!-- Hero -->
+  <section class="service-hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">{dict.title}</h1>
+        <p class="hero-subtitle">{dict.subtitulo}</p>
+        <p class="hero-description">{dict.intro}</p>
+        <a href={`${tPath("/", lang)}#contacto`} class="btn btn-primary">
+          <i class="fas fa-rocket" aria-hidden="true"></i>
+          {dict.ctaHero}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <SectionDivider />
+
+  <!-- Qué automatizamos -->
+  <section class="service-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">{dict.queTitle}</h2>
+        <p class="section-subtitle">{dict.queSubtitle}</p>
+      </div>
+      <div class="service-grid">
+        {
+          dict.que.map((item) => (
+            <div class="service-item-card">
+              <div class="service-item-icon">
+                <i class={`fas ${item.icon}`} aria-hidden="true" />
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <SectionDivider />
+
+  <!-- Cómo trabajamos -->
+  <section class="service-section proceso-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">{dict.procesoTitle}</h2>
+      </div>
+      <div class="proceso-steps">
+        {
+          dict.proceso.map((paso, i) => (
+            <div class="proceso-step">
+              <div class="proceso-number">{i + 1}</div>
+              <div>
+                <h3>{paso.titulo}</h3>
+                <p>{paso.contenido}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="service-cta">
+    <div class="container">
+      <h2>{dict.ctaTitle}</h2>
+      <p>{dict.ctaBody}</p>
+      <a href={`${tPath("/", lang)}#contacto`} class="btn btn-primary">
+        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+        {dict.ctaButton}
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .service-hero {
+    padding: 130px 0 3rem;
+    text-align: center;
+    background: linear-gradient(160deg, var(--color-bg-secondary) 0%, var(--color-bg) 60%);
+  }
+
+  .service-hero .hero-content {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .service-hero .hero-title {
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+  }
+
+  .service-hero .hero-subtitle {
+    margin-bottom: 0.75rem;
+    color: var(--color-purple);
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+
+  .service-hero .hero-description {
+    max-width: 640px;
+    margin: 0 auto 2rem;
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .service-section {
+    padding: var(--section-padding);
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.75rem;
+    margin-top: 2.5rem;
+  }
+
+  .service-item-card {
+    padding: 1.75rem;
+    border-radius: var(--border-radius);
+    background: var(--card-gradient);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow-md);
+  }
+
+  .service-item-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--color-purple), var(--color-blue));
+  }
+
+  .service-item-icon i {
+    color: #fff;
+    font-size: 1.25rem;
+  }
+
+  .service-item-card h3 {
+    color: var(--color-text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .service-item-card p {
+    color: var(--color-text-secondary);
+  }
+
+  .proceso-section {
+    background: var(--color-bg-secondary);
+  }
+
+  .proceso-steps {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 780px;
+    margin: 2.5rem auto 0;
+  }
+
+  .proceso-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--color-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+  }
+
+  .proceso-number {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--color-purple);
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .proceso-step h3 {
+    color: var(--color-text-primary);
+    margin-bottom: 0.4rem;
+  }
+
+  .proceso-step p {
+    color: var(--color-text-secondary);
+  }
+
+  .service-cta {
+    padding: var(--section-padding);
+    text-align: center;
+  }
+
+  .service-cta h2 {
+    color: var(--color-text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .service-cta p {
+    max-width: 620px;
+    margin: 0 auto 2rem;
+    color: var(--color-text-secondary);
+  }
+</style>
