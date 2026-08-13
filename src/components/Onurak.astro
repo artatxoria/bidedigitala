@@ -112,12 +112,24 @@ const dict = translations[lang] || translations.es;
 }
 
 .benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* flex en vez de grid: así la última fila incompleta (7 tarjetas =
+       4 + 3) queda centrada en vez de pegada a la izquierda. */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem;
 }
 
 .benefit-item {
+    /* Base y máximo al 25% (menos su parte del gap) para que encajen
+       exactamente 4 por fila en escritorio: la fila incompleta de 3
+       queda con hueco a ambos lados, que justify-content:center reparte
+       igual en vez de dejarla pegada a la izquierda. min-width evita que
+       se encojan demasiado, así en pantallas más estrechas se pasa a
+       menos columnas de forma fluida, igual que antes. */
+    flex: 1 1 calc(25% - 1.5rem);
+    min-width: 220px;
+    max-width: calc(25% - 1.5rem);
     text-align: center;
     padding: 1.5rem;
     background: var(--card-gradient);
