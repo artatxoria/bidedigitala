@@ -1,0 +1,372 @@
+---
+// src/pages/[lang]/consultoria-informatica.astro
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { t, tPath } from "../../lib/translations";
+import SectionDivider from "../../components/SectionDivider.astro";
+
+export async function getStaticPaths() {
+  return [{ params: { lang: "es" } }, { params: { lang: "eu" } }];
+}
+export const prerender = true;
+
+const supported = ["es", "eu"] as const;
+type Lang = (typeof supported)[number];
+
+const langParam = Astro.params.lang;
+const lang: Lang = supported.includes(langParam as any)
+  ? (langParam as Lang)
+  : "es";
+
+const translations: Record<
+  Lang,
+  {
+    title: string;
+    subtitulo: string;
+    intro: string;
+    ctaHero: string;
+    queTitle: string;
+    queSubtitle: string;
+    que: { icon: string; title: string; desc: string }[];
+    procesoTitle: string;
+    proceso: { titulo: string; contenido: string }[];
+    ctaTitle: string;
+    ctaBody: string;
+    ctaButton: string;
+  }
+> = {
+  es: {
+    title: "Consultoría Informática",
+    subtitulo: "Decisiones tecnológicas con criterio, no por moda",
+    intro:
+      "Te acompañamos a diagnosticar el estado real de tus sistemas y a decidir qué tecnología, herramienta o proveedor tiene sentido para tu empresa, con pedagogía y sin jerga innecesaria.",
+    ctaHero: "Solicita un diagnóstico",
+    queTitle: "En qué te ayudamos",
+    queSubtitle: "Criterio técnico independiente, aplicado a tu realidad.",
+    que: [
+      {
+        icon: "fa-magnifying-glass-chart",
+        title: "Auditoría de sistemas y procesos",
+        desc: "Revisamos cómo usas hoy la tecnología en tu empresa y detectamos cuellos de botella, riesgos y oportunidades de mejora.",
+      },
+      {
+        icon: "fa-sitemap",
+        title: "Elección de herramientas y stack",
+        desc: "Te ayudamos a elegir software, plataformas o proveedores sin depender de una única marca, priorizando lo que de verdad necesitas.",
+      },
+      {
+        icon: "fa-shield-halved",
+        title: "Ciberseguridad básica y buenas prácticas",
+        desc: "Revisión de riesgos, copias de seguridad, accesos y políticas mínimas para reducir la exposición de tu empresa.",
+      },
+      {
+        icon: "fa-route",
+        title: "Acompañamiento en transformación digital",
+        desc: "Diseñamos contigo una hoja de ruta realista, priorizada por impacto y esfuerzo, no un plan genérico de consultora.",
+      },
+    ],
+    procesoTitle: "Cómo trabajamos",
+    proceso: [
+      {
+        titulo: "Diagnóstico inicial",
+        contenido:
+          "Entendemos tu negocio, tus sistemas actuales y los problemas que quieres resolver, sin compromiso.",
+      },
+      {
+        titulo: "Informe y recomendaciones",
+        contenido:
+          "Te entregamos un análisis claro, priorizado, con recomendaciones concretas y su justificación.",
+      },
+      {
+        titulo: "Hoja de ruta",
+        contenido:
+          "Definimos contigo los siguientes pasos: qué abordar primero, con qué recursos y con qué resultado esperado.",
+      },
+      {
+        titulo: "Acompañamiento en la ejecución",
+        contenido:
+          "Si lo necesitas, te acompañamos en la implementación, coordinando con tu equipo o con terceros proveedores.",
+      },
+    ],
+    ctaTitle: "¿Necesitas una segunda opinión técnica?",
+    ctaBody:
+      "Hablemos de tus sistemas actuales y de hacia dónde quieres llevar tu empresa. Te damos un diagnóstico honesto, sin venderte nada que no necesites.",
+    ctaButton: "Solicitar diagnóstico",
+  },
+  eu: {
+    title: "Informatika Aholkularitza",
+    subtitulo: "Erabaki teknologikoak zentzuz, ez modagatik",
+    intro:
+      "Zure sistemen benetako egoera diagnostikatzen eta zure enpresarako zentzuzkoa den teknologia, tresna edo hornitzailea erabakitzen lagunduko dizugu, pedagogiarekin eta jargoi behar ez denik gabe.",
+    ctaHero: "Eskatu diagnostikoa",
+    queTitle: "Zertan laguntzen dizugu",
+    queSubtitle: "Irizpide tekniko independentea, zure errealitatera aplikatuta.",
+    que: [
+      {
+        icon: "fa-magnifying-glass-chart",
+        title: "Sistema eta prozesuen auditoria",
+        desc: "Gaur egun zure enpresan teknologia nola erabiltzen duzun aztertzen dugu, eta bottleneck, arrisku eta hobekuntza-aukerak detektatzen ditugu.",
+      },
+      {
+        icon: "fa-sitemap",
+        title: "Tresnen eta stack-aren aukeraketa",
+        desc: "Software, plataforma edo hornitzaileak aukeratzen laguntzen dizugu, marka bakar batekiko mendekotasunik gabe, benetan behar duzuna lehenetsiz.",
+      },
+      {
+        icon: "fa-shield-halved",
+        title: "Oinarrizko zibersegurtasuna eta jardunbide egokiak",
+        desc: "Arriskuen, babeskopien, sarbideen eta gutxieneko politiken berrikuspena, zure enpresaren esposizioa murrizteko.",
+      },
+      {
+        icon: "fa-route",
+        title: "Laguntza eraldaketa digitalean",
+        desc: "Zurekin batera errealista den bide-orri bat diseinatzen dugu, eraginaren eta ahaleginaren arabera lehenetsita, ez aholkularitza generiko baten plan bat.",
+      },
+    ],
+    procesoTitle: "Nola lan egiten dugu",
+    proceso: [
+      {
+        titulo: "Hasierako diagnostikoa",
+        contenido:
+          "Zure negozioa, oraingo sistemak eta konpondu nahi dituzun arazoak ulertzen ditugu, konpromisorik gabe.",
+      },
+      {
+        titulo: "Txostena eta gomendioak",
+        contenido:
+          "Analisi argi eta lehenetsi bat ematen dizugu, gomendio zehatzekin eta horien justifikazioarekin.",
+      },
+      {
+        titulo: "Bide-orria",
+        contenido:
+          "Zurekin batera hurrengo urratsak definitzen ditugu: zer landu lehenengo, zer baliabiderekin eta zer emaitza espero den.",
+      },
+      {
+        titulo: "Laguntza ezarpenean",
+        contenido:
+          "Behar izanez gero, ezarpenean laguntzen dizugu, zure taldearekin edo kanpoko hornitzaileekin koordinatuz.",
+      },
+    ],
+    ctaTitle: "Bigarren iritzi tekniko bat behar duzu?",
+    ctaBody:
+      "Hitz egin dezagun zure oraingo sistemez eta zure enpresa nora eraman nahi duzun. Diagnostiko zintzoa emango dizugu, behar ez duzun ezer saldu gabe.",
+    ctaButton: "Diagnostikoa eskatu",
+  },
+};
+
+const dict = translations[lang] || translations.es;
+const title = `${dict.title} – BideDigitala`;
+---
+
+<BaseLayout lang={lang} title={title}>
+  <!-- Hero -->
+  <section class="service-hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">{dict.title}</h1>
+        <p class="hero-subtitle">{dict.subtitulo}</p>
+        <p class="hero-description">{dict.intro}</p>
+        <a href={`${tPath("/", lang)}#contacto`} class="btn btn-primary">
+          <i class="fas fa-rocket" aria-hidden="true"></i>
+          {dict.ctaHero}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <SectionDivider />
+
+  <!-- En qué ayudamos -->
+  <section class="service-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">{dict.queTitle}</h2>
+        <p class="section-subtitle">{dict.queSubtitle}</p>
+      </div>
+      <div class="service-grid">
+        {
+          dict.que.map((item) => (
+            <div class="service-item-card">
+              <div class="service-item-icon">
+                <i class={`fas ${item.icon}`} aria-hidden="true" />
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <SectionDivider />
+
+  <!-- Cómo trabajamos -->
+  <section class="service-section proceso-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">{dict.procesoTitle}</h2>
+      </div>
+      <div class="proceso-steps">
+        {
+          dict.proceso.map((paso, i) => (
+            <div class="proceso-step">
+              <div class="proceso-number">{i + 1}</div>
+              <div>
+                <h3>{paso.titulo}</h3>
+                <p>{paso.contenido}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="service-cta">
+    <div class="container">
+      <h2>{dict.ctaTitle}</h2>
+      <p>{dict.ctaBody}</p>
+      <a href={`${tPath("/", lang)}#contacto`} class="btn btn-primary">
+        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+        {dict.ctaButton}
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .service-hero {
+    padding: 130px 0 3rem;
+    text-align: center;
+    background: linear-gradient(160deg, var(--color-bg-secondary) 0%, var(--color-bg) 60%);
+  }
+
+  .service-hero .hero-content {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .service-hero .hero-title {
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+  }
+
+  .service-hero .hero-subtitle {
+    margin-bottom: 0.75rem;
+    color: var(--color-purple);
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+
+  .service-hero .hero-description {
+    max-width: 640px;
+    margin: 0 auto 2rem;
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .service-section {
+    padding: var(--section-padding);
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.75rem;
+    margin-top: 2.5rem;
+  }
+
+  .service-item-card {
+    padding: 1.75rem;
+    border-radius: var(--border-radius);
+    background: var(--card-gradient);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow-md);
+  }
+
+  .service-item-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--color-purple), var(--color-blue));
+  }
+
+  .service-item-icon i {
+    color: #fff;
+    font-size: 1.25rem;
+  }
+
+  .service-item-card h3 {
+    color: var(--color-text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .service-item-card p {
+    color: var(--color-text-secondary);
+  }
+
+  .proceso-section {
+    background: var(--color-bg-secondary);
+  }
+
+  .proceso-steps {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 780px;
+    margin: 2.5rem auto 0;
+  }
+
+  .proceso-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--color-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+  }
+
+  .proceso-number {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--color-purple);
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .proceso-step h3 {
+    color: var(--color-text-primary);
+    margin-bottom: 0.4rem;
+  }
+
+  .proceso-step p {
+    color: var(--color-text-secondary);
+  }
+
+  .service-cta {
+    padding: var(--section-padding);
+    text-align: center;
+  }
+
+  .service-cta h2 {
+    color: var(--color-text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .service-cta p {
+    max-width: 620px;
+    margin: 0 auto 2rem;
+    color: var(--color-text-secondary);
+  }
+</style>
