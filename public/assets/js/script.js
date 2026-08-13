@@ -245,12 +245,14 @@ if (contactForm) {
     const lang = (fd.get('lang') || document.documentElement.lang || 'es').toString();
 
     // Campos (usa los name= correctos del formulario)
-    const nombre   = (fd.get('nombre')   || '').toString().trim();
-    const email    = (fd.get('email')    || '').toString().trim();
-    const telefono = (fd.get('telefono') || '').toString().trim();
-    const empresa  = (fd.get('empresa')  || '').toString().trim();
-    const tamano   = (fd.get('tamano')   || '').toString();
-    const mensaje  = (fd.get('mensaje')  || '').toString().trim();
+    const nombre      = (fd.get('nombre')      || '').toString().trim();
+    const email       = (fd.get('email')       || '').toString().trim();
+    const telefono    = (fd.get('telefono')    || '').toString().trim();
+    const empresa     = (fd.get('empresa')     || '').toString().trim();
+    const sitioWeb    = (fd.get('sitioWeb')    || '').toString().trim();
+    const servicio    = (fd.get('servicio')    || '').toString();
+    const presupuesto = (fd.get('presupuesto') || '').toString();
+    const mensaje     = (fd.get('mensaje')     || '').toString().trim();
 
     const consentInput = contactForm.querySelector('#f-consent');
     const consent  = consentInput?.checked ?? false;
@@ -260,6 +262,7 @@ if (contactForm) {
       required: 'Eremu hau beharrezkoa da.',
       email: 'Sartu baliozko email helbide bat.',
       tel: 'Sartu telefono baliodun bat.',
+      url: 'Sartu baliozko URL bat (aukerakoa).',
       consent: 'Onartu Pribatutasun Politika.',
       ok: 'Zure mezua bidali da! Laster jarriko gara harremanetan.',
       net: 'Sareko errorea. Saiatu berriro minutu batzuetan.'
@@ -267,6 +270,7 @@ if (contactForm) {
       required: 'Este campo es obligatorio.',
       email: 'Introduce un email válido.',
       tel: 'Introduce un teléfono válido.',
+      url: 'Introduce una URL válida (opcional).',
       consent: 'Acepta la Política de Privacidad.',
       ok: '¡Tu mensaje se ha enviado! Te contactaré muy pronto.',
       net: 'Error de red. Inténtalo de nuevo en unos minutos.'
@@ -290,8 +294,18 @@ if (contactForm) {
     const inputEmp = contactForm.querySelector('#f-empresa');
     if (!empresa) { setFieldError(inputEmp, M.required); firstInvalid ||= inputEmp; }
 
-    const inputTam = contactForm.querySelector('#f-tamano');
-    if (!tamano) { setFieldError(inputTam, M.required); firstInvalid ||= inputTam; }
+    // Validación laxa: solo si el campo (opcional) trae algo que no parezca una URL.
+    const inputWeb = contactForm.querySelector('#f-sitio-web');
+    const looksLikeUrl = /^(https?:\/\/)?[^\s.]+(\.[^\s.]+)+$/i;
+    if (sitioWeb && !looksLikeUrl.test(sitioWeb)) {
+      setFieldError(inputWeb, M.url); firstInvalid ||= inputWeb;
+    }
+
+    const inputServicio = contactForm.querySelector('#f-servicio');
+    if (!servicio) { setFieldError(inputServicio, M.required); firstInvalid ||= inputServicio; }
+
+    const inputPresupuesto = contactForm.querySelector('#f-presupuesto');
+    if (!presupuesto) { setFieldError(inputPresupuesto, M.required); firstInvalid ||= inputPresupuesto; }
 
     if (!consent) { setFieldError(consentInput, M.consent); firstInvalid ||= consentInput; }
 

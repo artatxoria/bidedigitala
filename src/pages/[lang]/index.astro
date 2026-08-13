@@ -14,6 +14,7 @@ import Proceso from "../../components/Proceso.astro";
 import Especializacion from "../../components/Especializacion.astro";
 import NavegacionSecundaria from "../../components/NavegacionSecundaria.astro";
 import SectionDivider from "../../components/SectionDivider.astro";
+import { SERVICIO_VALUES, PRESUPUESTO_VALUES } from "../../lib/leadOptions";
 
 // Para rutas dinámicas, exportamos getStaticPaths
 export async function getStaticPaths() {
@@ -144,7 +145,39 @@ const title = t(lang, "home.title");
               </div>
 
               <div class="form-group">
-                <select id="f-tamano" name="tamano" required>
+                <input
+                  id="f-sitio-web"
+                  name="sitioWeb"
+                  type="url"
+                  placeholder={t(lang, "cta.sitioWeb")}
+                  autocomplete="url"
+                />
+              </div>
+
+              <div class="form-group">
+                <select id="f-servicio" name="servicio" required>
+                  <option value="">{t(lang, "cta.servicioLabel")}</option>
+                  {
+                    SERVICIO_VALUES.map((v: string) => (
+                      <option value={v}>{t(lang, `cta.servicio.${v}`)}</option>
+                    ))
+                  }
+                </select>
+              </div>
+
+              <div class="form-group">
+                <select id="f-presupuesto" name="presupuesto" required>
+                  <option value="">{t(lang, "cta.presupuestoLabel")}</option>
+                  {
+                    PRESUPUESTO_VALUES.map((v: string) => (
+                      <option value={v}>{t(lang, `cta.presupuesto.${v}`)}</option>
+                    ))
+                  }
+                </select>
+              </div>
+
+              <div class="form-group">
+                <select id="f-tamano" name="tamano">
                   <option value="">{t(lang, "cta.numero")}</option>
                   <option value="1-10">{t(lang, "cta.1")}</option>
                   <option value="11-50">{t(lang, "cta.11")}</option>

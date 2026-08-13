@@ -91,7 +91,25 @@
     "nombre": "Izen osoa",
     "teléfono": "Telefonoa",
     "empresa": "Enpresa",
-    "numero": "Langile kopurua",
+    "sitioWeb": "Zure webgunearen URLa (aukerakoa)",
+    "servicioLabel": "Zein zerbitzu interesatzen zaizu?",
+    "servicio": {
+      "formacion": "Formakuntza",
+      "diseno-web": "Web Diseinua",
+      "creacion-aplicaciones": "Aplikazioen Sorkuntza",
+      "consultoria-informatica": "Informatika Aholkularitza",
+      "automatizacion-procesos": "Prozesuen Automatizazioa"
+    },
+    "presupuestoLabel": "Aurrekontu estimatua",
+    "presupuesto": {
+      "menos-1000": "1.000 € baino gutxiago",
+      "1000-3000": "1.000 € – 3.000 €",
+      "3000-10000": "3.000 € – 10.000 €",
+      "10000-30000": "10.000 € – 30.000 €",
+      "mas-30000": "30.000 € baino gehiago",
+      "no-se": "Oraindik ez dakit"
+    },
+    "numero": "Langile kopurua (aukerakoa)",
     "1": "1-10 langile",
     "11": "11-50 langile",
     "51": "51-100 langile",
