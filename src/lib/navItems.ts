@@ -19,7 +19,15 @@ export const mainNav: NavItem[] = [
       { key: 'nav.categoria4', path: '/catalogo#programacion' },
     ]
   },
-  { key: 'nav.designService', path: '/diseinu-zerbitzua' },
+  {
+    key: 'nav.servicios',
+    children: [
+      { key: 'nav.designService', path: '/diseinu-zerbitzua' },
+      { key: 'nav.appsService', path: '/creacion-aplicaciones' },
+      { key: 'nav.consultingService', path: '/consultoria-informatica' },
+      { key: 'nav.automationService', path: '/automatizacion-procesos' },
+    ]
+  },
 
   // 👉 NUEVA PÁGINA
   { key: 'nav.iaFormacion', path: '/ia-centros-educativos' },
