@@ -302,6 +302,11 @@ const title = `${dict.title} – BideDigitala`;
   }
 
   .service-item-card h3 {
+    /* Sin esto hereda el h3 global (pensado para el blog, ~39px) y
+       palabras largas como "Acompañamiento" no caben en la tarjeta y
+       se parten a mitad de palabra. */
+    font-size: 1.25rem;
+    line-height: 1.3;
     color: var(--color-text-primary);
     margin-bottom: 0.5rem;
   }
