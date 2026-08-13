@@ -587,9 +587,30 @@ section {
     color: white;
 }
 
-.cta-section .section-header h2,
-.cta-section .section-header p {
-    color: white;
+/* El título/párrafo de esta sección van en .cta-content, no en
+   .section-header (esa clase la usan otras secciones): sin esta regla
+   heredaban el color de texto oscuro por defecto y casi no se veían
+   sobre el fondo oscuro. */
+.cta-section .cta-content h2 {
+    color: var(--color-text-invert, #fff);
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.6rem;
+}
+
+.cta-section .cta-content h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 64px;
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--color-purple-light), var(--color-blue));
+}
+
+.cta-section .cta-content > p {
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .contact-grid {
