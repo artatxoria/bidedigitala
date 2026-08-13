@@ -54,3 +54,6 @@ n8n_data/
 *.log
 *.bak
 *.bak.*
+
+# Excepción: plantilla de entorno sí se versiona (sin secretos reales)
+!.env.example
