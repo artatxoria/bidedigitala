@@ -92,7 +92,10 @@ export async function scrapeWebsite(
   try {
     let startUrl: URL;
     try {
-      startUrl = new URL(rawUrl);
+      // Los prospectos suelen escribir "miempresa.com" sin esquema; new URL()
+      // lo rechaza tal cual, así que asumimos https:// si no viene indicado.
+      const candidate = /^https?:\/\//i.test(rawUrl.trim()) ? rawUrl.trim() : `https://${rawUrl.trim()}`;
+      startUrl = new URL(candidate);
     } catch {
       throw new Error(`URL inválida: ${rawUrl}`);
     }

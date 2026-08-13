@@ -4,7 +4,13 @@ export const prerender = false; // requiere runtime
 import { z } from "zod";
 import nodemailer from "nodemailer";
 import { mkdir, appendFile } from "node:fs/promises";
+import { randomUUID } from "node:crypto";
 import path from "node:path";
+import { SERVICIO_VALUES, PRESUPUESTO_VALUES, SERVICIO_LABELS_ES, PRESUPUESTO_LABELS_ES } from "../../lib/leadOptions";
+import { getLeadStore } from "../../lib/leadStore";
+import type { LeadRecord, ScoreResult } from "../../lib/leadStore";
+import { scrapeWebsite, scoreLeadWithGemini } from "../../lib/leadScoring";
+import type { ScrapedSite } from "../../lib/leadScoring";
 
 // ====== ENV (runtime) ======
 const smtpHost   = process.env.SMTP_HOST ?? "";
@@ -18,6 +24,8 @@ const smtpTo     = process.env.SMTP_TO ?? "";
 const dataDir    = process.env.DATA_DIR || "./data";
 const leadsFile  = process.env.LEADS_FILE || "leads.jsonl";
 const leadsPath  = path.join(dataDir, leadsFile);
+
+const leadStore = getLeadStore();
 
 // Diagnóstico en logs (sin credenciales)
 console.log(
@@ -41,7 +49,7 @@ const transporter = nodemailer.createTransport({
 // Verificación opcional (no bloquea)
 transporter.verify()
   .then(() => console.log("[SMTP] OK"))
-  .catch((e) => console.error("[SMTP] Error al verificar transporte:", e));
+  .catch((e: unknown) => console.error("[SMTP] Error al verificar transporte:", e));
 
 // ====== Schema de validación ======
 const FormSchema = z.object({
@@ -49,9 +57,12 @@ const FormSchema = z.object({
   email: z.string().email("Email inválido"),
   telefono: z.string().min(7, "Teléfono inválido"),
   empresa: z.string().min(2, "Empresa requerida"),
-  tamano: z.string().min(1, "Selecciona un tamaño"),
+  sitioWeb: z.string().optional().default(""), // opcional; se acepta laxo, scrapeWebsite valida/normaliza de verdad
+  servicio: z.enum(SERVICIO_VALUES),
+  presupuesto: z.enum(PRESUPUESTO_VALUES),
+  tamano: z.string().optional().default(""), // nº de trabajadores, opcional
   mensaje: z.string().optional().default(""),
-  website: z.string().optional().default(""), // honeypot
+  website: z.string().optional().default(""), // honeypot (no confundir con sitioWeb)
   marketing: z.string().optional(),           // "yes" si marcado
   consent: z.union([z.literal("on"), z.literal("yes"), z.literal("true")]),
   lang: z.enum(["es", "eu"]).optional(),
@@ -62,7 +73,7 @@ const FormSchema = z.object({
 async function saveLead(record: unknown) {
   try {
     await mkdir(dataDir, { recursive: true });
-    const line = JSON.stringify({ ...record, ts: new Date().toISOString() }) + "\n";
+    const line = JSON.stringify({ ...(record as object), ts: new Date().toISOString() }) + "\n";
     await appendFile(leadsPath, line, "utf8");
   } catch (e) {
     console.error("[leads] persist error:", e);
@@ -93,100 +104,145 @@ export async function POST({ request }: { request: Request }) {
     const ua   = request.headers.get("user-agent") || "";
     const ref  = request.headers.get("referer") || "";
     const lang = data.lang || "es";
+    const source = data.source || ref || "";
+    const leadId = randomUUID();
 
-    // Guarda el lead ANTES del mail (no perdemos nada si el SMTP falla)
-    await saveLead({
-      status: "received",
+    const leadRecord: LeadRecord = {
+      leadId,
       nombre: data.nombre,
+      empresa: data.empresa,
       email: data.email,
       telefono: data.telefono,
-      empresa: data.empresa,
-      tamano: data.tamano,
+      sitioWeb: data.sitioWeb || "",
+      servicio: data.servicio,
+      presupuesto: data.presupuesto,
+      tamano: data.tamano || "",
       mensaje: data.mensaje || "",
-      marketing: !!data.marketing,
-      consent: true,
       lang,
-      source: data.source || ref || null,
-      ua,
-    });
+      source,
+      marketing: !!data.marketing,
+    };
 
-    // Componer email
-    const subject =
-      lang === "eu"
-        ? `Kontaktua: ${data.nombre} · ${data.empresa}`
-        : `Nuevo contacto: ${data.nombre} · ${data.empresa}`;
+    // 1) Guarda el lead ANTES de cualquier llamada externa (no perdemos nada si algo falla).
+    await saveLead({ status: "received", ...leadRecord, consent: true, ua });
 
-    const text = `
-Nombre:   ${data.nombre}
-Email:    ${data.email}
-Teléfono: ${data.telefono}
-Empresa:  ${data.empresa}
-Tamaño:   ${data.tamano}
-Marketing: ${data.marketing ? "sí" : "no"}
-Idioma:   ${lang}
-Origen:   ${data.source || ref || "-"}
-UA:       ${ua}
+    // 2) Crea el registro en Airtable (rápido, se espera antes de responder para
+    //    tener el id externo y poder correlacionar la actualización del score).
+    let airtableId: string | null = null;
+    try {
+      airtableId = await leadStore.createLead(leadRecord);
+    } catch (e) {
+      console.error("[airtable] create error:", e);
+      await saveLead({ status: "airtable_create_error", leadId, error: String(e) });
+    }
+
+    // 3) Scoring (scraping + Gemini) en segundo plano: no bloquea la respuesta.
+    //    adapter Node standalone = proceso de larga duración, la promesa sigue
+    //    ejecutándose tras el `return` de más abajo. Siempre con .catch() para
+    //    no dejar un unhandledRejection suelto.
+    scoreLeadInBackground({ leadId, leadRecord, airtableId }).catch((e) =>
+      console.error("[scoring] uncaught:", e)
+    );
+
+    // 4) Email interno: también best-effort en segundo plano. La respuesta al
+    //    prospecto ya no depende de que el SMTP funcione (ver leads.jsonl para
+    //    el estado real: sent / mailer_error).
+    sendLeadEmail({ leadId, data: leadRecord }).catch((e) => console.error("[email] uncaught:", e));
+
+    return json({ ok: true, leadId });
+  } catch (err) {
+    console.error("[contact] fatal:", err);
+    return json({ ok: false, error: "Server error" }, 500);
+  }
+}
+
+// ====== Scoring en segundo plano ======
+async function scoreLeadInBackground({
+  leadId,
+  leadRecord,
+  airtableId,
+}: {
+  leadId: string;
+  leadRecord: LeadRecord;
+  airtableId: string | null;
+}) {
+  let scraped: ScrapedSite | null = null;
+  if (leadRecord.sitioWeb) {
+    scraped = await scrapeWebsite(leadRecord.sitioWeb);
+  }
+
+  const score: ScoreResult = await scoreLeadWithGemini(leadRecord, scraped);
+
+  await saveLead({ status: "scored", leadId, ...score });
+
+  if (airtableId) {
+    try {
+      await leadStore.updateLeadScore(airtableId, score);
+    } catch (e) {
+      console.error("[airtable] update error:", e);
+      await saveLead({ status: "airtable_update_error", leadId, error: String(e) });
+    }
+  }
+}
+
+// ====== Email interno (best-effort, en segundo plano) ======
+async function sendLeadEmail({ leadId, data }: { leadId: string; data: LeadRecord }) {
+  const servicioLabel = SERVICIO_LABELS_ES[data.servicio as keyof typeof SERVICIO_LABELS_ES] || data.servicio;
+  const presupuestoLabel =
+    PRESUPUESTO_LABELS_ES[data.presupuesto as keyof typeof PRESUPUESTO_LABELS_ES] || data.presupuesto;
+
+  const subject =
+    data.lang === "eu"
+      ? `Kontaktua: ${data.nombre} · ${data.empresa}`
+      : `Nuevo contacto: ${data.nombre} · ${data.empresa}`;
+
+  const text = `
+Nombre:      ${data.nombre}
+Email:       ${data.email}
+Teléfono:    ${data.telefono}
+Empresa:     ${data.empresa}
+Sitio web:   ${data.sitioWeb || "-"}
+Servicio:    ${servicioLabel}
+Presupuesto: ${presupuestoLabel}
+Tamaño:      ${data.tamano || "no indicado"}
+Marketing:   ${data.marketing ? "sí" : "no"}
+Idioma:      ${data.lang}
+Origen:      ${data.source || "-"}
+Lead ID:     ${leadId}
 
 Mensaje:
 ${data.mensaje || "(sin mensaje)"}
 `.trim();
 
-    const html = `
+  const html = `
   <div style="font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto;line-height:1.6;color:#111">
-    <h2 style="margin:0 0 .5rem">${lang === "eu" ? "Kontaktu berria" : "Nuevo contacto"}</h2>
+    <h2 style="margin:0 0 .5rem">${data.lang === "eu" ? "Kontaktu berria" : "Nuevo contacto"}</h2>
     <table style="border-collapse:collapse;width:100%;max-width:640px">
       <tbody>
         ${row("Nombre", escapeHtml(data.nombre))}
         ${row("Email", `<a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a>`)}
         ${row("Teléfono", escapeHtml(data.telefono))}
         ${row("Empresa", escapeHtml(data.empresa))}
-        ${row("Tamaño", escapeHtml(data.tamano))}
+        ${row("Sitio web", data.sitioWeb ? `<a href="${escapeHtml(data.sitioWeb)}">${escapeHtml(data.sitioWeb)}</a>` : "-")}
+        ${row("Servicio", escapeHtml(servicioLabel))}
+        ${row("Presupuesto", escapeHtml(presupuestoLabel))}
+        ${row("Tamaño", escapeHtml(data.tamano || "no indicado"))}
         ${row("Marketing", data.marketing ? "Sí" : "No")}
-        ${row("Idioma", lang.toUpperCase())}
-        ${row("Origen", escapeHtml(data.source || ref || "-"))}
-        ${row("User-Agent", escapeHtml(ua))}
+        ${row("Idioma", data.lang.toUpperCase())}
+        ${row("Origen", escapeHtml(data.source || "-"))}
+        ${row("Lead ID", escapeHtml(leadId))}
         ${row("Mensaje", escapeHtml(data.mensaje || "(sin mensaje)"))}
       </tbody>
     </table>
   </div>
 `.trim();
 
-    // Enviar email
-    try {
-      await transporter.sendMail({
-        from: smtpFrom,
-        to: smtpTo,
-        replyTo: data.email,
-        subject,
-        text,
-        html,
-      });
-
-      await saveLead({
-        status: "sent",
-        email_to: smtpTo,
-        nombre: data.nombre,
-        email: data.email,
-        empresa: data.empresa,
-        lang,
-      });
-
-      return json({ ok: true });
-    } catch (mailErr) {
-      console.error("[contact] mailer error:", mailErr);
-      await saveLead({
-        status: "mailer_error",
-        error: String(mailErr),
-        nombre: data.nombre,
-        email: data.email,
-        empresa: data.empresa,
-        lang,
-      });
-      return json({ ok: false, error: "Mailer error" }, 500);
-    }
-  } catch (err) {
-    console.error("[contact] fatal:", err);
-    return json({ ok: false, error: "Server error" }, 500);
+  try {
+    await transporter.sendMail({ from: smtpFrom, to: smtpTo, replyTo: data.email, subject, text, html });
+    await saveLead({ status: "sent", leadId, email_to: smtpTo, nombre: data.nombre, email: data.email, empresa: data.empresa, lang: data.lang });
+  } catch (mailErr) {
+    console.error("[contact] mailer error:", mailErr);
+    await saveLead({ status: "mailer_error", leadId, error: String(mailErr), nombre: data.nombre, email: data.email, empresa: data.empresa, lang: data.lang });
   }
 }
 
