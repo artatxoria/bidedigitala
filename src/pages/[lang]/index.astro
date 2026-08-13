@@ -7,6 +7,7 @@ import { t, tPath } from "../../lib/translations";
 import Hero from "../../components/Hero.astro";
 import Problemas from "../../components/Problemas.astro";
 import Valores from "../../components/Valores.astro";
+import LineasServicio from "../../components/LineasServicio.astro";
 import Servicios from "../../components/Servicios.astro";
 import Onurak from "../../components/Onurak.astro";
 import Proceso from "../../components/Proceso.astro";
@@ -44,6 +45,8 @@ const title = t(lang, "home.title");
 
   <Hero lang={lang} />
 
+  <LineasServicio lang={lang} />
+
   <Problemas lang={lang} />
 
   <SectionDivider />
@@ -51,56 +54,6 @@ const title = t(lang, "home.title");
   <Valores lang={lang} />
 
   <Servicios lang={lang} />
-
-  <!-- Services Section -->
-  <section id="zerbitzuak" class="services">
-    <div class="container">
-      <div class="section-header">
-        <h2>{t(lang, "servicios.nuestros")}</h2>
-        <p>{t(lang, "servicios.servicios")}</p>
-      </div>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-header">
-            <i class="fas fa-building"></i>
-            <h3>{t(lang, "servicios.empresas")}</h3>
-            <p>
-              <span class="service-tag">{t(lang, "servicios.bonificada")}</span>
-            </p>
-          </div>
-          <div class="service-content">
-            <div class="service-item">
-              <h4>{t(lang, "servicios.medida")}</h4>
-              <p>{t(lang, "servicios.diseño")}</p>
-            </div>
-            <div class="service-item">
-              <h4>{t(lang, "servicios.gestión")}</h4>
-              <p>{t(lang, "servicios.burocracia")}</p>
-            </div>
-          </div>
-        </div>
-        <div class="service-card">
-          <div class="service-header">
-            <i class="fas fa-users"></i>
-            <h3>{t(lang, "servicios.trabajadores")}</h3>
-            <p>
-              <span class="service-tag">{t(lang, "servicios.online")}</span>
-            </p>
-          </div>
-          <div class="service-content">
-            <div class="service-item">
-              <h4>{t(lang, "servicios.síncrona")}</h4>
-              <p>{t(lang, "servicios.clases")}</p>
-            </div>
-            <div class="service-item">
-              <h4>{t(lang, "servicios.programas")}</h4>
-              <p>{t(lang, "servicios.itinerario")}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <SectionDivider />
 

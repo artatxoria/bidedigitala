@@ -1,0 +1,210 @@
+---
+// src/components/LineasServicio.astro
+// Vista general de las 5 líneas de negocio, cada una enlazando a su página.
+// Componente autocontenido con CSS y traducciones embebidas (mismo patrón
+// que Servicios.astro / Valores.astro).
+import { tPath } from "../lib/translations";
+
+export interface Props {
+  lang: "es" | "eu";
+}
+const { lang } = Astro.props;
+
+interface Linea {
+  icon: string;
+  title: string;
+  desc: string;
+  href: string;
+  cta: string;
+}
+
+const translations: Record<
+  "es" | "eu",
+  { title: string; subtitle: string; lineas: Linea[] }
+> = {
+  es: {
+    title: "Nuestras Líneas de Servicio",
+    subtitle:
+      "Un mismo equipo para acompañar la transformación digital de tu empresa, de principio a fin.",
+    lineas: [
+      {
+        icon: "fa-graduation-cap",
+        title: "Formación",
+        desc: "Formación bonificada, subvencionada y privada en IA, datos, ciberseguridad, automatización y programación.",
+        href: tPath("/catalogo", lang),
+        cta: "Ver catálogo",
+      },
+      {
+        icon: "fa-pen-ruler",
+        title: "Diseño Web",
+        desc: "Webs y presencia digital orientadas a KPI de negocio, con ingeniería y pedagogía, no solo estética.",
+        href: tPath("/diseinu-zerbitzua", lang),
+        cta: "Ver servicio",
+      },
+      {
+        icon: "fa-code",
+        title: "Creación de Aplicaciones",
+        desc: "Software y aplicaciones a medida: herramientas internas, apps web y de escritorio para tu negocio.",
+        href: tPath("/creacion-aplicaciones", lang),
+        cta: "Ver servicio",
+      },
+      {
+        icon: "fa-lightbulb",
+        title: "Consultoría Informática",
+        desc: "Diagnóstico tecnológico, elección de herramientas y acompañamiento en tu transformación digital.",
+        href: tPath("/consultoria-informatica", lang),
+        cta: "Ver servicio",
+      },
+      {
+        icon: "fa-gears",
+        title: "Automatización de Proyectos",
+        desc: "Automatizamos procesos repetitivos e integramos tus herramientas (con n8n) para liberar tiempo de tu equipo.",
+        href: tPath("/automatizacion-procesos", lang),
+        cta: "Ver servicio",
+      },
+    ],
+  },
+  eu: {
+    title: "Gure Zerbitzu-lerroak",
+    subtitle:
+      "Talde bakarra, zure enpresaren eraldaketa digitala hasieratik amaierara laguntzeko.",
+    lineas: [
+      {
+        icon: "fa-graduation-cap",
+        title: "Formakuntza",
+        desc: "Formazio hobariduna, dirulaguntzaduna eta pribatua: IA, datuak, zibersegurtasuna, automatizazioa eta programazioa.",
+        href: tPath("/catalogo", lang),
+        cta: "Katalogoa ikusi",
+      },
+      {
+        icon: "fa-pen-ruler",
+        title: "Web Diseinua",
+        desc: "Negozioaren KPIetara begira dagoen web presentzia, ingeniaritzarekin eta pedagogiarekin, ez estetikarekin bakarrik.",
+        href: tPath("/diseinu-zerbitzua", lang),
+        cta: "Zerbitzua ikusi",
+      },
+      {
+        icon: "fa-code",
+        title: "Aplikazioen Sorkuntza",
+        desc: "Neurrira egindako softwarea eta aplikazioak: barne-tresnak, web eta mahaigaineko app-ak zure negoziorako.",
+        href: tPath("/creacion-aplicaciones", lang),
+        cta: "Zerbitzua ikusi",
+      },
+      {
+        icon: "fa-lightbulb",
+        title: "Informatika Aholkularitza",
+        desc: "Diagnostiko teknologikoa, tresnen aukeraketa eta laguntza zure eraldaketa digitalean.",
+        href: tPath("/consultoria-informatica", lang),
+        cta: "Zerbitzua ikusi",
+      },
+      {
+        icon: "fa-gears",
+        title: "Prozesuen Automatizazioa",
+        desc: "Errepikatzen diren prozesuak automatizatzen ditugu eta zure tresnak integratzen (n8n bidez), taldearen denbora askatzeko.",
+        href: tPath("/automatizacion-procesos", lang),
+        cta: "Zerbitzua ikusi",
+      },
+    ],
+  },
+};
+
+const dict = translations[lang] || translations.es;
+---
+
+<style>
+  .lineas {
+    padding: var(--section-padding, 5rem 0);
+  }
+
+  .lineas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.75rem;
+    margin-top: 2.5rem;
+  }
+
+  .linea-card {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.75rem;
+    border-radius: var(--border-radius, 16px);
+    background: var(--card-gradient, var(--color-bg));
+    border: 1px solid var(--card-border, var(--color-border));
+    box-shadow: var(--shadow-md);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .linea-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .linea-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    margin-bottom: 1.25rem;
+    background: linear-gradient(135deg, var(--color-purple), var(--color-blue));
+  }
+
+  .linea-icon i {
+    font-size: 1.4rem;
+    color: var(--color-text-invert, #fff);
+  }
+
+  .linea-card h3 {
+    color: var(--color-text-primary, var(--text-dark));
+    margin-bottom: 0.6rem;
+  }
+
+  .linea-card p {
+    color: var(--color-text-secondary, var(--text-light));
+    flex-grow: 1;
+    margin-bottom: 1.25rem;
+  }
+
+  .linea-cta {
+    font-weight: 600;
+    color: var(--color-purple);
+    font-size: 0.95rem;
+  }
+
+  .linea-cta i {
+    margin-left: 0.35rem;
+    transition: transform 0.2s ease;
+  }
+
+  .linea-card:hover .linea-cta i {
+    transform: translateX(4px);
+  }
+</style>
+
+<section id="zerbitzuak" class="lineas">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">{dict.title}</h2>
+      <p class="section-subtitle">{dict.subtitle}</p>
+    </div>
+    <div class="lineas-grid">
+      {
+        dict.lineas.map((linea) => (
+          <a class="linea-card" href={linea.href}>
+            <div class="linea-icon">
+              <i class={`fas ${linea.icon}`} aria-hidden="true" />
+            </div>
+            <h3>{linea.title}</h3>
+            <p>{linea.desc}</p>
+            <span class="linea-cta">
+              {linea.cta} <i class="fas fa-arrow-right" aria-hidden="true" />
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

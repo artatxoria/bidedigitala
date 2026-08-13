@@ -14,9 +14,11 @@ const { lang } = Astro.props;
                 <div class="footer-section">
                     <h4>{t(lang, 'footer.services')}</h4>
                     <ul>
-                        <li><a href="#zerbitzuak">{t(lang, 'footer.service1')}</a></li>
-                        <li><a href="#zerbitzuak">{t(lang, 'footer.service2')}</a></li>
-                        <li><a href="#zerbitzuak">{t(lang, 'footer.service3')}</a></li>
+                        <li><a href={tPath('/catalogo', lang)}>{t(lang, 'footer.service1')}</a></li>
+                        <li><a href={tPath('/diseinu-zerbitzua', lang)}>{t(lang, 'footer.service2')}</a></li>
+                        <li><a href={tPath('/creacion-aplicaciones', lang)}>{t(lang, 'footer.service3')}</a></li>
+                        <li><a href={tPath('/consultoria-informatica', lang)}>{t(lang, 'footer.service4')}</a></li>
+                        <li><a href={tPath('/automatizacion-procesos', lang)}>{t(lang, 'footer.service5')}</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">

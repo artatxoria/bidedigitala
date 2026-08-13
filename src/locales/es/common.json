@@ -17,22 +17,25 @@
     "categoria2": "Inteligencia Artificial",
     "categoria3": "Automatización",
     "categoria4": "Programación",
-    "designService": "Servicio de Diseño",
-    "iaFormacion": "IA para la Docencia"
+    "designService": "Diseño Web",
+    "iaFormacion": "IA para la Docencia",
+    "appsService": "Creación de Aplicaciones",
+    "consultingService": "Consultoría Informática",
+    "automationService": "Automatización de Proyectos"
 
   },
   "hero": {
-    "title": "La Formación Bonificada que tu PYME",
-    "title_": "Entenderá y Amará",
-    "subtitle": "Formación bonificada a medida para PYMES industriales de Euskadi, sin papeleo y con gestión 100% automatizada.",
-    "trustBadge": "FUNDAE · Lanbide · Bizkaia",
+    "title": "Tecnología, Formación y Automatización",
+    "title_": "al servicio de tu PYME",
+    "subtitle": "Formación bonificada, diseño web, desarrollo de aplicaciones, consultoría informática y automatización de procesos: todo con el mismo equipo de confianza en Euskadi.",
+    "trustBadge": "Formación · Software · Automatización",
     "metric1Value": "-95%",
-    "metric1Label": "Burocracia",
+    "metric1Label": "Burocracia automatizada",
     "metric2Value": "EU/ES",
     "metric2Label": "Bilingüe",
-    "metric3Value": "0€",
-    "metric3Label": "Coste con bonificación",
-    "contacto": "Solicita tu Asesoría Gratuita",
+    "metric3Value": "5",
+    "metric3Label": "Líneas de servicio",
+    "contacto": "Solicita tu Diagnóstico Gratuito",
     "diferencia": "Descubre cómo"
   },
   "problema": {
@@ -103,11 +106,13 @@
     "consent": "He leído y acepto la Política de Privacidad."
   },
   "footer": {
-    "tagline": "Formación inteligente para empresas vascas",
+    "tagline": "Formación, software y automatización para empresas vascas",
     "services": "Servicios",
-    "service1": "Formación Bonificada",
-    "service2": "Formación Subvencionada",
-    "service3": "Formación Privada",
+    "service1": "Formación",
+    "service2": "Diseño Web",
+    "service3": "Creación de Aplicaciones",
+    "service4": "Consultoría Informática",
+    "service5": "Automatización de Proyectos",
     "company": "Empresa",
     "valueProposal": "Propuesta de valor",
     "process": "Proceso",
