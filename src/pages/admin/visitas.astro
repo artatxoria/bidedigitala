@@ -1,0 +1,225 @@
+---
+// src/pages/admin/visitas.astro
+// Pestaña de analítica de visitas: KPIs, visitas por día, páginas más vistas,
+// origen del tráfico. Datos de src/pages/api/track.ts (tabla pageviews),
+// solo de visitantes que aceptaron el banner de cookies.
+export const prerender = false;
+
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import { pool, isDbConfigured } from "../../lib/db";
+
+const RANGO_DIAS = 30;
+
+interface DiaRow {
+  dia: string;
+  visitas: number;
+}
+interface PaginaRow {
+  path: string;
+  vistas: number;
+  tiempo_medio_ms: number | null;
+}
+interface OrigenRow {
+  origen: string;
+  visitas: number;
+}
+interface ResumenRow {
+  total_visitas: number;
+  visitantes_unicos: number;
+  tiempo_medio_ms: number | null;
+}
+
+let dbError: string | null = null;
+let resumen: ResumenRow = { total_visitas: 0, visitantes_unicos: 0, tiempo_medio_ms: null };
+let porDia: DiaRow[] = [];
+let paginas: PaginaRow[] = [];
+let origenes: OrigenRow[] = [];
+
+if (isDbConfigured()) {
+  try {
+    const [resumenRes, porDiaRes, paginasRes, origenesRes] = await Promise.all([
+      pool!.query<ResumenRow>(
+        `SELECT count(*)::int AS total_visitas,
+                count(DISTINCT visitor_id)::int AS visitantes_unicos,
+                avg(duration_ms) AS tiempo_medio_ms
+           FROM pageviews
+          WHERE created_at > now() - interval '${RANGO_DIAS} days'`
+      ),
+      pool!.query<DiaRow>(
+        `SELECT d::date::text AS dia, COALESCE(pv.visitas, 0)::int AS visitas
+           FROM generate_series(current_date - interval '${RANGO_DIAS - 1} days', current_date, interval '1 day') AS d
+           LEFT JOIN (
+             SELECT date_trunc('day', created_at)::date AS dia, count(*) AS visitas
+               FROM pageviews
+              WHERE created_at > now() - interval '${RANGO_DIAS} days'
+              GROUP BY dia
+           ) pv ON pv.dia = d::date
+          ORDER BY d`
+      ),
+      pool!.query<PaginaRow>(
+        `SELECT path, count(*)::int AS vistas, avg(duration_ms) AS tiempo_medio_ms
+           FROM pageviews
+          WHERE created_at > now() - interval '${RANGO_DIAS} days'
+          GROUP BY path
+          ORDER BY vistas DESC
+          LIMIT 20`
+      ),
+      pool!.query<OrigenRow>(
+        `SELECT COALESCE(referrer, '(directo)') AS origen, count(*)::int AS visitas
+           FROM pageviews
+          WHERE created_at > now() - interval '${RANGO_DIAS} days'
+          GROUP BY origen
+          ORDER BY visitas DESC
+          LIMIT 20`
+      ),
+    ]);
+    resumen = resumenRes.rows[0] ?? resumen;
+    porDia = porDiaRes.rows;
+    paginas = paginasRes.rows;
+    origenes = origenesRes.rows;
+  } catch (e) {
+    dbError = e instanceof Error ? e.message : String(e);
+    console.error("[admin/visitas] query error:", e);
+  }
+} else {
+  dbError = "PostgreSQL no configurado (faltan POSTGRES_HOST/USER/PASSWORD/DB).";
+}
+
+function fmtDuracion(ms: number | null): string {
+  if (ms === null || Number.isNaN(ms)) return "—";
+  const s = Math.round(ms / 1000);
+  if (s < 60) return `${s}s`;
+  return `${Math.floor(s / 60)}m ${s % 60}s`;
+}
+
+function fmtDiaCorto(iso: string): string {
+  const d = new Date(iso + "T00:00:00");
+  return d.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit" });
+}
+
+// ---- Gráfica de barras (SVG a medida, sin dependencias) ----
+const CHART_WIDTH = 760;
+const CHART_HEIGHT = 160;
+const CHART_PAD_BOTTOM = 24;
+const maxVisitas = Math.max(1, ...porDia.map((d) => d.visitas));
+const barGap = 3;
+const barWidth = porDia.length ? CHART_WIDTH / porDia.length - barGap : 0;
+
+const bars = porDia.map((d, i) => {
+  const h = (d.visitas / maxVisitas) * (CHART_HEIGHT - CHART_PAD_BOTTOM - 8);
+  const x = i * (barWidth + barGap);
+  const y = CHART_HEIGHT - CHART_PAD_BOTTOM - h;
+  return { ...d, x, y, h, width: barWidth };
+});
+// Solo etiquetar de tanto en tanto para no amontonar el eje (cada ~5 días).
+const labelEvery = Math.max(1, Math.ceil(porDia.length / 8));
+---
+
+<AdminLayout title="Visitas" active="visitas">
+  <style>
+    .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+    .kpi { background: var(--panel); border: 1px solid var(--border); border-radius: .5rem; padding: 1.25rem; }
+    .kpi .valor { font-size: 1.75rem; font-weight: 700; color: var(--text); }
+    .kpi .etiqueta { color: var(--text-dim); font-size: .8rem; margin-top: .25rem; }
+    .chart-wrap { background: var(--panel); border: 1px solid var(--border); border-radius: .5rem; padding: 1.25rem; overflow-x: auto; }
+    .chart-wrap svg { display: block; }
+    .bar { fill: var(--accent); }
+    .bar-label { fill: var(--text-dim); font-size: 9px; }
+    .empty-inline { color: var(--text-dim); padding: 1rem 0; }
+    .bar-list { display: flex; flex-direction: column; gap: .5rem; }
+    .bar-row { display: grid; grid-template-columns: 1fr auto; gap: .5rem; align-items: center; font-size: .85rem; }
+    .bar-row .bar-label-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-row .bar-track { grid-column: 1 / -1; height: 6px; background: var(--border); border-radius: 999px; overflow: hidden; }
+    .bar-row .bar-fill { height: 100%; background: var(--accent); border-radius: 999px; }
+  </style>
+
+  {dbError ? (
+    <div class="error">⚠️ {dbError}</div>
+  ) : (
+    <>
+      <div class="kpis">
+        <div class="kpi">
+          <div class="valor">{resumen.total_visitas}</div>
+          <div class="etiqueta">Visitas ({RANGO_DIAS} días)</div>
+        </div>
+        <div class="kpi">
+          <div class="valor">{resumen.visitantes_unicos}</div>
+          <div class="etiqueta">Visitantes únicos</div>
+        </div>
+        <div class="kpi">
+          <div class="valor">{fmtDuracion(resumen.tiempo_medio_ms)}</div>
+          <div class="etiqueta">Tiempo medio en página</div>
+        </div>
+      </div>
+
+      <section>
+        <h2>Visitas por día</h2>
+        {resumen.total_visitas === 0 ? (
+          <div class="empty-inline">Todavía no hay visitas registradas.</div>
+        ) : (
+          <div class="chart-wrap">
+            <svg viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`} width="100%" height={CHART_HEIGHT} role="img" aria-label="Visitas por día, últimos 30 días">
+              {bars.map((b) => (
+                <rect class="bar" x={b.x} y={b.y} width={Math.max(1, b.width)} height={Math.max(0, b.h)} rx="2">
+                  <title>{`${fmtDiaCorto(b.dia)}: ${b.visitas} visita${b.visitas === 1 ? "" : "s"}`}</title>
+                </rect>
+              ))}
+              {bars.map((b, i) => (
+                i % labelEvery === 0 ? (
+                  <text class="bar-label" x={b.x + b.width / 2} y={CHART_HEIGHT - 6} text-anchor="middle">
+                    {fmtDiaCorto(b.dia)}
+                  </text>
+                ) : null
+              ))}
+            </svg>
+          </div>
+        )}
+      </section>
+
+      <section>
+        <h2>Páginas más vistas</h2>
+        {paginas.length === 0 ? (
+          <div class="empty-inline">Sin datos todavía.</div>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>Página</th>
+                <th>Vistas</th>
+                <th>Tiempo medio</th>
+              </tr>
+            </thead>
+            <tbody>
+              {paginas.map((p) => (
+                <tr>
+                  <td>{p.path}</td>
+                  <td>{p.vistas}</td>
+                  <td>{fmtDuracion(p.tiempo_medio_ms)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </section>
+
+      <section>
+        <h2>Origen del tráfico</h2>
+        {origenes.length === 0 ? (
+          <div class="empty-inline">Sin datos todavía.</div>
+        ) : (
+          <div class="bar-list">
+            {origenes.map((o) => (
+              <div class="bar-row">
+                <span class="bar-label-text">{o.origen}</span>
+                <span>{o.visitas}</span>
+                <div class="bar-track">
+                  <div class="bar-fill" style={`width:${Math.max(2, (o.visitas / origenes[0].visitas) * 100)}%`}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+    </>
+  )}
+</AdminLayout>
