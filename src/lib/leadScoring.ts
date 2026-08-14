@@ -160,7 +160,10 @@ const geminiApiKey = process.env.GEMINI_API_KEY ?? "";
 // descontinuar para API keys nuevas (nos pasó con "gemini-2.5-flash", ver
 // GEMINI_MODEL en .env.example si se prefiere fijar una versión estable).
 const geminiModel = process.env.GEMINI_MODEL || "gemini-flash-latest";
-const geminiTimeoutMs = Number(process.env.GEMINI_TIMEOUT_MS ?? "15000");
+// El scoring corre en segundo plano (nunca bloquea la respuesta al
+// formulario), así que hay margen para ser insistente ante los 503
+// "high demand" de Gemini, que en la práctica son frecuentes.
+const geminiTimeoutMs = Number(process.env.GEMINI_TIMEOUT_MS ?? "30000");
 
 console.log(`[gemini cfg] modelo=${geminiModel} auth=${geminiApiKey ? "sí" : "no"}`);
 if (!geminiApiKey) {
@@ -264,8 +267,8 @@ en castellano, para el equipo comercial.
 `.trim();
 }
 
-const GEMINI_MAX_ATTEMPTS = 3;
-const GEMINI_RETRY_BASE_DELAY_MS = 400; // 400ms, 800ms — backoff lineal simple
+const GEMINI_MAX_ATTEMPTS = 5;
+const GEMINI_RETRY_BASE_DELAY_MS = 500; // backoff exponencial + jitter: ~0.5s, 1s, 2s, 4s
 
 /**
  * Puntúa un lead con Gemini. Nunca lanza — cualquier fallo (sin credenciales,
@@ -316,7 +319,9 @@ export async function scoreLeadWithGemini(data: LeadRecord, scraped: ScrapedSite
           e instanceof Error ? e.message : e
         );
         if (agotado) break;
-        await new Promise((r) => setTimeout(r, GEMINI_RETRY_BASE_DELAY_MS * attempt));
+        const backoff = GEMINI_RETRY_BASE_DELAY_MS * 2 ** (attempt - 1); // exponencial
+        const jitter = backoff * (0.8 + Math.random() * 0.4); // ±20%, evita reintentos sincronizados
+        await new Promise((r) => setTimeout(r, jitter));
       }
     }
     console.error("[gemini] fallo tras reintentos, aplico score neutro:", lastError instanceof Error ? lastError.message : lastError);
