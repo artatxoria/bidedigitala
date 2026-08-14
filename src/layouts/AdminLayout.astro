@@ -1,0 +1,109 @@
+---
+// src/layouts/AdminLayout.astro
+// Shell compartido por el panel interno (/admin/leads, /admin/visitas):
+// tema oscuro, pestañas de navegación, estilos base de tabla/filtros.
+// Protegido por Basic Auth vía src/middleware.ts (todo /admin/*). Fuera del
+// routing [lang]/ a propósito: herramienta interna en castellano.
+export interface Props {
+  title: string;
+  active: "leads" | "visitas";
+}
+const { title, active } = Astro.props;
+
+const TABS = [
+  { key: "leads", label: "Leads", href: "/admin/leads" },
+  { key: "visitas", label: "Visitas", href: "/admin/visitas" },
+] as const;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title} — Panel interno Bidedigitala</title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --panel: #1e293b;
+        --border: #334155;
+        --text: #e2e8f0;
+        --text-dim: #94a3b8;
+        --accent: #8b5cf6;
+        --alta: #ef4444;
+        --media: #f59e0b;
+        --baja: #64748b;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        font-size: 14px;
+      }
+      header {
+        padding: 1.25rem 1.5rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+      header h1 { margin: 0; font-size: 1.25rem; }
+      header p { margin: .25rem 0 1rem; color: var(--text-dim); }
+      .admin-tabs { display: flex; gap: 1.5rem; }
+      .admin-tabs a {
+        display: inline-block;
+        padding: .6rem 0;
+        color: var(--text-dim);
+        text-decoration: none;
+        font-size: .85rem;
+        font-weight: 600;
+        border-bottom: 2px solid transparent;
+      }
+      .admin-tabs a.active { color: var(--text); border-bottom-color: var(--accent); }
+      .admin-tabs a:hover { color: var(--text); }
+      main { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
+      .filters {
+        display: flex; gap: .75rem; flex-wrap: wrap; align-items: end;
+        background: var(--panel); border: 1px solid var(--border); border-radius: .5rem;
+        padding: 1rem; margin-bottom: 1.25rem;
+      }
+      .filters label { display: flex; flex-direction: column; gap: .25rem; font-size: .8rem; color: var(--text-dim); }
+      select, button {
+        background: #0b1120; color: var(--text); border: 1px solid var(--border);
+        border-radius: .375rem; padding: .4rem .6rem; font-size: .85rem;
+      }
+      button { cursor: pointer; }
+      button.primary { background: var(--accent); border-color: var(--accent); color: white; }
+      .filters a.clear { color: var(--text-dim); font-size: .8rem; align-self: center; }
+      table { width: 100%; border-collapse: collapse; background: var(--panel); border-radius: .5rem; overflow: hidden; }
+      th, td { text-align: left; padding: .6rem .75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+      th { color: var(--text-dim); font-weight: 600; font-size: .75rem; text-transform: uppercase; letter-spacing: .03em; }
+      tr:last-child td { border-bottom: none; }
+      .wrap-text { max-width: 320px; white-space: normal; overflow-wrap: break-word; }
+      .prio-alta { color: var(--alta); }
+      .prio-media { color: var(--media); }
+      .prio-baja { color: var(--baja); }
+      .empty, .error { padding: 2rem; text-align: center; color: var(--text-dim); }
+      .error { color: var(--alta); }
+      .count { color: var(--text-dim); margin-bottom: .75rem; font-size: .85rem; }
+      a { color: var(--accent); }
+      section + section { margin-top: 1.5rem; }
+      section > h2 { font-size: 1rem; margin: 0 0 .75rem; }
+    </style>
+    <slot name="head" />
+  </head>
+  <body>
+    <header>
+      <h1>{title} — Bidedigitala</h1>
+      <p>Panel interno. No indexado, protegido por autenticación.</p>
+      <nav class="admin-tabs">
+        {TABS.map((tab) => (
+          <a href={tab.href} class={tab.key === active ? "active" : ""}>{tab.label}</a>
+        ))}
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

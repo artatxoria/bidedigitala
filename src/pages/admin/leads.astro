@@ -1,11 +1,10 @@
 ---
 // src/pages/admin/leads.astro
 // Panel interno de leads para el equipo comercial: listado, filtros y cambio
-// de estado. Protegido por Basic Auth vía src/middleware.ts. Ruta fuera de
-// [lang]/ a propósito: es una herramienta interna, no contenido público
-// bilingüe.
+// de estado. Usa AdminLayout (shell + pestañas), compartido con /admin/visitas.
 export const prerender = false;
 
+import AdminLayout from "../../layouts/AdminLayout.astro";
 import { pool, isDbConfigured } from "../../lib/db";
 import { SERVICIO_VALUES, SERVICIO_LABELS_ES, PRESUPUESTO_LABELS_ES } from "../../lib/leadOptions";
 
@@ -118,177 +117,112 @@ function fmtFecha(iso: string): string {
 }
 ---
 
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>Leads — Panel interno Bidedigitala</title>
-    <style>
-      :root {
-        --bg: #0f172a;
-        --panel: #1e293b;
-        --border: #334155;
-        --text: #e2e8f0;
-        --text-dim: #94a3b8;
-        --accent: #8b5cf6;
-        --alta: #ef4444;
-        --media: #f59e0b;
-        --baja: #64748b;
-      }
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--text);
-        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-        font-size: 14px;
-      }
-      header {
-        padding: 1.25rem 1.5rem;
-        border-bottom: 1px solid var(--border);
-      }
-      header h1 { margin: 0; font-size: 1.25rem; }
-      header p { margin: .25rem 0 0; color: var(--text-dim); }
-      main { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
-      .filters {
-        display: flex; gap: .75rem; flex-wrap: wrap; align-items: end;
-        background: var(--panel); border: 1px solid var(--border); border-radius: .5rem;
-        padding: 1rem; margin-bottom: 1.25rem;
-      }
-      .filters label { display: flex; flex-direction: column; gap: .25rem; font-size: .8rem; color: var(--text-dim); }
-      select, button {
-        background: #0b1120; color: var(--text); border: 1px solid var(--border);
-        border-radius: .375rem; padding: .4rem .6rem; font-size: .85rem;
-      }
-      button { cursor: pointer; }
-      button.primary { background: var(--accent); border-color: var(--accent); color: white; }
-      .filters a.clear { color: var(--text-dim); font-size: .8rem; align-self: center; }
-      table { width: 100%; border-collapse: collapse; background: var(--panel); border-radius: .5rem; overflow: hidden; }
-      th, td { text-align: left; padding: .6rem .75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
-      th { color: var(--text-dim); font-weight: 600; font-size: .75rem; text-transform: uppercase; letter-spacing: .03em; }
-      tr:last-child td { border-bottom: none; }
-      .wrap-text { max-width: 320px; white-space: normal; overflow-wrap: break-word; }
-      .score { font-weight: 700; }
-      .prio-alta { color: var(--alta); }
-      .prio-media { color: var(--media); }
-      .prio-baja { color: var(--baja); }
-      .empty, .error { padding: 2rem; text-align: center; color: var(--text-dim); }
-      .error { color: var(--alta); }
-      .count { color: var(--text-dim); margin-bottom: .75rem; font-size: .85rem; }
-      a { color: var(--accent); }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>Leads — Bidedigitala</h1>
-      <p>Panel interno. No indexado, protegido por autenticación.</p>
-    </header>
-    <main>
-      <form class="filters" method="GET">
-        <label>
-          Estado
-          <select name="estado">
-            <option value="">Todos</option>
-            {ESTADOS.map((e) => (
-              <option value={e} selected={filtroEstado === e}>{ESTADO_LABELS[e]}</option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Prioridad
-          <select name="prioridad">
-            <option value="">Todas</option>
-            {["alta", "media", "baja"].map((p) => (
-              <option value={p} selected={filtroPrioridad === p}>{p}</option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Servicio
-          <select name="servicio">
-            <option value="">Todos</option>
-            {SERVICIO_VALUES.map((s: string) => (
-              <option value={s} selected={filtroServicio === s}>
-                {SERVICIO_LABELS_ES[s as keyof typeof SERVICIO_LABELS_ES]}
-              </option>
-            ))}
-          </select>
-        </label>
-        <button type="submit" class="primary">Filtrar</button>
-        {(filtroEstado || filtroPrioridad || filtroServicio) && (
-          <a class="clear" href={url.pathname}>Quitar filtros</a>
-        )}
-      </form>
+<AdminLayout title="Leads" active="leads">
+  <style>
+    .score { font-weight: 700; }
+  </style>
 
-      {dbError ? (
-        <div class="error">⚠️ {dbError}</div>
-      ) : leads.length === 0 ? (
-        <div class="empty">No hay leads que coincidan con estos filtros.</div>
-      ) : (
-        <>
-          <div class="count">{leads.length} lead{leads.length === 1 ? "" : "s"}</div>
-          <table>
-            <thead>
+  <form class="filters" method="GET">
+    <label>
+      Estado
+      <select name="estado">
+        <option value="">Todos</option>
+        {ESTADOS.map((e) => (
+          <option value={e} selected={filtroEstado === e}>{ESTADO_LABELS[e]}</option>
+        ))}
+      </select>
+    </label>
+    <label>
+      Prioridad
+      <select name="prioridad">
+        <option value="">Todas</option>
+        {["alta", "media", "baja"].map((p) => (
+          <option value={p} selected={filtroPrioridad === p}>{p}</option>
+        ))}
+      </select>
+    </label>
+    <label>
+      Servicio
+      <select name="servicio">
+        <option value="">Todos</option>
+        {SERVICIO_VALUES.map((s: string) => (
+          <option value={s} selected={filtroServicio === s}>
+            {SERVICIO_LABELS_ES[s as keyof typeof SERVICIO_LABELS_ES]}
+          </option>
+        ))}
+      </select>
+    </label>
+    <button type="submit" class="primary">Filtrar</button>
+    {(filtroEstado || filtroPrioridad || filtroServicio) && (
+      <a class="clear" href={url.pathname}>Quitar filtros</a>
+    )}
+  </form>
+
+  {dbError ? (
+    <div class="error">⚠️ {dbError}</div>
+  ) : leads.length === 0 ? (
+    <div class="empty">No hay leads que coincidan con estos filtros.</div>
+  ) : (
+    <>
+      <div class="count">{leads.length} lead{leads.length === 1 ? "" : "s"}</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Contacto</th>
+            <th>Servicio</th>
+            <th>Presupuesto</th>
+            <th>Tamaño</th>
+            <th>Score</th>
+            <th>Resumen IA</th>
+            <th>Mensaje</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {leads.map((lead) => {
+            const href = safeHref(lead.sitio_web);
+            return (
               <tr>
-                <th>Fecha</th>
-                <th>Contacto</th>
-                <th>Servicio</th>
-                <th>Presupuesto</th>
-                <th>Tamaño</th>
-                <th>Score</th>
-                <th>Resumen IA</th>
-                <th>Mensaje</th>
-                <th>Estado</th>
+                <td>{fmtFecha(lead.created_at)}</td>
+                <td>
+                  <strong>{lead.nombre}</strong><br />
+                  {lead.empresa}<br />
+                  <a href={`mailto:${lead.email}`}>{lead.email}</a><br />
+                  {lead.telefono}
+                  {href && (
+                    <>
+                      <br /><a href={href} target="_blank" rel="noopener noreferrer">{lead.sitio_web}</a>
+                    </>
+                  )}
+                </td>
+                <td>{SERVICIO_LABELS_ES[lead.servicio as keyof typeof SERVICIO_LABELS_ES] || lead.servicio}</td>
+                <td>{PRESUPUESTO_LABELS_ES[lead.presupuesto as keyof typeof PRESUPUESTO_LABELS_ES] || lead.presupuesto}</td>
+                <td>{lead.tamano || "—"}</td>
+                <td>
+                  {lead.score !== null ? (
+                    <span class={`score prio-${lead.priority}`}>{lead.score} · {lead.priority}</span>
+                  ) : (
+                    <span class="prio-baja">pendiente</span>
+                  )}
+                </td>
+                <td class="wrap-text">{lead.resumen_ia || "—"}</td>
+                <td class="wrap-text">{lead.mensaje || "—"}</td>
+                <td>
+                  <form method="POST">
+                    <input type="hidden" name="leadId" value={lead.lead_id} />
+                    <select name="estado" onchange="this.form.submit()">
+                      {ESTADOS.map((e) => (
+                        <option value={e} selected={lead.estado === e}>{ESTADO_LABELS[e]}</option>
+                      ))}
+                    </select>
+                  </form>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {leads.map((lead) => {
-                const href = safeHref(lead.sitio_web);
-                return (
-                  <tr>
-                    <td>{fmtFecha(lead.created_at)}</td>
-                    <td>
-                      <strong>{lead.nombre}</strong><br />
-                      {lead.empresa}<br />
-                      <a href={`mailto:${lead.email}`}>{lead.email}</a><br />
-                      {lead.telefono}
-                      {href && (
-                        <>
-                          <br /><a href={href} target="_blank" rel="noopener noreferrer">{lead.sitio_web}</a>
-                        </>
-                      )}
-                    </td>
-                    <td>{SERVICIO_LABELS_ES[lead.servicio as keyof typeof SERVICIO_LABELS_ES] || lead.servicio}</td>
-                    <td>{PRESUPUESTO_LABELS_ES[lead.presupuesto as keyof typeof PRESUPUESTO_LABELS_ES] || lead.presupuesto}</td>
-                    <td>{lead.tamano || "—"}</td>
-                    <td>
-                      {lead.score !== null ? (
-                        <span class={`score prio-${lead.priority}`}>{lead.score} · {lead.priority}</span>
-                      ) : (
-                        <span class="prio-baja">pendiente</span>
-                      )}
-                    </td>
-                    <td class="wrap-text">{lead.resumen_ia || "—"}</td>
-                    <td class="wrap-text">{lead.mensaje || "—"}</td>
-                    <td>
-                      <form method="POST">
-                        <input type="hidden" name="leadId" value={lead.lead_id} />
-                        <select name="estado" onchange="this.form.submit()">
-                          {ESTADOS.map((e) => (
-                            <option value={e} selected={lead.estado === e}>{ESTADO_LABELS[e]}</option>
-                          ))}
-                        </select>
-                      </form>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </>
-      )}
-    </main>
-  </body>
-</html>
+            );
+          })}
+        </tbody>
+      </table>
+    </>
+  )}
+</AdminLayout>
