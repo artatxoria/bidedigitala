@@ -16,8 +16,13 @@
 --   \c bidedigitala_leads
 --   -- (pega aquí el resto de este archivo)
 --
--- DATABASE_URL resultante (ver .env.example):
---   postgres://bidedigitala_leads_app:cambia-esto@localhost:5432/bidedigitala_leads
+-- Variables resultantes en .env (ver .env.example — POSTGRES_URL es el HOST,
+-- no una connection string completa):
+--   POSTGRES_URL=localhost   (o la IP/host de tu VPS si te conectas en remoto)
+--   POSTGRES_PORT=5432
+--   POSTGRES_USER=bidedigitala_leads_app
+--   POSTGRES_PASSWORD=cambia-esto
+--   POSTGRES_DB=bidedigitala_leads
 
 CREATE TABLE IF NOT EXISTS leads (
   id            BIGSERIAL PRIMARY KEY,

@@ -98,7 +98,7 @@ if (isDbConfigured()) {
     console.error("[admin/leads] query error:", e);
   }
 } else {
-  dbError = "PostgreSQL no configurado (falta DATABASE_URL).";
+  dbError = "PostgreSQL no configurado (faltan POSTGRES_URL/USER/PASSWORD/DB).";
 }
 
 /** Solo renderiza como enlace clicable si es un http(s) válido — evita esquemas tipo javascript: en el href. */
