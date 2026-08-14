@@ -7,6 +7,7 @@ import { mkdir, appendFile } from "node:fs/promises";
 import { randomUUID } from "node:crypto";
 import path from "node:path";
 import { SERVICIO_VALUES, PRESUPUESTO_VALUES, SERVICIO_LABELS_ES, PRESUPUESTO_LABELS_ES } from "../../lib/leadOptions";
+import { t } from "../../lib/translations";
 import { getLeadStore } from "../../lib/leadStore";
 import type { LeadRecord, ScoreResult } from "../../lib/leadStore";
 import { scrapeWebsite, scoreLeadWithGemini } from "../../lib/leadScoring";
@@ -144,10 +145,10 @@ export async function POST({ request }: { request: Request }) {
       console.error("[scoring] uncaught:", e)
     );
 
-    // 4) Email interno: también best-effort en segundo plano. La respuesta al
-    //    prospecto ya no depende de que el SMTP funcione (ver leads.jsonl para
-    //    el estado real: sent / mailer_error).
-    sendLeadEmail({ leadId, data: leadRecord }).catch((e) => console.error("[email] uncaught:", e));
+    // 4) Emails (aviso interno + confirmación al prospecto): también best-effort
+    //    en segundo plano. La respuesta al prospecto ya no depende de que el
+    //    SMTP funcione (ver leads.jsonl para el estado real de cada uno).
+    sendLeadEmails({ leadId, data: leadRecord }).catch((e) => console.error("[email] uncaught:", e));
 
     return json({ ok: true, leadId });
   } catch (err) {
@@ -185,8 +186,15 @@ async function scoreLeadInBackground({
   }
 }
 
-// ====== Email interno (best-effort, en segundo plano) ======
-async function sendLeadEmail({ leadId, data }: { leadId: string; data: LeadRecord }) {
+// ====== Emails (best-effort, en segundo plano) ======
+// Dos envíos independientes: aviso interno al equipo comercial y confirmación
+// al propio prospecto. Cada uno con su try/catch y su status en leads.jsonl,
+// para que el fallo de uno no oculte ni bloquee al otro.
+async function sendLeadEmails({ leadId, data }: { leadId: string; data: LeadRecord }) {
+  await Promise.allSettled([sendInternalNotification({ leadId, data }), sendProspectConfirmation({ leadId, data })]);
+}
+
+async function sendInternalNotification({ leadId, data }: { leadId: string; data: LeadRecord }) {
   const servicioLabel = SERVICIO_LABELS_ES[data.servicio as keyof typeof SERVICIO_LABELS_ES] || data.servicio;
   const presupuestoLabel =
     PRESUPUESTO_LABELS_ES[data.presupuesto as keyof typeof PRESUPUESTO_LABELS_ES] || data.presupuesto;
@@ -243,6 +251,73 @@ ${data.mensaje || "(sin mensaje)"}
   } catch (mailErr) {
     console.error("[contact] mailer error:", mailErr);
     await saveLead({ status: "mailer_error", leadId, error: String(mailErr), nombre: data.nombre, email: data.email, empresa: data.empresa, lang: data.lang });
+  }
+}
+
+/** Email de confirmación al propio prospecto — nunca incluye datos internos (score, criterios, etc.). */
+async function sendProspectConfirmation({ leadId, data }: { leadId: string; data: LeadRecord }) {
+  const servicioLabel = t(data.lang, `cta.servicio.${data.servicio}`);
+
+  const subject = data.lang === "eu" ? "Zure eskaera jaso dugu — Bidedigitala" : "Hemos recibido tu solicitud — Bidedigitala";
+
+  const text =
+    data.lang === "eu"
+      ? `
+Kaixo ${data.nombre},
+
+Eskerrik asko Bidedigitalarekin harremanetan jartzeagatik. ${servicioLabel} zerbitzuari buruzko
+zure eskaera jaso dugu eta hurrengo 24 orduetan zurekin harremanetan jarriko gara.
+
+Bitartean, zalantzarik baduzu, idatzi diezagukezu info@bidedigitala.eus helbidera edo deitu
++34 685 756 143 zenbakira.
+
+Agur bero bat,
+Bidedigitala taldea
+`.trim()
+      : `
+Hola ${data.nombre},
+
+Gracias por contactar con Bidedigitala. Hemos recibido tu solicitud sobre ${servicioLabel}
+y en las próximas 24 horas nos pondremos en contacto contigo.
+
+Mientras tanto, si tienes cualquier duda, puedes escribirnos a info@bidedigitala.eus o
+llamarnos al +34 685 756 143.
+
+Un saludo,
+El equipo de Bidedigitala
+`.trim();
+
+  const saludo = data.lang === "eu" ? "Kaixo" : "Hola";
+  const cuerpo =
+    data.lang === "eu"
+      ? `Eskerrik asko Bidedigitalarekin harremanetan jartzeagatik. <strong>${escapeHtml(servicioLabel)}</strong> zerbitzuari buruzko zure eskaera jaso dugu eta <strong>hurrengo 24 orduetan</strong> zurekin harremanetan jarriko gara.`
+      : `Gracias por contactar con Bidedigitala. Hemos recibido tu solicitud sobre <strong>${escapeHtml(servicioLabel)}</strong> y <strong>en las próximas 24 horas</strong> nos pondremos en contacto contigo.`;
+  const mientras =
+    data.lang === "eu"
+      ? `Bitartean, zalantzarik baduzu, idatzi diezagukezu <a href="mailto:info@bidedigitala.eus">info@bidedigitala.eus</a> helbidera edo deitu <a href="tel:+34685756143">+34 685 756 143</a> zenbakira.`
+      : `Mientras tanto, si tienes cualquier duda, puedes escribirnos a <a href="mailto:info@bidedigitala.eus">info@bidedigitala.eus</a> o llamarnos al <a href="tel:+34685756143">+34 685 756 143</a>.`;
+  const firma = data.lang === "eu" ? "Agur bero bat,<br>Bidedigitala taldea" : "Un saludo,<br>El equipo de Bidedigitala";
+
+  const html = `
+  <div style="font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto;line-height:1.6;color:#111;max-width:600px;margin:0 auto">
+    <div style="background:#8b5cf6;color:#fff;padding:1.25rem 1.5rem;border-radius:8px 8px 0 0">
+      <strong style="font-size:1.1rem">Bidedigitala</strong>
+    </div>
+    <div style="border:1px solid #e5e7eb;border-top:none;padding:1.5rem;border-radius:0 0 8px 8px">
+      <p>${saludo} ${escapeHtml(data.nombre)},</p>
+      <p>${cuerpo}</p>
+      <p>${mientras}</p>
+      <p>${firma}</p>
+    </div>
+  </div>
+`.trim();
+
+  try {
+    await transporter.sendMail({ from: smtpFrom, to: data.email, replyTo: smtpTo || smtpFrom, subject, text, html });
+    await saveLead({ status: "confirmation_sent", leadId, email: data.email, lang: data.lang });
+  } catch (mailErr) {
+    console.error("[contact] confirmation mailer error:", mailErr);
+    await saveLead({ status: "confirmation_error", leadId, email: data.email, error: String(mailErr), lang: data.lang });
   }
 }
 
