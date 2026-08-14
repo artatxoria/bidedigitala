@@ -134,7 +134,14 @@
     "valueProposal": "Gure balio proposamena",
     "process": "Nola lan egituen dugu",
     "contact": "Harremanetan jarri",
-    "rights": "2025 BideDigitala, S.L. Eskubide guztiak gordeta."
+    "rights": "2025 BideDigitala, S.L. Eskubide guztiak gordeta.",
+    "manageCookies": "Cookiak kudeatu"
+  },
+  "cookies": {
+    "message": "Cookie propio bat erabiltzen dugu webguneak jasotzen dituen bisitak eta gehien interesatzen diren orriak jakiteko. Ez dugu inorekin partekatzen.",
+    "policyLink": "Informazio gehiago",
+    "accept": "Onartu",
+    "reject": "Baztertu"
   },
   "home": {
     "title": "Hasiera – BideDigitala"

@@ -59,6 +59,9 @@ const translations: Record<Lang, {
   derechos_text_3:string;
   medidas: string;
   medidasText: string;
+  cookies: string;
+  cookiesText: string;
+  cookiesText2: string;
 }> = {
   es: {
     title: 'Política de Privacidad',
@@ -95,7 +98,10 @@ const translations: Record<Lang, {
     derechos_text_2:'Para ejercer cualquiera de estos derechos, puede dirigirse a BideDigitala, S.L. a través de la dirección de correo electrónico info@bidedigitala.eus o la dirección postal indicada en el apartado 1, adjuntando copia de su DNI o documento identificativo equivalente.',
     derechos_text_3:'Asimismo, tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (AEPD) si considera que el tratamiento de sus datos personales no se ajusta a la normativa vigente. Puede encontrar más información en <a href="https://www.aepd.es" target="_blank">www.aepd.es</a>.',
     medidas: '7. Medidas de Seguridad',
-    medidasText: 'En BideDigitala, S.L. hemos adoptado las medidas técnicas y organizativas necesarias para garantizar la seguridad e integridad de los datos personales que tratamos, evitando su alteración, pérdida, tratamiento o acceso no autorizado, habida cuenta del estado de la tecnología, la naturaleza de los datos almacenados y los riesgos a los que están expuestos, ya provengan de la acción humana o del medio físico o natural.'
+    medidasText: 'En BideDigitala, S.L. hemos adoptado las medidas técnicas y organizativas necesarias para garantizar la seguridad e integridad de los datos personales que tratamos, evitando su alteración, pérdida, tratamiento o acceso no autorizado, habida cuenta del estado de la tecnología, la naturaleza de los datos almacenados y los riesgos a los que están expuestos, ya provengan de la acción humana o del medio físico o natural.',
+    cookies: '8. Cookies',
+    cookiesText: 'Utilizamos cookies propias de analítica (bd_vid, con una duración de 1 año, y bd_sid, de sesión, con una duración de 30 minutos) para conocer el número de visitas a la web, qué páginas resultan más útiles y cuánto tiempo se dedica a cada una. Estas cookies no identifican a la persona usuaria, no se comparten con terceros y no se utilizan con fines publicitarios.',
+    cookiesText2: 'Esta cookie solo se instala si usted da su consentimiento expreso a través del aviso que aparece al visitar la web por primera vez. Puede retirar su consentimiento en cualquier momento desde el enlace "Gestionar cookies" disponible en el pie de página.'
   },
   eu: {
     title: 'Pribatutasun Politika',
@@ -132,7 +138,10 @@ const translations: Record<Lang, {
     derechos_text_2:'Eskubide horietakoren bat baliatzeko, BideDigitala, S.L.ra jo dezakezu info@bidedigitala.eus helbide elektronikoaren edo 1. atalean adierazitako posta-helbidearen bidez, NANaren edo identifikazio-agiri baliokidearen kopia erantsita.',
     derechos_text_3:'Era berean, eskubidea duzu Datuak Babesteko Espainiako Bulegoan (AEPD) erreklamazio bat aurkezteko, zure datu pertsonalen tratamendua indarrean dagoen araudiarekin bat ez datorrela uste baduzu. Informazio gehiago <a href="https://www.aepd.es" target="_blank">www.aepd.es</a> webgunean aurki dezakezu.',
     medidas: '7. Segurtasun-neurriak',
-    medidasText: 'BideDigitala, S.L.n beharrezko neurri teknikoak eta antolakuntzakoak hartu ditugu tratatzen ditugun datu pertsonalen segurtasuna eta osotasuna bermatzeko, datu horiek aldatzea, galtzea, baimenik gabe tratatzea edo eskuratzea saihestuz, teknologiaren egoera, biltegiratutako datuen izaera eta izan ditzaketen arriskuak kontuan hartuta, giza ekintzatik edo ingurune fisiko edo naturaletik datozenak.'
+    medidasText: 'BideDigitala, S.L.n beharrezko neurri teknikoak eta antolakuntzakoak hartu ditugu tratatzen ditugun datu pertsonalen segurtasuna eta osotasuna bermatzeko, datu horiek aldatzea, galtzea, baimenik gabe tratatzea edo eskuratzea saihestuz, teknologiaren egoera, biltegiratutako datuen izaera eta izan ditzaketen arriskuak kontuan hartuta, giza ekintzatik edo ingurune fisiko edo naturaletik datozenak.',
+    cookies: '8. Cookieak',
+    cookiesText: 'Analitikarako geure cookie propioak erabiltzen ditugu (bd_vid, urtebeteko iraupenarekin, eta bd_sid, saiokoa, 30 minutuko iraupenarekin) webguneak jasotzen dituen bisitak, orririk erabilgarrienak eta bakoitzari eskaintzen zaion denbora jakiteko. Cookie hauek ez dute erabiltzailea identifikatzen, ez dira hirugarrenekin partekatzen eta ez dira publizitate-helburuetarako erabiltzen.',
+    cookiesText2: 'Cookie hau soilik instalatzen da webgunea lehen aldiz bisitatzean agertzen den abisuaren bidez berariazko baimena ematen baduzu. Edonoiz kendu dezakezu zure baimena orri-oinean dagoen "Cookiak kudeatu" estekaren bidez.'
   }
 };
 
@@ -190,6 +199,10 @@ const title = dict.title;
 
             <h2 class="section-subtitle">{dict.medidas}</h2>
             <p>{dict.medidasText}</p>
+
+            <h2 class="section-subtitle">{dict.cookies}</h2>
+            <p>{dict.cookiesText}</p>
+            <p>{dict.cookiesText2}</p>
         </div>
     </main>
   </section>

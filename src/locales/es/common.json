@@ -135,7 +135,14 @@
     "valueProposal": "Propuesta de valor",
     "process": "Proceso",
     "contact": "Contacto",
-    "rights": "2025 BideDigitala, S.L. Todos los derechos reservados."
+    "rights": "2025 BideDigitala, S.L. Todos los derechos reservados.",
+    "manageCookies": "Gestionar cookies"
+  },
+  "cookies": {
+    "message": "Usamos una cookie propia para saber cuántas visitas recibe la web y qué páginas interesan más. No la compartimos con nadie.",
+    "policyLink": "Más información",
+    "accept": "Aceptar",
+    "reject": "Rechazar"
   },
   "home": {
     "title": "Inicio – BideDigitala"

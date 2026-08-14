@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import CookieBanner from "../components/CookieBanner.astro";
 import "../assets/css/style.css";
 import "../styles/global.css";
 const { lang, title } = Astro.props;
@@ -47,11 +48,15 @@ const hasSecondaryNav = Astro.slots.has("secondary-nav");
     <!-- Pie de página común -->
     <Footer lang={lang} />
 
+    <!-- Banner de consentimiento de cookies (analítica propia, sin terceros) -->
+    <CookieBanner lang={lang} />
+
     <!-- Tu JavaScript de interacción -->
     <!-- <script src="/assets/js/script.js?v=2025-09-03-1" defer></script> -->
     {Astro.url.pathname !== `/${lang}/ia-centros-educativos` && (
   <script src="/assets/js/script.js?v=2025-09-03-1" defer></script>
 )}
+    <script src="/assets/js/analytics.js?v=2026-08-14-1" defer></script>
 
   </body>
 </html>
