@@ -1,9 +1,8 @@
 // src/lib/leadStore.ts
-// Abstracción de persistencia externa de leads. Airtable es la única
-// implementación hoy; una futura implementación en PostgreSQL (pg /
-// drizzle-orm + DATABASE_URL) solo tendría que cumplir esta misma interfaz
-// para sustituirla sin tocar src/pages/api/contact.ts — getLeadStore() es el
-// único punto a cambiar.
+// Abstracción de persistencia de leads. Hoy la implementa postgresLeadStore.ts
+// (ver db/schema.sql) — el formulario usó Airtable en una primera versión;
+// esta interfaz existe precisamente para poder cambiar de proveedor sin tocar
+// src/pages/api/contact.ts. getLeadStore() es el único punto a cambiar.
 
 export type Prioridad = "alta" | "media" | "baja";
 
@@ -37,8 +36,8 @@ export interface LeadStore {
   updateLeadScore(externalId: string, score: ScoreResult): Promise<void>;
 }
 
-import { airtableLeadStore } from "./airtableLeadStore";
+import { postgresLeadStore } from "./postgresLeadStore";
 
 export function getLeadStore(): LeadStore {
-  return airtableLeadStore;
+  return postgresLeadStore;
 }

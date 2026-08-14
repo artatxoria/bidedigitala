@@ -14,11 +14,11 @@
     "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.5.1",
     "@google/genai": "^2.17.0",
-    "airtable": "^0.12.2",
     "astro": "^5.13.5",
     "astro-i18next": "^1.0.0-beta.21",
     "cheerio": "^1.2.0",
     "nodemailer": "^7.0.6",
+    "pg": "^8.23.0",
     "resend": "^6.0.2",
     "sharp": "^0.34.2",
     "zod": "^3.25.76"
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@astrojs/node": "^9.4.3",
+    "@types/pg": "^8.21.0",
     "playwright": "^1.61.0",
     "typescript": "^5.9.3"
   }

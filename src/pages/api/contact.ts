@@ -126,21 +126,21 @@ export async function POST({ request }: { request: Request }) {
     // 1) Guarda el lead ANTES de cualquier llamada externa (no perdemos nada si algo falla).
     await saveLead({ status: "received", ...leadRecord, consent: true, ua });
 
-    // 2) Crea el registro en Airtable (rápido, se espera antes de responder para
-    //    tener el id externo y poder correlacionar la actualización del score).
-    let airtableId: string | null = null;
+    // 2) Crea el registro en la base de datos (rápido, se espera antes de
+    //    responder para poder correlacionar la actualización del score).
+    let dbLeadId: string | null = null;
     try {
-      airtableId = await leadStore.createLead(leadRecord);
+      dbLeadId = await leadStore.createLead(leadRecord);
     } catch (e) {
-      console.error("[airtable] create error:", e);
-      await saveLead({ status: "airtable_create_error", leadId, error: String(e) });
+      console.error("[db] create error:", e);
+      await saveLead({ status: "db_create_error", leadId, error: String(e) });
     }
 
     // 3) Scoring (scraping + Gemini) en segundo plano: no bloquea la respuesta.
     //    adapter Node standalone = proceso de larga duración, la promesa sigue
     //    ejecutándose tras el `return` de más abajo. Siempre con .catch() para
     //    no dejar un unhandledRejection suelto.
-    scoreLeadInBackground({ leadId, leadRecord, airtableId }).catch((e) =>
+    scoreLeadInBackground({ leadId, leadRecord, dbLeadId }).catch((e) =>
       console.error("[scoring] uncaught:", e)
     );
 
@@ -160,11 +160,11 @@ export async function POST({ request }: { request: Request }) {
 async function scoreLeadInBackground({
   leadId,
   leadRecord,
-  airtableId,
+  dbLeadId,
 }: {
   leadId: string;
   leadRecord: LeadRecord;
-  airtableId: string | null;
+  dbLeadId: string | null;
 }) {
   let scraped: ScrapedSite | null = null;
   if (leadRecord.sitioWeb) {
@@ -175,12 +175,12 @@ async function scoreLeadInBackground({
 
   await saveLead({ status: "scored", leadId, ...score });
 
-  if (airtableId) {
+  if (dbLeadId) {
     try {
-      await leadStore.updateLeadScore(airtableId, score);
+      await leadStore.updateLeadScore(dbLeadId, score);
     } catch (e) {
-      console.error("[airtable] update error:", e);
-      await saveLead({ status: "airtable_update_error", leadId, error: String(e) });
+      console.error("[db] update error:", e);
+      await saveLead({ status: "db_update_error", leadId, error: String(e) });
     }
   }
 }

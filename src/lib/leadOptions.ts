@@ -5,8 +5,8 @@
 //  - las opciones del <select> (src/pages/[lang]/index.astro), cuyas
 //    etiquetas se resuelven contra common.json vía
 //    t(lang, `cta.servicio.${value}`) / t(lang, `cta.presupuesto.${value}`)
-//  - las etiquetas en castellano usadas en los registros de Airtable
-//    (src/lib/airtableLeadStore.ts), herramienta interna del equipo comercial
+//  - las etiquetas en castellano usadas en el email interno de aviso de lead
+//    (src/pages/api/contact.ts) y en el panel /admin/leads
 
 export const SERVICIO_VALUES = [
   "formacion",
@@ -31,7 +31,7 @@ export type ServicioValue = (typeof SERVICIO_VALUES)[number];
 export type PresupuestoValue = (typeof PRESUPUESTO_VALUES)[number];
 export type TamanoValue = (typeof TAMANO_VALUES)[number];
 
-/** Etiquetas en castellano para los registros de Airtable (herramienta interna, no i18n del sitio). */
+/** Etiquetas en castellano para el email interno y el panel de administración (no i18n del sitio público). */
 export const SERVICIO_LABELS_ES: Record<ServicioValue, string> = {
   "formacion": "Formación",
   "diseno-web": "Diseño Web",
