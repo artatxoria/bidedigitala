@@ -673,6 +673,15 @@ section {
     color: #fff;
 }
 
+/* El <select> cerrado hereda el texto blanco de arriba (correcto sobre el
+   fondo oscuro), pero el desplegable nativo de opciones lo pinta el propio
+   navegador/SO con fondo claro — sin esto, el texto blanco queda invisible
+   sobre ese fondo claro. Las <option> necesitan su propio color oscuro. */
+.form-group select option {
+    color: #111827;
+    background: #ffffff;
+}
+
 
 
 
