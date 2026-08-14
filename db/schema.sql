@@ -16,9 +16,8 @@
 --   \c bidedigitala_leads
 --   -- (pega aquí el resto de este archivo)
 --
--- Variables resultantes en .env (ver .env.example — POSTGRES_URL es el HOST,
--- no una connection string completa):
---   POSTGRES_URL=localhost   (o la IP/host de tu VPS si te conectas en remoto)
+-- Variables resultantes en .env (ver .env.example):
+--   POSTGRES_HOST=localhost   (o la IP/host de tu VPS si te conectas en remoto)
 --   POSTGRES_PORT=5432
 --   POSTGRES_USER=bidedigitala_leads_app
 --   POSTGRES_PASSWORD=cambia-esto

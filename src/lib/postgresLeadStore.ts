@@ -7,7 +7,7 @@ import { pool } from "./db";
 import type { LeadStore, LeadRecord, ScoreResult } from "./leadStore";
 
 function assertConfigured() {
-  if (!pool) throw new Error("PostgreSQL no configurado (faltan POSTGRES_URL/USER/PASSWORD/DB)");
+  if (!pool) throw new Error("PostgreSQL no configurado (faltan POSTGRES_HOST/USER/PASSWORD/DB)");
 }
 
 export const postgresLeadStore: LeadStore = {

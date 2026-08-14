@@ -10,7 +10,7 @@ import { Pool } from "pg";
 // Campos discretos (no una única connection string) — mismo patrón que las
 // variables POSTGRES_* de la imagen oficial de Postgres, para encajar con
 // cómo ya está aprovisionado el resto de la infraestructura del usuario.
-const pgHost     = process.env.POSTGRES_URL ?? ""; // nombre heredado del .env del usuario: es un host, no una URL completa
+const pgHost     = process.env.POSTGRES_HOST ?? "";
 const pgPort     = Number(process.env.POSTGRES_PORT ?? "5432");
 const pgUser     = process.env.POSTGRES_USER ?? "";
 const pgPassword = process.env.POSTGRES_PASSWORD ?? "";
@@ -23,7 +23,7 @@ console.log(
   `[db cfg] host=${pgHost || "(vacío)"} port=${pgPort} db=${pgDatabase || "(vacío)"} ssl=${pgSsl} auth=${pgUser && pgPassword ? "sí" : "no"}`
 );
 if (!configured) {
-  console.error("[db] Config incompleta. Requiere POSTGRES_URL, POSTGRES_USER, POSTGRES_PASSWORD y POSTGRES_DB en el entorno.");
+  console.error("[db] Config incompleta. Requiere POSTGRES_HOST, POSTGRES_USER, POSTGRES_PASSWORD y POSTGRES_DB en el entorno.");
 }
 
 export const pool = configured
