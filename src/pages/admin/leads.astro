@@ -169,7 +169,7 @@ function fmtFecha(iso: string): string {
       th, td { text-align: left; padding: .6rem .75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
       th { color: var(--text-dim); font-weight: 600; font-size: .75rem; text-transform: uppercase; letter-spacing: .03em; }
       tr:last-child td { border-bottom: none; }
-      .truncate { max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .wrap-text { max-width: 320px; white-space: normal; overflow-wrap: break-word; }
       .score { font-weight: 700; }
       .prio-alta { color: var(--alta); }
       .prio-media { color: var(--media); }
@@ -270,8 +270,8 @@ function fmtFecha(iso: string): string {
                         <span class="prio-baja">pendiente</span>
                       )}
                     </td>
-                    <td class="truncate" title={lead.resumen_ia || ""}>{lead.resumen_ia || "—"}</td>
-                    <td class="truncate" title={lead.mensaje || ""}>{lead.mensaje || "—"}</td>
+                    <td class="wrap-text">{lead.resumen_ia || "—"}</td>
+                    <td class="wrap-text">{lead.mensaje || "—"}</td>
                     <td>
                       <form method="POST">
                         <input type="hidden" name="leadId" value={lead.lead_id} />
