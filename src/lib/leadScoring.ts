@@ -154,7 +154,12 @@ async function readBodyCapped(res: Response, maxBytes: number): Promise<string> 
 // ====== Scoring con Gemini ======
 
 const geminiApiKey = process.env.GEMINI_API_KEY ?? "";
-const geminiModel = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+// "gemini-flash-latest" es un alias que Google mantiene apuntando siempre al
+// modelo Flash recomendado vigente (con aviso de 2 semanas ante cambios que
+// rompan compatibilidad) — evita fijar una versión concreta que Google puede
+// descontinuar para API keys nuevas (nos pasó con "gemini-2.5-flash", ver
+// GEMINI_MODEL en .env.example si se prefiere fijar una versión estable).
+const geminiModel = process.env.GEMINI_MODEL || "gemini-flash-latest";
 const geminiTimeoutMs = Number(process.env.GEMINI_TIMEOUT_MS ?? "15000");
 
 console.log(`[gemini cfg] modelo=${geminiModel} auth=${geminiApiKey ? "sí" : "no"}`);
@@ -259,11 +264,16 @@ en castellano, para el equipo comercial.
 `.trim();
 }
 
+const GEMINI_MAX_ATTEMPTS = 3;
+const GEMINI_RETRY_BASE_DELAY_MS = 400; // 400ms, 800ms — backoff lineal simple
+
 /**
  * Puntúa un lead con Gemini. Nunca lanza — cualquier fallo (sin credenciales,
  * timeout, error de API, respuesta que no valida contra el schema) devuelve
  * un score neutro de fallback para que el lead siempre tenga una prioridad
- * utilizable.
+ * utilizable. Reintenta ante errores de API (p.ej. 503 "high demand", que en
+ * la práctica es frecuente e intermitente) — no reintenta si la respuesta
+ * no valida contra el schema, ya que no es un fallo transitorio de red.
  */
 export async function scoreLeadWithGemini(data: LeadRecord, scraped: ScrapedSite | null): Promise<ScoreResult> {
   if (!ai) {
@@ -273,28 +283,43 @@ export async function scoreLeadWithGemini(data: LeadRecord, scraped: ScrapedSite
 
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), geminiTimeoutMs);
+  const prompt = buildPrompt(data, scraped);
+  let lastError: unknown = null;
+
   try {
-    const response = await ai.models.generateContent({
-      model: geminiModel,
-      contents: buildPrompt(data, scraped),
-      config: {
-        responseMimeType: "application/json",
-        responseSchema: RESPONSE_SCHEMA,
-        abortSignal: controller.signal,
-      },
-    });
+    for (let attempt = 1; attempt <= GEMINI_MAX_ATTEMPTS; attempt++) {
+      try {
+        const response = await ai.models.generateContent({
+          model: geminiModel,
+          contents: prompt,
+          config: {
+            responseMimeType: "application/json",
+            responseSchema: RESPONSE_SCHEMA,
+            abortSignal: controller.signal,
+          },
+        });
 
-    const text = response.text;
-    if (!text) throw new Error("Respuesta vacía de Gemini");
+        const text = response.text;
+        if (!text) throw new Error("Respuesta vacía de Gemini");
 
-    const parsed = GeminiScoreSchema.safeParse(JSON.parse(text));
-    if (!parsed.success) {
-      console.error("[gemini] respuesta no válida contra el schema:", parsed.error.flatten());
-      return FALLBACK_SCORE;
+        const parsed = GeminiScoreSchema.safeParse(JSON.parse(text));
+        if (!parsed.success) {
+          console.error("[gemini] respuesta no válida contra el schema:", parsed.error.flatten());
+          return FALLBACK_SCORE; // no es transitorio, reintentar no ayudaría
+        }
+        return parsed.data;
+      } catch (e) {
+        lastError = e;
+        const agotado = attempt === GEMINI_MAX_ATTEMPTS || controller.signal.aborted;
+        console.warn(
+          `[gemini] intento ${attempt}/${GEMINI_MAX_ATTEMPTS} falló${agotado ? "" : ", reintentando"}:`,
+          e instanceof Error ? e.message : e
+        );
+        if (agotado) break;
+        await new Promise((r) => setTimeout(r, GEMINI_RETRY_BASE_DELAY_MS * attempt));
+      }
     }
-    return parsed.data;
-  } catch (e) {
-    console.error("[gemini] fallo, aplico score neutro:", e instanceof Error ? e.message : e);
+    console.error("[gemini] fallo tras reintentos, aplico score neutro:", lastError instanceof Error ? lastError.message : lastError);
     return FALLBACK_SCORE;
   } finally {
     clearTimeout(timer);
