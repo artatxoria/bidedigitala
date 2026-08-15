@@ -18,7 +18,7 @@ if (!post) {
 }
 
 const { Content } = await post.render();
-const { title, pubDate, summary, categories } = post.data;
+const { title, description, pubDate, summary, categories } = post.data;
 
 // --- Categorías que no queremos usar (idioma) ---
 const excludedCategories = ['es', 'eu', 'eus', 'Euskera', 'Castellano', 'Idioma', 'Language'];
@@ -63,7 +63,7 @@ export async function getStaticPaths() {
 }
 ---
 
-<BaseLayout lang={lang} title={title}>
+<BaseLayout lang={lang} title={title} description={description}>
   <div class="container">
   <div class="post-layout">
     <aside id="toc" class="toc"></aside>

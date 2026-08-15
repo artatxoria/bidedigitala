@@ -33,9 +33,13 @@ const excludedCategories = ['Castellano', 'Euskera', 'Idioma', 'Lang', 'Language
 const categories = [...new Set(
   posts.flatMap((p) => p.data.categories || [])
 )].filter((cat) => !excludedCategories.includes(cat));
+
+const description = lang === 'es'
+  ? 'Artículos de BideDigitala sobre formación, inteligencia artificial, automatización y transformación digital para PYMES de Euskadi.'
+  : 'BideDigitalaren artikuluak prestakuntzari, adimen artifizialari, automatizazioari eta Euskadiko ETEen eraldaketa digitalari buruz.';
 ---
 
-<BaseLayout lang={lang} title={lang === 'es' ? 'Blog' : 'Bloga'}>
+<BaseLayout lang={lang} title={lang === 'es' ? 'Blog' : 'Bloga'} description={description}>
   <section class="blog-index container">
     {categories.map((category, i) => (
       <>
