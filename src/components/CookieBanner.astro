@@ -4,12 +4,12 @@
 // Oculto por defecto (evita parpadeo antes de que cargue el JS); lo muestra
 // public/assets/js/visitas.js solo si no hay una decisión previa guardada.
 //
-// Los botones son un <form method="POST"> real contra /api/consent: la
-// decisión se guarda con una navegación normal del navegador, sin depender
-// de que se ejecute ningún listener de clic. Así el aviso funciona incluso
-// si algún bloqueador de anuncios/antivirus interfiere con el JavaScript de
-// la página — solo mostrar/ocultar el aviso según la cookie necesita JS,
-// nunca la acción de aceptar/rechazar.
+// Los botones son <button type="button"> normales, SIN <form> ni navegación
+// posible detrás — el aviso solo existe si JS ya se está ejecutando (es lo
+// que lo muestra), así que no tiene sentido un fallback "sin JS" a través de
+// un envío de formulario: solo añade una recarga de página de más que puede
+// interferir. Todo lo hace public/assets/js/visitas.js directamente sobre
+// la cookie, sin ningún salto de página de por medio.
 //
 // Ids/clases con prefijo "bd-" a propósito: algunos bloqueadores (p.ej. el
 // Shield de "avisos de cookies" de Brave, activado por defecto) ocultan o
@@ -18,7 +18,6 @@
 // mayoría de estos avisos en el resto de la web.
 import { t, tPath } from "../lib/translations";
 const { lang } = Astro.props;
-const redirectTo = Astro.url.pathname;
 ---
 
 <div id="bd-cookie-notice" class="bd-cookie-notice" hidden>
@@ -27,15 +26,14 @@ const redirectTo = Astro.url.pathname;
     {" "}
     <a href={tPath("/privacidad", lang)}>{t(lang, "cookies.policyLink")}</a>
   </p>
-  <form method="POST" action="/api/consent" class="bd-cookie-notice-acciones">
-    <input type="hidden" name="redirect" value={redirectTo} />
-    <button type="submit" name="decision" value="rejected" class="bd-cookie-btn bd-cookie-btn-secundario">
+  <div class="bd-cookie-notice-acciones">
+    <button type="button" id="bd-cookie-reject" class="bd-cookie-btn bd-cookie-btn-secundario">
       {t(lang, "cookies.reject")}
     </button>
-    <button type="submit" name="decision" value="accepted" class="bd-cookie-btn bd-cookie-btn-primario">
+    <button type="button" id="bd-cookie-accept" class="bd-cookie-btn bd-cookie-btn-primario">
       {t(lang, "cookies.accept")}
     </button>
-  </form>
+  </div>
 </div>
 
 <style>

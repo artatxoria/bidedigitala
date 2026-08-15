@@ -2,12 +2,11 @@
 // Muestra el aviso de cookies si no hay decisión guardada, y registra visitas
 // propias (sin terceros) una vez el visitante ha aceptado.
 //
-// El clic en Aceptar/Rechazar actúa al instante por JavaScript (oculta el
-// aviso y guarda la cookie en el momento, sin esperar a que termine ninguna
-// navegación de página). El <form method="POST" action="/api/consent"> de
-// CookieBanner.astro sigue ahí como red de seguridad — si por lo que sea
-// este script no llega a ejecutarse o a enganchar el clic, el envío nativo
-// del formulario sigue guardando la decisión igualmente.
+// El aviso solo existe si este script se está ejecutando (es lo que lo saca
+// de "hidden"), así que los botones son <button type="button"> normales sin
+// ningún <form> ni navegación de página detrás — nada que pueda recargar la
+// página a medio camino y deshacer la decisión. Todo pasa por aquí: cookie +
+// ocultar el aviso, en el mismo clic.
 (function () {
   var CONSENT_COOKIE = 'bd_consent';
   var CONSENT_MAX_AGE = 365 * 24 * 60 * 60; // 1 año, en segundos
@@ -64,11 +63,6 @@
     setCookie(CONSENT_COOKIE, decision, CONSENT_MAX_AGE);
     banner.hidden = true;
     if (decision === 'accepted') track();
-    // Aviso al servidor en segundo plano, sin bloquear ni depender de la
-    // respuesta — la decisión ya ha quedado aplicada arriba.
-    var fd = new URLSearchParams();
-    fd.set('decision', decision);
-    fetch('/api/consent', { method: 'POST', body: fd, keepalive: true }).catch(function () {});
   }
 
   function showBanner() {
@@ -76,20 +70,10 @@
     if (!banner) return;
     banner.hidden = false;
 
-    var acceptBtn = banner.querySelector('button[value="accepted"]');
-    var rejectBtn = banner.querySelector('button[value="rejected"]');
-    if (acceptBtn) {
-      acceptBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        decide(banner, 'accepted');
-      });
-    }
-    if (rejectBtn) {
-      rejectBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        decide(banner, 'rejected');
-      });
-    }
+    var acceptBtn = document.getElementById('bd-cookie-accept');
+    var rejectBtn = document.getElementById('bd-cookie-reject');
+    if (acceptBtn) acceptBtn.addEventListener('click', function () { decide(banner, 'accepted'); });
+    if (rejectBtn) rejectBtn.addEventListener('click', function () { decide(banner, 'rejected'); });
   }
 
   var consent = getCookie(CONSENT_COOKIE);
