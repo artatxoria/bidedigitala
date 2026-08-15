@@ -1,6 +1,6 @@
-// src/pages/api/track.ts
+// src/pages/api/visita.ts
 // Registra una vista de página. Solo se llama desde el cliente si el
-// visitante ha aceptado el banner de cookies (ver public/assets/js/analytics.js).
+// visitante ha aceptado el aviso de cookies (ver public/assets/js/visitas.js).
 // Gestiona las cookies propias bd_vid (visitante, 1 año) y bd_sid (sesión,
 // 30 min) — ambas HttpOnly, nunca leídas por JS, nunca de terceros.
 export const prerender = false;
@@ -45,7 +45,7 @@ export async function POST({ request }: { request: Request }) {
     res.headers.append("set-cookie", `${SESSION_COOKIE}=${sessionId}; Path=/; Max-Age=${SESSION_MAX_AGE}; SameSite=Lax; HttpOnly`);
     return res;
   } catch (e) {
-    console.error("[track] error:", e);
+    console.error("[visita] error:", e);
     return json({ ok: false }, 500);
   }
 }

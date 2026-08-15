@@ -1,6 +1,6 @@
 // src/lib/analytics.ts
 // Constantes y helpers compartidos por los endpoints de tracking
-// (track.ts, track-duration.ts) y el panel /admin/visitas.
+// (visita.ts, visita-duracion.ts) y el panel /admin/visitas.
 
 export const VISITOR_COOKIE = "bd_vid";
 export const SESSION_COOKIE = "bd_sid";

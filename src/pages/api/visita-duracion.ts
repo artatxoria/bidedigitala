@@ -1,4 +1,4 @@
-// src/pages/api/track-duration.ts
+// src/pages/api/visita-duracion.ts
 // Recibe la duración de una vista de página, enviada vía navigator.sendBeacon()
 // al abandonar la página (visibilitychange/pagehide) — por eso el body llega
 // como texto plano, no necesariamente con content-type application/json.
@@ -25,7 +25,7 @@ export async function POST({ request }: { request: Request }) {
     );
     return json({ ok: true });
   } catch (e) {
-    console.error("[track-duration] error:", e);
+    console.error("[visita-duracion] error:", e);
     return json({ ok: false }, 500);
   }
 }
