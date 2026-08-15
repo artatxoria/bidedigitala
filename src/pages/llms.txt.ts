@@ -27,6 +27,9 @@ export async function GET() {
 - [Catálogo de formación bonificada](${SITE}/es/catalogo/): Cursos de análisis de datos, inteligencia artificial, automatización y programación.
 - [Formación en IA para centros educativos](${SITE}/es/ia-centros-educativos/): Formación práctica en IA generativa para profesorado.
 
+## Empresa
+- [Sobre nosotros](${SITE}/es/sobre-nosotros/): Quién es BideDigitala, fundada en 2022 en Aulesti (Bizkaia).
+
 ## Blog (es)
 ${recentEs.map(postLink).join('\n')}
 
