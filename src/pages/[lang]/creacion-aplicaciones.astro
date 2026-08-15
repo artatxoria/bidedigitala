@@ -3,6 +3,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { t, tPath } from "../../lib/translations";
 import SectionDivider from "../../components/SectionDivider.astro";
+import { buildFAQPageSchema } from "../../lib/schema";
 
 export async function getStaticPaths() {
   return [{ params: { lang: "es" } }, { params: { lang: "eu" } }];
@@ -155,9 +156,23 @@ const translations: Record<
 
 const dict = translations[lang] || translations.es;
 const title = `${dict.title} – BideDigitala`;
+
+// FAQPage a partir del contenido ya visible más abajo (dict.que/dict.proceso),
+// sin preguntas inventadas. Ver comentario en buildFAQPageSchema (schema.ts)
+// sobre por qué se hace (valor GEO) y no (rich result de Google).
+const faqSchema = buildFAQPageSchema([
+  ...dict.que.map((item) => ({
+    question: lang === "es" ? `¿Qué incluye "${item.title}"?` : `Zer da "${item.title}"?`,
+    answer: item.desc,
+  })),
+  ...dict.proceso.map((paso) => ({
+    question: lang === "es" ? `¿En qué consiste "${paso.titulo}"?` : `Zer da "${paso.titulo}"?`,
+    answer: paso.contenido,
+  })),
+]);
 ---
 
-<BaseLayout lang={lang} title={title} description={dict.intro}>
+<BaseLayout lang={lang} title={title} description={dict.intro} jsonLd={faqSchema}>
   <!-- Hero -->
   <section class="service-hero">
     <div class="container">

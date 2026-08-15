@@ -122,3 +122,31 @@ export function buildCourseSchema(course: CourseInput) {
     ...(course.url ? { url: course.url } : {}),
   };
 }
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+/**
+ * FAQPage a partir de contenido ya visible en la página (sin preguntas
+ * inventadas). Desde 2023 Google restringe su rich result a sitios
+ * gubernamentales/de salud, así que esto no busca aparecer en el SERP de
+ * Google — se implementa por valor GEO: los motores generativos (ChatGPT,
+ * Perplexity, etc.) sí consumen FAQPage para responder preguntas sobre
+ * el servicio directamente.
+ */
+export function buildFAQPageSchema(items: FAQItem[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+}
