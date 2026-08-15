@@ -2,6 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CookieBanner from "../components/CookieBanner.astro";
+import { getAlternateLinks } from "../lib/hreflang";
 import "../assets/css/style.css";
 import "../styles/global.css";
 
@@ -35,6 +36,9 @@ const hasSecondaryNav = Astro.slots.has("secondary-nav");
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL(image, Astro.site);
 const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+
+// hreflang: misma fuente de verdad que el selector de idioma visual (CambioIdioma).
+const alternates = await getAlternateLinks(Astro.url.pathname, lang);
 ---
 
 <!doctype html>
@@ -46,6 +50,15 @@ const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Hreflang: solo se declara el idioma alterno cuando hay una traducción real -->
+    {alternates.es.matched && (
+      <link rel="alternate" hreflang="es" href={new URL(alternates.es.href, Astro.site)} />
+    )}
+    {alternates.eu.matched && (
+      <link rel="alternate" hreflang="eu" href={new URL(alternates.eu.href, Astro.site)} />
+    )}
+    <link rel="alternate" hreflang="x-default" href={new URL(alternates.eu.href, Astro.site)} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -82,7 +95,7 @@ const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   </head>
   <body>
     <!-- Cabecera común con navegación secundaria opcional -->
-    <Header lang={lang}>
+    <Header lang={lang} altLinks={alternates}>
       {hasSecondaryNav && <slot name="secondary-nav" slot="secondary-nav" />}
     </Header>
 

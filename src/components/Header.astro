@@ -3,8 +3,14 @@
 
 import { tPath, t } from "../lib/translations";
 import NavegacionPrincipal from "./NavegacionPrincipal.astro";
+import type { AlternateLinks } from "../lib/hreflang";
 
-const { lang } = Astro.props;
+export interface Props {
+  lang: "es" | "eu";
+  altLinks?: AlternateLinks;
+}
+
+const { lang, altLinks } = Astro.props;
 const hasSecondaryNav = Astro.slots.has("secondary-nav");
 ---
 
@@ -140,7 +146,7 @@ const hasSecondaryNav = Astro.slots.has("secondary-nav");
         />
       </a>
 
-      <NavegacionPrincipal lang={lang} />
+      <NavegacionPrincipal lang={lang} altLinks={altLinks} />
     </div>
 
     {

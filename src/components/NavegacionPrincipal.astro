@@ -2,10 +2,11 @@
 import { mainNav } from '../lib/navItems';
 import CambioIdioma from './CambioIdioma.astro';
 import { tPath, t } from '../lib/translations';
+import type { AlternateLinks } from '../lib/hreflang';
 
 export interface Props {
   lang: 'es' | 'eu';
-  altLinks?: Record<'es' | 'eu', string>; // <- NUEVO
+  altLinks?: AlternateLinks;
 }
 const { lang, altLinks } = Astro.props;
 ---
