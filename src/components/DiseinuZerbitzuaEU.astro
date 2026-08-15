@@ -1,42 +1,18 @@
 ---
 import '../styles/diseinu-zerbitzua.css';
-import NavegacionPrincipal from './NavegacionPrincipal.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NavegacionSecundariaDiseinu from './NavegacionSecundariaDiseinu.astro';
 import SectionDivider from './SectionDivider.astro';
-import { tPath, t } from '../lib/translations';
+import { tPath } from '../lib/translations';
+
+const schema = { "@context": "https://schema.org", "@type": "Service", "name": "Web diseinua eta GEO optimizazioa", "description": "Ziurgabetasunaren amaiera: zure webgunea negozioa sortzen duen aktibo bihurtu. GEO eta AI aplikazioa ETE industrialetan.", "url": "https://www.bidedigitala.eus/eu/diseinu-zerbitzua/", "inLanguage": "eu", "areaServed": ["Euskal Herria", "España"], "serviceType": ["GEO (Generative Engine Optimization)", "Ingeniería Digital", "Optimización de Conversiones B2B", "Análisis de Datos", "Desarrollo Web orientado a KPI"], "audience": { "@type": "BusinessAudience", "audienceType": "PYMES industriales · Industria 4.0 · B2B" }, "provider": { "@type": "Organization", "name": "BideDigitala", "url": "https://www.bidedigitala.eus/" } };
 ---
-<!doctype html>
-<html
-lang="eu"> <head> <meta charset="UTF-8" /> <meta name="viewport"
-content="width=device-width, initial-scale=1.0" /> <title>BideDigitala ·
-Berrikuntza zure bidean</title> <meta name="description"
-content="Ziurgabetasunaren amaiera: zure webgunea negozioa sortzen duen aktibo
-bihurtu. GEO eta Adimen Artifizialean oinarritutako ingeniaritza digitala ETE
-industrialentzat." /> <script type="application/ld+json">{ "@context": "https://schema.org", "@type": "Service", "name": "Web diseinua eta GEO optimizazioa", "description": "Ziurgabetasunaren amaiera: zure webgunea negozioa sortzen duen aktibo bihurtu. GEO eta AI aplikazioa ETE industrialetan.", "url": "https://www.bidedigitala.eus/eu/diseinu-zerbitzua/", "inLanguage": "eu", "areaServed": ["Euskal Herria", "España"], "serviceType": ["GEO (Generative Engine Optimization)", "Ingeniería Digital", "Optimización de Conversiones B2B", "Análisis de Datos", "Desarrollo Web orientado a KPI"], "audience": { "@type": "BusinessAudience", "audienceType": "PYMES industriales · Industria 4.0 · B2B" }, "provider": { "@type": "Organization", "name": "BideDigitala", "url": "https://www.bidedigitala.eus/" } }</script> </head> <body> <div
-class="page"> <!-- HEADER -->    <header>
-        <div class="nav-inner">
-            <div class="nav-top">
-                <a href="/eu" class="logo">
-                    <img src="/images/BideDigitala.png" alt="BideDigitala logoa" />
-                    <div class="logo-text">
-                        <span>BIDEDIGITALA</span>
-                        <span>BERRIKUNTZA ZURE BIDEAN</span>
-                    </div>
-                </a>
-                <NavegacionPrincipal lang="eu" />
-            </div>
-            <div class="nav-bottom">
-                <nav aria-label="Orrialdeko nabigazioa">
-                    <ul>
-                    <li><a href="#hasiera">Hasiera</a></li>
-                    <li><a href="#balio-proposamena">Balio proposamena</a></li>
-                        <li><a href="#prozesua">Prozesua</a></li>
-                        <li><a href="#geo-ia">GEO · IA</a></li>
-                        <li><a class="nav-cta" href="#diagnostikoa">Diagnostiko doakoa</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header> <main class="container"> <!-- HERO --> <section
+
+<BaseLayout lang="eu" title="BideDigitala · Berrikuntza zure bidean" description="Ziurgabetasunaren amaiera: zure webgunea negozioa sortzen duen aktibo bihurtu. GEO eta Adimen Artifizialean oinarritutako ingeniaritza digitala ETE industrialentzat." jsonLd={schema}>
+  <NavegacionSecundariaDiseinu lang="eu" slot="secondary-nav" />
+
+  <div class="container">
+    <!-- HERO --> <section
 class="hero" id="hasiera"> <div class="hero-grid"> <div class="hero-copy"> <div
 class="hero-eyebrow"> <span class="hero-eyebrow-dot"></span> <span
 >Ziurgabetasun teknologikoaren aurkako estrategia B2B</span > </div> <h1>
@@ -147,8 +123,5 @@ href={`${tPath('/', 'eu')}#contacto`}
 class="btn-primary" > <span>Eskatu doako diagnostikoa</span> <span
 aria-hidden="true">✉️</span> </a> <a href="#hasiera" class="btn-secondary
 cta-outline" > <span>Itzuli goialdera</span> </a> </div> </div> </section>
-</main> <footer> <div>© 2025 BideDigitala · Berrikuntza zure bidean</div> <span
->Gardentasuna · Pedagogia · GEO &amp; IA · ETE industrialentzat.</span >
-</footer> </div>
-<script src="/assets/js/script.js?v=2025-09-03-1" defer></script>
-</body> </html>
+  </div>
+</BaseLayout>

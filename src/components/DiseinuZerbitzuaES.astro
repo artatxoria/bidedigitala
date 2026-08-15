@@ -1,31 +1,18 @@
 ---
 import '../styles/diseinu-zerbitzua.css';
-import NavegacionPrincipal from './NavegacionPrincipal.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NavegacionSecundariaDiseinu from './NavegacionSecundariaDiseinu.astro';
 import SectionDivider from './SectionDivider.astro';
-import { tPath, t } from '../lib/translations';
+import { tPath } from '../lib/translations';
+
+const schema = { "@context": "https://schema.org", "@type": "Service", "name": "Diseño web y optimización GEO", "description": "El fin de la incertidumbre: convierta su web en un activo que genere negocio. GEO e Inteligencia Artificial aplicados a PYMES industriales.", "url": "https://www.bidedigitala.eus/es/diseinu-zerbitzua/", "inLanguage": "es", "areaServed": ["Euskal Herria", "España"], "serviceType": ["GEO (Generative Engine Optimization)", "Ingeniería Digital", "Optimización de Conversiones B2B", "Análisis de Datos", "Desarrollo Web orientado a KPI"], "audience": { "@type": "BusinessAudience", "audienceType": "PYMES industriales · Industria 4.0 · B2B" }, "provider": { "@type": "Organization", "name": "BideDigitala", "url": "https://www.bidedigitala.eus/" } };
 ---
-<!doctype html>
-<html
-lang="es"> <head> <meta charset="UTF-8" /> <meta name="viewport"
-content="width=device-width, initial-scale=1.0" /> <title>BideDigitala ·
-Innovación en tu camino</title> <meta name="description" content="El fin de la
-incertidumbre: convierte tu web en un activo que genera negocio. Ingeniería
-digital para PYMES industriales con foco en GEO e Inteligencia Artificial." />
-<script type="application/ld+json">{ "@context": "https://schema.org", "@type": "Service", "name": "Diseño web y optimización GEO", "description": "El fin de la incertidumbre: convierta su web en un activo que genere negocio. GEO e Inteligencia Artificial aplicados a PYMES industriales.", "url": "https://www.bidedigitala.eus/es/diseinu-zerbitzua/", "inLanguage": "es", "areaServed": ["Euskal Herria", "España"], "serviceType": ["GEO (Generative Engine Optimization)", "Ingeniería Digital", "Optimización de Conversiones B2B", "Análisis de Datos", "Desarrollo Web orientado a KPI"], "audience": { "@type": "BusinessAudience", "audienceType": "PYMES industriales · Industria 4.0 · B2B" }, "provider": { "@type": "Organization", "name": "BideDigitala", "url": "https://www.bidedigitala.eus/" } }</script> </head> <body> <div
-class="page"> <!-- HEADER --> <header> <div class="nav-inner"> <div class="nav-top"> <a href="/es"
-class="logo"> <img src="/images/BideDigitala.png" alt="Logotipo de BideDigitala"
-/> <div class="logo-text"> <span>BIDEDIGITALA</span> <span>INNOVACIÓN EN TU
-CAMINO</span> </div> </a> <NavegacionPrincipal lang="es" /> </div> <div class="nav-bottom">
-            <nav aria-label="Navegación de la página">
-                <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#valor">Propuesta de valor</a></li>
-                    <li><a href="#proceso">Proceso</a></li>
-                    <li><a href="#geo-ia">GEO · IA</a></li>
-                    <li><a class="nav-cta" href="#diagnostico">Diagnóstico gratuito</a></li>
-                </ul>
-            </nav>
-</div> </div> </header> <main class="container"> <!-- HERO --> <section class="hero"
+
+<BaseLayout lang="es" title="BideDigitala · Innovación en tu camino" description="El fin de la incertidumbre: convierte tu web en un activo que genera negocio. Ingeniería digital para PYMES industriales con foco en GEO e Inteligencia Artificial." jsonLd={schema}>
+  <NavegacionSecundariaDiseinu lang="es" slot="secondary-nav" />
+
+  <div class="container">
+    <!-- HERO --> <section class="hero"
 id="inicio"> <div class="hero-grid"> <div class="hero-copy"> <div
 class="hero-eyebrow"> <span class="hero-eyebrow-dot"></span> <span >Estrategia
 B2B contra la incertidumbre tecnológica</span > </div> <h1> El fin de la
@@ -133,9 +120,6 @@ class="cta-final-actions"> <a
 href={`${tPath('/', 'es')}#contacto`}
 class="btn-primary" > <span>Solicitar diagnóstico gratuito</span> <span
 aria-hidden="true">✉️</span> </a> <a href="#inicio" class="btn-secondary
-cta-outline"> <span>Volver arriba</span> </a> </div> </div> </section> </main>
-<footer> <div>© 2025 BideDigitala · Innovación en tu camino</div> <span
->Transparencia · Pedagogía · GEO &amp; IA · Solo para PYMES industriales.</span
-> </footer> </div>
-<script src="/assets/js/script.js?v=2025-09-03-1" defer></script>
-</body> </html>
+cta-outline"> <span>Volver arriba</span> </a> </div> </div> </section>
+  </div>
+</BaseLayout>

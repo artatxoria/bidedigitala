@@ -1,0 +1,36 @@
+---
+// src/components/NavegacionSecundariaDiseinu.astro
+// Menú de anclas in-page para /diseinu-zerbitzua, con los mismos IDs de
+// sección que ya usa cada versión de idioma del componente principal.
+export interface Props {
+  lang: 'es' | 'eu';
+}
+const { lang } = Astro.props;
+
+const items =
+  lang === 'es'
+    ? [
+        { href: '#inicio', label: 'Inicio' },
+        { href: '#valor', label: 'Propuesta de valor' },
+        { href: '#proceso', label: 'Proceso' },
+        { href: '#geo-ia', label: 'GEO · IA' },
+        { href: '#diagnostico', label: 'Diagnóstico gratuito', cta: true },
+      ]
+    : [
+        { href: '#hasiera', label: 'Hasiera' },
+        { href: '#balio-proposamena', label: 'Balio proposamena' },
+        { href: '#prozesua', label: 'Prozesua' },
+        { href: '#geo-ia', label: 'GEO · IA' },
+        { href: '#diagnostikoa', label: 'Diagnostiko doakoa', cta: true },
+      ];
+---
+
+<nav aria-label={lang === 'es' ? 'Navegación de la página' : 'Orrialdeko nabigazioa'}>
+  <ul>
+    {items.map((item) => (
+      <li class={item.cta ? 'nav-cta' : undefined}>
+        <a href={item.href}>{item.label}</a>
+      </li>
+    ))}
+  </ul>
+</nav>
