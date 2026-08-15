@@ -41,6 +41,7 @@ const description = lang === 'es'
 
 <BaseLayout lang={lang} title={lang === 'es' ? 'Blog' : 'Bloga'} description={description}>
   <section class="blog-index container">
+    <h1>{lang === 'es' ? 'Blog' : 'Bloga'}</h1>
     {categories.map((category, i) => (
       <>
         {i > 0 && <SectionDivider />}
