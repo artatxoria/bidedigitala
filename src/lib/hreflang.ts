@@ -11,7 +11,7 @@ export interface AlternateLink {
 
 export type AlternateLinks = Record<Lang, AlternateLink>;
 
-const ROUTE_RE = /^\/(es|eu)(?:\/(blog))?(?:\/([^/]+))?\/?$/;
+const ROUTE_RE = /^\/(es|eu)(?:\/(blog|catalogo))?(?:\/([^/]+))?\/?$/;
 const otherLang = (lang: Lang): Lang => (lang === 'es' ? 'eu' : 'es');
 const baseSlug = (slug: string) => slug.split('/').pop()!;
 
@@ -36,7 +36,7 @@ export async function getAlternateLinks(
     };
   }
 
-  const section = match[2] || ''; // "blog" o ""
+  const section = match[2] || ''; // "blog", "catalogo" o ""
   const maybeSlug = match[3] || ''; // último segmento, si lo hay
   const strippedPath = pathname.replace(/^\/(es|eu)/, '');
 
@@ -47,6 +47,12 @@ export async function getAlternateLinks(
 
   if (!maybeSlug) {
     // Página estática sin slug (home, catálogo, servicios...): swap de prefijo directo.
+    return links;
+  }
+
+  if (section === 'catalogo') {
+    // Ficha de curso: mismo slug en ambos idiomas (ver src/pages/[lang]/catalogo/[curso].astro),
+    // swap de prefijo directo, sin consultar la colección de blog.
     return links;
   }
 
