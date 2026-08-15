@@ -6,7 +6,9 @@ const LOGO_URL = `${SITE}/images/BideDigitala.png`;
 
 // Datos de la Organización sin '@context': para incrustar como nodo anidado
 // (p.ej. 'publisher'/'provider') sin repetir el @context del documento raíz.
-const organizationData = {
+// Exportado para que otras páginas con JSON-LD ad-hoc (p.ej. diseinu-zerbitzua)
+// lo reutilicen en vez de mantener su propia copia divergente.
+export const organizationData = {
   '@type': 'Organization',
   name: 'BideDigitala',
   legalName: 'BideDigitala, S.L.',
@@ -15,6 +17,8 @@ const organizationData = {
   image: LOGO_URL,
   email: 'info@bidedigitala.eus',
   telephone: '+34 685 756 143',
+  // Año de fundación confirmado por el usuario (ver /sobre-nosotros y memoria del proyecto).
+  foundingDate: '2022',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Aulesti',
@@ -43,6 +47,8 @@ interface BlogPostingInput {
   author: string;
   lang: 'es' | 'eu';
   url: string; // URL absoluta del post
+  /** URL absoluta de la página del autor (p.ej. /sobre-nosotros), si existe. */
+  authorUrl?: string;
 }
 
 /**
@@ -61,8 +67,35 @@ export function buildBlogPostingSchema(post: BlogPostingInput) {
     author: {
       '@type': 'Person',
       name: post.author,
+      ...(post.authorUrl ? { url: post.authorUrl } : {}),
     },
     publisher: organizationData,
+  };
+}
+
+interface PersonInput {
+  name: string;
+  /** URL absoluta de la página del sitio que representa a esta persona. */
+  url?: string;
+  /** Perfiles externos (LinkedIn, etc.). */
+  sameAs?: string[];
+  jobTitle?: string;
+}
+
+/**
+ * Persona (fundador/autor). Documento JSON-LD independiente, pensado para
+ * /sobre-nosotros — señal E-E-A-T (Experience/Expertise/Authoritativeness/
+ * Trustworthiness) que buscadores y motores generativos usan para atribuir
+ * el contenido del sitio a alguien identificable, no solo a la marca.
+ */
+export function buildPersonSchema(person: PersonInput) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: person.name,
+    ...(person.url ? { url: person.url } : {}),
+    ...(person.sameAs ? { sameAs: person.sameAs } : {}),
+    ...(person.jobTitle ? { jobTitle: person.jobTitle } : {}),
   };
 }
 

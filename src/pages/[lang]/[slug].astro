@@ -27,6 +27,8 @@ if (!post) {
 const { Content } = await post.render();
 const { title, description, pubDate, summary, categories, author } = post.data;
 
+const authorHref = tPath('/sobre-nosotros', lang as 'es' | 'eu');
+
 const postSchema = buildBlogPostingSchema({
   title,
   description,
@@ -34,6 +36,7 @@ const postSchema = buildBlogPostingSchema({
   author,
   lang: lang as 'es' | 'eu',
   url: new URL(Astro.url.pathname, Astro.site).toString(),
+  authorUrl: new URL(authorHref, Astro.site).toString(),
 });
 
 // --- Categorías que no queremos usar (idioma) ---
@@ -67,8 +70,6 @@ function postUrl(entry: CollectionEntry<'blog'>): string {
   const slugPart = entry.slug.split('/').pop();
   return tPath(`/${slugPart}`, lang as 'es' | 'eu');
 }
-
-const authorHref = tPath('/sobre-nosotros', lang as 'es' | 'eu');
 
 export async function getStaticPaths() {
   const all = await getCollection('blog');

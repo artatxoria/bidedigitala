@@ -6,6 +6,7 @@
 // breve por ahora — pendiente ampliar con currículum y misión completa
 // cuando el usuario aporte ese contenido (ver memoria del proyecto).
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { buildPersonSchema } from '../../lib/schema';
 
 export async function getStaticPaths() {
   return [{ params: { lang: 'es' } }, { params: { lang: 'eu' } }];
@@ -64,9 +65,17 @@ const schema = {
   description: dict.intro,
   inLanguage: lang,
 };
+
+// Señal E-E-A-T: el fundador como Person identificable, no solo la marca.
+const personSchema = buildPersonSchema({
+  name: 'Juan Carlos Beaskoetxea',
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  sameAs: ['https://www.linkedin.com/in/juancarlosbeaskoetxea/'],
+  jobTitle: lang === 'es' ? 'Fundador y director' : 'Sortzailea eta zuzendaria',
+});
 ---
 
-<BaseLayout lang={lang} title={title} description={dict.intro} jsonLd={schema}>
+<BaseLayout lang={lang} title={title} description={dict.intro} jsonLd={[schema, personSchema]}>
   <div class="container about-page">
     <header class="about-hero">
       <h1>{dict.title}</h1>
