@@ -3,6 +3,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CookieBanner from "../components/CookieBanner.astro";
 import { getAlternateLinks } from "../lib/hreflang";
+import { buildOrganizationSchema } from "../lib/schema";
 import "../assets/css/style.css";
 import "../styles/global.css";
 
@@ -35,7 +36,11 @@ const hasSecondaryNav = Astro.slots.has("secondary-nav");
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL(image, Astro.site);
-const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+// La Organización se incluye siempre; el resto del JSON-LD lo aporta cada página.
+const jsonLdItems = [
+  buildOrganizationSchema(),
+  ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []),
+];
 
 // hreflang: misma fuente de verdad que el selector de idioma visual (CambioIdioma).
 const alternates = await getAlternateLinks(Astro.url.pathname, lang);
