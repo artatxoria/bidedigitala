@@ -10,7 +10,8 @@ export async function GET(context) {
 		site: context.site,
 		items: posts.map((post) => ({
 			...post.data,
-			link: `/blog/${post.id}/`,
+			// Ruta real del sitio: /{lang}/{slug}/ (ver src/pages/[lang]/[slug].astro)
+			link: `/${post.data.lang}/${post.slug.split('/').pop()}/`,
 		})),
 	});
 }
