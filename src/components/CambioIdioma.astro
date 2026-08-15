@@ -1,75 +1,25 @@
 ---
-import { getCollection } from 'astro:content';
+import { getAlternateLinks, type AlternateLinks } from '../lib/hreflang';
 
 export interface Props {
   lang: 'es' | 'eu';
+  /** Enlaces alternos ya calculados (p.ej. por BaseLayout, para no repetir la consulta a la colección). */
+  links?: AlternateLinks;
 }
 
 // Idiomas que manejas
 const supported = ['es', 'eu'] as const;
 
-// Ruta actual (p.ej. "/es/blog/primer-post" → "/blog/primer-post")
-const rawPath = Astro.url.pathname;
+const { lang, links: providedLinks } = Astro.props;
 
-// Regex que soporta ambas rutas de detalle:
-// - /{lang}/{slug}
-// - /{lang}/blog/{slug}
-// También cubre /{lang}/ y /{lang}/blog
-const m = rawPath.match(/^\/(es|eu)(?:\/(blog))?(?:\/([^/]+))?\/?$/);
+// Reutiliza los enlaces si ya vienen calculados (BaseLayout ya los usa para hreflang);
+// si no, los calcula aquí como antes.
+const alternates = providedLinks ?? (await getAlternateLinks(Astro.url.pathname, lang));
 
-const base = (s: string) => s.split('/').pop()!;
-
-let hrefs: Record<'es' | 'eu', string> = { es: '/es', eu: '/eu' };
-
-if (m) {
-  const currentLang = m[1] as 'es' | 'eu';
-  const section = m[2] || '';            // "blog" o ""
-  const maybeSlug = m[3] || '';          // último segmento si hay
-
-  const otherLang = currentLang === 'es' ? 'eu' : 'es';
-
-  // Por defecto: misma ruta cambiando prefijo de idioma
-  hrefs.es = `/es${rawPath.replace(/^\/(es|eu)/, '')}`;
-  hrefs.eu = `/eu${rawPath.replace(/^\/(es|eu)/, '')}`;
-
-  // ¿Estamos en detalle (hay slug)?
-  if (maybeSlug) {
-    const all = await getCollection('blog');
-
-    // Intenta localizar el post actual por (lang + basename del slug)
-    const current = all.find(
-      (e) => e.data.lang === currentLang && base(e.slug) === maybeSlug
-    );
-
-    if (current) {
-      // Construye el link “actual” normalizado
-      hrefs[currentLang] = `/${currentLang}/${base(current.slug)}`;
-
-      // Busca hermano por tkey en el otro idioma (si existe tkey)
-      const tkey = current.data.tkey;
-      if (tkey) {
-        const alt = all.find((e) => e.data.lang === otherLang && e.data.tkey === tkey);
-        hrefs[otherLang] = alt
-          ? `/${otherLang}/${base(alt.slug)}`
-          : `/${otherLang}/blog`; // fallback si no hay traducción
-      } else {
-        // Sin tkey: último intento ingenuo (mismo basename)
-        hrefs[otherLang] =
-          section === 'blog'
-            ? `/${otherLang}/blog/${maybeSlug}`
-            : `/${otherLang}/${maybeSlug}`;
-      }
-    } else {
-      // No identificamos el post (rutas raras): mantener swap simple de prefijo
-      hrefs.es = `/es${rawPath.replace(/^\/(es|eu)/, '')}`;
-      hrefs.eu = `/eu${rawPath.replace(/^\/(es|eu)/, '')}`;
-    }
-  }
-} else {
-  // Ruta fuera del patrón: prefijo simple
-  hrefs = { es: `/es${rawPath}`, eu: `/eu${rawPath}` };
-}
-
+const hrefs: Record<'es' | 'eu', string> = {
+  es: alternates.es.href,
+  eu: alternates.eu.href,
+};
 ---
 <style>
   .lang-switch {
@@ -107,8 +57,8 @@ if (m) {
     const label = l.toUpperCase();
     const isActive = l === Astro.props.lang;
 
-    // Marca como "disabled" si el link es fallback al índice de blog
-    const isFallback = hrefs[l] === `/${l}/blog`;
+    // Marca como "disabled" si no hay traducción real confirmada (fallback al índice de blog)
+    const isFallback = !alternates[l].matched;
 
     return (
       <li>
