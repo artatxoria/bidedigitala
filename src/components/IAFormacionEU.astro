@@ -1,38 +1,15 @@
 ---
 import '../styles/ia-centros-educativos.css';
-import NavegacionPrincipal from './NavegacionPrincipal.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionDivider from './SectionDivider.astro';
+
+const title = 'Ikastetxeetarako IA Prestakuntza | Bide Digitala';
+const description =
+  'Ikastetxeetarako Adimen Artifizial Sortzaileari buruzko prestakuntza praktikoa. Lan-karga gutxiago, eragin humano handiagoa.';
 ---
 
-<!doctype html>
-<html lang="eu">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ikastetxeetarako IA Prestakuntza | Bide Digitala</title>
-    <meta
-      name="description"
-      content="Ikastetxeetarako Adimen Artifizial Sortzaileari buruzko prestakuntza praktikoa. Lan-karga gutxiago, eragin humano handiagoa."
-    />
-  </head>
-
-  <body>
-    <div class="page">
-
-      <!-- HEADER -->
-      <header>
-        <div class="nav-inner">
-          <div class="nav-top">
-            <a href="/eu" class="logo">
-              <img src="/images/BideDigitala.png" alt="BideDigitalaren logotipoa" />
-            </a>
-            <NavegacionPrincipal lang="eu" />
-          </div>
-        </div>
-      </header>
-
-      <!-- MAIN -->
-      <main class="container">
+<BaseLayout lang="eu" title={title} description={description}>
+  <div class="container">
 
         <!-- HERO -->
         <section class="hero">
@@ -127,17 +104,6 @@ import SectionDivider from './SectionDivider.astro';
             </div>
         </section>
 
-      </main>
-
-      <!-- FOOTER -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Bide Digitala. Eskubide guztiak erreserbatuta.</p>
-        </div>
-    </footer>
-
-    </div>
-    <script src="/assets/js/script.js?v=2025-09-03-1" defer></script>
-  </body>
-</html>
+  </div>
+</BaseLayout>
 
