@@ -3,6 +3,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionDivider from '../../components/SectionDivider.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
+// Solo depende de la colección de contenido (resuelta en build time), no de
+// datos de request — se puede generar como HTML estático para que aparezca
+// en el sitemap y se sirva sin recalcular en cada visita.
+export const prerender = true;
+
 const { lang, slug } = Astro.params;
 
 // --- Cargar todos los posts ---
