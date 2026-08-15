@@ -5,8 +5,10 @@ import CourseSchema from './CourseSchema.astro';
 
 export interface Props {
   lang: 'es' | 'eu';
+  /** URL absoluta de la ficha propia del curso, si existe. */
+  url?: string;
 }
-const { lang } = Astro.props;
+const { lang, url } = Astro.props;
 
 // Traducciones embebidas
 const translations: Record<'es' | 'eu', {
@@ -63,8 +65,13 @@ const translations: Record<'es' | 'eu', {
 
 // Seleccionamos el diccionario según el idioma, fallback a español
 const dict = translations[lang] || translations.es;
+
+// Exportado para que catalogo/[curso].astro pueda usar el mismo diccionario
+// sin duplicarlo (evitar `export const` inline: rompe el hoisting del
+// compilador de Astro cuando el tipo tiene generics multilínea).
+export { translations };
 ---
-<CourseSchema hero={dict.hero} lang={lang} />
+<CourseSchema hero={dict.hero} lang={lang} url={url} />
 <style>
 .card {
     background: var(--card-gradient);
