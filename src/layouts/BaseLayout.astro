@@ -87,6 +87,12 @@ const alternates = await getAlternateLinks(Astro.url.pathname, lang);
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- IAFormacionES/EU.astro (/ia-centros-educativos) usan imágenes de Unsplash
+         hotlinkeadas, incluida la de fondo del hero (probable elemento LCP de
+         esa página). Preconnect en todas las páginas: es una única entrada de
+         DNS/TLS de coste fijo, no un recurso pesado. -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
