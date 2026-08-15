@@ -150,6 +150,7 @@
     "title": "Inicio – BideDigitala"
   },
   "catalogo": {
-    "volver": "← Volver al catálogo"
+    "volver": "← Volver al catálogo",
+    "verCompleto": "Ver curso completo →"
   }
 }

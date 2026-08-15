@@ -15,6 +15,8 @@ import Python from "./cursos/Python.astro";
 import Django from "./cursos/Django.astro";
 import Django_II from "./cursos/Django_II.astro";
 import Cplusplus from "./cursos/Cplusplus.astro";
+import { t } from "../lib/translations";
+import { cursoSlugs } from "../lib/cursos";
 
 export interface Props {
   lang: "es" | "eu";
@@ -59,6 +61,24 @@ const dict = translations[lang] || translations.es;
     grid-template-columns: minmax(0, 1fr);
     gap: 2rem;
   }
+
+  .course-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .course-link-cta {
+    display: block;
+    margin-top: 0.75rem;
+    text-align: right;
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+
+  .course-link:hover .course-link-cta {
+    text-decoration: underline;
+  }
 </style>
 <!-- Problemas Section -->
 <section id="programacion" class="section">
@@ -76,19 +96,58 @@ const dict = translations[lang] || translations.es;
       </div>
     </div>
     <div class="grid">
-      <JavaScript lang={lang} />
-      <Nodejs lang={lang} />
-      <Nodejs_II lang={lang} />
-      <PHP lang={lang} />
-      <PHP_II lang={lang} />
-      <PHP_III lang={lang} />
-      <Laravel lang={lang} />
-      <Laravel_II lang={lang} />
-      <Python lang={lang} />
-      <PythonGPT lang={lang} />
-      <Django lang={lang} />
-      <Django_II lang={lang} />
-      <Cplusplus lang={lang} />
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.JavaScript}/`}>
+        <JavaScript lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.Nodejs}/`}>
+        <Nodejs lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.Nodejs_II}/`}>
+        <Nodejs_II lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.PHP}/`}>
+        <PHP lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.PHP_II}/`}>
+        <PHP_II lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.PHP_III}/`}>
+        <PHP_III lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.Laravel}/`}>
+        <Laravel lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.Laravel_II}/`}>
+        <Laravel_II lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.Python}/`}>
+        <Python lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.Python_GPT}/`}>
+        <PythonGPT lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.Django}/`}>
+        <Django lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.Django_II}/`}>
+        <Django_II lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.Cplusplus}/`}>
+        <Cplusplus lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
     </div>
   </div>
 </section>

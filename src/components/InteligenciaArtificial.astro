@@ -4,6 +4,8 @@
 import { INVALID } from "astro:schema";
 import IAGenerativa from "./cursos/IAGenerativa.astro";
 import IAGenerativa_II from "./cursos/IAGenerativa_II.astro";
+import { t } from "../lib/translations";
+import { cursoSlugs } from "../lib/cursos";
 
 export interface Props {
   lang: "es" | "eu";
@@ -48,6 +50,24 @@ const dict = translations[lang] || translations.es;
     grid-template-columns: minmax(0, 1fr);
     gap: 2rem;
   }
+
+  .course-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .course-link-cta {
+    display: block;
+    margin-top: 0.75rem;
+    text-align: right;
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+
+  .course-link:hover .course-link-cta {
+    text-decoration: underline;
+  }
 </style>
 <!-- Problemas Section -->
 <section id="inteligencia-artificial" class="section">
@@ -65,8 +85,14 @@ const dict = translations[lang] || translations.es;
       </div>
     </div>
     <div class="grid">
-      <IAGenerativa lang={lang} />
-      <IAGenerativa_II lang={lang} />
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.IAGenerativa}/`}>
+        <IAGenerativa lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.IAGenerativa_II}/`}>
+        <IAGenerativa_II lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
     </div>
   </div>
 </section>

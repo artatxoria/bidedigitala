@@ -9,6 +9,8 @@ import Excel_IV from "./cursos/Excel_IV.astro";
 import Excel_V from "./cursos/Excel_V.astro";
 import Excel_VI from "./cursos/Excel_VI.astro";
 import PowerBI from "./cursos/PowerBI.astro";
+import { t } from "../lib/translations";
+import { cursoSlugs } from "../lib/cursos";
 
 export interface Props {
   lang: "es" | "eu";
@@ -53,6 +55,24 @@ const dict = translations[lang] || translations.es;
     grid-template-columns: minmax(0, 1fr);
     gap: 2rem;
   }
+
+  .course-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .course-link-cta {
+    display: block;
+    margin-top: 0.75rem;
+    text-align: right;
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+
+  .course-link:hover .course-link-cta {
+    text-decoration: underline;
+  }
 </style>
 <!-- Problemas Section -->
 <section id="analisis-datos" class="section">
@@ -70,13 +90,34 @@ const dict = translations[lang] || translations.es;
       </div>
     </div>
     <div class="grid">
-      <Excel_I lang={lang} />
-      <Excel_II lang={lang} />
-      <Excel_III lang={lang} />
-      <Excel_IV lang={lang} />
-      <Excel_V lang={lang} />
-      <Excel_VI lang={lang} />
-      <PowerBI lang={lang} />
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.Excel_I}/`}>
+        <Excel_I lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.Excel_II}/`}>
+        <Excel_II lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.Excel_III}/`}>
+        <Excel_III lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.Excel_IV}/`}>
+        <Excel_IV lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.Excel_V}/`}>
+        <Excel_V lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.Excel_VI}/`}>
+        <Excel_VI lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
+      <a class="course-link" href={`/${lang}/catalogo/${cursoSlugs.PowerBI}/`}>
+        <PowerBI lang={lang} />
+        <span class="course-link-cta">{t(lang, "catalogo.verCompleto")}</span>
+      </a>
     </div>
   </div>
 </section>
