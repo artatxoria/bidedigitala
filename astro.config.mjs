@@ -12,7 +12,10 @@ export default defineConfig({
   integrations: [
     astroI18next(),
     mdx(),
-    sitemap(),
+    sitemap({
+      // Excluye páginas privadas (admin) y endpoints de API del sitemap público.
+      filter: (page) => !page.includes('/admin/') && !page.includes('/api/'),
+    }),
   ],
 
   // --- 👇 Añade esto ---
