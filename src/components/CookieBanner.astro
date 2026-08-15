@@ -59,6 +59,12 @@ const { lang } = Astro.props;
     flex-direction: column;
     gap: 1rem;
   }
+  /* El atributo hidden y la clase .bd-cookie-notice tienen la misma
+     especificidad CSS — sin esta regla, "display: flex" de arriba gana
+     siempre y el aviso nunca llega a ocultarse aunque JS ponga hidden=true. */
+  .bd-cookie-notice[hidden] {
+    display: none;
+  }
   .bd-cookie-notice p {
     margin: 0;
     font-size: 0.9rem;
