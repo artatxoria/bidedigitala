@@ -11,6 +11,10 @@
 // interferir. Todo lo hace public/assets/js/visitas.js directamente sobre
 // la cookie, sin ningún salto de página de por medio.
 //
+// El onclick="" en el propio HTML es redundante con el addEventListener que
+// hace visitas.js — vía de enganche independiente por si en algún entorno
+// concreto uno de los dos caminos no llegase a activarse.
+//
 // Ids/clases con prefijo "bd-" a propósito: algunos bloqueadores (p.ej. el
 // Shield de "avisos de cookies" de Brave, activado por defecto) ocultan o
 // inutilizan cualquier elemento con nombres genéricos tipo "cookie-banner"
@@ -27,10 +31,10 @@ const { lang } = Astro.props;
     <a href={tPath("/privacidad", lang)}>{t(lang, "cookies.policyLink")}</a>
   </p>
   <div class="bd-cookie-notice-acciones">
-    <button type="button" id="bd-cookie-reject" class="bd-cookie-btn bd-cookie-btn-secundario">
+    <button type="button" id="bd-cookie-reject" class="bd-cookie-btn bd-cookie-btn-secundario" onclick="window.bdCookieDecide && window.bdCookieDecide('rejected')">
       {t(lang, "cookies.reject")}
     </button>
-    <button type="button" id="bd-cookie-accept" class="bd-cookie-btn bd-cookie-btn-primario">
+    <button type="button" id="bd-cookie-accept" class="bd-cookie-btn bd-cookie-btn-primario" onclick="window.bdCookieDecide && window.bdCookieDecide('accepted')">
       {t(lang, "cookies.accept")}
     </button>
   </div>

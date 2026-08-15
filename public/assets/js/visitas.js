@@ -4,10 +4,21 @@
 //
 // El aviso solo existe si este script se está ejecutando (es lo que lo saca
 // de "hidden"), así que los botones son <button type="button"> normales sin
-// ningún <form> ni navegación de página detrás — nada que pueda recargar la
-// página a medio camino y deshacer la decisión. Todo pasa por aquí: cookie +
-// ocultar el aviso, en el mismo clic.
+// ningún <form> ni navegación de página detrás.
+//
+// window.bdCookieDecide queda expuesta en global y CookieBanner.astro la
+// llama también por onclick="" directamente en el HTML del botón, como vía
+// redundante e independiente de addEventListener — por si en algún entorno
+// concreto addEventListener no llega a engancharse mientras que un atributo
+// onclick definido en el propio HTML sí funciona.
+//
+// Trazas con prefijo [visitas.js] en consola en cada paso: cargar, decidir
+// si hace falta mostrar el aviso, enganchar los botones, y detectar cada
+// clic — para poder ver exactamente hasta dónde llega la ejecución si algo
+// falla en un caso concreto.
 (function () {
+  console.log('[visitas.js] cargado');
+
   var CONSENT_COOKIE = 'bd_consent';
   var CONSENT_MAX_AGE = 365 * 24 * 60 * 60; // 1 año, en segundos
 
@@ -59,24 +70,39 @@
     window.addEventListener('pagehide', sendDuration);
   }
 
-  function decide(banner, decision) {
+  var decided = false;
+
+  function decide(decision) {
+    console.log('[visitas.js] decide() llamada con', decision, 'ya decidido antes:', decided);
+    if (decided) return; // evita doble ejecución si onclick Y addEventListener saltan ambos
+    decided = true;
     setCookie(CONSENT_COOKIE, decision, CONSENT_MAX_AGE);
-    banner.hidden = true;
+    var banner = document.getElementById('bd-cookie-notice');
+    if (banner) banner.hidden = true;
+    console.log('[visitas.js] cookie guardada, aviso oculto. document.cookie ahora:', document.cookie);
     if (decision === 'accepted') track();
   }
+  window.bdCookieDecide = decide;
 
   function showBanner() {
     var banner = document.getElementById('bd-cookie-notice');
-    if (!banner) return;
+    if (!banner) {
+      console.log('[visitas.js] no se encuentra #bd-cookie-notice en el DOM');
+      return;
+    }
     banner.hidden = false;
+    console.log('[visitas.js] aviso mostrado');
 
     var acceptBtn = document.getElementById('bd-cookie-accept');
     var rejectBtn = document.getElementById('bd-cookie-reject');
-    if (acceptBtn) acceptBtn.addEventListener('click', function () { decide(banner, 'accepted'); });
-    if (rejectBtn) rejectBtn.addEventListener('click', function () { decide(banner, 'rejected'); });
+    console.log('[visitas.js] botones encontrados:', { accept: !!acceptBtn, reject: !!rejectBtn });
+    if (acceptBtn) acceptBtn.addEventListener('click', function () { console.log('[visitas.js] click en Aceptar (addEventListener)'); decide('accepted'); });
+    if (rejectBtn) rejectBtn.addEventListener('click', function () { console.log('[visitas.js] click en Rechazar (addEventListener)'); decide('rejected'); });
+    console.log('[visitas.js] listeners enganchados');
   }
 
   var consent = getCookie(CONSENT_COOKIE);
+  console.log('[visitas.js] cookie de consentimiento actual:', JSON.stringify(consent));
   if (consent === 'accepted') {
     track();
   } else if (consent !== 'rejected') {
