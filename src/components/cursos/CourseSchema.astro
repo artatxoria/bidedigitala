@@ -6,14 +6,17 @@ import { buildCourseSchema } from '../../lib/schema';
 export interface Props {
   lang: 'es' | 'eu';
   hero: { title: string; descripcion: string };
+  /** URL absoluta de la ficha propia del curso, si existe. */
+  url?: string;
 }
 
-const { lang, hero } = Astro.props;
+const { lang, hero, url } = Astro.props;
 
 const schema = buildCourseSchema({
   name: hero.title,
   description: hero.descripcion,
   lang,
+  url,
 });
 ---
 

@@ -70,6 +70,8 @@ interface CourseInput {
   name: string;
   description: string;
   lang: 'es' | 'eu';
+  /** URL absoluta de la ficha propia del curso, si existe. */
+  url?: string;
 }
 
 /**
@@ -84,5 +86,6 @@ export function buildCourseSchema(course: CourseInput) {
     description: course.description,
     inLanguage: course.lang,
     provider: organizationData,
+    ...(course.url ? { url: course.url } : {}),
   };
 }
