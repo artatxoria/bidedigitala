@@ -43,6 +43,14 @@ Baina, zer esan nahi du horrek egunerokoan? Horrek esan nahi du hiru superbotere
 ### 🧠 Memoria Propioa duen Garuna (RAG Pertsonalizatua)
 Imajinatu zure enpresaren eskuliburu guztiak, ikasketa urteetako oharrak edo proiektu konplexu baten dokumentazioa leku bakar batean irauli ahal izatea, eta AA horiei buruz arrazoitzeko gai izatea. Sistema horri esker, "Lan Espazioak" sortu ahal izango dituzu, non ereduak ez dituen erantzunak asmatzen, baizik eta **zure ezagutza oinarritik** ateratzen dituen. NotebookLM pertsonal bat edukitzea bezala da, baina zu zara liburutegiaren erabateko jabea.
 
+### 💻 Zure Ondoan Programatzen Duen Kopilotu bat
+Artefaktu honek zure kode-editorearen barruan (VS Code) "bizitzeko" gaitasuna du. Funtzioak sortzeko, akatsak azaltzeko edo dokumentazio teknikoa zure fitxategien gainean zuzenean sortzeko eska diezaiokezu. 24/7 eskuragarri dagoen programatzaile senior bat izango duzu, zure softwarearen arkitektura ezagutzen duena, baina alde funtsezko batekin: zure industria-sekretuak eta zure datu-basearen kredentzialak ez dira inoiz Internetera bidaiatzen.
+
+### 🔌 Zure Errealitatera Konektatutako AA (MCP Protokoloak)
+Sistema hau txat arrunt batetik bereizten duena zabaltzeko duen gaitasuna da. MCP protokoloari esker (Model Context Protocol), artefaktu hau zure tokiko datu-baseekin (Postgres bezalakoekin) edo zure bulego-tresnekin zuzenean konektatu daiteke. Ez da burbuila batean isolatutako AA bat; zure karpetak irakurri, zure benetako datuak aztertu eta lehen copy-paste orduak eskatzen zituzten lan-fluxuak automatizatzen laguntzeko gai den motorra da.
+
+> **Abantaila Lehiakorra:** Azken finean, teknologia hau menderatzen duenak abiadura harrigarrian ideiak prototipatzeko gaitasuna eskuratzen du. Negozio-ideia batetik kode-egitura dokumentatu batera minutu gutxitan igaro ahal izango duzu, zure jabetza intelektuala erabateko zure kontrolpean jarraitzen duelako lasaitasunarekin. Teknologia erraldoi baten erabilera-politiken mende ez dagoen tresna bat eraikitzen ari zara, zure ikuspegi propioaren mende baizik.
+
 ## 🧪 Laborategia: Zure Nodo zimenduak
 Zerbait solidoa eraikitzeko, materialek garrantzia dute. Gure kasuan, beren egonkortasunagatik, arintasunagatik eta _open source_ izaeragatik nabarmentzen diren tresna multzo bat aukeratu dugu. Ekosistema hau moldakorra den arren eta Windowsera (WSL2 bidez) edo macOSera egokitu daitekeen arren, gure proba laborategia **Debian** izan da, zerbitzari-inguruneetan duen sendotasunagatik ezagutzen den "sistema eragile unibertsala".
 
