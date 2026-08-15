@@ -1,0 +1,20 @@
+---
+// Emite el JSON-LD (schema.org Course) de una ficha de curso.
+// Reutilizado por todos los componentes de src/components/cursos/*.astro.
+import { buildCourseSchema } from '../../lib/schema';
+
+export interface Props {
+  lang: 'es' | 'eu';
+  hero: { title: string; descripcion: string };
+}
+
+const { lang, hero } = Astro.props;
+
+const schema = buildCourseSchema({
+  name: hero.title,
+  description: hero.descripcion,
+  lang,
+});
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
