@@ -9,7 +9,6 @@ export interface NavItem {
 export const mainNav: NavItem[] = [
   { key: 'nav.home', path: '/' },
   { key: 'nav.blog', path: '/blog' },
-  { key: 'nav.privacy', path: '/privacidad' },
   {
     key: 'nav.catalogo',
     children: [
@@ -28,8 +27,7 @@ export const mainNav: NavItem[] = [
       { key: 'nav.automationService', path: '/automatizacion-procesos' },
     ]
   },
-
-  // 👉 NUEVA PÁGINA
   { key: 'nav.iaFormacion', path: '/ia-centros-educativos' },
   { key: 'nav.about', path: '/sobre-nosotros' },
+  { key: 'nav.privacy', path: '/privacidad' },
 ];
