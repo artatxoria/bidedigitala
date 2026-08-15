@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionDivider from '../../components/SectionDivider.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { buildBlogPostingSchema } from '../../lib/schema';
 
 // Solo depende de la colección de contenido (resuelta en build time), no de
 // datos de request — se puede generar como HTML estático para que aparezca
@@ -23,7 +24,16 @@ if (!post) {
 }
 
 const { Content } = await post.render();
-const { title, description, pubDate, summary, categories } = post.data;
+const { title, description, pubDate, summary, categories, author } = post.data;
+
+const postSchema = buildBlogPostingSchema({
+  title,
+  description,
+  pubDate,
+  author,
+  lang: lang as 'es' | 'eu',
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+});
 
 // --- Categorías que no queremos usar (idioma) ---
 const excludedCategories = ['es', 'eu', 'eus', 'Euskera', 'Castellano', 'Idioma', 'Language'];
@@ -68,7 +78,7 @@ export async function getStaticPaths() {
 }
 ---
 
-<BaseLayout lang={lang} title={title} description={description}>
+<BaseLayout lang={lang} title={title} description={description} jsonLd={postSchema}>
   <div class="container">
   <div class="post-layout">
     <aside id="toc" class="toc"></aside>

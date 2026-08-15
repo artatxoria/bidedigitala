@@ -4,28 +4,35 @@
 const SITE = 'https://www.bidedigitala.eus';
 const LOGO_URL = `${SITE}/images/BideDigitala.png`;
 
+// Datos de la Organización sin '@context': para incrustar como nodo anidado
+// (p.ej. 'publisher'/'provider') sin repetir el @context del documento raíz.
+const organizationData = {
+  '@type': 'Organization',
+  name: 'BideDigitala',
+  legalName: 'BideDigitala, S.L.',
+  url: `${SITE}/`,
+  logo: LOGO_URL,
+  image: LOGO_URL,
+  email: 'info@bidedigitala.eus',
+  telephone: '+34 685 756 143',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Aulesti',
+    addressRegion: 'Bizkaia',
+    addressCountry: 'ES',
+  },
+  sameAs: ['https://www.linkedin.com/in/juancarlosbeaskoetxea/'],
+};
+
 /**
- * Organización BideDigitala. Se incluye en todas las páginas (BaseLayout) para
- * dar una identidad consistente al sitio ante buscadores y motores generativos.
+ * Organización BideDigitala como documento JSON-LD independiente. Se incluye
+ * en todas las páginas (BaseLayout) para dar una identidad consistente al
+ * sitio ante buscadores y motores generativos.
  */
 export function buildOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'BideDigitala',
-    legalName: 'BideDigitala, S.L.',
-    url: `${SITE}/`,
-    logo: LOGO_URL,
-    image: LOGO_URL,
-    email: 'info@bidedigitala.eus',
-    telephone: '+34 685 756 143',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Aulesti',
-      addressRegion: 'Bizkaia',
-      addressCountry: 'ES',
-    },
-    sameAs: ['https://www.linkedin.com/in/juancarlosbeaskoetxea/'],
+    ...organizationData,
   };
 }
 
@@ -55,7 +62,7 @@ export function buildBlogPostingSchema(post: BlogPostingInput) {
       '@type': 'Person',
       name: post.author,
     },
-    publisher: buildOrganizationSchema(),
+    publisher: organizationData,
   };
 }
 
@@ -76,10 +83,6 @@ export function buildCourseSchema(course: CourseInput) {
     name: course.name,
     description: course.description,
     inLanguage: course.lang,
-    provider: {
-      '@type': 'Organization',
-      name: 'BideDigitala',
-      sameAs: `${SITE}/`,
-    },
+    provider: organizationData,
   };
 }
