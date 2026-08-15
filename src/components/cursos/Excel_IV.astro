@@ -65,11 +65,6 @@ const translations: Record<'es' | 'eu', {
 
 // Seleccionamos el diccionario según el idioma, fallback a español
 const dict = translations[lang] || translations.es;
-
-// Exportado para que catalogo/[curso].astro pueda usar el mismo diccionario
-// sin duplicarlo (evitar `export const` inline: rompe el hoisting del
-// compilador de Astro cuando el tipo tiene generics multilínea).
-export { translations };
 ---
 <CourseSchema hero={dict.hero} lang={lang} url={url} />
 <style>

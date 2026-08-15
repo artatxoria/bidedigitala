@@ -1,0 +1,130 @@
+---
+// src/pages/[lang]/catalogo/[curso].astro
+// Página propia por curso (46 rutas: 23 cursos x 2 idiomas), pensada para
+// SEO de cola larga: hasta ahora los 23 cursos solo existían como
+// secciones anónimas dentro de /catalogo, sin URL ni <title> propios.
+//
+// Reutiliza tal cual los componentes de src/components/cursos/*.astro
+// (mismo markup que ya se ve en /catalogo) pasándoles la prop `url` para
+// que su Course JSON-LD interno (vía CourseSchema.astro) incluya la URL
+// canónica de esta página. No se reutiliza NavegacionSecundariaCatalogo:
+// sus anclas (#analisis-datos, etc.) no existen en esta página.
+//
+// El <title>/description de página salen de cursoMeta (src/lib/cursos.ts),
+// no de un `translations` importado de cada componente: un `export const`
+// con tipo genérico multilínea en el frontmatter de un .astro rompe el
+// hoisting del compilador de Astro (ver historial de commits).
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { t } from '../../../lib/translations';
+import { cursoSlugs, cursoMeta, type CursoKey } from '../../../lib/cursos';
+
+import Excel_I from '../../../components/cursos/Excel_I.astro';
+import Excel_II from '../../../components/cursos/Excel_II.astro';
+import Excel_III from '../../../components/cursos/Excel_III.astro';
+import Excel_IV from '../../../components/cursos/Excel_IV.astro';
+import Excel_V from '../../../components/cursos/Excel_V.astro';
+import Excel_VI from '../../../components/cursos/Excel_VI.astro';
+import PowerBI from '../../../components/cursos/PowerBI.astro';
+import IAGenerativa from '../../../components/cursos/IAGenerativa.astro';
+import IAGenerativa_II from '../../../components/cursos/IAGenerativa_II.astro';
+import Automatizacion from '../../../components/cursos/Automatizacion.astro';
+import JavaScript from '../../../components/cursos/JavaScript.astro';
+import Nodejs from '../../../components/cursos/Nodejs.astro';
+import Nodejs_II from '../../../components/cursos/Nodejs_II.astro';
+import PHP from '../../../components/cursos/PHP.astro';
+import PHP_II from '../../../components/cursos/PHP_II.astro';
+import PHP_III from '../../../components/cursos/PHP_III.astro';
+import Laravel from '../../../components/cursos/Laravel.astro';
+import Laravel_II from '../../../components/cursos/Laravel_II.astro';
+import Python from '../../../components/cursos/Python.astro';
+import Python_GPT from '../../../components/cursos/Python_GPT.astro';
+import Django from '../../../components/cursos/Django.astro';
+import Django_II from '../../../components/cursos/Django_II.astro';
+import Cplusplus from '../../../components/cursos/Cplusplus.astro';
+
+// Componente por curso, indexado por el mismo CursoKey que cursoSlugs/cursoMeta.
+const COMPONENTS: Record<CursoKey, any> = {
+  Excel_I,
+  Excel_II,
+  Excel_III,
+  Excel_IV,
+  Excel_V,
+  Excel_VI,
+  PowerBI,
+  IAGenerativa,
+  IAGenerativa_II,
+  Automatizacion,
+  JavaScript,
+  Nodejs,
+  Nodejs_II,
+  PHP,
+  PHP_II,
+  PHP_III,
+  Laravel,
+  Laravel_II,
+  Python,
+  Python_GPT,
+  Django,
+  Django_II,
+  Cplusplus,
+};
+
+// slug -> clave de curso, derivado de cursoSlugs (única fuente de verdad de los slugs).
+const KEY_BY_SLUG: Record<string, CursoKey> = Object.fromEntries(
+  (Object.keys(cursoSlugs) as CursoKey[]).map((key) => [cursoSlugs[key], key])
+);
+
+export async function getStaticPaths() {
+  const supported = ['es', 'eu'] as const;
+  const slugs = Object.values(cursoSlugs);
+  return supported.flatMap((lang) =>
+    slugs.map((curso) => ({ params: { lang, curso } }))
+  );
+}
+
+export const prerender = true;
+
+const supported = ['es', 'eu'] as const;
+type Lang = (typeof supported)[number];
+
+const langParam = Astro.params.lang;
+const lang: Lang = supported.includes(langParam as any) ? (langParam as Lang) : 'es';
+const curso = Astro.params.curso as string;
+
+const key = KEY_BY_SLUG[curso];
+const CourseComponent = COMPONENTS[key];
+const meta = cursoMeta[key][lang] || cursoMeta[key].es;
+
+const pageUrl = new URL(`/${lang}/catalogo/${curso}/`, Astro.site).toString();
+const title = `${meta.title} – BideDigitala`;
+const volverHref = `/${lang}/catalogo/`;
+---
+
+<BaseLayout lang={lang} title={title} description={meta.descripcion}>
+  <div class="container curso-page">
+    <p class="curso-breadcrumb"><a href={volverHref}>{t(lang, 'catalogo.volver')}</a></p>
+    <CourseComponent lang={lang} url={pageUrl} />
+  </div>
+</BaseLayout>
+
+<style>
+  .curso-page {
+    max-width: 760px;
+    padding-top: 2.5rem;
+    padding-bottom: 4rem;
+  }
+
+  .curso-breadcrumb {
+    margin-bottom: 1.5rem;
+  }
+
+  .curso-breadcrumb a {
+    color: var(--primary-color, #0a6);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .curso-breadcrumb a:hover {
+    text-decoration: underline;
+  }
+</style>

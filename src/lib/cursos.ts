@@ -1,0 +1,137 @@
+// src/lib/cursos.ts
+// Registro de slugs de las páginas propias de curso
+// (src/pages/[lang]/catalogo/[curso].astro). La clave coincide con el
+// nombre del componente en src/components/cursos/, para que sea trivial
+// enlazar desde donde ya se importa ese componente. Fuente única de verdad
+// reutilizada por los 4 agregadores de categoría (AnalisisDatos,
+// InteligenciaArtificial, Automatizacion, Programacion) para el enlace
+// "Ver curso completo", y por la propia página [curso].astro para construir
+// su tabla slug -> componente sin duplicar los strings de slug dos veces.
+export const cursoSlugs = {
+  Excel_I: 'excel-i',
+  Excel_II: 'excel-ii',
+  Excel_III: 'excel-iii',
+  Excel_IV: 'excel-iv',
+  Excel_V: 'excel-v',
+  Excel_VI: 'excel-vi',
+  PowerBI: 'power-bi',
+  IAGenerativa: 'ia-generativa',
+  IAGenerativa_II: 'ia-generativa-ii',
+  Automatizacion: 'automatizacion-n8n',
+  JavaScript: 'javascript',
+  Nodejs: 'nodejs',
+  Nodejs_II: 'nodejs-ii',
+  PHP: 'php',
+  PHP_II: 'php-ii',
+  PHP_III: 'php-iii',
+  Laravel: 'laravel',
+  Laravel_II: 'laravel-ii',
+  Python: 'python',
+  Python_GPT: 'python-gpt',
+  Django: 'django',
+  Django_II: 'django-ii',
+  Cplusplus: 'cplusplus',
+} as const;
+
+export type CursoKey = keyof typeof cursoSlugs;
+
+// Título y descripción de cada curso (duplicados literalmente del `hero`
+// de su componente en src/components/cursos/*.astro) para el <title> y
+// meta description de su página propia. No se importa `translations`
+// directamente desde esos componentes porque un `export const` con un
+// tipo genérico multilínea (Record<'es' | 'eu', {...}>) rompe el hoisting
+// del compilador de Astro; ver commit que revirtió ese intento.
+export const cursoMeta: Record<CursoKey, Record<'es' | 'eu', { title: string; descripcion: string }>> = {
+  Automatizacion: {
+    es: { title: 'Automatización de Procesos con n8n (No-Code/Low-Code)', descripcion: 'Este servicio, un elemento diferenciador clave de nuestra oferta, capacita a profesionales y empresas para diseñar y desplegar sus propias automatizaciones. Se enseña a integrar aplicaciones (CRM, email, hojas de cálculo, etc.), crear flujos de trabajo automatizados y optimizar tareas repetitivas, sin necesidad de programación compleja.' },
+    eu: { title: 'Prozesuen automatizazioa n8n bidez (No-Code/Low-Code)', descripcion: 'Zerbitzu hori gure eskaintzaren funtsezko elementu bereizlea da, eta profesionalak eta enpresak gaitzen ditu beren automatizazioak diseinatzeko eta hedatzeko. Aplikazioak integratzen (CRM, email, kalkulu-orriak, etab.), lan-fluxu automatizatuak sortzen eta zeregin errepikakorrak optimizatzen irakasten da, programazio konplexuaren beharrik gabe.' },
+  },
+  Cplusplus: {
+    es: { title: 'Programación en C++: Fundamentos y Desarrollo de Aplicaciones', descripcion: 'Este itinerario ofrece a los participantes una formación integral en C++, uno de los lenguajes de programación más potentes, versátiles y utilizados en el sector tecnológico. Se trabajarán desde los fundamentos hasta el desarrollo de aplicaciones prácticas, con un enfoque en la programación estructurada y orientada a objetos. El curso dota a los alumnos de las competencias necesarias para construir soluciones eficientes y de alto rendimiento, aplicables en campos como el desarrollo de software, aplicaciones científicas, sistemas embebidos y videojuegos.' },
+    eu: { title: 'C++ programazioa: Oinarriak eta Aplikazioen Garapena', descripcion: 'Ibilbide honek C++ programazio-lengoaia indartsu, moldakor eta teknologia-sektorean erabilienetakoa den C++en prestakuntza integrala eskaintzen die parte-hartzaileei. Oinarrietatik aplikazio praktikoen garapenera arte lan egingo da, programazio egituratua eta objektuetara bideratua kontuan hartuta. Ikastaroak soluzio eraginkorrak eta errendimendu handikoak eraikitzeko beharrezkoak diren gaitasunak ematen dizkie ikasleei. Soluzio horiek softwarearen garapenean, aplikazio zientifikoetan, sistema txertatuetan eta bideojokoetan aplika daitezke.' },
+  },
+  Django: {
+    es: { title: 'Desarrollo Web con Django (Python) y Bases de Datos', descripcion: 'Un curso completo para aprender a construir potentes aplicaciones web con Django, el framework de Python que fomenta un desarrollo rápido y limpio. Ideal para proyectos basados en datos y con necesidad de escalabilidad.' },
+    eu: { title: 'Web garapena Django (Python) eta datu-baseekin', descripcion: 'Djangorekin web aplikazio indartsuak eraikitzen ikasteko ikastaro oso bat, garapen azkarra eta garbia sustatzen duen Python framework-a. Ezin hobea datuetan oinarritutako eta eskalagarritasun-beharra duten proiektuetarako..' },
+  },
+  Django_II: {
+    es: { title: 'Python para Backend y Ciencia de Datos con Django: Del Análisis a la Aplicación Web', descripcion: 'Python no es solo el lenguaje del futuro, es el presente en la Ciencia de Datos y el Desarrollo Web. Este programa es una apuesta por la versatilidad y la empleabilidad, dos pilares de nuestra misión formativa. Capacitaremos a sus profesionales para construir aplicaciones web robustas y escalables con Django, uno de los frameworks más seguros y potentes, y al mismo tiempo, les dotaremos de las habilidades imprescindibles para la Ciencia de Datos: desde la manipulación y análisis de grandes volúmenes de información con Pandas y NumPy, hasta la aplicación de modelos de Machine Learning con TensorFlow. La escasez de profesionales con estas habilidades combinadas es notoria, y con este curso, su equipo se convertirá en un activo estratégico, capaz de extraer valor de los datos y construir soluciones digitales innovadoras. Además, como empresa pionera en automatización e IA, le aseguramos una experiencia de formación impecable, con tutores expertos y la minimización de cualquier carga administrativa asociada a la bonificación.' },
+    eu: { title: 'Python para Backend y Datu-Zientzia Django-rekin: Analisitik Web Aplikaziora', descripcion: 'Python ez da etorkizuneko hizkuntza bakarrik, oraina da Datu Zientzian eta Web Garapenean. Programa hau aldakortasunaren eta enplegagarritasunaren aldeko apustua da, gure prestakuntza-misioaren bi zutabe. Beren profesionalak trebatuko ditugu web aplikazio sendoak eta eskalagarriak eraikitzeko Djangorekin, frameworkik seguru eta indartsuenetako batekin, eta, aldi berean, Datuen Zientziarako ezinbestekoak diren trebetasunak emango dizkiegu: Pandas eta NumPy-rekin informazio-bolumen handiak manipulatu eta aztertzetik hasi eta Machine Learning modeloak aplikatzeraino TensorFlow-ekin. Trebetasun konbinatu horiek dituzten profesionalen eskasia nabarmena da, eta ikastaro honekin, haien taldea aktibo estrategiko bihurtuko da, datuetatik balioa atera eta irtenbide digital berritzaileak eraikitzeko gai izango dena. Gainera, automatizazioan eta IAn enpresa aitzindaria zaren aldetik, prestakuntza-esperientzia bikaina ziurtatzen dizugu, tutore adituekin eta hobariari lotutako edozein karga administratibo minimizatuta.' },
+  },
+  Excel_I: {
+    es: { title: 'Excel para la Productividad Empresarial (Nivel Inicial)', descripcion: 'Curso esencial para sentar las bases en el manejo de Excel, la herramienta más universal para la gestión de datos. Ayuda a los equipos a organizar información eficientemente y a realizar cálculos básicos con solidez, eliminando errores comunes en el día a día administrativo.' },
+    eu: { title: 'Excel Enpresaren Produktibitatea (Oinarrizko Maila)', descripcion: 'Excel kudeatzeko oinarriak ezartzeko ikastaro ezinbestekoa, datuen kudeaketarako tresna unibertsalena. Taldeak informazioa modu eraginkorrean antolatzeko eta oinarrizko kalkuluak sendotasunez egiteko laguntzen du.' },
+  },
+  Excel_II: {
+    es: { title: 'Excel para la Productividad Empresarial (Nivel Medio)', descripcion: 'Este programa está meticulosamente diseñado para profesionales que ya poseen un manejo fundamental de Excel y aspiran a optimizar sus flujos de trabajo. Nos enfocamos en habilidades que permiten manejar conjuntos de datos más complejos, construir informes dinámicos y automatizar tareas sencillas.' },
+    eu: { title: 'Excel Enpresaren Produktibitatea (Erdiko Maila)', descripcion: 'Programa hau Excel-en oinarrizko kudeaketa duten profesionalentzat diseinatuta dago eta beren lan-fluxuak optimizatu nahi dituztenei zuzenduta. Datu-multzo konplexuagoak kudeatzeko, txosten dinamikoak eraikitzeko eta ataza sinpleak automatizatzeko gaitasunak lantzen ditugu.' },
+  },
+  Excel_III: {
+    es: { title: 'Excel Avanzado: Automatización y Análisis de Datos', descripcion: 'Este curso va más allá de lo básico, capacitando a los participantes en el uso de funciones avanzadas, tablas dinámicas y macros para automatizar tareas repetitivas y realizar análisis complejos, liberando tiempo y reduciendo errores manuales.' },
+    eu: { title: 'Excel Aurreratua: Automatizazioa eta Datuen Analisia', descripcion: 'Ikastaro honek oinarrizkoa gainditzen du, parte-hartzaileak funtzio aurreratuak, taula dinamikoak eta makroak erabiltzeko prestatuz, ataza errepikakorrak automatizatzeko eta analisi konplexuak egiteko.' },
+  },
+  Excel_IV: {
+    es: { title: 'Análisis de Datos con Tablas Dinámicas en Excel', descripcion: 'Este curso está diseñado para desatar el verdadero potencial de Excel como herramienta de Business Intelligence. Las Tablas Dinámicas permiten a cualquier profesional, sin necesidad de conocimientos de programación, transformar grandes bases de datos en informes interactivos, resúmenes estratégicos y dashboards visuales con una agilidad sorprendente.' },
+    eu: { title: 'Excel-eko Taula Dinamikoekin Datuen Analisia', descripcion: 'Ikastaro hau Excel-en benetako potentziala Business Intelligence tresna gisa askatzeko diseinatuta dago. Taula Dinamikoek edozein profesionali, programazio ezagutzarik gabe, datu-base handiak txosten interaktiboetan, laburpen estrategikoetan eta dashboard bisualetan eraldatzeko aukera ematen diete.' },
+  },
+  Excel_V: {
+    es: { title: 'Inteligencia de Negocio con Power Query y Power Pivot en Excel', descripcion: 'Rompe las barreras del Excel tradicional y adéntrate en el mundo de la Inteligencia de Negocio con Power Query y Power Pivot. Este curso te capacitará para conectar y transformar datos de múltiples fuentes heterogéneas con Power Query, y para construir modelos de datos robustos y medidas complejas (DAX) con Power Pivot.' },
+    eu: { title: 'Excel-eko Power Query eta Power Pivot-ekin Negozio Adimena', descripcion: 'Excel tradizionalaren mugak hautsi eta Negozio Adimenaren munduan sartu Power Query eta Power Pivot-ekin. Ikastaro honek iturri heterogeneo anitzak konektatu eta eraldatzeko gaitasuna emango dizu Power Query-rekin, eta datu-eredu sendoak eta neurri konplexuak (DAX) eraikitzeko Power Pivot-ekin.' },
+  },
+  Excel_VI: {
+    es: { title: 'Automatización de Tareas en Excel con Macros (VBA)', descripcion: '¡Elimina la burocracia y las tareas repetitivas en Excel de una vez por todas! Este curso capacitará a su equipo para automatizar informes, consolidar datos, formatear hojas de cálculo y ejecutar cualquier secuencia de acciones con un solo clic, utilizando la potencia de las Macros y VBA (Visual Basic for Applications).' },
+    eu: { title: 'Excel-eko Atazen Automatizazioa Makroekin (VBA)', descripcion: 'Ezabatu burokrazia eta Excel-eko ataza errepikakorrak behin betiko! Ikastaro honek zure taldea txostenak automatizatzeko, datuak kontsoldatzeko, kalkulu-orriak formateatzeko eta edozein ekintza-sekuentzia klik batekin exekutatzeko prestatuko du, Makroen eta VBA-ren (Visual Basic for Applications) potentzia erabiliz.' },
+  },
+  IAGenerativa: {
+    es: { title: 'IA Generativa: Impulsa tu Productividad Personal y Empresarial (Iniciación)', descripcion: 'Un curso introductorio que permite a los participantes entender y aplicar herramientas de IA Generativa como ChatGPT en sus tareas diarias, optimizando la redacción, el análisis y la ideación, sin necesidad de conocimientos técnicos previos.' },
+    eu: { title: 'IA Sortzailea: Bultzatu zure Produktibitate Pertsonala eta Enpresariala (Hasiera)', descripcion: 'Sarrera ikastaro bat, parte-hartzaileei IA Sortzaileko tresnak ulertu eta aplikatzeko aukera ematen diena, ChatGPT bezalakoak beren eguneroko atazetan, idazketa, analisia eta ideazioa optimizatuz, aurretiko ezagutza teknikorik behar gabe.' },
+  },
+  IAGenerativa_II: {
+    es: { title: 'IA Generativa: Nivel Medio y Creación de Asistentes Conversacionales', descripcion: 'Profundiza en las capacidades de la IA Generativa, enseñando a personalizar modelos y a construir asistentes conversacionales sencillos para automatizar respuestas a preguntas frecuentes, mejorar el servicio al cliente o el soporte interno.' },
+    eu: { title: 'IA Sortzailea: Maila Ertaina eta Elkarrizketa Laguntzaileen Sorrera', descripcion: 'IA Generatiboaren gaitasunetan sakontzen du, ereduak pertsonalizatzen eta elkarrizketa-laguntzaile errazak eraikitzen irakatsiz, ohiko galderen erantzunak automatizatzeko, bezeroarentzako zerbitzua hobetzeko edo barne-euskarria hobetzeko.' },
+  },
+  JavaScript: {
+    es: { title: 'Programación Frontend con JavaScript', descripcion: 'JavaScript es el lenguaje omnipresente de la web moderna, esencial para crear experiencias de usuario interactivas, dinámicas y fluidas directamente en el navegador. Este curso capacitará a sus equipos en los fundamentos de JavaScript, permitiéndoles desarrollar interfaces de usuario atractivas, validar datos en tiempo real y mejorar la interactividad de sus plataformas web y aplicaciones internas. Una web moderna no es solo un folleto digital, es una herramienta de negocio, y JavaScript es su motor interactivo.' },
+    eu: { title: 'Frontend programazioa JavaScript-ekin', descripcion: 'JavaScript web modernoaren nonahiko hizkuntza da, funtsezkoa nabigatzailean erabiltzaile-esperientzia elkarreragileak, dinamikoak eta jarioak sortzeko. Ikastaro horrek JavaScripten oinarrietan trebatuko ditu bere ekipoak, eta aukera emango die erabiltzaile-interfaze erakargarriak garatzeko, datuak denbora errealean baliozkotzeko eta beren web-plataformen eta barne-aplikazioen elkarreragina hobetzeko. Webgune moderno bat ez da liburuxka digital bat bakarrik, negozio-tresna bat da, eta JavaScript bere motor interaktiboa da.' },
+  },
+  Laravel: {
+    es: { title: 'Desarrollo Web con Laravel (PHP) para Aplicaciones Empresariales', descripcion: 'Dirigido a quienes buscan construir aplicaciones web empresariales de forma rápida y segura. Este curso enseña el uso del framework Laravel (PHP), conocido por su elegancia y robustez, para el desarrollo de sistemas complejos y escalables.' },
+    eu: { title: 'Web Garapena Laravelekin (PHP) Enpresa Aplikazioetarako', descripcion: 'Enpresen web aplikazioak azkar eta modu seguruan eraiki nahi dituztenei zuzendua. Ikastaro honek Laravel frameworkaren (PHP) erabilera irakasten du, bere dotorezia eta sendotasunagatik ezaguna, sistema konplexu eta eskalagarrien garapenerako.' },
+  },
+  Laravel_II: {
+    es: { title: 'Programación PHP Profesional con Laravel: Desarrollo Backend de Alto Rendimiento', descripcion: 'En un entorno donde la agilidad y la robustez del backend son críticas, este programa sumerge a sus equipos en PHP, un lenguaje que sigue siendo el pilar de millones de aplicaciones web, y en Laravel, el framework que ha redefinido la productividad y la seguridad en el desarrollo web. Nuestros expertos, con profunda experiencia en el desarrollo de soluciones para la administración pública y en entornos empresariales, le guiarán para construir aplicaciones backend sólidas, escalables y eficientes, capaces de gestionar grandes volúmenes de datos y automatizar procesos clave. En nuestro emprendimiento, aplicamos la misma filosofía de optimización y automatización interna que enseñamos, asegurando que cada hora de formación se traduzca en valor tangible para su organización. Además, nuestra gestión automatizada de las bonificaciones FUNDAE le garantiza cero complicaciones administrativas, permitiéndole centrarse en la capacitación de su talento.' },
+    eu: { title: 'PHP profesionalaren programazioa Laravelekin: errendimendu handiko backend garapena', descripcion: 'Backendaren arintasuna eta sendotasuna kritikoak diren ingurune batean, programa honek PHPn murgiltzen ditu bere ekipoak, milioika web-aplikazioren zutabe izaten jarraitzen duen lengoaian, eta Laravelen, web garapenaren produktibitatea eta segurtasuna birdefinitu dituen frameworkean. Gure adituek esperientzia handia dute administrazio publikorako eta enpresa-inguruneetarako konponbideak garatzen, eta backend aplikazio sendoak, eskalagarriak eta eraginkorrak eraikitzen lagunduko diote, datu-bolumen handiak kudeatzeko eta funtsezko prozesuak automatizatzeko gai direnak. Gure ekintzailetzan, irakasten dugun optimizazio- eta automatizazio-filosofia bera aplikatzen dugu, prestakuntza-ordu bakoitza antolaketarako balio ukigarri bihurtzen dela ziurtatuz. Gainera, FUNDAEren hobarien gure kudeaketa automatizatuak arazo administratiborik ez duela bermatzen dio, eta bere talentuaren trebakuntzan zentratzeko aukera ematen dio.' },
+  },
+  Nodejs: {
+    es: { title: 'Desarrollo Web Full-Stack con Node.js y Express', descripcion: 'Este itinerario capacita a los alumnos en el desarrollo de aplicaciones web robustas y escalables utilizando el ecosistema JavaScript completo (front-end y back-end). Les dota de las habilidades para construir soluciones digitales complejas y funcionales desde cero.' },
+    eu: { title: 'Full-Stack web-garapena Node.js eta Expressekin', descripcion: 'Ibilbide horrek JavaScript ekosistema osoa (front-end eta back-end) erabiliz web aplikazio sendoak eta eskalagarriak garatzeko gaitasuna ematen die ikasleei. Irtenbide digital konplexuak eta funtzionalak zerotik eraikitzeko trebetasunak ematen dizkie.' },
+  },
+  Nodejs_II: {
+    es: { title: 'Desarrollo Web Full-Stack con JavaScript: Node.js, Express y Sequelize para Aplicaciones Modernas', descripcion: 'El ecosistema JavaScript es el motor de la web moderna, impulsando tanto la experiencia de usuario (frontend) como la lógica de negocio (backend). Este itinerario Full-Stack capacitará a sus profesionales para dominar el desarrollo completo de aplicaciones web, desde la interfaz hasta la base de datos. Se sumergirán en Node.js, el entorno de ejecución que permite a JavaScript operar en el servidor, junto con Express.js, el framework estándar para construir APIs robustas. Además, aprenderán a interactuar con bases de datos relacionales de forma eficiente y segura a través de Sequelize ORM. Nuestros cursos están diseñados con un enfoque práctico y de aplicación inmediata, garantizando que sus equipos adquieran las habilidades más demandadas para construir las soluciones digitales que su empresa necesita hoy y mañana. Nos diferenciamos por ofrecer una gestión integral de la formación, incluyendo la automatización de trámites con FUNDAE, lo que asegura una experiencia fluida y sin complicaciones burocráticas.' },
+    eu: { title: 'Full-Stack web-garapena JavaScript-ekin: Node.js, Express eta Sequelize aplikazio modernoetarako', descripcion: 'JavaScript ekosistema webgune modernoaren motorra da, erabiltzailearen esperientzia (frontend) eta negozio-logika (backend) bultzatuz. Full-Stack ibilbide horrek gaitasuna emango die profesionalei web-aplikazioen garapen osoa menderatzeko, interfazetik datu-baseraino. Node.js-en murgilduko dira, JavaScript-i API sendoak eraikitzeko framework estandarra zerbitzarian, Express.jsekin batera, jarduteko aukera ematen dion exekuzio-ingurunean. Gainera, datu-base erlazionalekin modu eraginkorrean eta seguruan elkarreragiten ikasiko dute Sequelize ORMren bidez. Gure ikastaroak ikuspegi praktiko eta berehalako aplikazioko batekin diseinatuta daude, beren taldeek gaur eta bihar zure enpresak behar dituen soluzio digitalak eraikitzeko gehien eskatzen diren trebetasunak eskuratuko dituztela bermatuz. Prestakuntzaren kudeaketa integrala eskaintzeagatik bereizten gara, FUNDAErekiko izapideen automatizazioa barne; horrek esperientzia arina eta arazo burokratikorik gabea ziurtatzen du.' },
+  },
+  PHP: {
+    es: { title: 'Programación Web con PHP (Nivel Inicial)', descripcion: 'En el corazón de millones de sitios web dinámicos, PHP sigue siendo un lenguaje robusto y fundamental para el desarrollo backend. Este curso está diseñado para sentar las bases en PHP, permitiendo a sus equipos comprender cómo funcionan las aplicaciones web y cómo construir una lógica de servidor eficiente. Es el punto de partida ideal para aquellos profesionales que necesitan interactuar con sistemas existentes basados en PHP o embarcarse en nuevos proyectos web, mejorando la capacidad interna de su empresa para mantener y desarrollar su presencia digital.' },
+    eu: { title: 'Web programazioa PHPrekin (hasierako maila)', descripcion: 'Milioika webgune dinamikoen bihotzean, PHP hizkuntza sendoa eta funtsezkoa da backend garapenerako. Ikastaro hau PHPn oinarriak ezartzeko diseinatuta dago, eta bere ekipoei web aplikazioek nola funtzionatzen duten eta zerbitzari-logika eraginkorra nola eraiki ulertzeko aukera ematen die. Abiapuntu ezin hobea da PHPn oinarritutako sistemekin elkarreragin behar duten edo web-proiektu berrietan murgildu behar duten profesionalentzat, haien presentzia digitala mantentzeko eta garatzeko enpresaren barne-gaitasuna hobetuz.' },
+  },
+  PHP_II: {
+    es: { title: 'Programación PHP con Conexión a Bases de Datos', descripcion: 'Las aplicaciones web modernas son inherentemente dinámicas y requieren interactuar con bases de datos para almacenar y gestionar información. Este curso profundiza en la conexión de PHP con los sistemas de bases de datos más populares, como MySQL y PostgreSQL, donde su empresa tiene una sólida experiencia. Sus equipos aprenderán a construir aplicaciones robustas capaces de gestionar datos de forma segura y eficiente, una habilidad indispensable para cualquier negocio que opere online y busque automatizar la gestión de información.' },
+    eu: { title: 'PHP programazioa datu-baseetarako konexioarekin', descripcion: 'Web aplikazio modernoak berez dinamikoak dira, eta informazioa biltegiratzeko eta kudeatzeko datu-baseekin elkarreragina izatea eskatzen dute. Ikastaro honek PHPren eta datu-base sistema ezagunenen arteko konexioan sakontzen du, hala nola MySQL eta PostgreSQL, non bere enpresak esperientzia sendoa duen. Beren ekipoek aplikazio sendoak eraikitzen ikasiko dute, datuak modu seguruan eta efizientean kudeatzeko gai izango direnak, hau da, online jarduten duen eta informazioaren kudeaketa automatizatu nahi duen edozein negoziotarako ezinbesteko trebetasuna.' },
+  },
+  PHP_III: {
+    es: { title: 'Programación PHP Orientada a Objetos (POO) y Frameworks', descripcion: 'Para construir aplicaciones PHP escalables, mantenibles y eficientes, la programación orientada a objetos (POO) es el paradigma fundamental. Este curso no solo domina los principios de la POO en PHP, sino que también introduce a los participantes en el uso de frameworks modernos y potentes como Laravel o Symfony, que potencian la productividad y seguridad. Su equipo aprenderá a diseñar arquitecturas de software robustas, aplicar patrones de diseño y trabajar con herramientas de desarrollo que son estándar en la industria, posicionando a su empresa a la vanguardia del desarrollo web.' },
+    eu: { title: 'PHP Objektuetara Bideratutako Programazioa (POO) eta Frameworks', descripcion: 'PHP aplikazio eskalagarri, iraunkor eta eraginkorrak eraikitzeko, objektuetara bideratutako programazioa (POO) da funtsezko paradigma. Ikastaro honek, PHPn POOren printzipioak menderatzeaz gain, frameworks moderno eta indartsuen erabileran ere sartzen ditu parte-hartzaileak, hala nola Laravel edo Symfony, produktibitatea eta segurtasuna sustatzen dutenak. Bere taldeak software-arkitektura sendoak diseinatzen, diseinu-patroiak aplikatzen eta industrian estandarrak diren garapen-tresnekin lan egiten ikasiko du, bere enpresa web-garapenaren abangoardian jarriz.' },
+  },
+  PowerBI: {
+    es: { title: 'Power BI para la Inteligencia de Negocio', descripcion: 'Capacita a los profesionales para transformar datos brutos en insights de negocio accionables, creando cuadros de mando interactivos que facilitan la comprensión del rendimiento empresarial y la identificación de oportunidades.' },
+    eu: { title: 'Negozio Adimenaren Power BI', descripcion: 'Profesionalak datu gordinak negozio-ikuspegi ekintzagarrietan eraldatzeko gaitasuna ematen die, enpresaren errendimenduaren ulermena eta aukeren identifikazioa errazten duten aginte-koadro interaktiboak sortuz.' },
+  },
+  Python: {
+    es: { title: 'Programación con Python (Nivel Inicial)', descripcion: 'Python se ha convertido en el lenguaje de programación más versátil y demandado a nivel global, siendo la puerta de entrada a campos tan relevantes como la Inteligencia Artificial, el Análisis de Datos y la Automatización de Procesos. Este curso proporciona una introducción sólida a Python, permitiendo a sus equipos adquirir habilidades prácticas para la manipulación de datos, la automatización de tareas repetitivas y la base para explorar aplicaciones de IA. Es una inversión estratégica para cualquier empresa que busque modernizar sus operaciones y aprovechar el potencial de las nuevas tecnologías.' },
+    eu: { title: 'Python bidezko programazioa (hasierako maila)', descripcion: 'Python programazio-lengoaia moldakorrena eta eskatuena bihurtu da maila globalean, eta Adimen Artifiziala, Datuen Analisia eta Prozesuen Automatizazioa bezalako eremu garrantzitsuetara sartzeko atea da. Ikastaro honek sarrera sendoa ematen dio Python-i, eta bere ekipoei aukera ematen die trebetasun praktikoak eskuratzeko datuak manipulatzeko, zeregin errepikakorrak automatizatzeko eta IAren aplikazioak esploratzeko. Inbertsio estrategikoa da eragiketak modernizatu eta teknologia berrien potentziala aprobetxatu nahi duen edozein enpresarentzat.' },
+  },
+  Python_GPT: {
+    es: { title: 'Desarrollo de Aplicaciones con Python y GPT', descripcion: 'Este itinerario capacita a los alumnos en la creación de aplicaciones inteligentes basadas en modelos de lenguaje de última generación (GPT) integrados con Python. Los participantes aprenderán a desarrollar soluciones innovadoras que combinan la flexibilidad de Python con el poder de la Inteligencia Artificial Generativa, creando asistentes virtuales, herramientas de automatización, análisis de datos avanzados y aplicaciones interactivas con gran valor añadido para el entorno empresarial.' },
+    eu: { title: 'Python eta GPT bidezko aplikazioen garapena', descripcion: 'Ibilbide horrek Python-ekin integratutako azken belaunaldiko hizkuntza-ereduetan (GPT) oinarritutako aplikazio adimendunak sortzeko gaitasuna ematen die ikasleei. Parte-hartzaileek Python-en malgutasuna eta Adimen Artifizial Sortzailearen boterea konbinatzen dituzten irtenbide berritzaileak garatzen ikasiko dute, laguntzaile birtualak, automatizazio-tresnak, datu aurreratuen analisia eta enpresa-ingurunerako balio erantsi handia duten aplikazio interaktiboak sortuz.' },
+  },
+};
