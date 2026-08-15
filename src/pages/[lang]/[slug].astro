@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionDivider from '../../components/SectionDivider.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { buildBlogPostingSchema } from '../../lib/schema';
+import { tPath } from '../../lib/translations';
 
 // Solo depende de la colección de contenido (resuelta en build time), no de
 // datos de request — se puede generar como HTML estático para que aparezca
@@ -64,8 +65,10 @@ const relatedPosts: CollectionEntry<'blog'>[] = mainCategory
 // --- Función auxiliar para URLs ---
 function postUrl(entry: CollectionEntry<'blog'>): string {
   const slugPart = entry.slug.split('/').pop();
-  return `/${lang}/${slugPart}`;
+  return tPath(`/${slugPart}`, lang as 'es' | 'eu');
 }
+
+const authorHref = tPath('/sobre-nosotros', lang as 'es' | 'eu');
 
 export async function getStaticPaths() {
   const all = await getCollection('blog');
@@ -88,7 +91,7 @@ export async function getStaticPaths() {
         <h1>{title}</h1>
         <p class="post-meta">
           {lang === 'es' ? 'Por ' : ''}
-          <a href={`/${lang}/sobre-nosotros`}>{author}</a>
+          <a href={authorHref}>{author}</a>
           {lang === 'eu' ? ` (egilea)` : ''}
           &nbsp;·&nbsp;
           <time datetime={pubDate.toISOString()}>

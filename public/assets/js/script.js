@@ -324,7 +324,7 @@ if (contactForm) {
     if (btn) { btn.disabled = true; btn.textContent = lang === 'eu' ? 'Bidaltzen…' : 'Enviando…'; }
 
     try {
-      const res = await fetch(contactForm.action || '/api/contact', { method: 'POST', body: fd });
+      const res = await fetch(contactForm.action || '/api/contact/', { method: 'POST', body: fd });
       const out = await res.json();
 
       if (out?.ok) {

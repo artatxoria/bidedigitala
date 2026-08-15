@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import SectionDivider from '../../../components/SectionDivider.astro';
 import { getCollection } from 'astro:content';
+import { tPath } from '../../../lib/translations';
 
 // ✅ Primero definimos las rutas
 export async function getStaticPaths() {
@@ -54,7 +55,7 @@ const description = lang === 'es'
               const slugPart = post.slug.split('/').pop();
               return (
                 <li class="post-card">
-                  <a href={`/${lang}/${slugPart}`}>
+                  <a href={tPath(`/${slugPart}`, lang)}>
                     <h3>{post.data.title}</h3>
                     <p class="post-summary">{post.data.summary}</p>
                     <time class="post-date">

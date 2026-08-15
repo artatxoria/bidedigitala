@@ -9,6 +9,10 @@ export default defineConfig({
   site: 'https://www.bidedigitala.eus',
   output: 'server', // habilita SSR/APIs (necesario por /api/contact)
   adapter: node({ mode: 'standalone' }), // servidor Node autocontenido en dist/
+  // El sitio ya se sirve (y el sitemap ya declara) todas las rutas con barra
+  // final; esto lo hace explícito para que Astro.url.pathname sea consistente
+  // en todas partes (canonical, hreflang, comparaciones de ruta en BaseLayout).
+  trailingSlash: 'always',
   integrations: [
     astroI18next(),
     mdx(),

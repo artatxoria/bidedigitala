@@ -34,6 +34,11 @@ const {
 
 const hasSecondaryNav = Astro.slots.has("secondary-nav");
 
+// Sin barra final, para comparaciones de ruta robustas frente a
+// trailingSlash: 'always' (ver astro.config.mjs) — Astro.url.pathname
+// siempre la lleva, pero no dependemos de eso.
+const pathNoSlash = Astro.url.pathname.replace(/\/$/, "");
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL(image, Astro.site);
 // La Organización se incluye siempre; el resto del JSON-LD lo aporta cada página.
@@ -116,11 +121,11 @@ const alternates = await getAlternateLinks(Astro.url.pathname, lang);
     <CookieBanner lang={lang} />
 
     <!-- Tu JavaScript de interacción -->
-    <!-- <script src="/assets/js/script.js?v=2025-09-03-1" defer></script> -->
-    {Astro.url.pathname !== `/${lang}/ia-centros-educativos` && (
-  <script src="/assets/js/script.js?v=2025-09-03-1" defer></script>
-)}
-    <script src="/assets/js/visitas.js?v=2026-08-15-1" defer></script>
+    <!-- <script src="/assets/js/script.js?v=2026-08-15-2" defer></script> -->
+    {pathNoSlash !== `/${lang}/ia-centros-educativos` && (
+      <script src="/assets/js/script.js?v=2026-08-15-2" defer></script>
+    )}
+    <script src="/assets/js/visitas.js?v=2026-08-15-2" defer></script>
 
   </body>
 </html>

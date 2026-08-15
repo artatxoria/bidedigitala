@@ -18,9 +18,17 @@ export function t(lang: keyof typeof allLocales, key: string): string {
 }
 
 /**
- * Prefija la ruta con el idioma, p.ej. tPath('/blog','es') → '/es/blog'
+ * Prefija la ruta con el idioma y añade la barra final, p.ej.
+ * tPath('/blog','es') → '/es/blog/' — el sitio sirve (y el sitemap
+ * declara) todas las rutas con barra final, ver trailingSlash en
+ * astro.config.mjs. Un posible fragmento (#ancla) o query no se toca:
+ * tPath('#contacto','es') → '/es/#contacto', nunca '/es/#contacto/'.
  */
 export function tPath(path: string, lang: keyof typeof allLocales): string {
   const clean = path.startsWith('/') ? path : `/${path}`;
-  return `/${lang}${clean}`;
+  const splitIndex = clean.search(/[#?]/);
+  const pathname = splitIndex === -1 ? clean : clean.slice(0, splitIndex);
+  const suffix = splitIndex === -1 ? '' : clean.slice(splitIndex);
+  const pathnameWithSlash = pathname.endsWith('/') ? pathname : `${pathname}/`;
+  return `/${lang}${pathnameWithSlash}${suffix}`;
 }

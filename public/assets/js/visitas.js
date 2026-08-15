@@ -45,7 +45,7 @@
     var pageViewId = uuid();
     var startedAt = Date.now();
 
-    fetch('/api/visita', {
+    fetch('/api/visita/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ pageViewId: pageViewId, path: location.pathname, referrer: document.referrer || '' }),
@@ -58,9 +58,9 @@
       durationSent = true;
       var payload = JSON.stringify({ pageViewId: pageViewId, durationMs: Date.now() - startedAt });
       if (navigator.sendBeacon) {
-        navigator.sendBeacon('/api/visita-duracion', payload);
+        navigator.sendBeacon('/api/visita-duracion/', payload);
       } else {
-        fetch('/api/visita-duracion', { method: 'POST', body: payload, keepalive: true }).catch(function () {});
+        fetch('/api/visita-duracion/', { method: 'POST', body: payload, keepalive: true }).catch(function () {});
       }
     }
 

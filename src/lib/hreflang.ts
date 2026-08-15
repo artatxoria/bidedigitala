@@ -14,6 +14,11 @@ export type AlternateLinks = Record<Lang, AlternateLink>;
 const ROUTE_RE = /^\/(es|eu)(?:\/(blog|catalogo))?(?:\/([^/]+))?\/?$/;
 const otherLang = (lang: Lang): Lang => (lang === 'es' ? 'eu' : 'es');
 const baseSlug = (slug: string) => slug.split('/').pop()!;
+// El sitio sirve (y el sitemap declara) todas las rutas con barra final
+// (ver trailingSlash en astro.config.mjs); todo href generado aquí pasa
+// por esta función para no tener que repetir la normalización en cada
+// punto de construcción.
+const withSlash = (href: string): string => (href.endsWith('/') ? href : `${href}/`);
 
 /**
  * Calcula la URL equivalente en cada idioma (es/eu) para una ruta dada,
@@ -31,8 +36,8 @@ export async function getAlternateLinks(
   if (!match) {
     // Ruta fuera del patrón esperado: prefijo simple, best-effort.
     return {
-      es: { href: `/es${pathname}`, matched: true },
-      eu: { href: `/eu${pathname}`, matched: true },
+      es: { href: withSlash(`/es${pathname}`), matched: true },
+      eu: { href: withSlash(`/eu${pathname}`), matched: true },
     };
   }
 
@@ -41,8 +46,8 @@ export async function getAlternateLinks(
   const strippedPath = pathname.replace(/^\/(es|eu)/, '');
 
   const links: AlternateLinks = {
-    es: { href: `/es${strippedPath}`, matched: true },
-    eu: { href: `/eu${strippedPath}`, matched: true },
+    es: { href: withSlash(`/es${strippedPath}`), matched: true },
+    eu: { href: withSlash(`/eu${strippedPath}`), matched: true },
   };
 
   if (!maybeSlug) {
@@ -67,19 +72,19 @@ export async function getAlternateLinks(
   }
 
   const other = otherLang(currentLang);
-  links[currentLang] = { href: `/${currentLang}/${baseSlug(current.slug)}`, matched: true };
+  links[currentLang] = { href: withSlash(`/${currentLang}/${baseSlug(current.slug)}`), matched: true };
 
   const tkey = current.data.tkey;
   if (tkey) {
     const alt = all.find((e) => e.data.lang === other && e.data.tkey === tkey);
     links[other] = alt
-      ? { href: `/${other}/${baseSlug(alt.slug)}`, matched: true }
-      : { href: `/${other}/blog`, matched: false };
+      ? { href: withSlash(`/${other}/${baseSlug(alt.slug)}`), matched: true }
+      : { href: withSlash(`/${other}/blog`), matched: false };
   } else {
     // Sin tkey: solo tenemos una suposición ingenua (mismo basename en el otro idioma),
     // no una traducción confirmada — no se debe declarar como hreflang real.
     links[other] = {
-      href: section === 'blog' ? `/${other}/blog/${maybeSlug}` : `/${other}/${maybeSlug}`,
+      href: withSlash(section === 'blog' ? `/${other}/blog/${maybeSlug}` : `/${other}/${maybeSlug}`),
       matched: false,
     };
   }
