@@ -21,7 +21,8 @@
     "iaFormacion": "IA para la Docencia",
     "appsService": "Creación de Aplicaciones",
     "consultingService": "Consultoría Informática",
-    "automationService": "Automatización de Proyectos"
+    "automationService": "Automatización de Proyectos",
+    "about": "Sobre nosotros"
 
   },
   "hero": {
@@ -135,6 +136,7 @@
     "valueProposal": "Propuesta de valor",
     "process": "Proceso",
     "contact": "Contacto",
+    "about": "Sobre nosotros",
     "rights": "2025 BideDigitala, S.L. Todos los derechos reservados.",
     "manageCookies": "Gestionar cookies"
   },

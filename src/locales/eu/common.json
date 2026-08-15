@@ -21,7 +21,8 @@
   "iaFormacion": "Irakaskuntzarako IA",
   "appsService": "Aplikazioen Sorkuntza",
   "consultingService": "Informatika Aholkularitza",
-  "automationService": "Prozesuen Automatizazioa"
+  "automationService": "Prozesuen Automatizazioa",
+  "about": "Gutaz"
   },
   "hero": {
     "title": "Teknologia, Prestakuntza eta Automatizazioa",
@@ -134,6 +135,7 @@
     "valueProposal": "Gure balio proposamena",
     "process": "Nola lan egituen dugu",
     "contact": "Harremanetan jarri",
+    "about": "Gutaz",
     "rights": "2025 BideDigitala, S.L. Eskubide guztiak gordeta.",
     "manageCookies": "Cookiak kudeatu"
   },

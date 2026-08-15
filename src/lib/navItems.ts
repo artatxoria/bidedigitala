@@ -31,4 +31,5 @@ export const mainNav: NavItem[] = [
 
   // 👉 NUEVA PÁGINA
   { key: 'nav.iaFormacion', path: '/ia-centros-educativos' },
+  { key: 'nav.about', path: '/sobre-nosotros' },
 ];

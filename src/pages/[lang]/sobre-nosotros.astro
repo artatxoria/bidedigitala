@@ -1,0 +1,143 @@
+---
+// src/pages/[lang]/sobre-nosotros.astro
+// Sustituye a /about (boilerplate del starter de Astro, ver about.astro,
+// que ahora redirige aquí con 301). Contenido revisado con el usuario:
+// año de fundación confirmado (2022); bio del fundador deliberadamente
+// breve por ahora — pendiente ampliar con currículum y misión completa
+// cuando el usuario aporte ese contenido (ver memoria del proyecto).
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  return [{ params: { lang: 'es' } }, { params: { lang: 'eu' } }];
+}
+export const prerender = true;
+
+const supported = ['es', 'eu'] as const;
+type Lang = (typeof supported)[number];
+
+const langParam = Astro.params.lang;
+const lang: Lang = supported.includes(langParam as any) ? (langParam as Lang) : 'es';
+
+const translations: Record<
+  Lang,
+  {
+    title: string;
+    intro: string;
+    diferenciaTitle: string;
+    diferencia: string;
+    equipoTitle: string;
+    equipo: string;
+    contactoTitle: string;
+  }
+> = {
+  es: {
+    title: 'Sobre nosotros',
+    intro:
+      'BideDigitala nace en 2022 en Aulesti (Bizkaia) con un objetivo claro: acercar la tecnología a las PYMES vascas sin jerga innecesaria ni promesas vacías. Formación bonificada, diseño web, desarrollo de aplicaciones, consultoría informática y automatización de procesos, con el mismo equipo de confianza de principio a fin.',
+    diferenciaTitle: 'Qué nos diferencia',
+    diferencia:
+      'No somos una agencia de formación al uso. Nuestra ventaja competitiva reside en nuestro funcionamiento, basado en la innovación de procesos, difícil de imitar para las academias tradicionales.',
+    equipoTitle: 'Quién hay detrás',
+    equipo: 'BideDigitala está fundado y dirigido por Juan Carlos Beaskoetxea.',
+    contactoTitle: 'Contacto',
+  },
+  eu: {
+    title: 'Gutaz',
+    intro:
+      'BideDigitala 2022an sortu zen Aulestin (Bizkaia), helburu argi batekin: euskal ETEei teknologia hurbiltzea, jargoi alferrikakorik eta promesa hutsalik gabe. Prestakuntza hobariduna, web diseinua, aplikazioen garapena, informatika-aholkularitza eta prozesuen automatizazioa, konfiantzazko talde beraren eskutik hasieratik amaierara.',
+    diferenciaTitle: 'Zerk egiten gaitu desberdin',
+    diferencia:
+      'Ez gara ohiko prestakuntza-agentzia bat. Gure abantaila lehiakorra gure funtzionamenduan datza, prozesuen berrikuntzan oinarrituta, akademia tradizionalentzat imitatzeko zaila dena.',
+    equipoTitle: 'Nor dago atzean',
+    equipo: 'BideDigitala Juan Carlos Beaskoetxeak sortu eta zuzentzen du.',
+    contactoTitle: 'Kontaktua',
+  },
+};
+
+const dict = translations[lang];
+const title = `${dict.title} – BideDigitala`;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: dict.title,
+  description: dict.intro,
+  inLanguage: lang,
+};
+---
+
+<BaseLayout lang={lang} title={title} description={dict.intro} jsonLd={schema}>
+  <div class="container about-page">
+    <header class="about-hero">
+      <h1>{dict.title}</h1>
+      <p class="about-intro">{dict.intro}</p>
+    </header>
+
+    <section class="about-section">
+      <h2>{dict.diferenciaTitle}</h2>
+      <p>{dict.diferencia}</p>
+    </section>
+
+    <section class="about-section">
+      <h2>{dict.equipoTitle}</h2>
+      <p>
+        {dict.equipo}
+        {' '}
+        <a href="https://www.linkedin.com/in/juancarlosbeaskoetxea/" target="_blank" rel="noopener noreferrer">
+          LinkedIn
+        </a>
+      </p>
+    </section>
+
+    <section class="about-section">
+      <h2>{dict.contactoTitle}</h2>
+      <ul class="about-contact">
+        <li><i class="fas fa-envelope"></i> info@bidedigitala.eus</li>
+        <li><i class="fas fa-phone"></i> +34 685 756 143</li>
+        <li><i class="fas fa-map-marker-alt"></i> Aulesti, Bizkaia</li>
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-page {
+    max-width: 760px;
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+  }
+
+  .about-hero h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-intro {
+    font-size: 1.15rem;
+    color: var(--color-text-secondary, #555);
+    line-height: 1.6;
+  }
+
+  .about-section {
+    margin-top: 2.5rem;
+  }
+
+  .about-section h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .about-contact {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .about-contact i {
+    width: 1.5rem;
+    text-align: center;
+    color: var(--color-purple, #6e4f9e);
+  }
+</style>

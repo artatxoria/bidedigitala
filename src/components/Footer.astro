@@ -24,6 +24,7 @@ const { lang } = Astro.props;
                 <div class="footer-section">
                     <h4>{t(lang, 'footer.company')}</h4>
                     <ul>
+                        <li><a href={tPath('/sobre-nosotros', lang)}>{t(lang, 'footer.about')}</a></li>
                         <li><a href="#balio-proposamena">{t(lang, 'footer.valueProposal')}</a></li>
                         <li><a href="#prozesua">{t(lang, 'footer.process')}</a></li>
                         <li><a href="#harremana">{t(lang, 'footer.contact')}</a></li>

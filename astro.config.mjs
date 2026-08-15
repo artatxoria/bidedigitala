@@ -13,8 +13,12 @@ export default defineConfig({
     astroI18next(),
     mdx(),
     sitemap({
-      // Excluye páginas privadas (admin) y endpoints de API del sitemap público.
-      filter: (page) => !page.includes('/admin/') && !page.includes('/api/'),
+      // Excluye páginas privadas (admin), endpoints de API, y /about (redirect
+      // 301 a /es/sobre-nosotros/, no debe listarse como URL indexable).
+      filter: (page) =>
+        !page.includes('/admin/') &&
+        !page.includes('/api/') &&
+        page !== 'https://www.bidedigitala.eus/about/',
     }),
   ],
 
