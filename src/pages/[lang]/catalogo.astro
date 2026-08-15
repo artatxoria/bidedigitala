@@ -52,7 +52,7 @@ const dict = translations[lang] || translations.es;
 const title = dict.title;
 ---
 
-<BaseLayout lang={lang} title={title}>
+<BaseLayout lang={lang} title={title} description={dict.intro}>
   <NavegacionSecundariaCatalogo lang={lang} slot="secondary-nav" />
 
   <!-- Hero Section -->

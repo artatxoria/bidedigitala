@@ -39,9 +39,10 @@ if (!langParam || !supported.includes(langParam as any)) {
 const lang = langParam as (typeof supported)[number];
 
 const title = t(lang, "home.title");
+const description = t(lang, "hero.subtitle");
 ---
 
-<BaseLayout lang={lang} title={title}>
+<BaseLayout lang={lang} title={title} description={description}>
   <NavegacionSecundaria lang={lang} slot="secondary-nav" />
 
   <Hero lang={lang} />
