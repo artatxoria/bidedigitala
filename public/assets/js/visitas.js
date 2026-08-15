@@ -1,15 +1,24 @@
 // public/assets/js/visitas.js
 // Muestra el aviso de cookies si no hay decisión guardada, y registra visitas
 // propias (sin terceros) una vez el visitante ha aceptado.
-// La decisión de aceptar/rechazar la gestiona /api/consent mediante un
-// <form> normal (ver src/components/CookieBanner.astro) — este script NO
-// participa en esa acción, solo decide si el aviso debe mostrarse o no.
+//
+// El clic en Aceptar/Rechazar actúa al instante por JavaScript (oculta el
+// aviso y guarda la cookie en el momento, sin esperar a que termine ninguna
+// navegación de página). El <form method="POST" action="/api/consent"> de
+// CookieBanner.astro sigue ahí como red de seguridad — si por lo que sea
+// este script no llega a ejecutarse o a enganchar el clic, el envío nativo
+// del formulario sigue guardando la decisión igualmente.
 (function () {
   var CONSENT_COOKIE = 'bd_consent';
+  var CONSENT_MAX_AGE = 365 * 24 * 60 * 60; // 1 año, en segundos
 
   function getCookie(name) {
     var match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
     return match ? decodeURIComponent(match[1]) : null;
+  }
+
+  function setCookie(name, value, maxAgeSeconds) {
+    document.cookie = name + '=' + encodeURIComponent(value) + '; path=/; max-age=' + maxAgeSeconds + '; SameSite=Lax';
   }
 
   function uuid() {
@@ -51,12 +60,43 @@
     window.addEventListener('pagehide', sendDuration);
   }
 
+  function decide(banner, decision) {
+    setCookie(CONSENT_COOKIE, decision, CONSENT_MAX_AGE);
+    banner.hidden = true;
+    if (decision === 'accepted') track();
+    // Aviso al servidor en segundo plano, sin bloquear ni depender de la
+    // respuesta — la decisión ya ha quedado aplicada arriba.
+    var fd = new URLSearchParams();
+    fd.set('decision', decision);
+    fetch('/api/consent', { method: 'POST', body: fd, keepalive: true }).catch(function () {});
+  }
+
+  function showBanner() {
+    var banner = document.getElementById('bd-cookie-notice');
+    if (!banner) return;
+    banner.hidden = false;
+
+    var acceptBtn = banner.querySelector('button[value="accepted"]');
+    var rejectBtn = banner.querySelector('button[value="rejected"]');
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        decide(banner, 'accepted');
+      });
+    }
+    if (rejectBtn) {
+      rejectBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        decide(banner, 'rejected');
+      });
+    }
+  }
+
   var consent = getCookie(CONSENT_COOKIE);
   if (consent === 'accepted') {
     track();
   } else if (consent !== 'rejected') {
-    var banner = document.getElementById('bd-cookie-notice');
-    if (banner) banner.hidden = false;
+    showBanner();
   }
   // Si consent === 'rejected', no se hace nada: ni aviso ni tracking.
 })();
