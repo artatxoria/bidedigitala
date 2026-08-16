@@ -39,6 +39,22 @@ function readBlogLastmods() {
 
 const blogLastmods = readBlogLastmods();
 
+// La mayoría de posts de blog repiten su título como primer '# Título' del
+// cuerpo Markdown (arrastre del formato original en el que se escribieron),
+// duplicando el <h1> que ya pinta la plantilla desde el frontmatter (ver
+// src/pages/[lang]/[slug].astro:92) — dos <h1> reales por página. Este
+// plugin remark quita el primer nodo del árbol si es un heading de
+// profundidad 1, sin tocar ningún archivo de contenido ni afectar a posts
+// que no repitan el título (no-op en ese caso).
+function remarkStripLeadingH1() {
+  return (tree) => {
+    const first = tree.children[0];
+    if (first && first.type === 'heading' && first.depth === 1) {
+      tree.children.shift();
+    }
+  };
+}
+
 export default defineConfig({
   site: 'https://www.bidedigitala.eus',
   output: 'server', // habilita SSR/APIs (necesario por /api/contact)
@@ -66,6 +82,7 @@ export default defineConfig({
 
   // --- 👇 Añade esto ---
   markdown: {
+    remarkPlugins: [remarkStripLeadingH1],
     remarkRehype: { allowDangerousHtml: true },
     rehypePlugins: [],
   },

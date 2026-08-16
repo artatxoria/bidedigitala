@@ -251,7 +251,7 @@ Lehen fase honetan proiektuaren oinarri teknikoak osatu ditugu:
 
 - ✅ Git eta GitHub bidezko bertsioen kontrola.
 
-# Hurrengo urratsak
+## Hurrengo urratsak
 
 Hemendik aurrera **2. fasea** dator, datu-geruzari eskainita:
 
