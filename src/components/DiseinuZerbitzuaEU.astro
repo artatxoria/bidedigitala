@@ -4,13 +4,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import NavegacionSecundariaDiseinu from './NavegacionSecundariaDiseinu.astro';
 import SectionDivider from './SectionDivider.astro';
 import { t, tPath } from '../lib/translations';
-import { organizationData, buildBreadcrumbSchema } from '../lib/schema';
+import { buildBreadcrumbSchema, buildServiceSchema } from '../lib/schema';
 
-// 'provider' reutiliza organizationData (src/lib/schema.ts) en vez de una
-// copia propia — evita que este Service quede desincronizado si cambian
+// buildServiceSchema() (src/lib/schema.ts) reutiliza siempre organizationData
+// para 'provider' — evita que este Service quede desincronizado si cambian
 // los datos de la Organización (el mismo tipo de deuda que causó el bug
 // original de este archivo, ver Ronda 1).
-const schema = { "@context": "https://schema.org", "@type": "Service", "name": "Web diseinua eta GEO optimizazioa", "description": "Ziurgabetasunaren amaiera: zure webgunea negozioa sortzen duen aktibo bihurtu. GEO eta AI aplikazioa ETE industrialetan.", "url": "https://www.bidedigitala.eus/eu/diseinu-zerbitzua/", "inLanguage": "eu", "areaServed": ["Euskal Herria", "España"], "serviceType": ["GEO (Generative Engine Optimization)", "Ingeniería Digital", "Optimización de Conversiones B2B", "Análisis de Datos", "Desarrollo Web orientado a KPI"], "audience": { "@type": "BusinessAudience", "audienceType": "PYMES industriales · Industria 4.0 · B2B" }, "provider": organizationData };
+const schema = buildServiceSchema({
+  name: "Web diseinua eta GEO optimizazioa",
+  description: "Ziurgabetasunaren amaiera: zure webgunea negozioa sortzen duen aktibo bihurtu. GEO eta AI aplikazioa ETE industrialetan.",
+  url: "https://www.bidedigitala.eus/eu/diseinu-zerbitzua/",
+  lang: "eu",
+  areaServed: ["Euskal Herria", "España"],
+  serviceType: ["GEO (Generative Engine Optimization)", "Ingeniería Digital", "Optimización de Conversiones B2B", "Análisis de Datos", "Desarrollo Web orientado a KPI"],
+  audienceType: "PYMES industriales · Industria 4.0 · B2B",
+});
 
 const breadcrumbSchema = buildBreadcrumbSchema([
   { name: t('eu', 'nav.home'), url: new URL(tPath('/', 'eu'), Astro.site).toString() },

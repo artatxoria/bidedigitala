@@ -186,6 +186,37 @@ export function buildBreadcrumbSchema(items: BreadcrumbItem[]) {
   };
 }
 
+interface ServiceInput {
+  name: string;
+  description: string;
+  url: string;
+  lang: 'es' | 'eu';
+  areaServed: string[];
+  serviceType: string[];
+  audienceType: string;
+}
+
+/**
+ * Servicio (Service) genérico. `provider` reutiliza siempre organizationData
+ * para no arrastrar una copia divergente por cada página de servicio (el
+ * mismo tipo de deuda que causó el bug original de diseinu-zerbitzua, ver
+ * Ronda 1).
+ */
+export function buildServiceSchema(service: ServiceInput) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: service.name,
+    description: service.description,
+    url: service.url,
+    inLanguage: service.lang,
+    areaServed: service.areaServed,
+    serviceType: service.serviceType,
+    audience: { '@type': 'BusinessAudience', audienceType: service.audienceType },
+    provider: organizationData,
+  };
+}
+
 interface FAQItem {
   question: string;
   answer: string;
