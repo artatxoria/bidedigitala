@@ -3,7 +3,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CookieBanner from "../components/CookieBanner.astro";
 import { getAlternateLinks } from "../lib/hreflang";
-import { buildOrganizationSchema } from "../lib/schema";
+import { buildOrganizationSchema, buildWebSiteSchema } from "../lib/schema";
 import "../assets/css/style.css";
 import "../styles/global.css";
 
@@ -41,9 +41,17 @@ const pathNoSlash = Astro.url.pathname.replace(/\/$/, "");
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL(image, Astro.site);
-// La Organización se incluye siempre; el resto del JSON-LD lo aporta cada página.
+// Ninguna página pasa hoy una `image` propia (todas usan el logo por
+// defecto): dimensiones conocidas y fijas. Si en el futuro una página pasa
+// una imagen distinta, og:image:width/height quedará incorrecto para esa
+// página — limitación aceptada, no hay forma de leer dimensiones reales
+// desde aquí sin una dependencia nueva.
+const isDefaultImage = image === "/images/BideDigitala.png";
+// La Organización y el sitio (WebSite) se incluyen siempre; el resto del
+// JSON-LD lo aporta cada página.
 const jsonLdItems = [
   buildOrganizationSchema(),
+  buildWebSiteSchema(),
   ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []),
 ];
 
@@ -76,6 +84,13 @@ const alternates = await getAlternateLinks(Astro.url.pathname, lang);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageURL} />
+    {isDefaultImage && (
+      <>
+        <meta property="og:image:width" content="1021" />
+        <meta property="og:image:height" content="399" />
+        <meta property="og:image:type" content="image/png" />
+      </>
+    )}
     <meta property="og:locale" content={lang === "es" ? "es_ES" : "eu_ES"} />
 
     <!-- Twitter -->
@@ -83,6 +98,7 @@ const alternates = await getAlternateLinks(Astro.url.pathname, lang);
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content="Logotipo de BideDigitala" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

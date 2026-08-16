@@ -40,6 +40,44 @@ export function buildOrganizationSchema() {
   };
 }
 
+/**
+ * Sitio web como entidad (WebSite), nodo raíz estándar de schema.org que
+ * faltaba junto a Organization. Se incluye siempre en BaseLayout, igual
+ * que Organization.
+ */
+export function buildWebSiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: organizationData.name,
+    url: `${SITE}/`,
+    inLanguage: ['es', 'eu'],
+  };
+}
+
+interface ItemListEntry {
+  name: string;
+  url: string;
+}
+
+/**
+ * Lista de elementos (ItemList) genérica — usada en /catalogo para
+ * enumerar los cursos disponibles, valor GEO para que un motor
+ * generativo entienda de un vistazo cuántos cursos hay y cómo se llaman.
+ */
+export function buildItemListSchema(items: ItemListEntry[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      url: item.url,
+    })),
+  };
+}
+
 interface BlogPostingInput {
   title: string;
   description: string;

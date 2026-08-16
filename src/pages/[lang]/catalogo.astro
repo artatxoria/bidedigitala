@@ -8,7 +8,8 @@ import Automatizacion from "../../components/Automatizacion.astro";
 import Programacion from "../../components/Programacion.astro";
 import SectionDivider from "../../components/SectionDivider.astro";
 import { t, tPath } from "../../lib/translations";
-import { buildBreadcrumbSchema } from "../../lib/schema";
+import { buildBreadcrumbSchema, buildItemListSchema } from "../../lib/schema";
+import { cursoSlugs, cursoMeta, type CursoKey } from "../../lib/cursos";
 
 export async function getStaticPaths() {
   return [{ params: { lang: "es" } }, { params: { lang: "eu" } }];
@@ -57,9 +58,19 @@ const breadcrumbSchema = buildBreadcrumbSchema([
   { name: t(lang, 'nav.home'), url: new URL(tPath('/', lang), Astro.site).toString() },
   { name: t(lang, 'nav.catalogo'), url: new URL(tPath('/catalogo', lang), Astro.site).toString() },
 ]);
+
+// ItemList de los 23 cursos, misma fuente única de verdad (cursoSlugs/
+// cursoMeta) que usa catalogo/[curso].astro — valor GEO para que un motor
+// generativo vea de un vistazo cuántos cursos hay y cómo se llaman.
+const itemListSchema = buildItemListSchema(
+  (Object.keys(cursoSlugs) as CursoKey[]).map((key) => ({
+    name: (cursoMeta[key][lang] || cursoMeta[key].es).title,
+    url: new URL(`/${lang}/catalogo/${cursoSlugs[key]}/`, Astro.site).toString(),
+  }))
+);
 ---
 
-<BaseLayout lang={lang} title={title} description={dict.intro} jsonLd={breadcrumbSchema}>
+<BaseLayout lang={lang} title={title} description={dict.intro} jsonLd={[breadcrumbSchema, itemListSchema]}>
   <NavegacionSecundariaCatalogo lang={lang} slot="secondary-nav" />
 
   <!-- Hero Section -->
