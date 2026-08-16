@@ -1,0 +1,50 @@
+---
+// src/pages/404.astro
+// El status HTTP 404 ya es correcto para cualquier ruta no encontrada sin
+// necesidad de este archivo — lo gestiona el router de Astro incluso en
+// SSR (verificado con curl contra dist/server/entry.mjs). Este archivo solo
+// sustituye el cuerpo genérico de Astro (sin marca, sin navegación) por una
+// página consistente con el resto del sitio.
+//
+// Una URL rota no lleva el prefijo /es/ o /eu/ que usan el resto de páginas
+// (por definición, esa ruta no existe), así que el idioma se detecta por
+// prefijo de la URL: /eu/... -> euskera, cualquier otro caso -> castellano
+// (mismo idioma por defecto que el resto del sitio).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { t, tPath } from '../lib/translations';
+
+const lang: 'es' | 'eu' = Astro.url.pathname.startsWith('/eu/') ? 'eu' : 'es';
+---
+
+<BaseLayout lang={lang} title={t(lang, 'notFound.title')} noindex>
+  <section class="not-found">
+    <div class="container">
+      <p class="not-found-code">404</p>
+      <h1>{t(lang, 'notFound.heading')}</h1>
+      <p>{t(lang, 'notFound.body')}</p>
+      <a href={tPath('/', lang)} class="btn btn-primary">{t(lang, 'notFound.cta')}</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding: 6rem 1rem;
+    text-align: center;
+  }
+
+  .not-found-code {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--primary-color, #0a6);
+    margin: 0;
+  }
+
+  .not-found h1 {
+    margin: 0.5rem 0 1rem;
+  }
+
+  .not-found p {
+    margin: 0 0 1.5rem;
+  }
+</style>

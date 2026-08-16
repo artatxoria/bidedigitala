@@ -151,5 +151,11 @@
   "catalogo": {
     "volver": "← Katalogora itzuli",
     "verCompleto": "Ikusi ikastaro osoa →"
+  },
+  "notFound": {
+    "title": "Orria ez da aurkitu – BideDigitala",
+    "heading": "Orria ez da aurkitu",
+    "body": "Bilatzen ari zaren orria ez dago edo lekuz aldatu da.",
+    "cta": "Hasierara itzuli"
   }
 }

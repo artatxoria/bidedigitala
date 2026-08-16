@@ -152,5 +152,11 @@
   "catalogo": {
     "volver": "← Volver al catálogo",
     "verCompleto": "Ver curso completo →"
+  },
+  "notFound": {
+    "title": "Página no encontrada – BideDigitala",
+    "heading": "Página no encontrada",
+    "body": "La página que buscas no existe o se ha movido de sitio.",
+    "cta": "Volver al inicio"
   }
 }
