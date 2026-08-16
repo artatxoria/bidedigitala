@@ -3,7 +3,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { t, tPath } from "../../lib/translations";
 import SectionDivider from "../../components/SectionDivider.astro";
-import { buildFAQPageSchema } from "../../lib/schema";
+import { buildFAQPageSchema, buildBreadcrumbSchema } from "../../lib/schema";
 
 export async function getStaticPaths() {
   return [{ params: { lang: "es" } }, { params: { lang: "eu" } }];
@@ -169,9 +169,14 @@ const faqSchema = buildFAQPageSchema([
     answer: paso.contenido,
   })),
 ]);
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: t(lang, 'nav.home'), url: new URL(tPath('/', lang), Astro.site).toString() },
+  { name: t(lang, 'nav.consultingService'), url: new URL(tPath('/consultoria-informatica', lang), Astro.site).toString() },
+]);
 ---
 
-<BaseLayout lang={lang} title={title} description={dict.intro} jsonLd={faqSchema}>
+<BaseLayout lang={lang} title={title} description={dict.intro} jsonLd={[faqSchema, breadcrumbSchema]}>
   <!-- Hero -->
   <section class="service-hero">
     <div class="container">

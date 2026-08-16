@@ -2,8 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionDivider from '../../components/SectionDivider.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { buildBlogPostingSchema } from '../../lib/schema';
-import { tPath } from '../../lib/translations';
+import { buildBlogPostingSchema, buildBreadcrumbSchema } from '../../lib/schema';
+import { t, tPath } from '../../lib/translations';
 
 // Solo depende de la colección de contenido (resuelta en build time), no de
 // datos de request — se puede generar como HTML estático para que aparezca
@@ -29,15 +29,23 @@ const { title, description, pubDate, summary, categories, author } = post.data;
 
 const authorHref = tPath('/sobre-nosotros', lang as 'es' | 'eu');
 
+const postUrlAbs = new URL(Astro.url.pathname, Astro.site).toString();
+
 const postSchema = buildBlogPostingSchema({
   title,
   description,
   pubDate,
   author,
   lang: lang as 'es' | 'eu',
-  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  url: postUrlAbs,
   authorUrl: new URL(authorHref, Astro.site).toString(),
 });
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: t(lang as 'es' | 'eu', 'nav.home'), url: new URL(tPath('/', lang as 'es' | 'eu'), Astro.site).toString() },
+  { name: t(lang as 'es' | 'eu', 'nav.blog'), url: new URL(tPath('/blog', lang as 'es' | 'eu'), Astro.site).toString() },
+  { name: title, url: postUrlAbs },
+]);
 
 // --- Categorías que no queremos usar (idioma) ---
 const excludedCategories = ['es', 'eu', 'eus', 'Euskera', 'Castellano', 'Idioma', 'Language'];
@@ -82,7 +90,7 @@ export async function getStaticPaths() {
 }
 ---
 
-<BaseLayout lang={lang} title={title} description={description} jsonLd={postSchema}>
+<BaseLayout lang={lang} title={title} description={description} jsonLd={[postSchema, breadcrumbSchema]}>
   <div class="container">
   <div class="post-layout">
     <aside id="toc" class="toc"></aside>

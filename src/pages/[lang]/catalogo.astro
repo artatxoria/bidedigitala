@@ -7,6 +7,8 @@ import InteligenciaArtificial from "../../components/InteligenciaArtificial.astr
 import Automatizacion from "../../components/Automatizacion.astro";
 import Programacion from "../../components/Programacion.astro";
 import SectionDivider from "../../components/SectionDivider.astro";
+import { t, tPath } from "../../lib/translations";
+import { buildBreadcrumbSchema } from "../../lib/schema";
 
 export async function getStaticPaths() {
   return [{ params: { lang: "es" } }, { params: { lang: "eu" } }];
@@ -50,9 +52,14 @@ const dict = translations[lang] || translations.es;
 
 // Título de la página
 const title = dict.title;
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: t(lang, 'nav.home'), url: new URL(tPath('/', lang), Astro.site).toString() },
+  { name: t(lang, 'nav.catalogo'), url: new URL(tPath('/catalogo', lang), Astro.site).toString() },
+]);
 ---
 
-<BaseLayout lang={lang} title={title} description={dict.intro}>
+<BaseLayout lang={lang} title={title} description={dict.intro} jsonLd={breadcrumbSchema}>
   <NavegacionSecundariaCatalogo lang={lang} slot="secondary-nav" />
 
   <!-- Hero Section -->

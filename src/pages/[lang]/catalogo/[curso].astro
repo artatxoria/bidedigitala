@@ -15,8 +15,9 @@
 // con tipo genérico multilínea en el frontmatter de un .astro rompe el
 // hoisting del compilador de Astro (ver historial de commits).
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { t } from '../../../lib/translations';
+import { t, tPath } from '../../../lib/translations';
 import { cursoSlugs, cursoMeta, type CursoKey } from '../../../lib/cursos';
+import { buildBreadcrumbSchema } from '../../../lib/schema';
 
 import Excel_I from '../../../components/cursos/Excel_I.astro';
 import Excel_II from '../../../components/cursos/Excel_II.astro';
@@ -102,9 +103,15 @@ const pageUrl = new URL(`/${lang}/catalogo/${curso}/`, Astro.site).toString();
 const title = `${meta.metaTitle ?? meta.title} – BideDigitala`;
 const description = meta.metaDescripcion ?? meta.descripcion;
 const volverHref = `/${lang}/catalogo/`;
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: t(lang, 'nav.home'), url: new URL(tPath('/', lang), Astro.site).toString() },
+  { name: t(lang, 'nav.catalogo'), url: new URL(tPath('/catalogo', lang), Astro.site).toString() },
+  { name: meta.title, url: pageUrl },
+]);
 ---
 
-<BaseLayout lang={lang} title={title} description={description}>
+<BaseLayout lang={lang} title={title} description={description} jsonLd={breadcrumbSchema}>
   <div class="container curso-page">
     <!-- El componente de curso pinta su título como h3 (correcto dentro
          de /catalogo, donde cuelga de un h2 de sección); esta página

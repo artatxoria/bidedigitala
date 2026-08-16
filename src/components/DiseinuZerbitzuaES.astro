@@ -3,17 +3,22 @@ import '../styles/diseinu-zerbitzua.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NavegacionSecundariaDiseinu from './NavegacionSecundariaDiseinu.astro';
 import SectionDivider from './SectionDivider.astro';
-import { tPath } from '../lib/translations';
-import { organizationData } from '../lib/schema';
+import { t, tPath } from '../lib/translations';
+import { organizationData, buildBreadcrumbSchema } from '../lib/schema';
 
 // 'provider' reutiliza organizationData (src/lib/schema.ts) en vez de una
 // copia propia — evita que este Service quede desincronizado si cambian
 // los datos de la Organización (el mismo tipo de deuda que causó el bug
 // original de este archivo, ver Ronda 1).
 const schema = { "@context": "https://schema.org", "@type": "Service", "name": "Diseño web y optimización GEO", "description": "El fin de la incertidumbre: convierta su web en un activo que genere negocio. GEO e Inteligencia Artificial aplicados a PYMES industriales.", "url": "https://www.bidedigitala.eus/es/diseinu-zerbitzua/", "inLanguage": "es", "areaServed": ["Euskal Herria", "España"], "serviceType": ["GEO (Generative Engine Optimization)", "Ingeniería Digital", "Optimización de Conversiones B2B", "Análisis de Datos", "Desarrollo Web orientado a KPI"], "audience": { "@type": "BusinessAudience", "audienceType": "PYMES industriales · Industria 4.0 · B2B" }, "provider": organizationData };
+
+const breadcrumbSchema = buildBreadcrumbSchema([
+  { name: t('es', 'nav.home'), url: new URL(tPath('/', 'es'), Astro.site).toString() },
+  { name: t('es', 'nav.designService'), url: new URL(tPath('/diseinu-zerbitzua', 'es'), Astro.site).toString() },
+]);
 ---
 
-<BaseLayout lang="es" title="BideDigitala · Innovación en tu camino" description="El fin de la incertidumbre: convierte tu web en un activo que genera negocio. Ingeniería digital para PYMES industriales con foco en GEO e Inteligencia Artificial." jsonLd={schema}>
+<BaseLayout lang="es" title="BideDigitala · Innovación en tu camino" description="El fin de la incertidumbre: convierte tu web en un activo que genera negocio. Ingeniería digital para PYMES industriales con foco en GEO e Inteligencia Artificial." jsonLd={[schema, breadcrumbSchema]}>
   <NavegacionSecundariaDiseinu lang="es" slot="secondary-nav" />
 
   <div class="container">

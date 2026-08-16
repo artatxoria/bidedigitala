@@ -123,6 +123,31 @@ export function buildCourseSchema(course: CourseInput) {
   };
 }
 
+interface BreadcrumbItem {
+  /** Texto visible del nivel (p.ej. "Inicio", "Catálogo", el título del curso). */
+  name: string;
+  /** URL absoluta de ese nivel. */
+  url: string;
+}
+
+/**
+ * Traza de navegación (BreadcrumbList). `position` se deriva del orden del
+ * array (1-indexado, tal como exige schema.org/Google) — el llamador solo
+ * pasa los niveles en orden, de más general a más específico.
+ */
+export function buildBreadcrumbSchema(items: BreadcrumbItem[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
 interface FAQItem {
   question: string;
   answer: string;
