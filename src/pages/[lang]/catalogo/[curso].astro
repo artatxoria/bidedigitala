@@ -96,11 +96,15 @@ const CourseComponent = COMPONENTS[key];
 const meta = cursoMeta[key][lang] || cursoMeta[key].es;
 
 const pageUrl = new URL(`/${lang}/catalogo/${curso}/`, Astro.site).toString();
-const title = `${meta.title} – BideDigitala`;
+// metaTitle/metaDescripcion son versiones cortas pensadas para <title>/meta
+// description (ver comentario en cursos.ts); title/descripcion son el texto
+// largo que pinta el propio componente de curso en el cuerpo de la página.
+const title = `${meta.metaTitle ?? meta.title} – BideDigitala`;
+const description = meta.metaDescripcion ?? meta.descripcion;
 const volverHref = `/${lang}/catalogo/`;
 ---
 
-<BaseLayout lang={lang} title={title} description={meta.descripcion}>
+<BaseLayout lang={lang} title={title} description={description}>
   <div class="container curso-page">
     <!-- El componente de curso pinta su título como h3 (correcto dentro
          de /catalogo, donde cuelga de un h2 de sección); esta página
