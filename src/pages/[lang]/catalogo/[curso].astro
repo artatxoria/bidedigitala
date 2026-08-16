@@ -102,6 +102,11 @@ const volverHref = `/${lang}/catalogo/`;
 
 <BaseLayout lang={lang} title={title} description={meta.descripcion}>
   <div class="container curso-page">
+    <!-- El componente de curso pinta su título como h3 (correcto dentro
+         de /catalogo, donde cuelga de un h2 de sección); esta página
+         standalone necesita su propio h1 para no saltar de nada a h3.
+         Oculto visualmente para no duplicar el título en pantalla. -->
+    <h1 class="sr-only">{meta.title}</h1>
     <p class="curso-breadcrumb"><a href={volverHref}>{t(lang, 'catalogo.volver')}</a></p>
     <CourseComponent lang={lang} url={pageUrl} />
   </div>
