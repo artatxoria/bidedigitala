@@ -4,6 +4,8 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
+# Borrador temporal para revisión de un cliente (se retirará)
+Disallow: /Alex/
 
 # Bots de IA / motores generativos — permitidos explícitamente (GEO)
 User-agent: GPTBot
