@@ -7,7 +7,7 @@ summary: "Prestakuntza batek aldaketarik ekartzen ez duenean, ia beti ikastaroan
 author: "Juan Carlos Beaskoetxea"
 categories: ["Formación"]
 tags: ["prestakuntza", "laneko ikaskuntza", "ETEak", "autonomoak", "enpresako prestakuntza"]
-tkey: "Lo-que-quda-de-un-curso"
+tkey: "Lo-que-queda-de-un-curso"
 ---
 
 Badago nahiko ohikoa den egoera bat, gutxitan hitz egiten bada ere. Enpresa batek, edo bere kabuz lan egiten duen pertsona batek, behar duen zerbaitetan prestakuntza jasotzea erabakitzen du. Ikastaro bat arretaz aukeratu, ordaindu eta eskatzen dituen orduak ematen ditu. Edukia ona da, eta ikastaroa ematen duenak badaki zertaz ari den. Aste batzuk geroago, ordea, denak lehengo moduan jarraitzen du.

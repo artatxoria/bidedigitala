@@ -7,7 +7,7 @@ summary: "Cuando una formación no se traduce en cambios, casi siempre se busca 
 author: "BideDigitala"
 categories: ["Formación"]
 tags: ["formación", "aprendizaje en el trabajo", "pymes", "autónomos", "formación en empresa"]
-tkey: "Lo-que-quda-de-un-curso"
+tkey: "Lo-que-queda-de-un-curso"
 ---
 
 Hay una situación bastante común, aunque se hable poco de ella. Una empresa, o una persona que trabaja por su cuenta, decide formarse en algo que le hace falta. Elige un curso con cuidado, lo paga y dedica las horas que pide. El contenido es bueno y quien lo imparte sabe de lo que habla. Unas semanas más tarde, todo sigue funcionando exactamente igual que antes.
